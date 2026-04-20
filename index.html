@@ -371,9 +371,48 @@
         relevant and impactful &mdash; no matter what comes next.
       </p>
       <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:64px;">
-        <a href="#contact" class="btn-primary">Book a Strategic Fitness Conversation</a>
-        <a href="#approach" class="btn-ghost">Explore our approach &#8595;</a>
+        <a href="#contact" class="btn-primary">Book a Conversation</a>
+        <a href="#approach" style="color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif; font-size:12px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Explore our approach &#8595;</a>
       </div>
+    </div>
+    <!-- Right side: abstract signal network graphic -->
+    <div style="flex-shrink:0; width:300px; padding-top:16px; align-self:center;">
+      <svg viewBox="0 0 300 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+        <defs>
+          <radialGradient id="dotFade" cx="50%" cy="45%" r="55%">
+            <stop offset="0%" stop-opacity="1"/>
+            <stop offset="100%" stop-opacity="0"/>
+          </radialGradient>
+          <mask id="gridMask">
+            <rect width="300" height="320" fill="url(#dotFade)"/>
+          </mask>
+        </defs>
+        <!-- Dot grid -->
+        <g mask="url(#gridMask)" opacity="0.3">
+          <circle cx="20" cy="20" r="1.5" fill="#A1CACC"/><circle cx="60" cy="20" r="1.5" fill="#A1CACC"/><circle cx="100" cy="20" r="1.5" fill="#A1CACC"/><circle cx="140" cy="20" r="1.5" fill="#A1CACC"/><circle cx="180" cy="20" r="1.5" fill="#A1CACC"/><circle cx="220" cy="20" r="1.5" fill="#A1CACC"/><circle cx="260" cy="20" r="1.5" fill="#A1CACC"/>
+          <circle cx="20" cy="60" r="1.5" fill="#A1CACC"/><circle cx="60" cy="60" r="1.5" fill="#A1CACC"/><circle cx="100" cy="60" r="1.5" fill="#A1CACC"/><circle cx="140" cy="60" r="1.5" fill="#A1CACC"/><circle cx="180" cy="60" r="1.5" fill="#A1CACC"/><circle cx="220" cy="60" r="1.5" fill="#A1CACC"/><circle cx="260" cy="60" r="1.5" fill="#A1CACC"/>
+          <circle cx="20" cy="100" r="1.5" fill="#A1CACC"/><circle cx="60" cy="100" r="1.5" fill="#A1CACC"/><circle cx="100" cy="100" r="1.5" fill="#A1CACC"/><circle cx="140" cy="100" r="1.5" fill="#A1CACC"/><circle cx="180" cy="100" r="1.5" fill="#A1CACC"/><circle cx="220" cy="100" r="1.5" fill="#A1CACC"/><circle cx="260" cy="100" r="1.5" fill="#A1CACC"/>
+          <circle cx="20" cy="140" r="1.5" fill="#A1CACC"/><circle cx="60" cy="140" r="1.5" fill="#A1CACC"/><circle cx="100" cy="140" r="1.5" fill="#A1CACC"/><circle cx="140" cy="140" r="1.5" fill="#A1CACC"/><circle cx="180" cy="140" r="1.5" fill="#A1CACC"/><circle cx="220" cy="140" r="1.5" fill="#A1CACC"/><circle cx="260" cy="140" r="1.5" fill="#A1CACC"/>
+          <circle cx="20" cy="180" r="1.5" fill="#A1CACC"/><circle cx="60" cy="180" r="1.5" fill="#A1CACC"/><circle cx="100" cy="180" r="1.5" fill="#A1CACC"/><circle cx="140" cy="180" r="1.5" fill="#A1CACC"/><circle cx="180" cy="180" r="1.5" fill="#A1CACC"/><circle cx="220" cy="180" r="1.5" fill="#A1CACC"/><circle cx="260" cy="180" r="1.5" fill="#A1CACC"/>
+          <circle cx="20" cy="220" r="1.5" fill="#A1CACC"/><circle cx="60" cy="220" r="1.5" fill="#A1CACC"/><circle cx="100" cy="220" r="1.5" fill="#A1CACC"/><circle cx="140" cy="220" r="1.5" fill="#A1CACC"/><circle cx="180" cy="220" r="1.5" fill="#A1CACC"/><circle cx="220" cy="220" r="1.5" fill="#A1CACC"/><circle cx="260" cy="220" r="1.5" fill="#A1CACC"/>
+          <circle cx="20" cy="260" r="1.5" fill="#A1CACC"/><circle cx="60" cy="260" r="1.5" fill="#A1CACC"/><circle cx="100" cy="260" r="1.5" fill="#A1CACC"/><circle cx="140" cy="260" r="1.5" fill="#A1CACC"/><circle cx="180" cy="260" r="1.5" fill="#A1CACC"/><circle cx="220" cy="260" r="1.5" fill="#A1CACC"/><circle cx="260" cy="260" r="1.5" fill="#A1CACC"/>
+          <circle cx="20" cy="300" r="1.5" fill="#A1CACC"/><circle cx="60" cy="300" r="1.5" fill="#A1CACC"/><circle cx="100" cy="300" r="1.5" fill="#A1CACC"/><circle cx="140" cy="300" r="1.5" fill="#A1CACC"/><circle cx="180" cy="300" r="1.5" fill="#A1CACC"/><circle cx="220" cy="300" r="1.5" fill="#A1CACC"/><circle cx="260" cy="300" r="1.5" fill="#A1CACC"/>
+        </g>
+        <!-- Signal nodes -->
+        <circle cx="140" cy="100" r="6" fill="#FF6139" opacity="0.9"/>
+        <circle cx="220" cy="60" r="4" fill="#FF6139" opacity="0.65"/>
+        <circle cx="60" cy="140" r="4.5" fill="#FF6139" opacity="0.7"/>
+        <circle cx="260" cy="160" r="3" fill="#FF6139" opacity="0.45"/>
+        <circle cx="180" cy="200" r="6" fill="#FF6139" opacity="0.85"/>
+        <circle cx="100" cy="240" r="3.5" fill="#FF6139" opacity="0.5"/>
+        <!-- Connections -->
+        <line x1="140" y1="100" x2="220" y2="60" stroke="#FF6139" stroke-width="0.75" opacity="0.35"/>
+        <line x1="140" y1="100" x2="60" y2="140" stroke="#FF6139" stroke-width="0.75" opacity="0.35"/>
+        <line x1="140" y1="100" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.25"/>
+        <line x1="60" y1="140" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.25"/>
+        <line x1="260" y1="160" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.2"/>
+        <line x1="180" y1="200" x2="100" y2="240" stroke="#FF6139" stroke-width="0.75" opacity="0.2"/>
+      </svg>
     </div>
   </div>
   <!-- Stats strip -->
@@ -436,32 +475,40 @@
       ">"The most dangerous place any organisation can be is confidently executing
       a strategy that is no longer aligned to reality."</p>
     </blockquote>
-    <!-- Problem grid — Option J: compact 4-col chips -->
+    <!-- Problem grid — 4-col chips with coral numbers -->
     <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:48px;">
 
       <div style="background:#fff; border-top:3px solid #FF6139; padding:18px 16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:8px;">01</div>
         <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Strategy cycles too slow and too narrow for the pace of change</p>
       </div>
       <div style="background:#fff; border-top:3px solid #FF6139; padding:18px 16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:8px;">02</div>
         <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Risk registers miss dynamic interdependencies between forces</p>
       </div>
       <div style="background:#fff; border-top:3px solid #FF6139; padding:18px 16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:8px;">03</div>
         <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Strategy becomes a &lsquo;project list&rsquo; disconnected from real conditions</p>
       </div>
       <div style="background:#fff; border-top:3px solid #FF6139; padding:18px 16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:8px;">04</div>
         <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Boards lack real-time strategic intelligence for effective governance</p>
       </div>
 
       <div style="background:#fff; border-top:3px solid rgba(255,97,57,0.3); padding:18px 16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:8px;">05</div>
         <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Signals of change go undetected, leading to decision lag</p>
       </div>
       <div style="background:#fff; border-top:3px solid rgba(255,97,57,0.3); padding:18px 16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:8px;">06</div>
         <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Optimising the present rather than preparing for the future</p>
       </div>
       <div style="background:#fff; border-top:3px solid rgba(255,97,57,0.3); padding:18px 16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:8px;">07</div>
         <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Leadership effectiveness declines under disruptive pressure</p>
       </div>
       <div style="background:#fff; border-top:3px solid rgba(255,97,57,0.3); padding:18px 16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:8px;">08</div>
         <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Capability gaps &mdash; in people, systems, infrastructure &mdash; quietly widen</p>
       </div>
 
@@ -507,7 +554,7 @@
         <div class="font-display" style="font-size:40px; font-weight:700; color:rgba(255,97,57,0.18); line-height:1; margin-bottom:16px;">01</div>
         <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:6px; line-height:1.2;">Strategic Fitness</div>
         <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#A1CACC; margin-bottom:16px;">Boards, CEOs, Senior Leadership Teams</div>
-        <p style="font-size:13px; line-height:1.65; color:rgba(255,255,255,0.5);">
+        <p style="font-size:15px; line-height:1.7; color:#F2EDE6;">
           Half or full-day diagnostic workshop to assess your organisation's readiness to operate
           in structural instability. Includes diagnostics, structured executive sessions, and
           immediate action pathways.
@@ -518,7 +565,7 @@
         <div class="font-display" style="font-size:40px; font-weight:700; color:rgba(255,97,57,0.18); line-height:1; margin-bottom:16px;">02</div>
         <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:6px; line-height:1.2;">SiA Strategy Engagement</div>
         <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#A1CACC; margin-bottom:16px;">Boards, Executives &amp; Complex Organisations</div>
-        <p style="font-size:13px; line-height:1.65; color:rgba(255,255,255,0.5);">
+        <p style="font-size:15px; line-height:1.7; color:#F2EDE6;">
           A co-designed, end-to-end strategy engagement using the SiA framework. From conditions
           analysis through to strategic priorities, capability investment, and an implementation
           framework.
@@ -529,7 +576,7 @@
         <div class="font-display" style="font-size:40px; font-weight:700; color:rgba(255,97,57,0.18); line-height:1; margin-bottom:16px;">03</div>
         <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:6px; line-height:1.2;">Capability Building</div>
         <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#A1CACC; margin-bottom:16px;">Executive &amp; Leadership Teams</div>
-        <p style="font-size:13px; line-height:1.65; color:rgba(255,255,255,0.5);">
+        <p style="font-size:15px; line-height:1.7; color:#F2EDE6;">
           Embedding the SiA mindset, tools, and behaviours into your leadership team so strategic
           thinking becomes a continuous internal capability, not an external dependency.
         </p>
@@ -634,12 +681,14 @@
       <!-- Larry -->
       <div style="border-top:2px solid rgba(161,202,204,0.3); padding-top:32px;">
         <div style="
-          width:64px; height:64px;
-          background:rgba(161,202,204,0.1);
+          width:88px; height:88px; border-radius:50%;
+          background:linear-gradient(135deg,rgba(161,202,204,0.1) 0%,rgba(255,97,57,0.05) 100%);
+          border:1.5px solid rgba(161,202,204,0.4);
+          box-shadow:0 0 0 4px rgba(161,202,204,0.06);
           display:flex; align-items:center; justify-content:center;
-          color:#A1CACC; font-family:'Playfair Display',serif;
-          font-size:20px; font-weight:700; letter-spacing:0.05em;
-          margin-bottom:24px;
+          color:#fff; font-family:'Playfair Display',serif;
+          font-size:26px; font-weight:700; font-style:italic; letter-spacing:0.04em;
+          margin-bottom:28px;
         ">LQ</div>
         <div class="font-display" style="font-size:24px; font-weight:700; color:#fff; line-height:1.1; margin-bottom:6px;">Larry Quick</div>
         <div style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#FF6139; margin-bottom:12px;">Co-founder · Strategy &amp; Complex Systems</div>
@@ -654,12 +703,14 @@
       <!-- David -->
       <div style="border-top:2px solid rgba(161,202,204,0.3); padding-top:32px;">
         <div style="
-          width:64px; height:64px;
-          background:rgba(161,202,204,0.1);
+          width:88px; height:88px; border-radius:50%;
+          background:linear-gradient(135deg,rgba(161,202,204,0.1) 0%,rgba(255,97,57,0.05) 100%);
+          border:1.5px solid rgba(161,202,204,0.4);
+          box-shadow:0 0 0 4px rgba(161,202,204,0.06);
           display:flex; align-items:center; justify-content:center;
-          color:#A1CACC; font-family:'Playfair Display',serif;
-          font-size:20px; font-weight:700; letter-spacing:0.05em;
-          margin-bottom:24px;
+          color:#fff; font-family:'Playfair Display',serif;
+          font-size:26px; font-weight:700; font-style:italic; letter-spacing:0.04em;
+          margin-bottom:28px;
         ">DP</div>
         <div class="font-display" style="font-size:24px; font-weight:700; color:#fff; line-height:1.1; margin-bottom:6px;">David Platt</div>
         <div style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#FF6139; margin-bottom:12px;">Co-founder · Capability &amp; Facilitation</div>
