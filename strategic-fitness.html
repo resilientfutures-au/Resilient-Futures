@@ -64,7 +64,6 @@
     .nav-logo-link { text-decoration: none; transition: opacity 0.2s; }
     .nav-logo-link:hover { opacity: 0.8; }
     .nav-logo-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; }
-    /* Dropdown */
     .nav-dropdown { position: relative; }
     .nav-dropdown-trigger {
       background: none; border: none; cursor: pointer;
@@ -104,34 +103,91 @@
     }
     .footer-email:hover { color: rgba(255,255,255,0.8); }
 
-    /* Diagnostic cards */
-    .diag-card {
+    /* Ticker */
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      animation: ticker 28s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 32px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      white-space: nowrap;
+    }
+    .ticker-sep {
+      color: #FF6139;
+      font-size: 9px;
+      opacity: 0.6;
+    }
+
+    /* Signal chips */
+    .signal-chip {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 20px 22px;
       background: rgba(255,255,255,0.025);
       border: 1px solid rgba(255,255,255,0.06);
-      border-top: 2px solid #FF6139;
-      padding: 32px 28px;
+      border-left: 2px solid rgba(255,97,57,0.4);
     }
 
-    /* Agenda step */
-    .agenda-step {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 32px;
-      align-items: start;
-      padding: 36px 0;
-      border-top: 1px solid rgba(54,31,29,0.1);
+    /* Diagnostic cards */
+    .diag-card {
+      background: #fff;
+      padding: 40px 36px;
+      border-top: 3px solid #FF6139;
     }
-    .agenda-step:first-child { border-top: none; padding-top: 0; }
-
-    /* Deliverable row */
-    .deliverable-row {
+    .diag-check {
       display: flex;
-      gap: 20px;
       align-items: flex-start;
-      padding: 24px 0;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(54,31,29,0.08);
+    }
+    .diag-check:last-child { border-bottom: none; }
+
+    /* Workshop cards */
+    .workshop-card {
+      background: #361F1D;
+      padding: 40px 36px;
+      border-top: 2px solid rgba(255,97,57,0.4);
+    }
+    .workshop-focus-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 9px 0;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .deliverable-row:last-child { border-bottom: none; }
+    .workshop-focus-item:last-child { border-bottom: none; }
+    .workshop-gain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 0;
+    }
+
+    /* Diagnostic Q */
+    .diag-q {
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .diag-q:last-child { border-bottom: none; }
 
     /* Explore cards */
     .explore-card {
@@ -156,14 +212,9 @@
       .hero-section { padding: 64px 32px 80px !important; }
       .hero-section h1 { font-size: 38px !important; }
       .intro-section { padding: 80px 32px !important; }
-      .intro-cols { grid-template-columns: 1fr !important; }
-      .diagnostic-section { padding: 80px 32px !important; }
-      .diag-grid { grid-template-columns: repeat(2,1fr) !important; }
-      .agenda-section { padding: 80px 32px !important; }
-      .agenda-step { grid-template-columns: 60px 1fr !important; gap: 20px !important; }
-      .deliverables-section { padding: 80px 32px !important; }
-      .for-whom-section { padding: 80px 32px !important; }
-      .for-whom-grid { grid-template-columns: 1fr !important; }
+      .diag-grid { grid-template-columns: 1fr !important; }
+      .workshop-grid { grid-template-columns: 1fr !important; }
+      .signals-grid { grid-template-columns: repeat(2,1fr) !important; }
       footer { padding: 28px 32px !important; }
     }
     @media (max-width: 767px) {
@@ -173,16 +224,9 @@
       .hero-inner-flex { flex-direction: column !important; }
       .hero-accent-line { display: none !important; }
       .hero-graphic { display: none !important; }
-      .intro-section { padding: 64px 24px !important; }
-      .intro-cols { grid-template-columns: 1fr !important; }
-      .diagnostic-section { padding: 64px 24px !important; }
       .diag-grid { grid-template-columns: 1fr !important; }
-      .agenda-section { padding: 64px 24px !important; }
-      .agenda-step { grid-template-columns: 1fr !important; gap: 8px !important; }
-      .agenda-time { font-size: 11px !important; }
-      .deliverables-section { padding: 64px 24px !important; }
-      .for-whom-section { padding: 64px 24px !important; }
-      .for-whom-grid { grid-template-columns: 1fr !important; }
+      .workshop-grid { grid-template-columns: 1fr !important; }
+      .signals-grid { grid-template-columns: 1fr !important; }
       .cta-section { padding: 64px 24px !important; }
       .explore-strip { padding: 48px 24px !important; }
       .explore-cards { flex-direction: column !important; }
@@ -243,23 +287,10 @@
   position: relative;
   overflow: hidden;
 ">
-  <!-- Coral radial glow top-right -->
-  <div style="
-    position:absolute; top:-80px; right:-80px;
-    width:500px; height:500px; border-radius:50%;
-    background: radial-gradient(circle, rgba(255,97,57,0.1) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
-  <!-- Teal glow bottom-left -->
-  <div style="
-    position:absolute; bottom:40px; left:-60px;
-    width:350px; height:350px; border-radius:50%;
-    background: radial-gradient(circle, rgba(161,202,204,0.07) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
+  <div style="position:absolute; top:-80px; right:-80px; width:500px; height:500px; border-radius:50%; background: radial-gradient(circle, rgba(255,97,57,0.1) 0%, transparent 65%); pointer-events:none;"></div>
+  <div style="position:absolute; bottom:40px; left:-60px; width:350px; height:350px; border-radius:50%; background: radial-gradient(circle, rgba(161,202,204,0.07) 0%, transparent 65%); pointer-events:none;"></div>
 
   <div class="section-inner" style="position:relative; z-index:1;">
-    <!-- Breadcrumb -->
     <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:40px; border-left:2px solid rgba(255,97,57,0.4); padding-left:12px;">
       <a href="index.html" style="font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a>
       <span style="font-size:11px; color:rgba(255,255,255,0.2);">&#47;</span>
@@ -269,68 +300,28 @@
     </div>
 
     <div class="hero-inner-flex" style="display:flex; gap:48px; align-items:flex-start;">
-      <!-- Vertical coral accent line -->
-      <div class="hero-accent-line" style="
-        width: 3px;
-        flex-shrink: 0;
-        min-height: 280px;
-        margin-top: 4px;
-        background: linear-gradient(to bottom, #FF6139, rgba(255,97,57,0));
-      "></div>
-      <!-- Copy -->
+      <div class="hero-accent-line" style="width:3px; flex-shrink:0; min-height:260px; margin-top:4px; background: linear-gradient(to bottom, #FF6139, rgba(255,97,57,0));"></div>
       <div style="flex:1;">
-        <span style="
-          font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
-          color:rgba(161,202,204,0.7); display:block; margin-bottom:20px;
-        ">Diagnostic Workshop</span>
-        <h1 class="font-display" style="
-          font-size: 52px;
-          font-weight: 700;
-          color: #fff;
-          line-height: 1.08;
-          letter-spacing: -0.025em;
-          margin-bottom: 20px;
-          max-width: 640px;
-        ">
-          Is your organisation strategically fit for the conditions it faces?
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(161,202,204,0.7); display:block; margin-bottom:20px;">Strategic Services</span>
+        <h1 class="font-display" style="font-size:56px; font-weight:700; color:#fff; line-height:1.05; letter-spacing:-0.025em; margin-bottom:12px; max-width:640px;">
+          Strategic Fitness
         </h1>
-        <p class="font-display" style="
-          font-size: 19px;
-          font-weight: 700;
-          color: #FF6139;
-          line-height: 1.4;
-          letter-spacing: -0.01em;
-          max-width: 520px;
-          margin-bottom: 24px;
-        ">A diagnostic designed to answer that question — honestly.</p>
-        <p style="
-          color: rgba(255,255,255,0.65);
-          font-size: 16px;
-          line-height: 1.7;
-          max-width: 520px;
-          margin-bottom: 16px;
-        ">
-          Strategic Fitness is a structured half or full-day workshop that gives Boards and
-          Executive teams a clear, evidence-based reading of where their current strategy is
-          strong, where it is not, and what conditions demand next.
+        <p class="font-display" style="font-size:22px; font-weight:400; font-style:italic; color:#FF6139; line-height:1.4; letter-spacing:-0.01em; max-width:520px; margin-bottom:28px;">
+          for a Non-Stable World
         </p>
-        <p style="
-          color: rgba(255,255,255,0.42);
-          font-size: 14px;
-          line-height: 1.7;
-          max-width: 520px;
-          margin-bottom: 40px;
-        ">
-          Designed for Boards, CEOs, and Senior Leadership Teams. Available as a half-day or
-          full-day format, with immediate action pathways built into the output.
+        <p style="color:rgba(255,255,255,0.8); font-size:17px; font-weight:500; line-height:1.6; max-width:520px; margin-bottom:16px;">
+          Stability is no longer the operating condition.
         </p>
-        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
-          <a href="mailto:james.cacciottolo@resilientfutures.com" class="btn-primary" style="font-size:13px; padding:16px 32px;">Book a Workshop</a>
-          <a href="#what-you-discover" style="color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif; font-size:12px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">What the diagnostic covers &#8595;</a>
+        <p style="color:rgba(255,255,255,0.55); font-size:15px; line-height:1.75; max-width:520px; margin-bottom:40px;">
+          Structural instability is now the baseline, and most organisations are running on
+          systems designed for a world that no longer exists.
+        </p>
+        <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+          <a href="#diagnostics" class="btn-primary" style="font-size:12px; padding:15px 32px;">Explore Strategic Fitness</a>
+          <a href="#workshops" style="color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif; font-size:12px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">See workshops &#8595;</a>
         </div>
       </div>
-      <!-- Right graphic -->
-      <div class="hero-graphic" style="flex-shrink:0; width:280px; padding-top:16px; align-self:center;">
+      <div class="hero-graphic" style="flex-shrink:0; width:280px; padding-top:8px; align-self:center;">
         <svg viewBox="0 0 280 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
           <defs>
             <pattern id="sfHatch" x="0" y="0" width="7" height="9999" patternUnits="userSpaceOnUse">
@@ -341,28 +332,22 @@
               <ellipse cx="140" cy="125" rx="84" ry="58" fill="black"/>
             </mask>
           </defs>
-          <!-- Outer ring hatch -->
-          <ellipse cx="140" cy="125" rx="122" ry="96" fill="url(#sfHatch)" mask="url(#sfRingMask)" opacity="0.32"/>
-          <ellipse cx="140" cy="125" rx="122" ry="96" stroke="#FF6139" stroke-width="0.75" fill="none" opacity="0.38"/>
-          <!-- Inner ellipse -->
-          <ellipse cx="140" cy="125" rx="84" ry="58" fill="#2d1815" stroke="#FF6139" stroke-width="0.75" opacity="0.28"/>
-          <!-- Diagnostic spokes -->
+          <ellipse cx="140" cy="125" rx="122" ry="96" fill="url(#sfHatch)" mask="url(#sfRingMask)" opacity="0.28"/>
+          <ellipse cx="140" cy="125" rx="122" ry="96" stroke="#FF6139" stroke-width="0.75" fill="none" opacity="0.35"/>
+          <ellipse cx="140" cy="125" rx="84" ry="58" fill="#2d1815" stroke="#FF6139" stroke-width="0.75" opacity="0.25"/>
           <line x1="140" y1="67" x2="140" y2="29" stroke="#A1CACC" stroke-width="0.75" opacity="0.4"/>
           <line x1="140" y1="183" x2="140" y2="221" stroke="#A1CACC" stroke-width="0.75" opacity="0.4"/>
           <line x1="50" y1="100" x2="18" y2="82" stroke="#A1CACC" stroke-width="0.75" opacity="0.4"/>
           <line x1="230" y1="100" x2="262" y2="82" stroke="#A1CACC" stroke-width="0.75" opacity="0.4"/>
           <line x1="50" y1="150" x2="18" y2="168" stroke="#A1CACC" stroke-width="0.75" opacity="0.4"/>
           <line x1="230" y1="150" x2="262" y2="168" stroke="#A1CACC" stroke-width="0.75" opacity="0.4"/>
-          <!-- Centre node -->
           <circle cx="140" cy="125" r="18" fill="#2d1815" stroke="#FF6139" stroke-width="1.5" opacity="0.7"/>
-          <!-- Perimeter nodes -->
           <circle cx="140" cy="29" r="10" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.75"/>
           <circle cx="140" cy="221" r="10" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.75"/>
           <circle cx="18" cy="82" r="10" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.75"/>
           <circle cx="262" cy="82" r="10" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.75"/>
           <circle cx="18" cy="168" r="10" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.75"/>
           <circle cx="262" cy="168" r="10" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.75"/>
-          <!-- Rim nodes on ellipse -->
           <circle cx="140" cy="67" r="5" fill="#FF6139" opacity="0.65"/>
           <circle cx="140" cy="183" r="5" fill="#FF6139" opacity="0.65"/>
           <circle cx="50" cy="100" r="5" fill="#FF6139" opacity="0.65"/>
@@ -375,530 +360,479 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════ WHAT IT IS ═══════════════════════════ -->
-<section class="intro-section" style="background:#F5F5ED; padding:96px 48px;">
-  <div class="section-inner">
-    <span class="section-label">The Premise</span>
+<!-- ═══════════════════════════ TICKER ═══════════════════════════ -->
+<div style="background:#1a0f0e; height:44px; overflow:hidden; display:flex; align-items:center; border-bottom:1px solid rgba(255,255,255,0.05);">
+  <div class="ticker-track">
+    <!-- set 1 -->
+    <span class="ticker-item">Regulatory settings shift mid cycle <span class="ticker-sep">&#8594;</span></span>
+    <span class="ticker-item">Technology outpaces capability readiness <span class="ticker-sep">&#8594;</span></span>
+    <span class="ticker-item">Funding models recalibrate under pressure <span class="ticker-sep">&#8594;</span></span>
+    <span class="ticker-item">Public trust more fragile than ever <span class="ticker-sep">&#8594;</span></span>
+    <!-- set 2 (duplicate for seamless loop) -->
+    <span class="ticker-item">Regulatory settings shift mid cycle <span class="ticker-sep">&#8594;</span></span>
+    <span class="ticker-item">Technology outpaces capability readiness <span class="ticker-sep">&#8594;</span></span>
+    <span class="ticker-item">Funding models recalibrate under pressure <span class="ticker-sep">&#8594;</span></span>
+    <span class="ticker-item">Public trust more fragile than ever <span class="ticker-sep">&#8594;</span></span>
+  </div>
+</div>
 
-    <div class="intro-cols" style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;">
+<!-- ═══════════════════════════ OPERATING REALITY ═══════════════════════════ -->
+<section style="background:#F5F5ED; padding:96px 48px;">
+  <div class="section-inner">
+    <span class="section-label">The Operating Reality</span>
+    <h2 class="font-display" style="font-size:42px; font-weight:700; color:#361F1D; line-height:1.1; letter-spacing:-0.025em; max-width:680px; margin-bottom:40px;">
+      Structural instability is now the baseline.
+    </h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;">
       <div>
-        <h2 class="font-display" style="
-          font-size:38px; font-weight:700; color:#361F1D;
-          line-height:1.15; letter-spacing:-0.02em;
-          max-width:480px; margin-bottom:24px;
-        ">Not a planning retreat. A diagnostic.</h2>
         <p style="font-size:16px; line-height:1.75; color:#1A1A1A; margin-bottom:20px;">
-          Most strategic planning processes start from the assumption that the organisation
-          knows what conditions it is operating in. Strategic Fitness begins one step earlier
-          &mdash; by testing whether that assumption is justified.
+          Strategic assumptions drift. Decision disciplines weaken. Governance rhythms lag
+          behind changing conditions.
         </p>
         <p style="font-size:16px; line-height:1.75; color:#6B5350; margin-bottom:20px;">
-          It is a structured assessment of how well your current strategy, capabilities, and
-          decision-making processes are aligned to the actual conditions facing your organisation
-          &mdash; not the conditions that existed when the strategy was written.
+          Most organisations do not struggle because they lack strategy.
+        </p>
+        <p style="font-size:16px; line-height:1.75; color:#6B5350; margin-bottom:20px;">
+          They struggle because their operating systems were designed for a more stable era.
         </p>
         <p style="font-size:15px; line-height:1.75; color:#6B5350;">
-          The gap between those two things is almost always larger than leadership teams expect.
-          Strategic Fitness makes that gap visible &mdash; and actionable.
+          The question is no longer whether you have a strategy. It is whether your organisation
+          is fit enough to sustain it.
         </p>
       </div>
       <div>
-        <!-- Pullquote -->
-        <blockquote style="
-          border-left: 3px solid #FF6139;
-          padding: 24px 28px;
-          margin-bottom: 24px;
-          background: rgba(54,31,29,0.04);
-        ">
-          <p class="font-display" style="
-            font-size:19px; font-weight:700; color:#361F1D;
-            line-height:1.45; font-style:italic; margin-bottom:16px;
-          ">&ldquo;The most dangerous place any organisation can be is confidently executing a strategy that is no longer aligned to reality.&rdquo;</p>
-          <p style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#743734;">Larry Quick &middot; Co-founder, Resilient Futures</p>
+        <blockquote style="border-left:3px solid #FF6139; padding:28px 32px; background:rgba(54,31,29,0.04);">
+          <p class="font-display" style="font-size:20px; font-weight:700; color:#361F1D; line-height:1.5; font-style:italic; margin-bottom:0;">
+            &ldquo;Over time, performance stalls not because strategy was flawed, but because the
+            organisation was not structurally fit to execute it under evolving conditions.&rdquo;
+          </p>
         </blockquote>
-        <p style="font-size:13px; line-height:1.65; color:#6B5350;">
-          Strategic Fitness is the entry point to working with Resilient Futures. It generates an
-          honest picture of strategic health in a single session &mdash; and gives leadership teams
-          a clear basis for deciding what to do next.
-        </p>
-      </div>
-    </div>
-
-    <!-- Three contrasts -->
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(54,31,29,0.1); margin-top:56px;">
-      <div style="background:#F5F5ED; padding:28px 24px;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF6139; margin-bottom:14px;">Not This</div>
-        <div class="font-display" style="font-size:16px; font-weight:700; color:rgba(54,31,29,0.4); text-decoration:line-through; margin-bottom:10px; line-height:1.3;">Another planning offsite</div>
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#743734; margin-bottom:10px; margin-top:20px;">But This</div>
-        <div class="font-display" style="font-size:16px; font-weight:700; color:#361F1D; line-height:1.3;">A diagnostic read of your strategic alignment to current conditions</div>
-      </div>
-      <div style="background:#F5F5ED; padding:28px 24px;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF6139; margin-bottom:14px;">Not This</div>
-        <div class="font-display" style="font-size:16px; font-weight:700; color:rgba(54,31,29,0.4); text-decoration:line-through; margin-bottom:10px; line-height:1.3;">Theoretical frameworks</div>
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#743734; margin-bottom:10px; margin-top:20px;">But This</div>
-        <div class="font-display" style="font-size:16px; font-weight:700; color:#361F1D; line-height:1.3;">Evidence-based assessment of your real strategic position</div>
-      </div>
-      <div style="background:#F5F5ED; padding:28px 24px;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF6139; margin-bottom:14px;">Not This</div>
-        <div class="font-display" style="font-size:16px; font-weight:700; color:rgba(54,31,29,0.4); text-decoration:line-through; margin-bottom:10px; line-height:1.3;">Generic recommendations</div>
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#743734; margin-bottom:10px; margin-top:20px;">But This</div>
-        <div class="font-display" style="font-size:16px; font-weight:700; color:#361F1D; line-height:1.3;">Specific, immediate action pathways grounded in your context</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════ WHAT YOU DISCOVER ═══════════════════════════ -->
-<section id="what-you-discover" style="
-  background: #361F1D;
-  padding: 96px 48px;
-  position:relative; overflow:hidden;
-">
-  <div style="
-    position:absolute; top:-100px; right:-100px;
-    width:500px; height:500px; border-radius:50%;
-    background: radial-gradient(circle, rgba(161,202,204,0.06) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
+<!-- ═══════════════════════════ SIGNALS ═══════════════════════════ -->
+<section style="background:#361F1D; padding:96px 48px; position:relative; overflow:hidden;">
+  <div style="position:absolute; top:-100px; right:-100px; width:500px; height:500px; border-radius:50%; background: radial-gradient(circle, rgba(161,202,204,0.06) 0%, transparent 65%); pointer-events:none;"></div>
 
   <div class="section-inner" style="position:relative; z-index:1;">
-    <span class="section-label section-label--light">The Diagnostic</span>
-    <h2 class="font-display" style="
-      font-size:38px; font-weight:700; color:#fff;
-      line-height:1.15; letter-spacing:-0.02em;
-      max-width:640px; margin-bottom:12px;
-    ">Five dimensions. One honest assessment.</h2>
-    <p style="font-size:15px; line-height:1.7; color:rgba(255,255,255,0.45); max-width:620px; margin-bottom:56px;">
-      The Strategic Fitness diagnostic maps your organisation's strategic position across the five
-      standards of Strategy in Action. Each dimension surfaces a different category of strategic risk
-      &mdash; and a different category of strategic opportunity.
-    </p>
-
-    <div class="diag-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
-
-      <div class="diag-card">
-        <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:18px;">
-          <span class="font-display" style="font-size:40px; font-weight:700; color:rgba(255,97,57,0.18); line-height:1;">01</span>
-          <div style="width:24px; height:2px; background:#FF6139; flex-shrink:0; margin-bottom:4px;"></div>
-        </div>
-        <div class="font-display" style="font-size:18px; font-weight:700; color:#fff; margin-bottom:10px; line-height:1.2;">Conditions Clarity</div>
-        <p style="font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5); margin-bottom:16px;">
-          Does your leadership team share a common, evidence-based understanding of the forces
-          actually driving change in your operating environment?
-        </p>
-        <p style="font-size:13px; font-weight:500; line-height:1.6; color:rgba(161,202,204,0.7); margin:0;">
-          Surfaces: blind spots, interpretation gaps, misaligned assumptions about what's changing and why.
+    <span class="section-label section-label--light">Where Organisations Are Exposed</span>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; margin-bottom:48px;">
+      <div>
+        <h2 class="font-display" style="font-size:38px; font-weight:700; color:#fff; line-height:1.15; letter-spacing:-0.02em; max-width:480px; margin-bottom:16px;">
+          Boards and Executive teams are increasingly noticing.
+        </h2>
+        <p style="font-size:15px; line-height:1.7; color:rgba(255,255,255,0.45); max-width:440px;">
+          These are not planning problems. They are <span style="color:rgba(255,255,255,0.75); font-weight:500;">strategic fitness signals.</span>
         </p>
       </div>
+      <div></div>
+    </div>
 
-      <div class="diag-card">
-        <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:18px;">
-          <span class="font-display" style="font-size:40px; font-weight:700; color:rgba(255,97,57,0.18); line-height:1;">02</span>
-          <div style="width:24px; height:2px; background:#FF6139; flex-shrink:0; margin-bottom:4px;"></div>
-        </div>
-        <div class="font-display" style="font-size:18px; font-weight:700; color:#fff; margin-bottom:10px; line-height:1.2;">Value Alignment</div>
-        <p style="font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5); margin-bottom:16px;">
-          Is the value your organisation delivers still the value your stakeholders actually need
-          &mdash; given the conditions it now faces?
-        </p>
-        <p style="font-size:13px; font-weight:500; line-height:1.6; color:rgba(161,202,204,0.7); margin:0;">
-          Surfaces: silent relevance erosion, misaligned value propositions, unrecognised stakeholder drift.
+    <div class="signals-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
+      <div class="signal-chip">
+        <div style="width:6px; height:6px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+        <p style="font-size:14px; font-weight:500; line-height:1.6; color:rgba(255,255,255,0.7); margin:0;">Decisions slowing despite urgency</p>
+      </div>
+      <div class="signal-chip">
+        <div style="width:6px; height:6px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+        <p style="font-size:14px; font-weight:500; line-height:1.6; color:rgba(255,255,255,0.7); margin:0;">Re-litigation of previously agreed priorities</p>
+      </div>
+      <div class="signal-chip">
+        <div style="width:6px; height:6px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+        <p style="font-size:14px; font-weight:500; line-height:1.6; color:rgba(255,255,255,0.7); margin:0;">Capability investment anchored to past success models</p>
+      </div>
+      <div class="signal-chip">
+        <div style="width:6px; height:6px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+        <p style="font-size:14px; font-weight:500; line-height:1.6; color:rgba(255,255,255,0.7); margin:0;">Strategy reviews increasing in frequency but declining in clarity</p>
+      </div>
+      <div class="signal-chip">
+        <div style="width:6px; height:6px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+        <p style="font-size:14px; font-weight:500; line-height:1.6; color:rgba(255,255,255,0.7); margin:0;">Value erosion detected only after impact</p>
+      </div>
+      <div class="signal-chip">
+        <div style="width:6px; height:6px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+        <p style="font-size:14px; font-weight:500; line-height:1.6; color:rgba(255,255,255,0.7); margin:0;">Leadership fatigue disguised as alignment</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ DIAGNOSTICS ═══════════════════════════ -->
+<section id="diagnostics" style="background:#F5F5ED; padding:96px 48px;">
+  <div class="section-inner">
+    <span class="section-label">Test Your Organisation's Strategic Fitness</span>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:end; margin-bottom:56px;">
+      <div>
+        <h2 class="font-display" style="font-size:38px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; max-width:480px; margin-bottom:20px;">
+          Before leaders act, they need evidence.
+        </h2>
+        <p style="font-size:16px; line-height:1.75; color:#1A1A1A; margin-bottom:16px;">
+          The <strong>Strategic Readiness</strong> and <strong>Leadership Capability Diagnostic</strong> reveals
+          where strategy remains viable, where capability signals show strain, and where
+          leadership systems need strengthening.
         </p>
       </div>
+      <div>
+        <blockquote style="border-left:3px solid rgba(255,97,57,0.4); padding:20px 24px; background:rgba(54,31,29,0.04);">
+          <p class="font-display" style="font-size:17px; font-weight:700; color:#361F1D; line-height:1.45; font-style:italic; margin-bottom:10px;">
+            &ldquo;Is our organisation structurally fit to execute under current and emerging conditions?&rdquo;
+          </p>
+          <p style="font-size:12px; font-weight:500; color:#6B5350; margin:0;">Our diagnostic-led approach provides that clarity.</p>
+        </blockquote>
+      </div>
+    </div>
 
+    <div class="diag-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+
+      <!-- Diagnostic 1 -->
       <div class="diag-card">
-        <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:18px;">
-          <span class="font-display" style="font-size:40px; font-weight:700; color:rgba(255,97,57,0.18); line-height:1;">03</span>
-          <div style="width:24px; height:2px; background:#FF6139; flex-shrink:0; margin-bottom:4px;"></div>
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF6139; margin-bottom:16px;">Strategic Fitness Diagnostic</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.2; margin-bottom:14px;">Strategic Readiness</div>
+        <p style="font-size:14px; line-height:1.65; color:#6B5350; margin-bottom:28px;">
+          A view of your organisation's agility to operate effectively in conditions of
+          permanent structural instability.
+        </p>
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#743734; margin-bottom:12px;">Evaluates whether your organisation can</div>
+        <div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Quickly identify shifting conditions and patterns</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Make high-quality strategic decisions under pressure</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Adapt direction and realign teams when assumptions no longer hold</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Protect existing value while identifying emerging opportunity</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Align capability, systems and agency with strategic intent</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Maintain momentum and progress during change</p>
+          </div>
         </div>
-        <div class="font-display" style="font-size:18px; font-weight:700; color:#fff; margin-bottom:10px; line-height:1.2;">Strategic Risk Exposure</div>
-        <p style="font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5); margin-bottom:16px;">
-          Where is your organisation exposed to strategic risks that your current risk register
-          cannot see &mdash; and which opportunities are being missed?
-        </p>
-        <p style="font-size:13px; font-weight:500; line-height:1.6; color:rgba(161,202,204,0.7); margin:0;">
-          Surfaces: underweighted risks, overlooked opportunities, interdependencies your governance process is missing.
-        </p>
       </div>
 
+      <!-- Diagnostic 2 -->
       <div class="diag-card">
-        <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:18px;">
-          <span class="font-display" style="font-size:40px; font-weight:700; color:rgba(255,97,57,0.18); line-height:1;">04</span>
-          <div style="width:24px; height:2px; background:#FF6139; flex-shrink:0; margin-bottom:4px;"></div>
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF6139; margin-bottom:16px;">Leadership Capability Diagnostic</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.2; margin-bottom:14px;">Leadership Readiness</div>
+        <p style="font-size:14px; line-height:1.65; color:#6B5350; margin-bottom:28px;">
+          A view of the collective readiness of your leadership team to lead in complexity,
+          uncertainty and rapid change.
+        </p>
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#743734; margin-bottom:12px;">Evaluates whether your leaders can</div>
+        <div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Make sense of ambiguity without relying on over-simplification</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Confidently decide and execute without full information</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Learn and adjust quickly as evidence changes</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Build trust while navigating tension</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Maintain operating rhythm and accountability to results</p>
+          </div>
+          <div class="diag-check">
+            <div style="width:16px; height:16px; border:1.5px solid rgba(255,97,57,0.4); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%;"></div>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:#1A1A1A; margin:0;">Sustain performance under pressure</p>
+          </div>
         </div>
-        <div class="font-display" style="font-size:18px; font-weight:700; color:#fff; margin-bottom:10px; line-height:1.2;">Capability Readiness</div>
-        <p style="font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5); margin-bottom:16px;">
-          Are you building the capabilities conditions now require &mdash; or investing in the
-          capabilities that mattered in conditions that no longer exist?
-        </p>
-        <p style="font-size:13px; font-weight:500; line-height:1.6; color:rgba(161,202,204,0.7); margin:0;">
-          Surfaces: capability gaps widening silently, over-investment in legacy strengths, build vs. buy misjudgements.
-        </p>
-      </div>
-
-      <div class="diag-card">
-        <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:18px;">
-          <span class="font-display" style="font-size:40px; font-weight:700; color:rgba(255,97,57,0.18); line-height:1;">05</span>
-          <div style="width:24px; height:2px; background:#FF6139; flex-shrink:0; margin-bottom:4px;"></div>
-        </div>
-        <div class="font-display" style="font-size:18px; font-weight:700; color:#fff; margin-bottom:10px; line-height:1.2;">Strategic Velocity</div>
-        <p style="font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5); margin-bottom:16px;">
-          Can your organisation translate strategic clarity into consequential action quickly
-          enough to remain relevant as conditions continue to shift?
-        </p>
-        <p style="font-size:13px; font-weight:500; line-height:1.6; color:rgba(161,202,204,0.7); margin:0;">
-          Surfaces: decision lag, execution bottlenecks, strategy disconnected from operational pace.
-        </p>
-      </div>
-
-      <!-- Sixth card: summary -->
-      <div style="
-        background: rgba(255,97,57,0.06);
-        border: 1px solid rgba(255,97,57,0.15);
-        border-top: 2px solid rgba(255,97,57,0.4);
-        padding: 32px 28px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      ">
-        <div style="width:32px; height:2px; background:#FF6139; margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size:18px; font-weight:700; color:rgba(255,255,255,0.9); margin-bottom:12px; line-height:1.3;">One session. A complete strategic read.</div>
-        <p style="font-size:13px; line-height:1.65; color:rgba(255,255,255,0.45); margin:0 0 20px;">
-          Five dimensions mapped. Clear findings. Immediate action pathways. A basis for the
-          Board and Executive team to decide what comes next &mdash; with shared confidence.
-        </p>
-        <a href="mailto:james.cacciottolo@resilientfutures.com" style="
-          display: inline-block;
-          color: #FF6139;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          text-decoration: none;
-          transition: opacity 0.2s;
-        " onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Book a Workshop &rarr;</a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════ THE SESSION ═══════════════════════════ -->
-<section class="agenda-section" style="background:#F5F5ED; padding:96px 48px;">
-  <div class="section-inner">
-    <span class="section-label">The Session</span>
-    <div style="display:grid; grid-template-columns:1fr 400px; gap:64px; align-items:start;">
+<!-- ═══════════════════════════ DIAGNOSTIC QUESTIONS ═══════════════════════════ -->
+<section style="background:#361F1D; padding:96px 48px; position:relative; overflow:hidden;">
+  <div style="position:absolute; bottom:-100px; left:-100px; width:500px; height:500px; border-radius:50%; background: radial-gradient(circle, rgba(255,97,57,0.06) 0%, transparent 65%); pointer-events:none;"></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
       <div>
-        <h2 class="font-display" style="
-          font-size:38px; font-weight:700; color:#361F1D;
-          line-height:1.15; letter-spacing:-0.02em;
-          max-width:480px; margin-bottom:20px;
-        ">A structured day that generates real insight.</h2>
-        <p style="font-size:15px; line-height:1.75; color:#6B5350; margin-bottom:40px;">
-          Strategic Fitness is available as a half-day (4 hours) or full-day (7 hours) format,
-          depending on the depth of diagnostic required and the questions your organisation most needs answered.
-          Both formats follow the same structured approach &mdash; the full-day allows for deeper
-          interrogation of findings and extended action planning.
-        </p>
-
-        <!-- Agenda steps -->
-        <div style="border-top: 2px solid rgba(54,31,29,0.12); padding-top:0;">
-
-          <div class="agenda-step">
-            <div>
-              <div class="agenda-time" style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:4px;">Phase 1</div>
-              <div style="font-size:11px; color:#6B5350;">Pre-work &amp; context</div>
-            </div>
-            <div>
-              <div class="font-display" style="font-size:18px; font-weight:700; color:#361F1D; margin-bottom:8px; line-height:1.25;">Conditions briefing</div>
-              <p style="font-size:14px; line-height:1.65; color:#6B5350; margin:0;">
-                Before the session, Resilient Futures conducts a structured assessment of your
-                operating environment &mdash; the forces driving change, their trajectory, and their
-                implications for your specific organisation. This briefing is presented to the
-                leadership team to establish a shared, evidence-based starting point.
-              </p>
-            </div>
+        <span class="section-label section-label--light">The Questions We Help You Answer</span>
+        <div>
+          <div class="diag-q">
+            <div style="font-size:36px; font-weight:700; color:rgba(255,97,57,0.15); font-family:'Playfair Display',serif; line-height:1; flex-shrink:0; width:40px;">01</div>
+            <p class="font-display" style="font-size:18px; font-weight:700; color:rgba(255,255,255,0.82); line-height:1.4; margin:0; font-style:italic;">How quickly would we know if our strategy was no longer viable?</p>
           </div>
-
-          <div class="agenda-step">
-            <div>
-              <div class="agenda-time" style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:4px;">Phase 2</div>
-              <div style="font-size:11px; color:#6B5350;">Structured assessment</div>
-            </div>
-            <div>
-              <div class="font-display" style="font-size:18px; font-weight:700; color:#361F1D; margin-bottom:8px; line-height:1.25;">Five-dimension diagnostic</div>
-              <p style="font-size:14px; line-height:1.65; color:#6B5350; margin:0;">
-                The leadership team works through the five diagnostic dimensions in structured,
-                facilitated sessions. Each dimension uses a combination of pre-circulated diagnostics,
-                live discussion, and scenario stress-testing to surface the real strategic position
-                &mdash; not the one that looks best in a board paper.
-              </p>
-            </div>
+          <div class="diag-q">
+            <div style="font-size:36px; font-weight:700; color:rgba(255,97,57,0.15); font-family:'Playfair Display',serif; line-height:1; flex-shrink:0; width:40px;">02</div>
+            <p class="font-display" style="font-size:18px; font-weight:700; color:rgba(255,255,255,0.82); line-height:1.4; margin:0; font-style:italic;">Are our decision systems detecting weak signals early enough?</p>
           </div>
-
-          <div class="agenda-step">
-            <div>
-              <div class="agenda-time" style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:4px;">Phase 3</div>
-              <div style="font-size:11px; color:#6B5350;">Synthesis &amp; findings</div>
-            </div>
-            <div>
-              <div class="font-display" style="font-size:18px; font-weight:700; color:#361F1D; margin-bottom:8px; line-height:1.25;">Strategic fitness read</div>
-              <p style="font-size:14px; line-height:1.65; color:#6B5350; margin:0;">
-                Resilient Futures synthesises the diagnostic findings into a clear strategic fitness
-                assessment &mdash; rating each dimension and identifying the specific areas requiring
-                the most urgent attention. Findings are presented back to the full group for
-                confirmation and challenge.
-              </p>
-            </div>
+          <div class="diag-q">
+            <div style="font-size:36px; font-weight:700; color:rgba(255,97,57,0.15); font-family:'Playfair Display',serif; line-height:1; flex-shrink:0; width:40px;">03</div>
+            <p class="font-display" style="font-size:18px; font-weight:700; color:rgba(255,255,255,0.82); line-height:1.4; margin:0; font-style:italic;">Is capability aligned to future conditions or past success?</p>
           </div>
-
-          <div class="agenda-step">
-            <div>
-              <div class="agenda-time" style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:4px;">Phase 4</div>
-              <div style="font-size:11px; color:#6B5350;">Action &amp; next steps</div>
-            </div>
-            <div>
-              <div class="font-display" style="font-size:18px; font-weight:700; color:#361F1D; margin-bottom:8px; line-height:1.25;">Immediate action pathways</div>
-              <p style="font-size:14px; line-height:1.65; color:#6B5350; margin:0;">
-                The session closes with concrete, prioritised action pathways &mdash; specific
-                to your organisation's findings. These are not generic recommendations. They are
-                the steps this organisation needs to take next, grounded in what the diagnostic
-                has revealed.
-              </p>
-            </div>
+          <div class="diag-q">
+            <div style="font-size:36px; font-weight:700; color:rgba(255,97,57,0.15); font-family:'Playfair Display',serif; line-height:1; flex-shrink:0; width:40px;">04</div>
+            <p class="font-display" style="font-size:18px; font-weight:700; color:rgba(255,255,255,0.82); line-height:1.4; margin:0; font-style:italic;">Where is value quietly eroding beneath performance metrics?</p>
           </div>
-
         </div>
       </div>
-
-      <!-- Right panel: format options -->
-      <div style="position:sticky; top:88px;">
-        <div style="background:#361F1D; padding:40px 32px;">
-          <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#A1CACC; margin-bottom:24px;">Format Options</div>
-
-          <div style="margin-bottom:32px; padding-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.08);">
-            <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:6px;">Half Day</div>
-            <div style="font-size:11px; color:#A1CACC; margin-bottom:14px;">Approx. 4 hours</div>
-            <p style="font-size:13px; line-height:1.65; color:rgba(255,255,255,0.5); margin:0;">
-              Covers all five diagnostic dimensions with focused interrogation. Best suited for
-              organisations seeking a rapid, high-level read of strategic fitness, or as a
-              precursor to a fuller SiA engagement.
-            </p>
-          </div>
-
-          <div style="margin-bottom:32px; padding-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.08);">
-            <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:6px;">Full Day</div>
-            <div style="font-size:11px; color:#A1CACC; margin-bottom:14px;">Approx. 7 hours</div>
-            <p style="font-size:13px; line-height:1.65; color:rgba(255,255,255,0.5); margin:0;">
-              Deeper interrogation of each dimension, extended scenario stress-testing, and
-              more comprehensive action planning. Recommended for organisations facing material
-              strategic decisions or significant environmental change.
-            </p>
-          </div>
-
-          <div>
-            <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:12px;">Audience</div>
-            <p style="font-size:13px; line-height:1.65; color:rgba(255,255,255,0.5); margin:0 0 20px;">
-              Board and CEO, or full Senior Leadership Team. Up to 12 participants.
-              Can be structured for Board-only or combined Board and Executive sessions.
-            </p>
-            <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:12px;">Location</div>
-            <p style="font-size:13px; line-height:1.65; color:rgba(255,255,255,0.5); margin:0;">
-              On-site at your organisation or at a facilitation venue. Available across Australia.
-            </p>
-          </div>
+      <div>
+        <div style="background:rgba(255,255,255,0.04); padding:40px 36px;">
+          <div style="width:32px; height:2px; background:#FF6139; margin-bottom:24px;"></div>
+          <p style="font-size:15px; line-height:1.75; color:rgba(255,255,255,0.55); margin:0;">
+            Our diagnostic-led workshops are built to answer these questions, grounded in your
+            organisation's observed reality.
+          </p>
         </div>
-
-        <a href="mailto:james.cacciottolo@resilientfutures.com" class="btn-primary" style="display:block; text-align:center; margin-top:2px; padding:16px 28px; font-size:12px;">
-          Enquire About a Workshop
+        <a href="mailto:james.cacciottolo@resilientfutures.com" class="btn-primary" style="display:block; text-align:center; margin-top:2px; padding:18px 28px; font-size:12px;">
+          Book a Strategic Fitness Conversation
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════ WHAT YOU LEAVE WITH ═══════════════════════════ -->
-<section class="deliverables-section" style="
-  background: #361F1D;
-  padding: 96px 48px;
-  position:relative; overflow:hidden;
-">
-  <div style="
-    position:absolute; bottom:-100px; left:-100px;
-    width:500px; height:500px; border-radius:50%;
-    background: radial-gradient(circle, rgba(255,97,57,0.06) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
-
-  <div class="section-inner" style="position:relative; z-index:1;">
-    <span class="section-label section-label--light">The Output</span>
-    <h2 class="font-display" style="
-      font-size:38px; font-weight:700; color:#fff;
-      line-height:1.15; letter-spacing:-0.02em;
-      max-width:640px; margin-bottom:12px;
-    ">What you leave with.</h2>
-    <p style="font-size:15px; line-height:1.7; color:rgba(255,255,255,0.45); max-width:620px; margin-bottom:56px;">
-      Strategic Fitness is designed to generate actionable intelligence, not just insight.
-      Every session concludes with a clear set of outputs that give the leadership team
-      something to act on immediately.
-    </p>
-
-    <div>
-
-      <div class="deliverable-row">
-        <div style="width:32px; height:32px; border:1px solid rgba(255,97,57,0.3); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
-          <div style="width:8px; height:8px; background:#FF6139; border-radius:50%;"></div>
-        </div>
-        <div>
-          <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:8px; line-height:1.25;">Strategic Fitness Assessment</div>
-          <p style="font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5); margin:0;">
-            A structured, written read of your organisation's strategic fitness across all five dimensions
-            &mdash; where you are strong, where you are exposed, and what the conditions are demanding
-            that your current strategy is not yet addressing.
-          </p>
-        </div>
-      </div>
-
-      <div class="deliverable-row">
-        <div style="width:32px; height:32px; border:1px solid rgba(255,97,57,0.3); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
-          <div style="width:8px; height:8px; background:#FF6139; border-radius:50%;"></div>
-        </div>
-        <div>
-          <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:8px; line-height:1.25;">Priority Strategic Questions</div>
-          <p style="font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5); margin:0;">
-            The three to five strategic questions your Board and Executive team should be wrestling
-            with right now &mdash; grounded in the diagnostic findings, not derived from a generic
-            framework. These questions become the basis for your next strategic conversation.
-          </p>
-        </div>
-      </div>
-
-      <div class="deliverable-row">
-        <div style="width:32px; height:32px; border:1px solid rgba(255,97,57,0.3); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
-          <div style="width:8px; height:8px; background:#FF6139; border-radius:50%;"></div>
-        </div>
-        <div>
-          <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:8px; line-height:1.25;">Immediate Action Pathways</div>
-          <p style="font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5); margin:0;">
-            Specific, prioritised actions your organisation can take within 30 to 90 days to
-            close the most critical gaps identified in the diagnostic. Not broad recommendations
-            &mdash; concrete next steps, assigned to the right level of the organisation.
-          </p>
-        </div>
-      </div>
-
-      <div class="deliverable-row">
-        <div style="width:32px; height:32px; border:1px solid rgba(255,97,57,0.3); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;">
-          <div style="width:8px; height:8px; background:#FF6139; border-radius:50%;"></div>
-        </div>
-        <div>
-          <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:8px; line-height:1.25;">A Clear View of What Comes Next</div>
-          <p style="font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5); margin:0;">
-            A shared leadership-team view of whether a deeper SiA engagement is warranted
-            &mdash; and if so, what the most important strategic work is. Strategic Fitness
-            creates the basis for confident, aligned decision-making about where to invest
-            your strategic energy next.
-          </p>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Pull quote -->
-    <div style="margin-top:64px; background:rgba(255,255,255,0.04); padding:52px 56px;">
-      <p class="font-display" style="
-        font-size:22px; font-weight:700;
-        color:rgba(255,255,255,0.85); line-height:1.6;
-        max-width:800px; margin:0 0 32px;
-      ">
-        &ldquo;We&rsquo;re only a third of the way through the program, but it&rsquo;s already having a profound impact on our organisation. The way our leadership team thinks about strategy has <span style="color:#FF6139;">fundamentally shifted.&rdquo;</span>
-      </p>
-      <p style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin:0;">
-        CEO &middot; Health and Human Services Organisation
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════ WHO IT'S FOR ═══════════════════════════ -->
-<section class="for-whom-section" style="background:#F5F5ED; padding:96px 48px;">
+<!-- ═══════════════════════════ WORKSHOPS ═══════════════════════════ -->
+<section id="workshops" style="background:#F5F5ED; padding:96px 48px;">
   <div class="section-inner">
-    <span class="section-label">Who It Is For</span>
-    <h2 class="font-display" style="
-      font-size:38px; font-weight:700; color:#361F1D;
-      line-height:1.15; letter-spacing:-0.02em;
-      max-width:640px; margin-bottom:24px;
-    ">Built for organisations operating in genuine complexity.</h2>
-    <p style="font-size:16px; line-height:1.75; color:#6B5350; max-width:680px; margin-bottom:56px;">
-      We work with Australian Boards and Executives whose organisations carry a stakeholder map
-      as complicated as the environment around them &mdash; and where getting strategy right
-      is genuinely non-negotiable.
+    <span class="section-label">Workshops</span>
+    <h2 class="font-display" style="font-size:38px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; max-width:680px; margin-bottom:16px;">
+      Diagnostic-led executive interventions.
+    </h2>
+    <p style="font-size:15px; line-height:1.75; color:#6B5350; max-width:680px; margin-bottom:56px;">
+      Diagnostics feed directly into structured executive sessions grounded in observed reality,
+      not abstract discussion. This ensures the workshop is built on evidence, not assumption.
     </p>
 
-    <div class="for-whom-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(54,31,29,0.1);">
+    <div class="workshop-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
 
-      <div style="background:#F5F5ED; padding:36px 28px;">
-        <div style="width:32px; height:2px; background:#FF6139; margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size:20px; font-weight:700; color:#361F1D; margin-bottom:12px; line-height:1.25;">Boards &amp; CEOs</div>
-        <p style="font-size:14px; line-height:1.65; color:#6B5350; margin:0 0 20px;">
-          Strategic Fitness gives a Board and CEO a shared, independently-generated view of
-          the organisation's strategic health &mdash; one that is not filtered through the
-          management team's optimism or the prior year's assumptions.
-        </p>
-        <div style="border-top:1px solid rgba(54,31,29,0.1); padding-top:16px;">
-          <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#743734; margin-bottom:8px;">Good fit when</div>
-          <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0;">
-            Strategic confidence is low, governance conversations feel circular, or conditions
-            have shifted materially and the Board needs an independent read.
-          </p>
+      <!-- Workshop 1 -->
+      <div class="workshop-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#A1CACC; margin-bottom:20px;">Strategic Readiness Workshop</div>
+        <div class="font-display" style="font-size:24px; font-weight:700; color:#fff; line-height:1.15; margin-bottom:8px;">Testing Strategy Under Conditions of Ongoing Change</div>
+
+        <div style="display:flex; gap:24px; margin:24px 0; padding:20px 0; border-top:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px;">Duration</div>
+            <div style="font-size:13px; font-weight:500; color:rgba(255,255,255,0.7);">1 full-day or 2 half-days</div>
+          </div>
+          <div style="width:1px; background:rgba(255,255,255,0.08);"></div>
+          <div>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px;">For</div>
+            <div style="font-size:13px; font-weight:500; color:rgba(255,255,255,0.7);">Boards, CEOs, Executives</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:28px;">
+          <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:14px;">Focus</div>
+          <div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Pressure-test current strategy against immediate + emerging conditions</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Map value exchange + exposure to value destruction</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Identify strategic opportunity–risk dynamics and blind spots</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Triage capability alignment and resource reallocations</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Strengthen decision systems and operating rhythms</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#A1CACC; margin-bottom:14px;">Leaders Gain</div>
+          <div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Clear visibility of strategic strengths and exposure areas</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Clarity on which assumptions still hold and which do not</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Insight into value at risk and emerging opportunity</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Alignment on priority shifts required</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Agreed next steps to strengthen strategic fitness</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Strengthened decision cadence and operating rhythm</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div style="background:#F5F5ED; padding:36px 28px;">
-        <div style="width:32px; height:2px; background:#FF6139; margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size:20px; font-weight:700; color:#361F1D; margin-bottom:12px; line-height:1.25;">Senior Leadership Teams</div>
-        <p style="font-size:14px; line-height:1.65; color:#6B5350; margin:0 0 20px;">
-          When the Executive team needs to stress-test their strategic assumptions, identify
-          where capability investment should go, and surface the strategic questions they
-          may be avoiding, Strategic Fitness provides a structured process to do exactly that.
-        </p>
-        <div style="border-top:1px solid rgba(54,31,29,0.1); padding-top:16px;">
-          <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#743734; margin-bottom:8px;">Good fit when</div>
-          <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0;">
-            The team is executing well but uncertain about whether they are executing the
-            right strategy, or when there is misalignment in the room about where to focus.
-          </p>
-        </div>
-      </div>
+      <!-- Workshop 2 -->
+      <div class="workshop-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#A1CACC; margin-bottom:20px;">Leadership Elevation Workshop</div>
+        <div class="font-display" style="font-size:24px; font-weight:700; color:#fff; line-height:1.15; margin-bottom:8px;">Strengthening Leadership Capability Under Conditions of Uncertainty</div>
 
-      <div style="background:#F5F5ED; padding:36px 28px;">
-        <div style="width:32px; height:2px; background:rgba(255,97,57,0.4); margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size:20px; font-weight:700; color:#361F1D; margin-bottom:12px; line-height:1.25;">Organisations at Inflection Points</div>
-        <p style="font-size:14px; line-height:1.65; color:#6B5350; margin:0 0 20px;">
-          Sector disruption, leadership transition, funding model change, regulatory shift
-          &mdash; when the ground moves, Strategic Fitness provides a rapid, structured
-          mechanism to re-establish strategic clarity before the next set of decisions are made.
-        </p>
-        <div style="border-top:1px solid rgba(54,31,29,0.1); padding-top:16px;">
-          <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#743734; margin-bottom:8px;">Good fit when</div>
-          <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0;">
-            Something significant has changed &mdash; or is about to &mdash; and the
-            organisation needs to understand what that means for its strategy before acting.
-          </p>
+        <div style="display:flex; gap:24px; margin:24px 0; padding:20px 0; border-top:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px;">Duration</div>
+            <div style="font-size:13px; font-weight:500; color:rgba(255,255,255,0.7);">1 half-day</div>
+          </div>
+          <div style="width:1px; background:rgba(255,255,255,0.08);"></div>
+          <div>
+            <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px;">For</div>
+            <div style="font-size:13px; font-weight:500; color:rgba(255,255,255,0.7);">Executive and Senior Leadership Teams</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:28px;">
+          <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:14px;">Focus</div>
+          <div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Strengthen the human system beneath strategy</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Improve shared sense-making within uncertainty</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Reinforce disciplined trade-offs and prioritisation</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Increase learning velocity</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#FF6139; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin:0;">Build trust, legitimacy, and coherence in decision-making</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#A1CACC; margin-bottom:14px;">Leaders Gain</div>
+          <div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Visibility of behavioural strengths and constraints</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Clarity on decision disciplines requiring strengthening</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Alignment on leadership shifts required</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Agreed practical actions to elevate leadership capability</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">Greater confidence operating without false certainty</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:14px; height:14px; border:1px solid rgba(161,202,204,0.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:3px;">
+                <div style="width:4px; height:4px; background:#A1CACC; opacity:0.7;"></div>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.5); margin:0;">A shared view of the change landscape and its implications</p>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Sector note -->
-    <div style="margin-top:48px; padding:32px 36px; background:rgba(54,31,29,0.05); border-left:3px solid rgba(255,97,57,0.3);">
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF6139; margin-bottom:10px;">Sectors We Work With</div>
-      <p style="font-size:15px; line-height:1.7; color:#6B5350; margin:0;">
-        Government &amp; Public Sector &nbsp;&middot;&nbsp; Health &amp; Human Services &nbsp;&middot;&nbsp; Education
-        &nbsp;&middot;&nbsp; Peak Bodies &amp; Associations &nbsp;&middot;&nbsp; Not-for-profit &amp; Philanthropy
-        &nbsp;&middot;&nbsp; Complex Stakeholder Environments
-      </p>
+    <!-- Not a strategy rewrite callout -->
+    <div style="margin-top:2px; background:#361F1D; padding:40px 48px; display:flex; gap:48px; align-items:center;">
+      <div style="flex:1;">
+        <div class="font-display" style="font-size:26px; font-weight:700; color:#fff; line-height:1.2; margin-bottom:12px;">
+          This is not a strategy rewrite.
+        </div>
+        <p style="font-size:15px; line-height:1.7; color:rgba(255,255,255,0.5); margin:0;">
+          It is an intervention in <span style="color:rgba(255,255,255,0.8); font-weight:500;">how your organisation senses, decides and executes under change.</span>
+        </p>
+      </div>
+      <a href="mailto:james.cacciottolo@resilientfutures.com" class="btn-primary" style="flex-shrink:0; font-size:12px; padding:16px 32px;">Book Your 20-Minute Conversation</a>
     </div>
+
   </div>
 </section>
 
@@ -909,34 +843,21 @@
   text-align: center;
   position:relative; overflow:hidden;
 ">
-  <div style="
-    position:absolute; top:50%; left:50%;
-    transform: translate(-50%,-50%);
-    width:600px; height:600px; border-radius:50%;
-    background: radial-gradient(circle, rgba(255,97,57,0.08) 0%, transparent 60%);
-    pointer-events:none;
-  "></div>
+  <div style="position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); width:600px; height:600px; border-radius:50%; background: radial-gradient(circle, rgba(255,97,57,0.08) 0%, transparent 60%); pointer-events:none;"></div>
   <div style="position:relative; z-index:1;">
-    <h2 class="font-display" style="
-      font-size:42px; font-weight:700; color:#fff;
-      line-height:1.15; letter-spacing:-0.02em;
-      max-width:600px; margin:0 auto 16px;
-    ">Start with an honest question.</h2>
-    <p style="
-      font-size:15px; line-height:1.7; color:rgba(255,255,255,0.5);
-      max-width:480px; margin:0 auto 16px;
-    ">
-      A short conversation with Larry or David is the right place to start. No pitch.
-      A genuine conversation about your operating environment and whether Strategic Fitness
-      would give you the clarity you need.
+    <h2 class="font-display" style="font-size:42px; font-weight:700; color:#fff; line-height:1.15; letter-spacing:-0.02em; max-width:600px; margin:0 auto 16px;">
+      Book a Strategic Fitness conversation.
+    </h2>
+    <p style="font-size:15px; line-height:1.7; color:rgba(255,255,255,0.5); max-width:520px; margin:0 auto 16px;">
+      Schedule a confidential, executive-level discussion to determine whether the Strategic Fitness
+      or Leadership Capability Diagnostic and Workshops would be valuable for your organisation.
     </p>
-    <p style="font-size:13px; line-height:1.7; color:rgba(255,255,255,0.3); max-width:480px; margin:0 auto 40px;">
-      Available as a half-day or full-day workshop, across Australia.
+    <p style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.25); max-width:480px; margin:0 auto 40px;">
+      No Obligation &nbsp;&middot;&nbsp; Direct Insight &nbsp;&middot;&nbsp; Executive Level Conversation
     </p>
     <a href="mailto:james.cacciottolo@resilientfutures.com" class="btn-primary" style="font-size:13px; padding:16px 40px;">
-      Book a Conversation
+      Book Your 20-Minute Conversation
     </a>
-    <p style="font-size:11px; color:rgba(255,255,255,0.25); margin-top:16px; letter-spacing:0.04em;">No commitment required</p>
   </div>
 </section>
 
@@ -948,13 +869,13 @@
       <a href="strategy-in-action.html" class="explore-card">
         <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:14px;">The Framework</div>
         <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">Strategy in Action</div>
-        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">The decision-making system built for structural instability &mdash; and the five standards that make it work.</p>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">The decision-making system built for structural instability — and the five standards that make it work.</p>
         <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#FF6139;">Explore the framework &rarr;</span>
       </a>
       <a href="why.html" class="explore-card explore-card--dim">
         <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,97,57,0.65); margin-bottom:14px;">The Problem</div>
         <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">Why Resilient Futures</div>
-        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">Why most strategic systems are built for a world that no longer exists &mdash; and what the consequences are.</p>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">Why most strategic systems are built for a world that no longer exists — and what the consequences are.</p>
         <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,97,57,0.65);">Read the argument &rarr;</span>
       </a>
       <a href="index.html#services" class="explore-card explore-card--dim">
@@ -969,13 +890,10 @@
 
 <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
 <footer style="background:#1a0f0e; border-top:1px solid rgba(255,255,255,0.06);">
-
   <div style="padding:40px 48px 28px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:32px;">
-
     <a href="index.html" class="nav-logo-link">
       <img src="brand_assets/Resilient Futures LOGO.png" alt="Resilient Futures" style="height:32px; width:auto; display:block; filter:brightness(0) invert(1); opacity:0.55;">
     </a>
-
     <div style="display:flex; gap:48px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:10px;">
         <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">About</span>
@@ -994,7 +912,6 @@
         <a href="mailto:james.cacciottolo@resilientfutures.com" class="footer-email">james.cacciottolo@resilientfutures.com</a>
       </div>
     </div>
-
     <div style="display:flex; gap:10px; align-items:center;">
       <a href="#" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.4)'">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -1013,16 +930,10 @@
       </a>
     </div>
   </div>
-
   <div style="padding:20px 48px; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-    <p style="font-size:11px; color:rgba(255,255,255,0.25); margin:0;">
-      Resilient Futures &copy; 2026 &middot; All rights reserved
-    </p>
-    <p style="font-size:11px; color:rgba(255,255,255,0.2); margin:0;">
-      Strategy for a world that won&rsquo;t hold still
-    </p>
+    <p style="font-size:11px; color:rgba(255,255,255,0.25); margin:0;">Resilient Futures &copy; 2026 &middot; All rights reserved</p>
+    <p style="font-size:11px; color:rgba(255,255,255,0.2); margin:0;">Strategy for a world that won&rsquo;t hold still</p>
   </div>
-
 </footer>
 </body>
 </html>
