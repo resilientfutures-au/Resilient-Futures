@@ -306,16 +306,16 @@
 
         <form action="mailto:info@resilientfutures.com" method="post" enctype="text/plain">
           <div style="margin-bottom:20px;">
-            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#6B5350; margin-bottom:7px;">Your Name</label>
-            <input type="text" name="name" class="form-input" placeholder="Full name" required>
+            <label for="gs-name" style="display:block; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#6B5350; margin-bottom:7px;">Your Name</label>
+            <input id="gs-name" type="text" name="name" class="form-input" placeholder="Full name" required>
           </div>
           <div style="margin-bottom:20px;">
-            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#6B5350; margin-bottom:7px;">Email Address</label>
-            <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
+            <label for="gs-email" style="display:block; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#6B5350; margin-bottom:7px;">Email Address</label>
+            <input id="gs-email" type="email" name="email" class="form-input" placeholder="your@email.com" required>
           </div>
           <div style="margin-bottom:28px;">
-            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#6B5350; margin-bottom:7px;">Message</label>
-            <textarea name="message" class="form-input" placeholder="Tell us a little about your organisation and what you're looking for…" style="min-height:120px; resize:vertical;" required></textarea>
+            <label for="gs-message" style="display:block; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#6B5350; margin-bottom:7px;">Message</label>
+            <textarea id="gs-message" name="message" class="form-input" placeholder="Tell us a little about your organisation and what you're looking for…" style="min-height:120px; resize:vertical;" required></textarea>
           </div>
           <button type="submit" class="btn-primary" style="font-size:13px; padding:16px 36px;">Send Message</button>
         </form>
