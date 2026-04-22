@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Resilient Futures — The Problem We Solve</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1A1A1A;
+      background: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #FF6139;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .section-label--light { color: #A1CACC; }
+    .btn-primary {
+      display: inline-block;
+      background: #FF6139;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-primary:focus-visible { outline: 2px solid #FF6139; outline-offset: 3px; }
+    .btn-primary:active { transform: translateY(1px); }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .nav-link {
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: rgba(255,255,255,0.9); }
+    .nav-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; color: rgba(255,255,255,0.9); }
+    .nav-link:active { color: #fff; }
+    .nav-link--active { color: rgba(255,255,255,0.9) !important; }
+    .nav-logo-link {
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-logo-link:hover { opacity: 0.8; }
+    .nav-logo-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; }
+    .footer-email {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-email:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── Implication chips ── */
+    .impl-chip {
+      background: #fff;
+      border-top: 3px solid #FF6139;
+      padding: 18px 16px;
+    }
+    .impl-chip--dim {
+      border-top-color: rgba(255,97,57,0.3);
+    }
+
+    /* ── MAD section: large type treatment ── */
+    .mad-glyph {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(96px, 14vw, 180px);
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      color: rgba(255,97,57,0.1);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── Comparison table ── */
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid rgba(54,31,29,0.1);
+    }
+    .compare-cell {
+      padding: 16px 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #1A1A1A;
+    }
+    .compare-cell--header {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(54,31,29,0.45);
+      padding: 12px 20px;
+      background: rgba(54,31,29,0.04);
+    }
+    .compare-cell--left { border-right: 1px solid rgba(54,31,29,0.1); }
+    .compare-cell--neg { color: #743734; }
+
+    /* ── Responsive ── */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero-section { padding: 64px 32px 72px !important; }
+      .hero-section h1 { font-size: 38px !important; }
+      .reality-section { padding: 80px 32px !important; }
+      .reality-grid { grid-template-columns: repeat(2,1fr) !important; }
+      .mad-section { padding: 80px 32px !important; }
+      .mad-cols { grid-template-columns: 1fr !important; }
+      .cta-cols { grid-template-columns: 1fr !important; }
+      .trad-section { padding: 80px 32px !important; }
+      .cta-section { padding: 80px 32px !important; }
+      footer { padding: 28px 32px !important; }
+    }
+    @media (max-width: 767px) {
+      nav > div:last-child { display: none !important; }
+      .hero-section { padding: 48px 24px 64px !important; }
+      .hero-section h1 { font-size: 30px !important; }
+      .hero-inner-flex { flex-direction: column !important; }
+      .hero-accent-line { display: none !important; }
+      .reality-section { padding: 64px 24px !important; }
+      .reality-grid { grid-template-columns: 1fr 1fr !important; }
+      .mad-section { padding: 64px 24px !important; }
+      .mad-inner { flex-direction: column !important; gap: 32px !important; }
+      .mad-cols { grid-template-columns: 1fr !important; }
+      .cta-cols { grid-template-columns: 1fr !important; }
+      .trad-section { padding: 64px 24px !important; }
+      .compare-row { grid-template-columns: 1fr !important; }
+      .compare-cell--left { border-right: none !important; border-bottom: 1px solid rgba(54,31,29,0.1); }
+      .cta-section { padding: 64px 24px !important; }
+      footer {
+        padding: 28px 24px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 12px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav style="
+  background: #361F1D;
+  height: 64px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+">
+  <a href="index.html" class="nav-logo-link">
+    <span class="font-display" style="
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    ">
+      <span style="color:#fff;">resilient</span><span style="color:#743734;">futures</span><span style="color:#FF6139;">+</span>
+    </span>
+  </a>
+  <div style="display:flex; gap:32px; align-items:center;">
+    <a href="why.html" class="nav-link nav-link--active">Why RF</a>
+    <a href="index.html#services" class="nav-link">Services</a>
+    <a href="index.html#approach" class="nav-link">Our Approach</a>
+    <a href="index.html#about" class="nav-link">About</a>
+    <a href="mailto:techadmin@resilientfutures.com" class="btn-primary" style="padding:8px 20px; font-size:11px;">Get in touch</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero-section" style="
+  background: linear-gradient(155deg, #2a1816 0%, #361F1D 45%, #4a2826 100%);
+  padding: 80px 48px 96px;
+  position: relative;
+  overflow: hidden;
+">
+  <!-- Coral radial glow -->
+  <div style="
+    position:absolute; top:-80px; right:-80px;
+    width:500px; height:500px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,97,57,0.1) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+  <!-- Blue-green glow -->
+  <div style="
+    position:absolute; bottom:40px; left:-60px;
+    width:350px; height:350px; border-radius:50%;
+    background: radial-gradient(circle, rgba(161,202,204,0.07) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <!-- Breadcrumb -->
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:40px;">
+      <a href="index.html" style="font-size:12px; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Home</a>
+      <span style="font-size:12px; color:rgba(255,255,255,0.2);">&#47;</span>
+      <span style="font-size:12px; color:rgba(255,255,255,0.5);">Why Resilient Futures</span>
+    </div>
+
+    <div class="hero-inner-flex" style="display:flex; gap:32px; align-items:flex-start;">
+      <!-- Vertical coral accent line -->
+      <div class="hero-accent-line" style="
+        width: 3px;
+        flex-shrink: 0;
+        min-height: 280px;
+        margin-top: 4px;
+        background: linear-gradient(to bottom, #FF6139, rgba(255,97,57,0));
+      "></div>
+      <!-- Copy -->
+      <div style="flex:1; max-width:780px;">
+        <span class="section-label" style="margin-bottom:16px;">Why Resilient Futures</span>
+        <h1 class="font-display" style="
+          font-size: 48px;
+          font-weight: 700;
+          color: #fff;
+          line-height: 1.1;
+          letter-spacing: -0.025em;
+          margin-bottom: 28px;
+          max-width: 720px;
+        ">
+          The operating environment has changed.<br>
+          <span style="color:rgba(255,255,255,0.55);">Most strategic systems haven&rsquo;t.</span>
+        </h1>
+        <p style="
+          font-size: 17px;
+          line-height: 1.7;
+          color: rgba(255,255,255,0.65);
+          max-width: 620px;
+          margin-bottom: 16px;
+        ">
+          This is not a crisis of intent. Most leadership teams are working hard, making reasonable
+          decisions, and executing against plans they believe in.
+        </p>
+        <p style="
+          font-size: 17px;
+          line-height: 1.7;
+          color: rgba(255,255,255,0.45);
+          max-width: 620px;
+          margin-bottom: 40px;
+        ">
+          The problem is structural: the methods, rhythms, and assumptions underpinning most
+          strategies were built for a world of relative predictability &mdash; and that world is gone.
+        </p>
+        <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+          <a href="mailto:techadmin@resilientfutures.com" class="btn-primary">Book a Conversation</a>
+          <a href="#reality" style="color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif; font-size:12px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Read on &#8595;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ STRATEGIC REALITY ═══════════════════════════ -->
+<section id="reality" class="reality-section" style="background:#F5F5ED; padding:96px 48px;">
+  <div class="section-inner">
+    <span class="section-label">The Strategic Reality Facing Leaders Today</span>
+    <h2 class="font-display" style="
+      font-size:38px; font-weight:700; color:#361F1D;
+      line-height:1.15; letter-spacing:-0.02em;
+      max-width:700px; margin-bottom:24px;
+    ">Change is no longer an event to be managed.<br>It is the permanent operating condition.</h2>
+
+    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:16px;">
+      The forces reshaping organisations &mdash; from AI adoption and workforce transformation,
+      to geopolitical instability, shifting member expectations, regulatory pressure, and
+      climate-related disruption &mdash; are not sequential.
+    </p>
+    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:16px;">
+      They interact. They amplify each other. And they do not pause for annual planning cycles.
+    </p>
+
+    <!-- Pullquote -->
+    <blockquote style="
+      border-left: 3px solid #FF6139;
+      padding: 20px 28px;
+      margin: 40px 0 48px;
+      background: rgba(54,31,29,0.04);
+    ">
+      <p class="font-display" style="
+        font-size:20px; font-weight:700; color:#361F1D;
+        line-height:1.4; font-style:italic;
+      ">&ldquo;The most dangerous place any organisation can be is confidently executing
+      a strategy that is no longer aligned to reality.&rdquo;</p>
+    </blockquote>
+
+    <p style="font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#743734; margin-bottom:24px;">
+      The implications for leaders are profound
+    </p>
+
+    <!-- 8 implication chips -->
+    <div class="reality-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+
+      <div class="impl-chip">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:8px;">01</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Traditional strategy cycles are too slow and too narrow for the pace of change</p>
+      </div>
+      <div class="impl-chip">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:8px;">02</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Risk registers seldom capture the dynamic interdependencies between forces</p>
+      </div>
+      <div class="impl-chip">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:8px;">03</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Strategy becomes a &lsquo;project list&rsquo; &mdash; disconnected from real conditions</p>
+      </div>
+      <div class="impl-chip">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:8px;">04</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Boards lack real-time strategic intelligence for effective governance</p>
+      </div>
+
+      <div class="impl-chip impl-chip--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:8px;">05</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Undetected signals of change lead to decision lag and missed opportunity</p>
+      </div>
+      <div class="impl-chip impl-chip--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:8px;">06</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Organisations invest in optimising the present rather than preparing for the future</p>
+      </div>
+      <div class="impl-chip impl-chip--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:8px;">07</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Leadership effectiveness declines under the pressure of disruptive change</p>
+      </div>
+      <div class="impl-chip impl-chip--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:8px;">08</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Capability gaps &mdash; in people, systems, and infrastructure &mdash; quietly widen</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MAD SECTION ═══════════════════════════ -->
+<section class="mad-section" style="
+  background: #361F1D;
+  padding: 56px 48px;
+  position:relative; overflow:hidden;
+">
+
+  <!-- Blue-green glow -->
+  <div style="
+    position:absolute; top:-100px; left:-100px;
+    width:450px; height:450px; border-radius:50%;
+    background: radial-gradient(circle, rgba(161,202,204,0.06) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <span class="section-label section-label--light">The Consequence</span>
+
+    <!-- MAD: acronym + name -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex; align-items:baseline; gap:20px; flex-wrap:wrap; margin-bottom:12px;">
+        <span class="font-display" style="
+          font-size:72px; font-weight:700;
+          color:#FF6139; letter-spacing:-0.04em; line-height:1;
+        ">MAD</span>
+        <span class="font-display" style="
+          font-size:20px; font-weight:700;
+          color:rgba(255,255,255,0.4); letter-spacing:-0.01em; line-height:1;
+          padding-bottom:4px;
+        ">Managed Adaptive Decline</span>
+      </div>
+      <div style="width:60px; height:3px; background:#FF6139;"></div>
+    </div>
+
+    <div class="mad-cols" style="display:grid; grid-template-columns:1fr 1.5fr; gap:48px; align-items:end;">
+      <div>
+        <p style="font-size:16px; line-height:1.75; color:rgba(255,255,255,0.7); margin-bottom:20px;">
+          When organisations adapt to deteriorating conditions in a seemingly rational way &mdash;
+          cutting costs, tightening focus, incrementally adjusting &mdash; they can maintain the
+          appearance of function while steadily losing relevance, influence, and value.
+        </p>
+        <p style="font-size:16px; line-height:1.75; color:rgba(255,255,255,0.55); margin-bottom:20px;">
+          This is what we call Managed Adaptive Decline, or MAD. MAD is insidious precisely
+          because it is gradual. Performance metrics may hold. Board confidence may remain high.
+          But the organisation is slowly becoming less capable of generating the value that made
+          it important in the first place.
+        </p>
+        <p style="font-size:15px; line-height:1.75; color:rgba(255,255,255,0.4);">
+          Each adaptive decision is locally rational. Collectively, they produce an irreversible
+          drift away from relevance.
+        </p>
+      </div>
+
+      <div style="padding-left:40px;">
+        <!-- Disruptive Conditions diagram -->
+        <iframe src="brand_assets/disruptive-conditions.svg?v=5" style="width:100%; height:400px; border:none; display:block; pointer-events:none;" scrolling="no"></iframe>
+        <p style="font-size:11px; color:rgba(255,255,255,0.25); margin-top:12px; letter-spacing:0.06em; line-height:1.5;">
+          The capability gap between what is required and what is available accelerates as disruptive conditions intensify.
+        </p>
+      </div>
+    </div>
+
+    <!-- Pullquote -->
+    <div style="margin-top:64px; border-left:3px solid rgba(255,97,57,0.5); padding:24px 32px; background:rgba(255,255,255,0.03);">
+      <p class="font-display" style="
+        font-size:20px; font-weight:700; color:rgba(255,255,255,0.85);
+        line-height:1.5; font-style:italic; margin-bottom:0;
+      ">
+        &ldquo;The most significant risk is not the disruption you can see.
+        It is the erosion of relevance that is happening <span style="color:#FF6139;">too slowly to trigger an alarm.</span>&rdquo;
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ WHY TRADITIONAL APPROACHES FALL SHORT ═══════════════════════════ -->
+<section class="trad-section" style="background:#F5F5ED; padding:96px 48px;">
+  <div class="section-inner">
+    <span class="section-label">Why Traditional Approaches Fall Short</span>
+    <h2 class="font-display" style="
+      font-size:38px; font-weight:700; color:#361F1D;
+      line-height:1.15; letter-spacing:-0.02em;
+      max-width:680px; margin-bottom:24px;
+    ">Optimisation tools cannot solve an orientation problem.</h2>
+
+    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:16px;">
+      LEAN programs, agile methodologies, design thinking, large-scale restructuring &mdash; these
+      tools have genuine value in the right contexts. But they are <strong>optimisation tools, not
+      orientation tools.</strong>
+    </p>
+    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:40px;">
+      They improve how an organisation executes within a given frame. They do not help an
+      organisation determine whether the frame itself is still the right one.
+    </p>
+
+    <!-- Comparison table -->
+    <div style="background:#fff; border:1px solid rgba(54,31,29,0.1); overflow:hidden; margin-bottom:48px;">
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--header compare-cell--left">What traditional tools do well</div>
+        <div class="compare-cell compare-cell--header">What they cannot do</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--left">Improve execution efficiency within an existing frame</div>
+        <div class="compare-cell compare-cell--neg">Determine whether the strategic frame is still the right one</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--left">Reduce waste and increase throughput</div>
+        <div class="compare-cell compare-cell--neg">Read the real change landscape and its implications for your organisation</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-cell--left">Solve well-defined problems with known solutions</div>
+        <div class="compare-cell compare-cell--neg">Navigate conditions where the problem itself is continuously changing</div>
+      </div>
+      <div class="compare-row" style="border-bottom:none;">
+        <div class="compare-cell compare-cell--left">Generate incremental improvement</div>
+        <div class="compare-cell compare-cell--neg">Identify whether the organisation is optimising toward irrelevance</div>
+      </div>
+    </div>
+
+    <h3 class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; margin-bottom:16px; letter-spacing:-0.01em;">
+      What leaders in complex environments actually need
+    </h3>
+    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:12px;">
+      A fundamentally different approach to strategy &mdash; one that:
+    </p>
+    <div style="display:flex; flex-direction:column; gap:0; max-width:700px;">
+      <div style="display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(54,31,29,0.08);">
+        <div style="width:3px; height:3px; border-radius:50%; background:#FF6139; flex-shrink:0; margin-top:11px;"></div>
+        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin:0;">Starts with an honest reading of the real change landscape</p>
+      </div>
+      <div style="display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(54,31,29,0.08);">
+        <div style="width:3px; height:3px; border-radius:50%; background:#FF6139; flex-shrink:0; margin-top:11px;"></div>
+        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin:0;">Moves to where value must be generated and protected</p>
+      </div>
+      <div style="display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(54,31,29,0.08);">
+        <div style="width:3px; height:3px; border-radius:50%; background:#FF6139; flex-shrink:0; margin-top:11px;"></div>
+        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin:0;">Identifies the risks and opportunities that matter most</p>
+      </div>
+      <div style="display:flex; gap:16px; align-items:flex-start; padding:16px 0;">
+        <div style="width:3px; height:3px; border-radius:50%; background:#FF6139; flex-shrink:0; margin-top:11px;"></div>
+        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin:0;">Translates all of this into focused, adaptive action</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ THERE IS A BETTER WAY ═══════════════════════════ -->
+<section class="cta-section" style="
+  background: linear-gradient(135deg, #2a1816 0%, #361F1D 100%);
+  padding: 96px 48px;
+  position:relative; overflow:hidden;
+">
+  <!-- Radial glow -->
+  <div style="
+    position:absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    width:700px; height:700px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,97,57,0.07) 0%, transparent 60%);
+    pointer-events:none;
+  "></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <div class="cta-cols" style="display:grid; grid-template-columns:1fr 380px; gap:64px; align-items:center;">
+
+      <div>
+        <span class="section-label section-label--light" style="margin-bottom:16px;">There Is a Better Way</span>
+        <h2 class="font-display" style="
+          font-size:42px; font-weight:700; color:#fff;
+          line-height:1.12; letter-spacing:-0.02em;
+          margin-bottom:20px; max-width:560px;
+        ">
+          Resilient Futures works with leaders who have recognised
+          <span style="color:#FF6139;"> the current approach is not fit for the conditions.</span>
+        </h2>
+        <p style="font-size:15px; line-height:1.7; color:rgba(255,255,255,0.5); max-width:520px; margin-bottom:0;">
+          Our approach does not begin with frameworks. It begins with a clear-eyed diagnosis
+          of what is actually happening in your operating environment &mdash; and what that means
+          for your organisation&rsquo;s relevance, risk exposure, and opportunity set.
+        </p>
+      </div>
+
+      <!-- CTA card -->
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:40px 36px;">
+        <div class="font-display" style="font-size:18px; font-weight:700; color:#fff; margin-bottom:12px; line-height:1.3;">Start with a Strategic Fitness conversation.</div>
+        <p style="font-size:14px; line-height:1.7; color:rgba(255,255,255,0.45); margin-bottom:28px;">
+          We work with a small number of organisations at any given time. A short conversation
+          helps determine whether the timing and fit are right for your organisation.
+        </p>
+        <a href="mailto:techadmin@resilientfutures.com" class="btn-primary" style="font-size:12px; padding:14px 28px; display:inline-block; width:100%; text-align:center;">
+          Book a conversation
+        </a>
+        <p style="font-size:11px; color:rgba(255,255,255,0.2); margin-top:16px; text-align:center; letter-spacing:0.03em;">No commitment required</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ NEXT STEP STRIP ═══════════════════════════ -->
+<section style="background:#EFEFE7; padding:56px 48px; border-top:1px solid rgba(54,31,29,0.08);">
+  <div class="section-inner">
+    <p style="
+      font-size:9px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;
+      color:rgba(54,31,29,0.35); margin-bottom:28px;
+    ">Explore further</p>
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+      <a href="index.html#approach" style="
+        display:flex; align-items:center; gap:12px;
+        background:#fff; padding:20px 24px;
+        border-top:3px solid #FF6139;
+        text-decoration:none;
+        transition:box-shadow 0.2s;
+        flex:1; min-width:240px;
+      " onmouseover="this.style.boxShadow='0 4px 20px rgba(54,31,29,0.1)'" onmouseout="this.style.boxShadow='none'">
+        <div>
+          <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#FF6139; margin-bottom:6px;">Our Approach</div>
+          <div class="font-display" style="font-size:15px; font-weight:700; color:#361F1D; line-height:1.3;">Strategy in Action (SiA)</div>
+          <p style="font-size:13px; color:#6B5350; margin:4px 0 0; line-height:1.5;">The decision-making system built for structural instability &rarr;</p>
+        </div>
+      </a>
+      <a href="index.html#services" style="
+        display:flex; align-items:center; gap:12px;
+        background:#fff; padding:20px 24px;
+        border-top:3px solid rgba(255,97,57,0.4);
+        text-decoration:none;
+        transition:box-shadow 0.2s;
+        flex:1; min-width:240px;
+      " onmouseover="this.style.boxShadow='0 4px 20px rgba(54,31,29,0.1)'" onmouseout="this.style.boxShadow='none'">
+        <div>
+          <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,97,57,0.6); margin-bottom:6px;">Services</div>
+          <div class="font-display" style="font-size:15px; font-weight:700; color:#361F1D; line-height:1.3;">Three Ways to Work Together</div>
+          <p style="font-size:13px; color:#6B5350; margin:4px 0 0; line-height:1.5;">Strategic Fitness, SiA Engagement, Capability Building &rarr;</p>
+        </div>
+      </a>
+      <a href="index.html#about" style="
+        display:flex; align-items:center; gap:12px;
+        background:#fff; padding:20px 24px;
+        border-top:3px solid rgba(255,97,57,0.4);
+        text-decoration:none;
+        transition:box-shadow 0.2s;
+        flex:1; min-width:240px;
+      " onmouseover="this.style.boxShadow='0 4px 20px rgba(54,31,29,0.1)'" onmouseout="this.style.boxShadow='none'">
+        <div>
+          <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,97,57,0.6); margin-bottom:6px;">Our Team</div>
+          <div class="font-display" style="font-size:15px; font-weight:700; color:#361F1D; line-height:1.3;">The People Behind the Work</div>
+          <p style="font-size:13px; color:#6B5350; margin:4px 0 0; line-height:1.5;">25+ years of strategy for complex organisations &rarr;</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer style="background:#1a0f0e; border-top:1px solid rgba(255,255,255,0.06);">
+
+  <div style="padding:40px 48px 28px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:32px;">
+
+    <a href="index.html" class="nav-logo-link">
+      <img src="brand_assets/Resilient Futures LOGO.png" alt="Resilient Futures" style="height:32px; width:auto; display:block; filter:brightness(0) invert(1); opacity:0.55;">
+    </a>
+
+    <div style="display:flex; gap:48px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Services</span>
+        <a href="index.html#services" class="nav-link">Strategic Fitness</a>
+        <a href="index.html#services" class="nav-link">SiA Strategy Engagement</a>
+        <a href="index.html#services" class="nav-link">Capability Building</a>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Company</span>
+        <a href="why.html" class="nav-link">Why Resilient Futures</a>
+        <a href="index.html#approach" class="nav-link">Our Approach</a>
+        <a href="index.html#about" class="nav-link">Our Team</a>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Contact</span>
+        <a href="mailto:techadmin@resilientfutures.com" class="nav-link">Get in touch</a>
+        <a href="mailto:techadmin@resilientfutures.com" class="footer-email">techadmin@resilientfutures.com</a>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="#" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.4)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="#" aria-label="X (Twitter)" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.4)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div style="
+    padding: 20px 48px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  ">
+    <p style="font-size:11px; color:rgba(255,255,255,0.2); margin:0;">
+      &copy; 2026 Resilient Futures. All rights reserved.
+    </p>
+    <p style="font-size:11px; color:rgba(255,255,255,0.15); margin:0; letter-spacing:0.04em; text-transform:uppercase;">
+      Strategy for a world that won&rsquo;t hold still.
+    </p>
+  </div>
+
+</footer>
+
+</body>
+</html>
