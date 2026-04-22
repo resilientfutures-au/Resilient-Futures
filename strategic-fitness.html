@@ -321,92 +321,42 @@
           <a href="#workshops" style="color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif; font-size:12px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">See workshops &#8595;</a>
         </div>
       </div>
-      <div class="hero-graphic" style="flex-shrink:0; width:320px; padding-top:8px; align-self:center;">
-        <!--
-          Six nodes represent the six Strategic Fitness evaluation dimensions:
-          Sensing · Deciding · Value · Capability · Leadership · Adapting
-        -->
-        <svg viewBox="0 0 400 310" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <div class="hero-graphic" style="flex-shrink:0; width:300px; padding-top:16px; align-self:center;">
+        <svg viewBox="0 0 300 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
           <defs>
-            <pattern id="sfHatch" x="0" y="0" width="7" height="9999" patternUnits="userSpaceOnUse">
-              <line x1="3.5" y1="0" x2="3.5" y2="9999" stroke="#FF6139" stroke-width="0.8"/>
-            </pattern>
-            <mask id="sfRingMask">
-              <ellipse cx="200" cy="155" rx="110" ry="86" fill="white"/>
-              <ellipse cx="200" cy="155" rx="74" ry="57" fill="black"/>
+            <radialGradient id="dotFade" cx="50%" cy="45%" r="55%">
+              <stop offset="0%" stop-opacity="1"/>
+              <stop offset="100%" stop-opacity="0"/>
+            </radialGradient>
+            <mask id="gridMask">
+              <rect width="300" height="320" fill="url(#dotFade)"/>
             </mask>
           </defs>
-
-          <!-- Hatch ring -->
-          <ellipse cx="200" cy="155" rx="110" ry="86" fill="url(#sfHatch)" mask="url(#sfRingMask)" opacity="0.25"/>
-          <ellipse cx="200" cy="155" rx="110" ry="86" stroke="#FF6139" stroke-width="0.75" fill="none" opacity="0.32"/>
-          <!-- Inner fill -->
-          <ellipse cx="200" cy="155" rx="74" ry="57" fill="#2d1815" stroke="#FF6139" stroke-width="0.75" opacity="0.22"/>
-
-          <!-- Spoke lines — centre (200,155) to each outer node -->
-          <!-- Top -->
-          <line x1="200" y1="155" x2="200" y2="35" stroke="#A1CACC" stroke-width="0.75" opacity="0.35"/>
-          <!-- Top-right: sin60=0.866, cos60=0.5 → (200+120×0.866, 155−120×0.5) = (304, 95) -->
-          <line x1="200" y1="155" x2="304" y2="95" stroke="#A1CACC" stroke-width="0.75" opacity="0.35"/>
-          <!-- Bottom-right -->
-          <line x1="200" y1="155" x2="304" y2="215" stroke="#A1CACC" stroke-width="0.75" opacity="0.35"/>
-          <!-- Bottom -->
-          <line x1="200" y1="155" x2="200" y2="275" stroke="#A1CACC" stroke-width="0.75" opacity="0.35"/>
-          <!-- Bottom-left -->
-          <line x1="200" y1="155" x2="96" y2="215" stroke="#A1CACC" stroke-width="0.75" opacity="0.35"/>
-          <!-- Top-left -->
-          <line x1="200" y1="155" x2="96" y2="95" stroke="#A1CACC" stroke-width="0.75" opacity="0.35"/>
-
-          <!-- Centre node -->
-          <circle cx="200" cy="155" r="16" fill="#2d1815" stroke="#FF6139" stroke-width="1.5" opacity="0.75"/>
-          <circle cx="200" cy="155" r="4" fill="#FF6139" opacity="0.6"/>
-
-          <!-- Outer nodes -->
-          <circle cx="200" cy="35"  r="9" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.85"/>
-          <circle cx="304" cy="95"  r="9" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.85"/>
-          <circle cx="304" cy="215" r="9" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.85"/>
-          <circle cx="200" cy="275" r="9" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.85"/>
-          <circle cx="96"  cy="215" r="9" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.85"/>
-          <circle cx="96"  cy="95"  r="9" fill="#2d1815" stroke="#A1CACC" stroke-width="1.5" opacity="0.85"/>
-
-          <!-- Labels — 6 strategic fitness dimensions -->
-          <!-- Top: Sensing -->
-          <text x="200" y="17" text-anchor="middle"
-            font-family="Inter, sans-serif" font-size="9.5" font-weight="600"
-            letter-spacing="1.2" fill="#A1CACC" opacity="0.82">SENSING</text>
-
-          <!-- Top-right: Deciding -->
-          <text x="317" y="91" text-anchor="start"
-            font-family="Inter, sans-serif" font-size="9.5" font-weight="600"
-            letter-spacing="1.2" fill="#A1CACC" opacity="0.82">DECIDING</text>
-
-          <!-- Bottom-right: Value -->
-          <text x="317" y="219" text-anchor="start"
-            font-family="Inter, sans-serif" font-size="9.5" font-weight="600"
-            letter-spacing="1.2" fill="#A1CACC" opacity="0.82">VALUE</text>
-
-          <!-- Bottom: Capability -->
-          <text x="200" y="298" text-anchor="middle"
-            font-family="Inter, sans-serif" font-size="9.5" font-weight="600"
-            letter-spacing="1.2" fill="#A1CACC" opacity="0.82">CAPABILITY</text>
-
-          <!-- Bottom-left: Leadership -->
-          <text x="83" y="219" text-anchor="end"
-            font-family="Inter, sans-serif" font-size="9.5" font-weight="600"
-            letter-spacing="1.2" fill="#A1CACC" opacity="0.82">LEADERSHIP</text>
-
-          <!-- Top-left: Adapting -->
-          <text x="83" y="91" text-anchor="end"
-            font-family="Inter, sans-serif" font-size="9.5" font-weight="600"
-            letter-spacing="1.2" fill="#A1CACC" opacity="0.82">ADAPTING</text>
-
-          <!-- Dim label inside ring: "6 DIMENSIONS OF STRATEGIC FITNESS" -->
-          <text x="200" y="152" text-anchor="middle"
-            font-family="Inter, sans-serif" font-size="6.5" font-weight="500"
-            letter-spacing="0.8" fill="rgba(255,255,255,0.2)">6 DIMENSIONS</text>
-          <text x="200" y="163" text-anchor="middle"
-            font-family="Inter, sans-serif" font-size="6.5" font-weight="500"
-            letter-spacing="0.8" fill="rgba(255,255,255,0.2)">STRATEGIC FITNESS</text>
+          <!-- Dot grid -->
+          <g mask="url(#gridMask)" opacity="0.3">
+            <circle cx="20" cy="20" r="1.5" fill="#A1CACC"/><circle cx="60" cy="20" r="1.5" fill="#A1CACC"/><circle cx="100" cy="20" r="1.5" fill="#A1CACC"/><circle cx="140" cy="20" r="1.5" fill="#A1CACC"/><circle cx="180" cy="20" r="1.5" fill="#A1CACC"/><circle cx="220" cy="20" r="1.5" fill="#A1CACC"/><circle cx="260" cy="20" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="60" r="1.5" fill="#A1CACC"/><circle cx="60" cy="60" r="1.5" fill="#A1CACC"/><circle cx="100" cy="60" r="1.5" fill="#A1CACC"/><circle cx="140" cy="60" r="1.5" fill="#A1CACC"/><circle cx="180" cy="60" r="1.5" fill="#A1CACC"/><circle cx="220" cy="60" r="1.5" fill="#A1CACC"/><circle cx="260" cy="60" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="100" r="1.5" fill="#A1CACC"/><circle cx="60" cy="100" r="1.5" fill="#A1CACC"/><circle cx="100" cy="100" r="1.5" fill="#A1CACC"/><circle cx="140" cy="100" r="1.5" fill="#A1CACC"/><circle cx="180" cy="100" r="1.5" fill="#A1CACC"/><circle cx="220" cy="100" r="1.5" fill="#A1CACC"/><circle cx="260" cy="100" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="140" r="1.5" fill="#A1CACC"/><circle cx="60" cy="140" r="1.5" fill="#A1CACC"/><circle cx="100" cy="140" r="1.5" fill="#A1CACC"/><circle cx="140" cy="140" r="1.5" fill="#A1CACC"/><circle cx="180" cy="140" r="1.5" fill="#A1CACC"/><circle cx="220" cy="140" r="1.5" fill="#A1CACC"/><circle cx="260" cy="140" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="180" r="1.5" fill="#A1CACC"/><circle cx="60" cy="180" r="1.5" fill="#A1CACC"/><circle cx="100" cy="180" r="1.5" fill="#A1CACC"/><circle cx="140" cy="180" r="1.5" fill="#A1CACC"/><circle cx="180" cy="180" r="1.5" fill="#A1CACC"/><circle cx="220" cy="180" r="1.5" fill="#A1CACC"/><circle cx="260" cy="180" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="220" r="1.5" fill="#A1CACC"/><circle cx="60" cy="220" r="1.5" fill="#A1CACC"/><circle cx="100" cy="220" r="1.5" fill="#A1CACC"/><circle cx="140" cy="220" r="1.5" fill="#A1CACC"/><circle cx="180" cy="220" r="1.5" fill="#A1CACC"/><circle cx="220" cy="220" r="1.5" fill="#A1CACC"/><circle cx="260" cy="220" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="260" r="1.5" fill="#A1CACC"/><circle cx="60" cy="260" r="1.5" fill="#A1CACC"/><circle cx="100" cy="260" r="1.5" fill="#A1CACC"/><circle cx="140" cy="260" r="1.5" fill="#A1CACC"/><circle cx="180" cy="260" r="1.5" fill="#A1CACC"/><circle cx="220" cy="260" r="1.5" fill="#A1CACC"/><circle cx="260" cy="260" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="300" r="1.5" fill="#A1CACC"/><circle cx="60" cy="300" r="1.5" fill="#A1CACC"/><circle cx="100" cy="300" r="1.5" fill="#A1CACC"/><circle cx="140" cy="300" r="1.5" fill="#A1CACC"/><circle cx="180" cy="300" r="1.5" fill="#A1CACC"/><circle cx="220" cy="300" r="1.5" fill="#A1CACC"/><circle cx="260" cy="300" r="1.5" fill="#A1CACC"/>
+          </g>
+          <!-- Signal nodes -->
+          <circle cx="140" cy="100" r="6" fill="#FF6139" opacity="0.9"/>
+          <circle cx="220" cy="60" r="4" fill="#FF6139" opacity="0.65"/>
+          <circle cx="60" cy="140" r="4.5" fill="#FF6139" opacity="0.7"/>
+          <circle cx="260" cy="160" r="3" fill="#FF6139" opacity="0.45"/>
+          <circle cx="180" cy="200" r="6" fill="#FF6139" opacity="0.85"/>
+          <circle cx="100" cy="240" r="3.5" fill="#FF6139" opacity="0.5"/>
+          <!-- Connections -->
+          <line x1="140" y1="100" x2="220" y2="60" stroke="#FF6139" stroke-width="0.75" opacity="0.35"/>
+          <line x1="140" y1="100" x2="60" y2="140" stroke="#FF6139" stroke-width="0.75" opacity="0.35"/>
+          <line x1="140" y1="100" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.25"/>
+          <line x1="60" y1="140" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.25"/>
+          <line x1="260" y1="160" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.2"/>
+          <line x1="180" y1="200" x2="100" y2="240" stroke="#FF6139" stroke-width="0.75" opacity="0.2"/>
         </svg>
       </div>
     </div>
