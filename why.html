@@ -67,23 +67,103 @@
     }
     .nav-logo-link:hover { opacity: 0.8; }
     .nav-logo-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; }
+    /* ── Dropdown nav ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 500;
+      font-family: 'Inter', sans-serif; text-decoration: none;
+      transition: color 0.2s; display: flex; align-items: center; gap: 4px;
+      padding: 4px 8px;
+    }
+    .nav-dropdown-trigger:hover, .nav-dropdown:focus-within .nav-dropdown-trigger { color: rgba(255,255,255,0.9); }
+    .nav-caret { font-size: 8px; opacity: 0.5; transition: transform 0.15s; display: inline-block; }
+    .nav-dropdown:hover .nav-caret, .nav-dropdown:focus-within .nav-caret { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%);
+      background: #2a1816; border: 1px solid rgba(255,255,255,0.08);
+      min-width: 190px; padding: 6px 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s, transform 0.15s;
+      transform: translateX(-50%) translateY(-4px);
+    }
+    .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-item {
+      display: block; padding: 9px 20px;
+      color: rgba(255,255,255,0.55); font-size: 13px; font-weight: 400;
+      text-decoration: none; transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .nav-dropdown-trigger--active { color: rgba(255,255,255,0.9) !important; }
     .footer-email {
       font-size: 11px;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.45);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .footer-email:hover { color: rgba(255,255,255,0.6); }
+    .footer-email:hover { color: rgba(255,255,255,0.8); }
 
     /* ── Implication chips ── */
     .impl-chip {
       background: #fff;
       border-top: 3px solid #FF6139;
       padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
     }
     .impl-chip--dim {
       border-top-color: rgba(255,97,57,0.3);
     }
+    /* ── Mid-weight subheading ── */
+    .subheading-mid {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #361F1D;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .subheading-mid-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #FF6139;
+      display: block;
+      margin-bottom: 12px;
+    }
+    /* ── Need cards (2×2 grid) ── */
+    .need-card {
+      background: #fff;
+      border-top: 3px solid #FF6139;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    /* ── Explore Further cards ── */
+    .explore-card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      padding: 28px 28px 24px;
+      border-top: 3px solid #FF6139;
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+      flex: 1;
+      min-width: 240px;
+    }
+    .explore-card:hover {
+      box-shadow: 0 8px 32px rgba(54,31,29,0.12);
+      transform: translateY(-2px);
+    }
+    .explore-card--dim { border-top-color: rgba(255,97,57,0.35); }
 
     /* ── MAD section: large type treatment ── */
     .mad-glyph {
@@ -185,12 +265,25 @@
       <span style="color:#fff;">resilient</span><span style="color:#743734;">futures</span><span style="color:#FF6139;">+</span>
     </span>
   </a>
-  <div style="display:flex; gap:32px; align-items:center;">
-    <a href="why.html" class="nav-link nav-link--active">Why RF</a>
-    <a href="index.html#services" class="nav-link">Services</a>
-    <a href="index.html#approach" class="nav-link">Our Approach</a>
-    <a href="index.html#about" class="nav-link">About</a>
-    <a href="mailto:techadmin@resilientfutures.com" class="btn-primary" style="padding:8px 20px; font-size:11px;">Get in touch</a>
+  <div style="display:flex; gap:4px; align-items:center;">
+    <!-- About dropdown (active on this page) -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger nav-dropdown-trigger--active">About <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="why.html" class="nav-dropdown-item" style="color:#FF6139;">Why Resilient Futures</a>
+        <a href="#" class="nav-dropdown-item">How We Work</a>
+      </div>
+    </div>
+    <a href="strategy-in-action.html" class="nav-link" style="padding:4px 8px;">Strategy in Action</a>
+    <!-- Services dropdown -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">Services <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="#" class="nav-dropdown-item">Strategic Services</a>
+        <a href="strategic-fitness.html" class="nav-dropdown-item">Strategic Fitness</a>
+      </div>
+    </div>
+    <a href="mailto:james.cacciottolo@resilientfutures.com" class="btn-primary" style="padding:8px 20px; font-size:11px; margin-left:16px;">Get in touch</a>
   </div>
 </nav>
 
@@ -218,13 +311,13 @@
 
   <div class="section-inner" style="position:relative; z-index:1;">
     <!-- Breadcrumb -->
-    <div style="display:flex; align-items:center; gap:8px; margin-bottom:40px;">
-      <a href="index.html" style="font-size:12px; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Home</a>
-      <span style="font-size:12px; color:rgba(255,255,255,0.2);">&#47;</span>
-      <span style="font-size:12px; color:rgba(255,255,255,0.5);">Why Resilient Futures</span>
+    <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:40px; border-left:2px solid rgba(255,97,57,0.4); padding-left:12px;">
+      <a href="index.html" style="font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a>
+      <span style="font-size:11px; color:rgba(255,255,255,0.2);">&#47;</span>
+      <span style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#FF6139;">Why Resilient Futures</span>
     </div>
 
-    <div class="hero-inner-flex" style="display:flex; gap:32px; align-items:flex-start;">
+    <div class="hero-inner-flex" style="display:flex; gap:48px; align-items:flex-start;">
       <!-- Vertical coral accent line -->
       <div class="hero-accent-line" style="
         width: 3px;
@@ -234,8 +327,7 @@
         background: linear-gradient(to bottom, #FF6139, rgba(255,97,57,0));
       "></div>
       <!-- Copy -->
-      <div style="flex:1; max-width:780px;">
-        <span class="section-label" style="margin-bottom:16px;">Why Resilient Futures</span>
+      <div style="flex:1;">
         <h1 class="font-display" style="
           font-size: 48px;
           font-weight: 700;
@@ -243,7 +335,7 @@
           line-height: 1.1;
           letter-spacing: -0.025em;
           margin-bottom: 28px;
-          max-width: 720px;
+          max-width: 580px;
         ">
           The operating environment has changed.<br>
           <span style="color:rgba(255,255,255,0.55);">Most strategic systems haven&rsquo;t.</span>
@@ -252,7 +344,7 @@
           font-size: 17px;
           line-height: 1.7;
           color: rgba(255,255,255,0.65);
-          max-width: 620px;
+          max-width: 520px;
           margin-bottom: 16px;
         ">
           This is not a crisis of intent. Most leadership teams are working hard, making reasonable
@@ -262,7 +354,7 @@
           font-size: 17px;
           line-height: 1.7;
           color: rgba(255,255,255,0.45);
-          max-width: 620px;
+          max-width: 520px;
           margin-bottom: 40px;
         ">
           The problem is structural: the methods, rhythms, and assumptions underpinning most
@@ -273,6 +365,42 @@
           <a href="#reality" style="color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif; font-size:12px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Read on &#8595;</a>
         </div>
       </div>
+      <!-- Right side: abstract signal network graphic -->
+      <div style="flex-shrink:0; width:300px; padding-top:16px; align-self:center;">
+        <svg viewBox="0 0 300 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <defs>
+            <radialGradient id="dotFade2" cx="50%" cy="45%" r="55%">
+              <stop offset="0%" stop-opacity="1"/>
+              <stop offset="100%" stop-opacity="0"/>
+            </radialGradient>
+            <mask id="gridMask2">
+              <rect width="300" height="320" fill="url(#dotFade2)"/>
+            </mask>
+          </defs>
+          <g mask="url(#gridMask2)" opacity="0.3">
+            <circle cx="20" cy="20" r="1.5" fill="#A1CACC"/><circle cx="60" cy="20" r="1.5" fill="#A1CACC"/><circle cx="100" cy="20" r="1.5" fill="#A1CACC"/><circle cx="140" cy="20" r="1.5" fill="#A1CACC"/><circle cx="180" cy="20" r="1.5" fill="#A1CACC"/><circle cx="220" cy="20" r="1.5" fill="#A1CACC"/><circle cx="260" cy="20" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="60" r="1.5" fill="#A1CACC"/><circle cx="60" cy="60" r="1.5" fill="#A1CACC"/><circle cx="100" cy="60" r="1.5" fill="#A1CACC"/><circle cx="140" cy="60" r="1.5" fill="#A1CACC"/><circle cx="180" cy="60" r="1.5" fill="#A1CACC"/><circle cx="220" cy="60" r="1.5" fill="#A1CACC"/><circle cx="260" cy="60" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="100" r="1.5" fill="#A1CACC"/><circle cx="60" cy="100" r="1.5" fill="#A1CACC"/><circle cx="100" cy="100" r="1.5" fill="#A1CACC"/><circle cx="140" cy="100" r="1.5" fill="#A1CACC"/><circle cx="180" cy="100" r="1.5" fill="#A1CACC"/><circle cx="220" cy="100" r="1.5" fill="#A1CACC"/><circle cx="260" cy="100" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="140" r="1.5" fill="#A1CACC"/><circle cx="60" cy="140" r="1.5" fill="#A1CACC"/><circle cx="100" cy="140" r="1.5" fill="#A1CACC"/><circle cx="140" cy="140" r="1.5" fill="#A1CACC"/><circle cx="180" cy="140" r="1.5" fill="#A1CACC"/><circle cx="220" cy="140" r="1.5" fill="#A1CACC"/><circle cx="260" cy="140" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="180" r="1.5" fill="#A1CACC"/><circle cx="60" cy="180" r="1.5" fill="#A1CACC"/><circle cx="100" cy="180" r="1.5" fill="#A1CACC"/><circle cx="140" cy="180" r="1.5" fill="#A1CACC"/><circle cx="180" cy="180" r="1.5" fill="#A1CACC"/><circle cx="220" cy="180" r="1.5" fill="#A1CACC"/><circle cx="260" cy="180" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="220" r="1.5" fill="#A1CACC"/><circle cx="60" cy="220" r="1.5" fill="#A1CACC"/><circle cx="100" cy="220" r="1.5" fill="#A1CACC"/><circle cx="140" cy="220" r="1.5" fill="#A1CACC"/><circle cx="180" cy="220" r="1.5" fill="#A1CACC"/><circle cx="220" cy="220" r="1.5" fill="#A1CACC"/><circle cx="260" cy="220" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="260" r="1.5" fill="#A1CACC"/><circle cx="60" cy="260" r="1.5" fill="#A1CACC"/><circle cx="100" cy="260" r="1.5" fill="#A1CACC"/><circle cx="140" cy="260" r="1.5" fill="#A1CACC"/><circle cx="180" cy="260" r="1.5" fill="#A1CACC"/><circle cx="220" cy="260" r="1.5" fill="#A1CACC"/><circle cx="260" cy="260" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="300" r="1.5" fill="#A1CACC"/><circle cx="60" cy="300" r="1.5" fill="#A1CACC"/><circle cx="100" cy="300" r="1.5" fill="#A1CACC"/><circle cx="140" cy="300" r="1.5" fill="#A1CACC"/><circle cx="180" cy="300" r="1.5" fill="#A1CACC"/><circle cx="220" cy="300" r="1.5" fill="#A1CACC"/><circle cx="260" cy="300" r="1.5" fill="#A1CACC"/>
+          </g>
+          <circle cx="140" cy="100" r="6" fill="#FF6139" opacity="0.9"/>
+          <circle cx="220" cy="60" r="4" fill="#FF6139" opacity="0.65"/>
+          <circle cx="60" cy="140" r="4.5" fill="#FF6139" opacity="0.7"/>
+          <circle cx="260" cy="160" r="3" fill="#FF6139" opacity="0.45"/>
+          <circle cx="180" cy="200" r="6" fill="#FF6139" opacity="0.85"/>
+          <circle cx="100" cy="240" r="3.5" fill="#FF6139" opacity="0.5"/>
+          <line x1="140" y1="100" x2="220" y2="60" stroke="#FF6139" stroke-width="0.75" opacity="0.35"/>
+          <line x1="140" y1="100" x2="60" y2="140" stroke="#FF6139" stroke-width="0.75" opacity="0.35"/>
+          <line x1="140" y1="100" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.25"/>
+          <line x1="60" y1="140" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.25"/>
+          <line x1="260" y1="160" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.2"/>
+          <line x1="180" y1="200" x2="100" y2="240" stroke="#FF6139" stroke-width="0.75" opacity="0.2"/>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
@@ -281,11 +409,7 @@
 <section id="reality" class="reality-section" style="background:#F5F5ED; padding:96px 48px;">
   <div class="section-inner">
     <span class="section-label">The Strategic Reality Facing Leaders Today</span>
-    <h2 class="font-display" style="
-      font-size:38px; font-weight:700; color:#361F1D;
-      line-height:1.15; letter-spacing:-0.02em;
-      max-width:700px; margin-bottom:24px;
-    ">Change is no longer an event to be managed.<br>It is the permanent operating condition.</h2>
+    <h2 class="font-display" style="font-size:38px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; max-width:700px; margin-bottom:24px;">Change is no longer an event to be managed.<br>It is the <span style="color:#A8A89A;">permanent operating condition.</span></h2>
 
     <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:16px;">
       The forces reshaping organisations &mdash; from AI adoption and workforce transformation,
@@ -315,7 +439,7 @@
     </p>
 
     <!-- 8 implication chips -->
-    <div class="reality-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+    <div class="reality-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:stretch;">
 
       <div class="impl-chip">
         <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:8px;">01</div>
@@ -402,7 +526,7 @@
           But the organisation is slowly becoming less capable of generating the value that made
           it important in the first place.
         </p>
-        <p style="font-size:15px; line-height:1.75; color:rgba(255,255,255,0.4);">
+        <p style="font-size:15px; line-height:1.75; color:rgba(255,255,255,0.65);">
           Each adaptive decision is locally rational. Collectively, they produce an irreversible
           drift away from relevance.
         </p>
@@ -475,28 +599,31 @@
       </div>
     </div>
 
-    <h3 class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; margin-bottom:16px; letter-spacing:-0.01em;">
-      What leaders in complex environments actually need
-    </h3>
-    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:12px;">
-      A fundamentally different approach to strategy &mdash; one that:
+    <span class="subheading-mid-label">A fundamentally different approach</span>
+    <h3 class="subheading-mid">What leaders in complex environments actually need</h3>
+    <p style="font-size:15px; line-height:1.7; color:#6B5350; max-width:700px; margin-bottom:28px;">
+      Not better optimisation tools — a different orientation. Strategy that begins with reality, moves through value, and arrives at action.
     </p>
-    <div style="display:flex; flex-direction:column; gap:0; max-width:700px;">
-      <div style="display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(54,31,29,0.08);">
-        <div style="width:3px; height:3px; border-radius:50%; background:#FF6139; flex-shrink:0; margin-top:11px;"></div>
-        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin:0;">Starts with an honest reading of the real change landscape</p>
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; max-width:700px;">
+      <div class="need-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:10px;">01</div>
+        <div class="font-display" style="font-size:16px; font-weight:700; color:#361F1D; margin-bottom:8px; line-height:1.25;">Honest reading of the change landscape</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.6; color:#6B5350; margin:0;">Starts with evidence — not assumptions — about what is actually driving change and what it means for your organisation.</p>
       </div>
-      <div style="display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(54,31,29,0.08);">
-        <div style="width:3px; height:3px; border-radius:50%; background:#FF6139; flex-shrink:0; margin-top:11px;"></div>
-        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin:0;">Moves to where value must be generated and protected</p>
+      <div class="need-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:10px;">02</div>
+        <div class="font-display" style="font-size:16px; font-weight:700; color:#361F1D; margin-bottom:8px; line-height:1.25;">Clarity on value generation and protection</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.6; color:#6B5350; margin:0;">Moves to where value must be created, renewed, and defended given the conditions the organisation now faces.</p>
       </div>
-      <div style="display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(54,31,29,0.08);">
-        <div style="width:3px; height:3px; border-radius:50%; background:#FF6139; flex-shrink:0; margin-top:11px;"></div>
-        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin:0;">Identifies the risks and opportunities that matter most</p>
+      <div class="need-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:10px;">03</div>
+        <div class="font-display" style="font-size:16px; font-weight:700; color:#361F1D; margin-bottom:8px; line-height:1.25;">Identification of risks and opportunities that matter</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.6; color:#6B5350; margin:0;">Surfaces the conditions and choices with the most significant implications — not just the most visible ones.</p>
       </div>
-      <div style="display:flex; gap:16px; align-items:flex-start; padding:16px 0;">
-        <div style="width:3px; height:3px; border-radius:50%; background:#FF6139; flex-shrink:0; margin-top:11px;"></div>
-        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin:0;">Translates all of this into focused, adaptive action</p>
+      <div class="need-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:10px;">04</div>
+        <div class="font-display" style="font-size:16px; font-weight:700; color:#361F1D; margin-bottom:8px; line-height:1.25;">Focused, adaptive action</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.6; color:#6B5350; margin:0;">Translates clarity into targeted initiatives that generate feedback quickly — strategy that moves at the pace of change.</p>
       </div>
     </div>
   </div>
@@ -517,93 +644,55 @@
     pointer-events:none;
   "></div>
 
-  <div class="section-inner" style="position:relative; z-index:1;">
-    <div class="cta-cols" style="display:grid; grid-template-columns:1fr 380px; gap:64px; align-items:center;">
-
-      <div>
-        <span class="section-label section-label--light" style="margin-bottom:16px;">There Is a Better Way</span>
-        <h2 class="font-display" style="
-          font-size:42px; font-weight:700; color:#fff;
-          line-height:1.12; letter-spacing:-0.02em;
-          margin-bottom:20px; max-width:560px;
-        ">
-          Resilient Futures works with leaders who have recognised
-          <span style="color:#FF6139;"> the current approach is not fit for the conditions.</span>
-        </h2>
-        <p style="font-size:15px; line-height:1.7; color:rgba(255,255,255,0.5); max-width:520px; margin-bottom:0;">
-          Our approach does not begin with frameworks. It begins with a clear-eyed diagnosis
-          of what is actually happening in your operating environment &mdash; and what that means
-          for your organisation&rsquo;s relevance, risk exposure, and opportunity set.
-        </p>
-      </div>
-
-      <!-- CTA card -->
-      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:40px 36px;">
-        <div class="font-display" style="font-size:18px; font-weight:700; color:#fff; margin-bottom:12px; line-height:1.3;">Start with a Strategic Fitness conversation.</div>
-        <p style="font-size:14px; line-height:1.7; color:rgba(255,255,255,0.45); margin-bottom:28px;">
-          We work with a small number of organisations at any given time. A short conversation
-          helps determine whether the timing and fit are right for your organisation.
-        </p>
-        <a href="mailto:techadmin@resilientfutures.com" class="btn-primary" style="font-size:12px; padding:14px 28px; display:inline-block; width:100%; text-align:center;">
-          Book a conversation
-        </a>
-        <p style="font-size:11px; color:rgba(255,255,255,0.2); margin-top:16px; text-align:center; letter-spacing:0.03em;">No commitment required</p>
-      </div>
-
-    </div>
+  <div class="section-inner" style="position:relative; z-index:1; max-width:720px;">
+    <span class="section-label section-label--light">There Is a Better Way</span>
+    <h2 class="font-display" style="
+      font-size:46px; font-weight:700; color:#fff;
+      line-height:1.1; letter-spacing:-0.02em;
+      margin-bottom:24px;
+    ">
+      Resilient Futures works with leaders who have recognised
+      <span style="color:#FF6139;"> the current approach is not fit for the conditions.</span>
+    </h2>
+    <p style="font-size:16px; line-height:1.7; color:rgba(255,255,255,0.55); margin-bottom:48px;">
+      Our approach begins with a clear-eyed diagnosis of what is actually happening in your
+      operating environment &mdash; and what that means for your organisation&rsquo;s relevance,
+      risk exposure, and opportunity set.
+    </p>
+    <a href="mailto:techadmin@resilientfutures.com" class="btn-primary" style="font-size:13px; padding:16px 40px;">
+      Book a Conversation
+    </a>
+    <p style="font-size:11px; color:rgba(255,255,255,0.3); margin-top:16px; letter-spacing:0.04em;">No commitment required</p>
   </div>
 </section>
 
 <!-- ═══════════════════════════ NEXT STEP STRIP ═══════════════════════════ -->
-<section style="background:#EFEFE7; padding:56px 48px; border-top:1px solid rgba(54,31,29,0.08);">
+<section style="background:#EFEFE7; padding:64px 48px; border-top:1px solid rgba(54,31,29,0.08);">
   <div class="section-inner">
-    <p style="
-      font-size:9px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;
-      color:rgba(54,31,29,0.35); margin-bottom:28px;
-    ">Explore further</p>
-    <div style="display:flex; gap:24px; flex-wrap:wrap;">
-      <a href="index.html#approach" style="
-        display:flex; align-items:center; gap:12px;
-        background:#fff; padding:20px 24px;
-        border-top:3px solid #FF6139;
-        text-decoration:none;
-        transition:box-shadow 0.2s;
-        flex:1; min-width:240px;
-      " onmouseover="this.style.boxShadow='0 4px 20px rgba(54,31,29,0.1)'" onmouseout="this.style.boxShadow='none'">
-        <div>
-          <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#FF6139; margin-bottom:6px;">Our Approach</div>
-          <div class="font-display" style="font-size:15px; font-weight:700; color:#361F1D; line-height:1.3;">Strategy in Action (SiA)</div>
-          <p style="font-size:13px; color:#6B5350; margin:4px 0 0; line-height:1.5;">The decision-making system built for structural instability &rarr;</p>
-        </div>
+    <p style="font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:rgba(54,31,29,0.4); margin-bottom:32px;">Explore further</p>
+    <div style="display:flex; gap:16px; flex-wrap:wrap;">
+
+      <a href="strategy-in-action.html" class="explore-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:14px;">Our Approach</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">Strategy in Action (SiA)</div>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">A decision-making system built not to plan around disruption, but to operate effectively within it.</p>
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#FF6139;">Explore the framework &rarr;</span>
       </a>
-      <a href="index.html#services" style="
-        display:flex; align-items:center; gap:12px;
-        background:#fff; padding:20px 24px;
-        border-top:3px solid rgba(255,97,57,0.4);
-        text-decoration:none;
-        transition:box-shadow 0.2s;
-        flex:1; min-width:240px;
-      " onmouseover="this.style.boxShadow='0 4px 20px rgba(54,31,29,0.1)'" onmouseout="this.style.boxShadow='none'">
-        <div>
-          <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,97,57,0.6); margin-bottom:6px;">Services</div>
-          <div class="font-display" style="font-size:15px; font-weight:700; color:#361F1D; line-height:1.3;">Three Ways to Work Together</div>
-          <p style="font-size:13px; color:#6B5350; margin:4px 0 0; line-height:1.5;">Strategic Fitness, SiA Engagement, Capability Building &rarr;</p>
-        </div>
+
+      <a href="index.html#services" class="explore-card explore-card--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,97,57,0.65); margin-bottom:14px;">Services</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">Three Ways to Work Together</div>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">From a half-day Strategic Fitness diagnostic to a full SiA engagement and embedded capability building.</p>
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,97,57,0.65);">See our services &rarr;</span>
       </a>
-      <a href="index.html#about" style="
-        display:flex; align-items:center; gap:12px;
-        background:#fff; padding:20px 24px;
-        border-top:3px solid rgba(255,97,57,0.4);
-        text-decoration:none;
-        transition:box-shadow 0.2s;
-        flex:1; min-width:240px;
-      " onmouseover="this.style.boxShadow='0 4px 20px rgba(54,31,29,0.1)'" onmouseout="this.style.boxShadow='none'">
-        <div>
-          <div style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,97,57,0.6); margin-bottom:6px;">Our Team</div>
-          <div class="font-display" style="font-size:15px; font-weight:700; color:#361F1D; line-height:1.3;">The People Behind the Work</div>
-          <p style="font-size:13px; color:#6B5350; margin:4px 0 0; line-height:1.5;">25+ years of strategy for complex organisations &rarr;</p>
-        </div>
+
+      <a href="index.html#about" class="explore-card explore-card--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,97,57,0.65); margin-bottom:14px;">Our Team</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">The People Behind the Work</div>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">Every engagement is led by the people with the deepest expertise — not delegated down after the pitch.</p>
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,97,57,0.65);">Meet the team &rarr;</span>
       </a>
+
     </div>
   </div>
 </section>
@@ -619,21 +708,20 @@
 
     <div style="display:flex; gap:48px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Services</span>
-        <a href="index.html#services" class="nav-link">Strategic Fitness</a>
-        <a href="index.html#services" class="nav-link">SiA Strategy Engagement</a>
-        <a href="index.html#services" class="nav-link">Capability Building</a>
+        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">About</span>
+        <a href="why.html" class="nav-link">Why Resilient Futures</a>
+        <a href="#" class="nav-link">How We Work</a>
+        <a href="strategy-in-action.html" class="nav-link">Strategy in Action</a>
       </div>
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Company</span>
-        <a href="why.html" class="nav-link">Why Resilient Futures</a>
-        <a href="index.html#approach" class="nav-link">Our Approach</a>
-        <a href="index.html#about" class="nav-link">Our Team</a>
+        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Services</span>
+        <a href="#" class="nav-link">Strategic Services</a>
+        <a href="strategic-fitness.html" class="nav-link">Strategic Fitness</a>
       </div>
       <div style="display:flex; flex-direction:column; gap:10px;">
         <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Contact</span>
-        <a href="mailto:techadmin@resilientfutures.com" class="nav-link">Get in touch</a>
-        <a href="mailto:techadmin@resilientfutures.com" class="footer-email">techadmin@resilientfutures.com</a>
+        <a href="mailto:james.cacciottolo@resilientfutures.com" class="nav-link">Get in touch</a>
+        <a href="mailto:james.cacciottolo@resilientfutures.com" class="footer-email">james.cacciottolo@resilientfutures.com</a>
       </div>
     </div>
 
@@ -644,19 +732,24 @@
       <a href="#" aria-label="X (Twitter)" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.4)'">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
+      <a href="#" aria-label="Facebook" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.4)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="#" aria-label="YouTube" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.4)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.4)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
     </div>
   </div>
 
-  <div style="
-    padding: 20px 48px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
-  ">
-    <p style="font-size:11px; color:rgba(255,255,255,0.2); margin:0;">
-      &copy; 2026 Resilient Futures. All rights reserved.
+  <div style="padding:20px 48px; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <p style="font-size:11px; color:rgba(255,255,255,0.25); margin:0;">
+      Resilient Futures &copy; 2026 &middot; All rights reserved
     </p>
-    <p style="font-size:11px; color:rgba(255,255,255,0.15); margin:0; letter-spacing:0.04em; text-transform:uppercase;">
-      Strategy for a world that won&rsquo;t hold still.
+    <p style="font-size:11px; color:rgba(255,255,255,0.2); margin:0;">
+      Strategy for a world that won&rsquo;t hold still
     </p>
   </div>
 

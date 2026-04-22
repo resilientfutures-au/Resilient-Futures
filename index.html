@@ -90,6 +90,39 @@
     .nav-logo-link:hover { opacity: 0.8; }
     .nav-logo-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; }
     .nav-logo-link:active { opacity: 0.65; }
+    /* ── Dropdown nav ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 500;
+      font-family: 'Inter', sans-serif; text-decoration: none;
+      transition: color 0.2s; display: flex; align-items: center; gap: 4px;
+      padding: 4px 8px;
+    }
+    .nav-dropdown-trigger:hover, .nav-dropdown:focus-within .nav-dropdown-trigger { color: rgba(255,255,255,0.9); }
+    .nav-caret { font-size: 8px; opacity: 0.5; transition: transform 0.15s; display: inline-block; }
+    .nav-dropdown:hover .nav-caret, .nav-dropdown:focus-within .nav-caret { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%);
+      background: #2a1816; border: 1px solid rgba(255,255,255,0.08);
+      min-width: 190px; padding: 6px 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s, transform 0.15s;
+      transform: translateX(-50%) translateY(-4px);
+    }
+    .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-item {
+      display: block; padding: 9px 20px;
+      color: rgba(255,255,255,0.55); font-size: 13px; font-weight: 400;
+      text-decoration: none; transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .nav-link--active { color: rgba(255,255,255,0.9) !important; }
     /* ── Service cards ── */
     .svc-card {
       background: #361F1D;
@@ -297,11 +330,25 @@
     </span>
   </a>
   <!-- Nav links -->
-  <div style="display:flex; gap:32px; align-items:center;">
-    <a href="#services" class="nav-link">Services</a>
-    <a href="#approach" class="nav-link">Our Approach</a>
-    <a href="#about" class="nav-link">About</a>
-    <a href="#contact" class="btn-primary" style="padding:8px 20px; font-size:11px;">Get in touch</a>
+  <div style="display:flex; gap:4px; align-items:center;">
+    <!-- About dropdown -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">About <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="why.html" class="nav-dropdown-item">Why Resilient Futures</a>
+        <a href="#" class="nav-dropdown-item">How We Work</a>
+      </div>
+    </div>
+    <a href="strategy-in-action.html" class="nav-link" style="padding:4px 8px;">Strategy in Action</a>
+    <!-- Services dropdown -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">Services <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="#" class="nav-dropdown-item">Strategic Services</a>
+        <a href="strategic-fitness.html" class="nav-dropdown-item">Strategic Fitness</a>
+      </div>
+    </div>
+    <a href="mailto:james.cacciottolo@resilientfutures.com" class="btn-primary" style="padding:8px 20px; font-size:11px; margin-left:16px;">Get in touch</a>
   </div>
 </nav>
 
@@ -547,7 +594,7 @@
           in structural instability. Includes diagnostics, structured executive sessions, and
           immediate action pathways.
         </p>
-        <a href="#" class="svc-link">Learn more &#8594;</a>
+        <a href="strategic-fitness.html" class="svc-link">Learn more &#8594;</a>
       </div>
       <div class="svc-card">
         <div class="font-display" style="font-size:40px; font-weight:700; color:rgba(255,97,57,0.18); line-height:1; margin-bottom:16px;">02</div>
@@ -832,37 +879,31 @@
 <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
 <footer style="background:#1a0f0e; border-top:1px solid rgba(255,255,255,0.06);">
 
-  <!-- Top row: logo + page links + social -->
   <div style="padding:40px 48px 28px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:32px;">
 
-    <!-- Logo -->
-    <a href="#" class="nav-logo-link">
+    <a href="index.html" class="nav-logo-link">
       <img src="brand_assets/Resilient Futures LOGO.png" alt="Resilient Futures" style="height:32px; width:auto; display:block; filter:brightness(0) invert(1); opacity:0.55;">
     </a>
 
-    <!-- Page links -->
     <div style="display:flex; gap:48px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Services</span>
-        <a href="#services" class="nav-link">Strategic Fitness</a>
-        <a href="#services" class="nav-link">SiA Strategy Engagement</a>
-        <a href="#services" class="nav-link">Capability Building</a>
+        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">About</span>
+        <a href="why.html" class="nav-link">Why Resilient Futures</a>
+        <a href="#" class="nav-link">How We Work</a>
+        <a href="strategy-in-action.html" class="nav-link">Strategy in Action</a>
       </div>
       <div style="display:flex; flex-direction:column; gap:10px;">
-        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Company</span>
-        <a href="#approach" class="nav-link">Our Approach</a>
-        <a href="#about" class="nav-link">Our Team</a>
-        <a href="#" class="nav-link">Who We Work With</a>
-        <a href="#" class="nav-link">Case Studies</a>
+        <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Services</span>
+        <a href="#" class="nav-link">Strategic Services</a>
+        <a href="strategic-fitness.html" class="nav-link">Strategic Fitness</a>
       </div>
       <div style="display:flex; flex-direction:column; gap:10px;">
         <span style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:4px;">Contact</span>
-        <a href="#contact" class="nav-link">Get in touch</a>
-        <a href="mailto:techadmin@resilientfutures.com" class="nav-link">techadmin@resilientfutures.com</a>
+        <a href="mailto:james.cacciottolo@resilientfutures.com" class="nav-link">Get in touch</a>
+        <a href="mailto:james.cacciottolo@resilientfutures.com" class="footer-email">james.cacciottolo@resilientfutures.com</a>
       </div>
     </div>
 
-    <!-- Social icons -->
     <div style="display:flex; gap:10px; align-items:center;">
       <a href="#" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.4)'">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -882,7 +923,6 @@
     </div>
   </div>
 
-  <!-- Bottom row: copyright -->
   <div style="padding:20px 48px; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
     <p style="font-size:11px; color:rgba(255,255,255,0.25); margin:0;">
       Resilient Futures &copy; 2026 &middot; All rights reserved
