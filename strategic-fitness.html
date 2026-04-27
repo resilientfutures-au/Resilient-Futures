@@ -346,37 +346,38 @@
             </linearGradient>
           </defs>
 
-          <!-- Globe sphere -->
+          <!-- Globe sphere boundary -->
           <circle cx="150" cy="150" r="118" fill="url(#sfSphereGlow)"/>
-          <circle cx="150" cy="150" r="118" stroke="#FF6139" stroke-width="0.75" stroke-opacity="0.18" fill="none"/>
+          <circle cx="150" cy="150" r="118" stroke="#FF6139" stroke-width="0.6" stroke-opacity="0.15" fill="none"/>
 
-          <!-- Latitude lines -->
-          <ellipse cx="150" cy="150" rx="118" ry="36" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="5 4" opacity="0.65" transform="rotate(-12,150,150)" style="animation:flowGlobe 10s linear infinite;"/>
-          <ellipse cx="150" cy="150" rx="102" ry="46" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="5 4" opacity="0.55" transform="rotate(-12,150,150)" style="animation:flowGlobe 11s linear infinite reverse;"/>
-          <ellipse cx="150" cy="150" rx="82"  ry="56" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="5 4" opacity="0.50" transform="rotate(-12,150,150)" style="animation:flowGlobe 13s linear infinite;"/>
-          <ellipse cx="150" cy="150" rx="56"  ry="64" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="5 4" opacity="0.44" transform="rotate(-12,150,150)" style="animation:flowGlobe 15s linear infinite reverse;"/>
-          <ellipse cx="150" cy="150" rx="26"  ry="70" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="5 4" opacity="0.38" transform="rotate(-12,150,150)" style="animation:flowGlobe 17s linear infinite;"/>
+          <!-- Latitude lines (8 — dense even grid) -->
+          <ellipse cx="150" cy="150" rx="117" ry="16" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 3" opacity="0.52" transform="rotate(-12,150,150)" style="animation:flowGlobe 10s linear infinite;"/>
+          <ellipse cx="150" cy="150" rx="113" ry="29" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 3" opacity="0.50" transform="rotate(-12,150,150)" style="animation:flowGlobe 11s linear infinite reverse;"/>
+          <ellipse cx="150" cy="150" rx="105" ry="43" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 3" opacity="0.48" transform="rotate(-12,150,150)" style="animation:flowGlobe 12s linear infinite;"/>
+          <ellipse cx="150" cy="150" rx="93"  ry="55" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 3" opacity="0.45" transform="rotate(-12,150,150)" style="animation:flowGlobe 13s linear infinite reverse;"/>
+          <ellipse cx="150" cy="150" rx="77"  ry="64" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 3" opacity="0.42" transform="rotate(-12,150,150)" style="animation:flowGlobe 14s linear infinite;"/>
+          <ellipse cx="150" cy="150" rx="57"  ry="71" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 3" opacity="0.38" transform="rotate(-12,150,150)" style="animation:flowGlobe 16s linear infinite reverse;"/>
+          <ellipse cx="150" cy="150" rx="34"  ry="75" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 3" opacity="0.33" transform="rotate(-12,150,150)" style="animation:flowGlobe 18s linear infinite;"/>
+          <ellipse cx="150" cy="150" rx="14"  ry="77" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 3" opacity="0.27" transform="rotate(-12,150,150)" style="animation:flowGlobe 20s linear infinite reverse;"/>
 
-          <!-- Longitude lines -->
-          <ellipse cx="150" cy="150" rx="28" ry="118" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="4 5" opacity="0.55" transform="rotate(0,150,150)"   style="animation:flowGlobe 12s linear infinite;"/>
-          <ellipse cx="150" cy="150" rx="28" ry="118" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="4 5" opacity="0.48" transform="rotate(36,150,150)"  style="animation:flowGlobe 10s linear infinite reverse;"/>
-          <ellipse cx="150" cy="150" rx="28" ry="118" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="4 5" opacity="0.44" transform="rotate(72,150,150)"  style="animation:flowGlobe 9s  linear infinite;"/>
-          <ellipse cx="150" cy="150" rx="28" ry="118" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="4 5" opacity="0.44" transform="rotate(108,150,150)" style="animation:flowGlobe 13s linear infinite reverse;"/>
-          <ellipse cx="150" cy="150" rx="28" ry="118" stroke="url(#sfTrailDim)" stroke-width="1" fill="none" stroke-dasharray="4 5" opacity="0.40" transform="rotate(144,150,150)" style="animation:flowGlobe 11s linear infinite;"/>
+          <!-- Longitude lines (8 meridians — 22.5° spacing) -->
+          <ellipse cx="150" cy="150" rx="20" ry="118" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 4" opacity="0.50" transform="rotate(0,150,150)"    style="animation:flowGlobe 12s linear infinite;"/>
+          <ellipse cx="150" cy="150" rx="20" ry="118" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 4" opacity="0.48" transform="rotate(22.5,150,150)"  style="animation:flowGlobe 11s linear infinite reverse;"/>
+          <ellipse cx="150" cy="150" rx="20" ry="118" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 4" opacity="0.46" transform="rotate(45,150,150)"    style="animation:flowGlobe 13s linear infinite;"/>
+          <ellipse cx="150" cy="150" rx="20" ry="118" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 4" opacity="0.44" transform="rotate(67.5,150,150)"  style="animation:flowGlobe 10s linear infinite reverse;"/>
+          <ellipse cx="150" cy="150" rx="20" ry="118" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 4" opacity="0.44" transform="rotate(90,150,150)"    style="animation:flowGlobe 9s  linear infinite;"/>
+          <ellipse cx="150" cy="150" rx="20" ry="118" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 4" opacity="0.42" transform="rotate(112.5,150,150)" style="animation:flowGlobe 14s linear infinite reverse;"/>
+          <ellipse cx="150" cy="150" rx="20" ry="118" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 4" opacity="0.40" transform="rotate(135,150,150)"   style="animation:flowGlobe 11s linear infinite;"/>
+          <ellipse cx="150" cy="150" rx="20" ry="118" stroke="url(#sfTrailDim)" stroke-width="0.8" fill="none" stroke-dasharray="3 4" opacity="0.38" transform="rotate(157.5,150,150)" style="animation:flowGlobe 13s linear infinite reverse;"/>
 
           <!-- Primary orbital ring -->
-          <ellipse cx="150" cy="150" rx="140" ry="58" stroke="url(#sfTrailBright)" stroke-width="2.5" fill="none" stroke-dasharray="12 8" opacity="1"    transform="rotate(20,150,150)"  style="animation:flowGlobe 14s linear infinite;"/>
+          <ellipse cx="150" cy="150" rx="140" ry="58" stroke="url(#sfTrailBright)" stroke-width="2.8" fill="none" stroke-dasharray="14 7" opacity="1"    transform="rotate(20,150,150)"  style="animation:flowGlobe 14s linear infinite;"/>
 
           <!-- Secondary orbital ring -->
-          <ellipse cx="150" cy="150" rx="132" ry="50" stroke="#FF6139"           stroke-width="1.8" fill="none" stroke-dasharray="10 10" opacity="0.55"  transform="rotate(-40,150,150)" style="animation:flowGlobe 9s linear infinite reverse;"/>
+          <ellipse cx="150" cy="150" rx="132" ry="50" stroke="#FF6139"           stroke-width="2.2" fill="none" stroke-dasharray="12 8" opacity="0.75"  transform="rotate(-40,150,150)" style="animation:flowGlobe 9s  linear infinite reverse;"/>
 
-          <!-- Equatorial band -->
-          <ellipse cx="150" cy="150" rx="118" ry="26" stroke="#FF8C6B"           stroke-width="1.4" fill="none" stroke-dasharray="8 6"  opacity="0.55"  transform="rotate(6,150,150)"   style="animation:flowGlobe 16s linear infinite;"/>
-
-          <!-- Orbital node on primary ring -->
-          <circle cx="150" cy="92"  r="5" fill="#FF6139" opacity="0.95" transform="rotate(20,150,150)"/>
-          <circle cx="150" cy="208" r="3.5" fill="#FF8C6B" opacity="0.65" transform="rotate(20,150,150)"/>
-          <circle cx="150" cy="100" r="3" fill="#FF6139"  opacity="0.70" transform="rotate(-40,150,150)"/>
+          <!-- Equatorial orbital ring -->
+          <ellipse cx="150" cy="150" rx="118" ry="26" stroke="#FF8C6B"           stroke-width="1.6" fill="none" stroke-dasharray="10 6" opacity="0.65"  transform="rotate(6,150,150)"   style="animation:flowGlobe 16s linear infinite;"/>
 
         </svg>
       </div>
