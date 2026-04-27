@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resilient Futures: Strategy for a World That Won't Hold Still</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -355,26 +356,24 @@
 
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section style="
-  background: linear-gradient(155deg, #2a1816 0%, #361F1D 45%, #4a2826 100%);
+  background: #361F1D;
   padding: 80px 48px 0;
   position: relative;
   overflow: hidden;
-  min-height: 520px;
+  min-height: 660px;
 ">
-  <!-- Coral radial glow top-right -->
-  <div style="
-    position:absolute; top:-80px; right:-80px;
-    width:500px; height:500px; border-radius:50%;
-    background: radial-gradient(circle, rgba(255,97,57,0.1) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
-  <!-- Blue-green radial glow bottom-left -->
-  <div style="
-    position:absolute; bottom:40px; left:-60px;
-    width:350px; height:350px; border-radius:50%;
-    background: radial-gradient(circle, rgba(161,202,204,0.08) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
+  <!-- Full-height node canvas — 1000px wide, anchored to section-inner right edge -->
+  <div id="hero-node-wrap" style="position:absolute; width:1000px; right:calc((100% - 1100px)/2); top:0; bottom:0; overflow:hidden; z-index:0;">
+    <canvas id="hero-node-canvas" style="position:absolute;inset:0;width:100%;height:100%;display:block;"></canvas>
+    <!-- Fade left edge -->
+    <div style="position:absolute;left:0;top:0;bottom:0;width:260px;background:linear-gradient(to right,#361F1D,transparent);pointer-events:none;"></div>
+    <!-- Fade bottom edge -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,transparent,#361F1D 85%);pointer-events:none;"></div>
+    <!-- Fade top edge -->
+    <div style="position:absolute;top:0;left:0;right:0;height:140px;background:linear-gradient(to bottom,#361F1D,transparent);pointer-events:none;"></div>
+    <!-- Fade right edge -->
+    <div style="position:absolute;top:0;right:0;bottom:0;width:180px;background:linear-gradient(to left,#361F1D,transparent);pointer-events:none;"></div>
+  </div>
   <!-- Hero copy -->
   <div class="section-inner" style="position:relative; z-index:1; display:flex; gap:32px; align-items:flex-start;">
     <!-- Vertical coral accent line -->
@@ -386,7 +385,7 @@
       background: linear-gradient(to bottom, #FF6139, rgba(255,97,57,0));
     "></div>
     <!-- Copy block -->
-    <div style="flex:1;">
+    <div style="flex: 0 1 580px; min-width: 0;">
       <h1 class="font-display" style="
         font-size: 52px;
         font-weight: 700;
@@ -430,45 +429,6 @@
         <a href="#contact" class="btn-primary">Book a Conversation</a>
         <a href="#approach" style="color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif; font-size:12px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Explore our approach &#8595;</a>
       </div>
-    </div>
-    <!-- Right side: abstract signal network graphic -->
-    <div style="flex-shrink:0; width:300px; padding-top:16px; align-self:center;">
-      <svg viewBox="0 0 300 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
-        <defs>
-          <radialGradient id="dotFade" cx="50%" cy="45%" r="55%">
-            <stop offset="0%" stop-opacity="1"/>
-            <stop offset="100%" stop-opacity="0"/>
-          </radialGradient>
-          <mask id="gridMask">
-            <rect width="300" height="320" fill="url(#dotFade)"/>
-          </mask>
-        </defs>
-        <!-- Dot grid -->
-        <g mask="url(#gridMask)" opacity="0.3">
-          <circle cx="20" cy="20" r="1.5" fill="#A1CACC"/><circle cx="60" cy="20" r="1.5" fill="#A1CACC"/><circle cx="100" cy="20" r="1.5" fill="#A1CACC"/><circle cx="140" cy="20" r="1.5" fill="#A1CACC"/><circle cx="180" cy="20" r="1.5" fill="#A1CACC"/><circle cx="220" cy="20" r="1.5" fill="#A1CACC"/><circle cx="260" cy="20" r="1.5" fill="#A1CACC"/>
-          <circle cx="20" cy="60" r="1.5" fill="#A1CACC"/><circle cx="60" cy="60" r="1.5" fill="#A1CACC"/><circle cx="100" cy="60" r="1.5" fill="#A1CACC"/><circle cx="140" cy="60" r="1.5" fill="#A1CACC"/><circle cx="180" cy="60" r="1.5" fill="#A1CACC"/><circle cx="220" cy="60" r="1.5" fill="#A1CACC"/><circle cx="260" cy="60" r="1.5" fill="#A1CACC"/>
-          <circle cx="20" cy="100" r="1.5" fill="#A1CACC"/><circle cx="60" cy="100" r="1.5" fill="#A1CACC"/><circle cx="100" cy="100" r="1.5" fill="#A1CACC"/><circle cx="140" cy="100" r="1.5" fill="#A1CACC"/><circle cx="180" cy="100" r="1.5" fill="#A1CACC"/><circle cx="220" cy="100" r="1.5" fill="#A1CACC"/><circle cx="260" cy="100" r="1.5" fill="#A1CACC"/>
-          <circle cx="20" cy="140" r="1.5" fill="#A1CACC"/><circle cx="60" cy="140" r="1.5" fill="#A1CACC"/><circle cx="100" cy="140" r="1.5" fill="#A1CACC"/><circle cx="140" cy="140" r="1.5" fill="#A1CACC"/><circle cx="180" cy="140" r="1.5" fill="#A1CACC"/><circle cx="220" cy="140" r="1.5" fill="#A1CACC"/><circle cx="260" cy="140" r="1.5" fill="#A1CACC"/>
-          <circle cx="20" cy="180" r="1.5" fill="#A1CACC"/><circle cx="60" cy="180" r="1.5" fill="#A1CACC"/><circle cx="100" cy="180" r="1.5" fill="#A1CACC"/><circle cx="140" cy="180" r="1.5" fill="#A1CACC"/><circle cx="180" cy="180" r="1.5" fill="#A1CACC"/><circle cx="220" cy="180" r="1.5" fill="#A1CACC"/><circle cx="260" cy="180" r="1.5" fill="#A1CACC"/>
-          <circle cx="20" cy="220" r="1.5" fill="#A1CACC"/><circle cx="60" cy="220" r="1.5" fill="#A1CACC"/><circle cx="100" cy="220" r="1.5" fill="#A1CACC"/><circle cx="140" cy="220" r="1.5" fill="#A1CACC"/><circle cx="180" cy="220" r="1.5" fill="#A1CACC"/><circle cx="220" cy="220" r="1.5" fill="#A1CACC"/><circle cx="260" cy="220" r="1.5" fill="#A1CACC"/>
-          <circle cx="20" cy="260" r="1.5" fill="#A1CACC"/><circle cx="60" cy="260" r="1.5" fill="#A1CACC"/><circle cx="100" cy="260" r="1.5" fill="#A1CACC"/><circle cx="140" cy="260" r="1.5" fill="#A1CACC"/><circle cx="180" cy="260" r="1.5" fill="#A1CACC"/><circle cx="220" cy="260" r="1.5" fill="#A1CACC"/><circle cx="260" cy="260" r="1.5" fill="#A1CACC"/>
-          <circle cx="20" cy="300" r="1.5" fill="#A1CACC"/><circle cx="60" cy="300" r="1.5" fill="#A1CACC"/><circle cx="100" cy="300" r="1.5" fill="#A1CACC"/><circle cx="140" cy="300" r="1.5" fill="#A1CACC"/><circle cx="180" cy="300" r="1.5" fill="#A1CACC"/><circle cx="220" cy="300" r="1.5" fill="#A1CACC"/><circle cx="260" cy="300" r="1.5" fill="#A1CACC"/>
-        </g>
-        <!-- Signal nodes -->
-        <circle cx="140" cy="100" r="6" fill="#FF6139" opacity="0.9"/>
-        <circle cx="220" cy="60" r="4" fill="#FF6139" opacity="0.65"/>
-        <circle cx="60" cy="140" r="4.5" fill="#FF6139" opacity="0.7"/>
-        <circle cx="260" cy="160" r="3" fill="#FF6139" opacity="0.45"/>
-        <circle cx="180" cy="200" r="6" fill="#FF6139" opacity="0.85"/>
-        <circle cx="100" cy="240" r="3.5" fill="#FF6139" opacity="0.5"/>
-        <!-- Connections -->
-        <line x1="140" y1="100" x2="220" y2="60" stroke="#FF6139" stroke-width="0.75" opacity="0.35"/>
-        <line x1="140" y1="100" x2="60" y2="140" stroke="#FF6139" stroke-width="0.75" opacity="0.35"/>
-        <line x1="140" y1="100" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.25"/>
-        <line x1="60" y1="140" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.25"/>
-        <line x1="260" y1="160" x2="180" y2="200" stroke="#FF6139" stroke-width="0.75" opacity="0.2"/>
-        <line x1="180" y1="200" x2="100" y2="240" stroke="#FF6139" stroke-width="0.75" opacity="0.2"/>
-      </svg>
     </div>
   </div>
 </section>
@@ -936,5 +896,203 @@
   </div>
 
 </footer>
+
+<script type="module">
+import * as THREE from 'three';
+
+const canvas = document.getElementById('hero-node-canvas');
+if (!canvas) throw new Error('hero-node-canvas not found');
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x150B0A, 0.022);
+
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 500);
+camera.position.set(0, 5, 28);
+camera.lookAt(0, 3, 0);
+
+const COLORS = {
+  node:      new THREE.Color('#FF8C6B'),
+  nodeDim:   new THREE.Color('#743734'),
+  highlight: new THREE.Color('#FFFFFF'),
+  line:      new THREE.Color('#FF6139'),
+};
+
+const NODE_COUNT = 320;
+const FIELD_W = 55;
+const FIELD_D = 22;
+const RIDGE_GAIN = 16;
+
+function hash(x, y){ const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return s - Math.floor(s); }
+function smoothstep(t){ return t*t*(3-2*t); }
+function valueNoise(x, y){
+  const xi = Math.floor(x), yi = Math.floor(y);
+  const xf = x - xi, yf = y - yi;
+  const a = hash(xi, yi), b = hash(xi+1, yi), c = hash(xi, yi+1), d = hash(xi+1, yi+1);
+  const u = smoothstep(xf), v = smoothstep(yf);
+  return THREE.MathUtils.lerp(THREE.MathUtils.lerp(a,b,u), THREE.MathUtils.lerp(c,d,u), v);
+}
+function fbm(x, y){
+  let v = 0, amp = 0.5, freq = 1;
+  for (let i = 0; i < 4; i++){ v += amp * valueNoise(x*freq, y*freq); freq *= 2; amp *= 0.5; }
+  return v;
+}
+
+const nodes = [];
+for (let i = 0; i < NODE_COUNT; i++){
+  const u = Math.random(), v = Math.random();
+  const x = (u - 0.5) * FIELD_W, z = (v - 0.5) * FIELD_D;
+  const ridge = THREE.MathUtils.smoothstep(u, 0.05, 0.95);
+  const noise = fbm(x * 0.18 + 7.3, z * 0.28 + 1.1);
+  const y = ridge * RIDGE_GAIN + (noise - 0.5) * 8 - 4;
+  const isHi = Math.random() < 0.04;
+  nodes.push({ basePos: new THREE.Vector3(x, y, z), pos: new THREE.Vector3(x, y, z), phase: Math.random() * Math.PI * 2, sizeMul: 0.6 + Math.random() * 1.4, isHi });
+}
+
+const MAX_DIST = 5.2, MAX_LINKS_PER = 5;
+const cellSize = MAX_DIST, bins = new Map();
+const binKey = (cx, cz) => `${cx}|${cz}`;
+nodes.forEach((n, i) => {
+  const cx = Math.floor(n.basePos.x / cellSize), cz = Math.floor(n.basePos.z / cellSize);
+  const k = binKey(cx, cz);
+  if (!bins.has(k)) bins.set(k, []);
+  bins.get(k).push(i);
+});
+
+const linkSet = new Set(), linkCount = new Int16Array(nodes.length), linkIndices = [];
+for (let i = 0; i < nodes.length; i++){
+  if (linkCount[i] >= MAX_LINKS_PER) continue;
+  const ni = nodes[i];
+  const cx = Math.floor(ni.basePos.x / cellSize), cz = Math.floor(ni.basePos.z / cellSize);
+  const cands = [];
+  for (let dx = -1; dx <= 1; dx++) for (let dz = -1; dz <= 1; dz++){ const arr = bins.get(binKey(cx+dx, cz+dz)); if (arr) cands.push(...arr); }
+  const scored = [];
+  for (const j of cands){
+    if (j <= i || linkCount[j] >= MAX_LINKS_PER) continue;
+    const d = ni.basePos.distanceTo(nodes[j].basePos);
+    if (d <= MAX_DIST) scored.push([d, j]);
+  }
+  scored.sort((a,b) => a[0]-b[0]);
+  for (const [, j] of scored){
+    if (linkCount[i] >= MAX_LINKS_PER) break;
+    if (linkCount[j] >= MAX_LINKS_PER) continue;
+    const key = i < j ? `${i}|${j}` : `${j}|${i}`;
+    if (linkSet.has(key)) continue;
+    linkSet.add(key); linkIndices.push(i, j); linkCount[i]++; linkCount[j]++;
+  }
+}
+
+const pointsGeo = new THREE.BufferGeometry();
+const positions = new Float32Array(nodes.length * 3), colors = new Float32Array(nodes.length * 3), sizes = new Float32Array(nodes.length);
+for (let i = 0; i < nodes.length; i++){
+  const n = nodes[i];
+  positions[i*3] = n.basePos.x; positions[i*3+1] = n.basePos.y; positions[i*3+2] = n.basePos.z;
+  const col = n.isHi ? COLORS.highlight : (Math.random() < 0.5 ? COLORS.node : COLORS.nodeDim.clone().lerp(COLORS.node, 0.6));
+  colors[i*3] = col.r; colors[i*3+1] = col.g; colors[i*3+2] = col.b;
+  sizes[i] = (n.isHi ? 0.95 : 0.7) * n.sizeMul;
+}
+pointsGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+pointsGeo.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+pointsGeo.setAttribute('aSize',    new THREE.BufferAttribute(sizes, 1));
+
+function makeDotTexture(){
+  const s = 128, cv = document.createElement('canvas'); cv.width = cv.height = s;
+  const ctx = cv.getContext('2d'), r = s/2 - 1, img = ctx.createImageData(s, s);
+  for (let y = 0; y < s; y++) for (let x = 0; x < s; x++){
+    const dx = x - s/2 + 0.5, dy = y - s/2 + 0.5, d = Math.sqrt(dx*dx+dy*dy);
+    const a = Math.max(0, Math.min(1, (r - d) / 1.2)), idx = (y*s+x)*4;
+    img.data[idx] = img.data[idx+1] = img.data[idx+2] = 255; img.data[idx+3] = Math.round(a*255);
+  }
+  ctx.putImageData(img, 0, 0);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace; tex.minFilter = THREE.LinearMipmapLinearFilter; tex.magFilter = THREE.LinearFilter; tex.generateMipmaps = true;
+  return tex;
+}
+
+const pointsMat = new THREE.ShaderMaterial({
+  uniforms: { uTex: { value: makeDotTexture() }, uPixelRatio: { value: renderer.getPixelRatio() }, uTime: { value: 0 } },
+  vertexShader: `attribute float aSize; varying vec3 vColor; uniform float uPixelRatio; uniform float uTime;
+    void main(){ vColor = color; vec4 mv = modelViewMatrix * vec4(position,1.0);
+    float pulse = 0.85 + 0.15 * sin(uTime*1.2 + position.x*0.3 + position.z*0.5);
+    gl_PointSize = aSize * 1.4 * pulse * uPixelRatio * (170.0 / -mv.z); gl_Position = projectionMatrix * mv; }`,
+  fragmentShader: `uniform sampler2D uTex; varying vec3 vColor;
+    void main(){ vec4 t = texture2D(uTex, gl_PointCoord); if(t.a < 0.02) discard; gl_FragColor = vec4(vColor, t.a); }`,
+  transparent: true, depthWrite: false, blending: THREE.NormalBlending, vertexColors: true
+});
+
+scene.add(new THREE.Points(pointsGeo, pointsMat));
+
+const lineGeo = new THREE.BufferGeometry();
+const linePositions = new Float32Array(linkIndices.length * 3), lineColors = new Float32Array(linkIndices.length * 3);
+for (let li = 0; li < linkIndices.length; li += 2){
+  const a = nodes[linkIndices[li]], b = nodes[linkIndices[li+1]], off = li * 3;
+  linePositions[off]   = a.basePos.x; linePositions[off+1] = a.basePos.y; linePositions[off+2] = a.basePos.z;
+  linePositions[off+3] = b.basePos.x; linePositions[off+4] = b.basePos.y; linePositions[off+5] = b.basePos.z;
+  const tint = (a.isHi || b.isHi) ? COLORS.highlight : COLORS.line;
+  const hf1 = THREE.MathUtils.clamp((a.basePos.y + 4) / RIDGE_GAIN, 0.15, 1);
+  const hf2 = THREE.MathUtils.clamp((b.basePos.y + 4) / RIDGE_GAIN, 0.15, 1);
+  lineColors[off]   = tint.r*hf1; lineColors[off+1] = tint.g*hf1; lineColors[off+2] = tint.b*hf1;
+  lineColors[off+3] = tint.r*hf2; lineColors[off+4] = tint.g*hf2; lineColors[off+5] = tint.b*hf2;
+}
+lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+lineGeo.setAttribute('color',    new THREE.BufferAttribute(lineColors, 3));
+const lineMat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.35, depthWrite: false, blending: THREE.NormalBlending });
+scene.add(new THREE.LineSegments(lineGeo, lineMat));
+
+function resize(){
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (w === 0 || h === 0) return;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  pointsMat.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+}
+window.addEventListener('resize', resize);
+resize();
+
+const pointsArr = pointsGeo.attributes.position.array;
+const linesArr  = lineGeo.attributes.position.array;
+const incident  = Array.from({length: nodes.length}, () => []);
+for (let li = 0; li < linkIndices.length; li += 2){
+  incident[linkIndices[li]].push({ linkBaseFloat: li * 3 });
+  incident[linkIndices[li+1]].push({ linkBaseFloat: li * 3 + 3 });
+}
+
+let mouseX = 0, mouseY = 0;
+window.addEventListener('pointermove', (e) => {
+  mouseX = (e.clientX / window.innerWidth)  * 2 - 1;
+  mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+});
+
+const clock = new THREE.Clock();
+function tick(){
+  const t = clock.getElapsedTime();
+  pointsMat.uniforms.uTime.value = t;
+  for (let i = 0; i < nodes.length; i++){
+    const n = nodes[i], wob = 0.35;
+    const px = n.basePos.x + Math.sin(t*0.5 + n.phase) * wob;
+    const py = n.basePos.y + Math.cos(t*0.7 + n.phase*1.3) * wob * 0.8;
+    const pz = n.basePos.z + Math.sin(t*0.4 + n.phase*0.7) * wob;
+    pointsArr[i*3] = px; pointsArr[i*3+1] = py; pointsArr[i*3+2] = pz;
+    for (const { linkBaseFloat: off } of incident[i]){ linesArr[off] = px; linesArr[off+1] = py; linesArr[off+2] = pz; }
+  }
+  pointsGeo.attributes.position.needsUpdate = true;
+  lineGeo.attributes.position.needsUpdate   = true;
+
+  const camX = Math.sin(t*0.06)*1.5 + mouseX*2.4;
+  const camY = 5 + Math.cos(t*0.05)*0.8 - mouseY*1.0;
+  camera.position.x += (camX - camera.position.x) * 0.04;
+  camera.position.y += (camY - camera.position.y) * 0.04;
+  camera.lookAt(0, 3, 0);
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+
 </body>
 </html>
