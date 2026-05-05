@@ -899,14 +899,14 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor(0x000000, 0);
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x150B0A, 0.022);
+scene.fog = new THREE.FogExp2(0x0B1D26, 0.022);
 
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 500);
 camera.position.set(0, 5, 28);
 camera.lookAt(0, 3, 0);
 
 const COLORS = {
-  node:      new THREE.Color('#FF8C6B'),
+  node:      new THREE.Color('#7B9BD1'),
   nodeDim:   new THREE.Color('#162f44'),
   highlight: new THREE.Color('#FFFFFF'),
   line:      new THREE.Color('#7B9BD1'),
