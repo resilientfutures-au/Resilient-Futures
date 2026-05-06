@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Node Graphic — Resilient Futures</title>
+<link rel="stylesheet" href="colors_and_type.css" />
+<style>
+  :root{
+    /* Local stage tokens — derive from the brand palette but tuned for a dark, atmospheric hero */
+    --stage-bg-1: #1A0F0E;          /* deeper than --rf-primary, gives the nodes more air */
+    --stage-bg-2: #2A1A18;
+    --stage-vignette: rgba(0,0,0,0.55);
+  }
+
+  html, body{
+    margin:0;
+    padding:0;
+    background:var(--rf-primary);
+    color:var(--rf-white);
+    font-family: var(--rf-font-sans, 'Inter', system-ui, sans-serif);
+    overflow:hidden;
+    height:100%;
+  }
+
+  /* Full-bleed stage */
+  .stage{
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 40%, var(--stage-bg-2) 0%, var(--stage-bg-1) 55%, #0E0807 100%);
+    overflow:hidden;
+  }
+
+  canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+  }
+
+  /* Vignette + grain over the canvas to give it weight */
+  .stage::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+      radial-gradient(ellipse 100% 80% at 50% 50%, transparent 50%, var(--stage-vignette) 100%);
+    z-index:2;
+  }
+
+  /* Brand overlay — optional copy to demonstrate hero usage */
+  .overlay{
+    position:absolute;
+    inset:0;
+    z-index:3;
+    pointer-events:none;
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+    padding: clamp(28px, 4vw, 64px);
+  }
+
+  .overlay-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+  }
+
+  .brand{
+    font-family: 'Playfair Display', serif;
+    font-weight:700;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height:1;
+    letter-spacing:-0.01em;
+  }
+  .brand .a{ color:var(--rf-white); }
+  .brand .b{ color:var(--rf-secondary); }
+  .brand .plus{ color:var(--rf-highlight); margin-left:2px; }
+
+  .meta{
+    text-align:right;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--rf-secondary);
+  }
+  .meta .num{
+    display:block;
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size: clamp(36px, 4vw, 56px);
+    color:var(--rf-white);
+    letter-spacing:-0.02em;
+    line-height:1;
+    margin-top:8px;
+    text-transform:none;
+  }
+
+  .overlay-mid{
+    align-self:center;
+    max-width: 640px;
+  }
+  .eyebrow{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--rf-highlight);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:32px;
+    height:1px;
+    background:var(--rf-highlight);
+  }
+  .headline{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size: clamp(36px, 5.2vw, 68px);
+    line-height: 1.05;
+    letter-spacing:-0.015em;
+    color:var(--rf-white);
+    margin:0 0 20px;
+    text-wrap:balance;
+  }
+  .headline em{
+    color:var(--rf-secondary);
+    font-style:italic;
+  }
+  .sub{
+    font-family:'Playfair Display', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height:1.55;
+    color: rgba(255,255,255,0.72);
+    max-width:480px;
+  }
+
+  .overlay-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    color: rgba(255,255,255,0.55);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+  }
+  .overlay-bottom .index{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size: clamp(28px, 3vw, 42px);
+    color:var(--rf-white);
+    letter-spacing:-0.02em;
+    line-height:1;
+    text-transform:none;
+  }
+  .overlay-bottom .label{
+    max-width:280px;
+    text-align:right;
+    color:rgba(255,255,255,0.5);
+  }
+
+  /* Hide overlay if user just wants the raw graphic — toggled by tweak */
+  body.bare .overlay{ display:none; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <canvas id="c"></canvas>
+
+    <div class="overlay">
+      <div class="overlay-top">
+        <div class="brand"><span class="a">resilient</span><span class="b">futures</span><span class="plus">+</span></div>
+        <div class="meta">
+          Strategic fitness index
+          <span class="num">5,000</span>
+        </div>
+      </div>
+
+      <div class="overlay-mid">
+        <div class="eyebrow">Strategy in Action</div>
+        <h1 class="headline">Strategy for a world that <em>won't hold still.</em></h1>
+        <p class="sub">A connected view of the conditions, decisions, and capabilities that compound into sustainable value — across permanent instability.</p>
+      </div>
+
+      <div class="overlay-bottom">
+        <div><span class="index">09</span></div>
+        <div class="label">Conditions watching · Change ahead of change</div>
+      </div>
+    </div>
+  </div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+/* =========================================================
+   Resilient Futures — 3D node graphic
+   - Particle field shaped as a rising "ridge" (low-left → high-right)
+   - Lines connect any two points within a radius (limited per node)
+   - Gentle continuous animation: drift on the noise field + camera parallax
+   ========================================================= */
+
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+
+const scene = new THREE.Scene();
+
+// Subtle exponential fog so distant nodes fade into the background
+scene.fog = new THREE.FogExp2(0x150B0A, 0.018);
+
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 500);
+camera.position.set(0, 6, 38);
+camera.lookAt(0, 2, 0);
+
+/* ---------- Brand palette (matches --rf-* tokens) ---------- */
+const COLORS = {
+  node:      new THREE.Color('#A1CACC'),  // secondary — blue-green
+  nodeDim:   new THREE.Color('#6B5350'),  // mid-grey
+  highlight: new THREE.Color('#FF6139'),  // coral CTA
+  accent:    new THREE.Color('#C8B8A8'),  // warm light
+  line:      new THREE.Color('#A1CACC'),
+};
+
+/* =========================================================
+   Generate the node field
+   - Nodes laid out across a wide X / shallow Z plane
+   - Y is driven by a layered noise function so the surface
+     reads as a rising mountain ridge from lower-left to upper-right
+   ========================================================= */
+
+const NODE_COUNT = 420;
+const FIELD_W = 70;     // x extent
+const FIELD_D = 26;     // z extent
+const RIDGE_GAIN = 18;  // how high the right side climbs
+
+// Cheap value-noise (deterministic, smooth enough for a height field)
+function hash(x, y){
+  const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
+  return s - Math.floor(s);
+}
+function smoothstep(t){ return t*t*(3-2*t); }
+function valueNoise(x, y){
+  const xi = Math.floor(x), yi = Math.floor(y);
+  const xf = x - xi, yf = y - yi;
+  const a = hash(xi,   yi);
+  const b = hash(xi+1, yi);
+  const c = hash(xi,   yi+1);
+  const d = hash(xi+1, yi+1);
+  const u = smoothstep(xf), v = smoothstep(yf);
+  return THREE.MathUtils.lerp(
+    THREE.MathUtils.lerp(a, b, u),
+    THREE.MathUtils.lerp(c, d, u),
+    v
+  );
+}
+function fbm(x, y){
+  let v = 0, amp = 0.5, freq = 1;
+  for (let i = 0; i < 4; i++){
+    v += amp * valueNoise(x*freq, y*freq);
+    freq *= 2;
+    amp *= 0.5;
+  }
+  return v; // 0..~1
+}
+
+const nodes = []; // {pos: Vector3, basePos: Vector3, phase, sizeMul, isHi}
+for (let i = 0; i < NODE_COUNT; i++){
+  // Slight stratification: cluster more nodes along the rising ridge
+  const u = Math.random();
+  const v = Math.random();
+  const x = (u - 0.5) * FIELD_W;
+  const z = (v - 0.5) * FIELD_D;
+
+  // Ridge height: rises steeply from left to right with noisy variation
+  const ridge = THREE.MathUtils.smoothstep(u, 0.05, 0.95); // 0..1 left→right
+  const noise = fbm(x * 0.18 + 7.3, z * 0.28 + 1.1); // 0..1
+  const ridgeY = ridge * RIDGE_GAIN;
+  const noiseY = (noise - 0.5) * 8;
+  const y = ridgeY + noiseY - 4; // shift down so center of mass is near origin
+
+  const basePos = new THREE.Vector3(x, y, z);
+  const isHi = Math.random() < 0.04; // ~4% coral highlight nodes
+  nodes.push({
+    basePos,
+    pos: basePos.clone(),
+    phase: Math.random() * Math.PI * 2,
+    sizeMul: 0.6 + Math.random() * 1.4,
+    isHi
+  });
+}
+
+/* ---------- Build line segments between nearby nodes ---------- */
+
+const MAX_DIST = 5.2;     // connection radius
+const MAX_LINKS_PER = 5;  // cap on links per node — prevents a hairball
+
+// Spatial bin to find neighbours quickly (O(n) instead of O(n^2) work in practice)
+const cellSize = MAX_DIST;
+const bins = new Map();
+const binKey = (cx, cz) => `${cx}|${cz}`;
+nodes.forEach((n, i) => {
+  const cx = Math.floor(n.basePos.x / cellSize);
+  const cz = Math.floor(n.basePos.z / cellSize);
+  const k = binKey(cx, cz);
+  if (!bins.has(k)) bins.set(k, []);
+  bins.get(k).push(i);
+});
+
+const linkSet = new Set();
+const linkCount = new Int16Array(nodes.length);
+const linkIndices = []; // [aIdx, bIdx, ...]
+
+for (let i = 0; i < nodes.length; i++){
+  if (linkCount[i] >= MAX_LINKS_PER) continue;
+  const ni = nodes[i];
+  const cx = Math.floor(ni.basePos.x / cellSize);
+  const cz = Math.floor(ni.basePos.z / cellSize);
+
+  // Candidate neighbours from 3x3 surrounding bins
+  const cands = [];
+  for (let dx = -1; dx <= 1; dx++){
+    for (let dz = -1; dz <= 1; dz++){
+      const arr = bins.get(binKey(cx+dx, cz+dz));
+      if (arr) cands.push(...arr);
+    }
+  }
+
+  // Score by distance, then attach up to MAX_LINKS_PER closest
+  const scored = [];
+  for (const j of cands){
+    if (j <= i) continue;
+    if (linkCount[j] >= MAX_LINKS_PER) continue;
+    const d = ni.basePos.distanceTo(nodes[j].basePos);
+    if (d <= MAX_DIST) scored.push([d, j]);
+  }
+  scored.sort((a,b) => a[0] - b[0]);
+
+  for (const [, j] of scored){
+    if (linkCount[i] >= MAX_LINKS_PER) break;
+    if (linkCount[j] >= MAX_LINKS_PER) continue;
+    const key = i < j ? `${i}|${j}` : `${j}|${i}`;
+    if (linkSet.has(key)) continue;
+    linkSet.add(key);
+    linkIndices.push(i, j);
+    linkCount[i]++;
+    linkCount[j]++;
+  }
+}
+
+/* =========================================================
+   GPU geometry
+   ========================================================= */
+
+// Points (nodes)
+const pointsGeo = new THREE.BufferGeometry();
+const positions = new Float32Array(nodes.length * 3);
+const colors    = new Float32Array(nodes.length * 3);
+const sizes     = new Float32Array(nodes.length);
+
+for (let i = 0; i < nodes.length; i++){
+  const n = nodes[i];
+  positions[i*3+0] = n.basePos.x;
+  positions[i*3+1] = n.basePos.y;
+  positions[i*3+2] = n.basePos.z;
+  const col = n.isHi
+    ? COLORS.highlight
+    : (Math.random() < 0.5 ? COLORS.node : COLORS.nodeDim.clone().lerp(COLORS.node, 0.6));
+  colors[i*3+0] = col.r; colors[i*3+1] = col.g; colors[i*3+2] = col.b;
+  sizes[i] = (n.isHi ? 0.95 : 0.7) * n.sizeMul;
+}
+pointsGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+pointsGeo.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+pointsGeo.setAttribute('aSize',    new THREE.BufferAttribute(sizes, 1));
+
+// Hard-edged anti-aliased disc — solid core, single-pixel feather at the rim.
+// Drawn at high resolution so sprites stay crisp when scaled up.
+function makeDotTexture(){
+  const s = 128;
+  const cv = document.createElement('canvas');
+  cv.width = cv.height = s;
+  const ctx = cv.getContext('2d');
+  const cx = s/2, cy = s/2;
+  const r  = s/2 - 1;
+  const img = ctx.createImageData(s, s);
+  for (let y = 0; y < s; y++){
+    for (let x = 0; x < s; x++){
+      const dx = x - cx + 0.5;
+      const dy = y - cy + 0.5;
+      const d  = Math.sqrt(dx*dx + dy*dy);
+      // Sharp circle with 1.2px anti-aliased edge
+      const a  = Math.max(0, Math.min(1, (r - d) / 1.2));
+      const i  = (y * s + x) * 4;
+      img.data[i  ] = 255;
+      img.data[i+1] = 255;
+      img.data[i+2] = 255;
+      img.data[i+3] = Math.round(a * 255);
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.minFilter = THREE.LinearMipmapLinearFilter;
+  tex.magFilter = THREE.LinearFilter;
+  tex.generateMipmaps = true;
+  tex.anisotropy = 4;
+  return tex;
+}
+const dotTex = makeDotTexture();
+
+const pointsMat = new THREE.ShaderMaterial({
+  uniforms: {
+    uTex: { value: dotTex },
+    uPixelRatio: { value: renderer.getPixelRatio() },
+    uTime: { value: 0 }
+  },
+  vertexShader: /* glsl */`
+    attribute float aSize;
+    varying vec3 vColor;
+    uniform float uPixelRatio;
+    uniform float uTime;
+    void main(){
+      vColor = color;
+      vec4 mv = modelViewMatrix * vec4(position, 1.0);
+      // Subtle pulse on each node, phase-offset by world position
+      float pulse = 0.85 + 0.15 * sin(uTime * 1.2 + position.x * 0.3 + position.z * 0.5);
+      gl_PointSize = aSize * 2.2 * pulse * uPixelRatio * (300.0 / -mv.z);
+      gl_Position = projectionMatrix * mv;
+    }
+  `,
+  fragmentShader: /* glsl */`
+    uniform sampler2D uTex;
+    varying vec3 vColor;
+    void main(){
+      vec4 t = texture2D(uTex, gl_PointCoord);
+      if (t.a < 0.02) discard;
+      gl_FragColor = vec4(vColor, t.a);
+    }
+  `,
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.NormalBlending,
+  vertexColors: true
+});
+
+const points = new THREE.Points(pointsGeo, pointsMat);
+scene.add(points);
+
+// Lines — buffer of vertex pairs, colours derived per-vertex
+const lineGeo = new THREE.BufferGeometry();
+const linePositions = new Float32Array(linkIndices.length * 3); // 2 verts per link, 3 floats
+const lineColors    = new Float32Array(linkIndices.length * 3);
+
+for (let li = 0; li < linkIndices.length; li += 2){
+  const a = nodes[linkIndices[li]];
+  const b = nodes[linkIndices[li+1]];
+  const off = li * 3;
+  linePositions[off+0] = a.basePos.x;
+  linePositions[off+1] = a.basePos.y;
+  linePositions[off+2] = a.basePos.z;
+  linePositions[off+3] = b.basePos.x;
+  linePositions[off+4] = b.basePos.y;
+  linePositions[off+5] = b.basePos.z;
+
+  // Tint lines mostly secondary, occasionally coral when both endpoints are high
+  const tint = (a.isHi || b.isHi) ? COLORS.highlight : COLORS.line;
+  // Lines fade with height so the upper ridge feels lighter
+  const heightFactor = THREE.MathUtils.clamp((a.basePos.y + 4) / (RIDGE_GAIN), 0.15, 1);
+  lineColors[off+0] = tint.r * heightFactor;
+  lineColors[off+1] = tint.g * heightFactor;
+  lineColors[off+2] = tint.b * heightFactor;
+  const heightFactor2 = THREE.MathUtils.clamp((b.basePos.y + 4) / (RIDGE_GAIN), 0.15, 1);
+  lineColors[off+3] = tint.r * heightFactor2;
+  lineColors[off+4] = tint.g * heightFactor2;
+  lineColors[off+5] = tint.b * heightFactor2;
+}
+lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+lineGeo.setAttribute('color',    new THREE.BufferAttribute(lineColors, 3));
+
+const lineMat = new THREE.LineBasicMaterial({
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.55,
+  depthWrite: false,
+  blending: THREE.NormalBlending
+});
+const lines = new THREE.LineSegments(lineGeo, lineMat);
+scene.add(lines);
+
+/* =========================================================
+   Resize
+   ========================================================= */
+function resize(){
+  const w = canvas.clientWidth || window.innerWidth;
+  const h = canvas.clientHeight || window.innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  pointsMat.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+}
+window.addEventListener('resize', resize);
+resize();
+
+/* =========================================================
+   Animation
+   - Each node bobs along a slow Lissajous-ish path
+   - Both points buffer and matching line endpoints update each frame
+   - Camera does a slow parallax sweep on mouse / pointer
+   ========================================================= */
+
+const pointsArr = pointsGeo.attributes.position.array;
+const linesArr  = lineGeo.attributes.position.array;
+
+// Build a node→link incidence map so we can patch line endpoints in place
+const incident = Array.from({length: nodes.length}, () => []);
+for (let li = 0; li < linkIndices.length; li += 2){
+  const a = linkIndices[li], b = linkIndices[li+1];
+  incident[a].push({ linkBaseFloat: li * 3 + 0 });   // a goes into the first vertex
+  incident[b].push({ linkBaseFloat: li * 3 + 3 });   // b goes into the second vertex
+}
+
+let mouseX = 0, mouseY = 0;
+window.addEventListener('pointermove', (e) => {
+  mouseX = (e.clientX / window.innerWidth)  * 2 - 1;
+  mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+});
+
+const clock = new THREE.Clock();
+
+function tick(){
+  const t = clock.getElapsedTime();
+  pointsMat.uniforms.uTime.value = t;
+
+  // Update node positions
+  for (let i = 0; i < nodes.length; i++){
+    const n = nodes[i];
+    const wob = 0.35;
+    const dx = Math.sin(t * 0.5 + n.phase) * wob;
+    const dy = Math.cos(t * 0.7 + n.phase * 1.3) * wob * 0.8;
+    const dz = Math.sin(t * 0.4 + n.phase * 0.7) * wob;
+
+    const px = n.basePos.x + dx;
+    const py = n.basePos.y + dy;
+    const pz = n.basePos.z + dz;
+
+    pointsArr[i*3+0] = px;
+    pointsArr[i*3+1] = py;
+    pointsArr[i*3+2] = pz;
+
+    // Patch every line endpoint that references this node
+    const inc = incident[i];
+    for (let k = 0; k < inc.length; k++){
+      const off = inc[k].linkBaseFloat;
+      linesArr[off+0] = px;
+      linesArr[off+1] = py;
+      linesArr[off+2] = pz;
+    }
+  }
+  pointsGeo.attributes.position.needsUpdate = true;
+  lineGeo.attributes.position.needsUpdate = true;
+
+  // Slow camera drift + pointer parallax
+  const camX = Math.sin(t * 0.06) * 1.5 + mouseX * 2.4;
+  const camY = 6 + Math.cos(t * 0.05) * 0.8 - mouseY * 1.2;
+  camera.position.x += (camX - camera.position.x) * 0.04;
+  camera.position.y += (camY - camera.position.y) * 0.04;
+  camera.lookAt(2, 2, 0);
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+tick();
+
+/* =========================================================
+   Tweaks panel — let the user retune the brand expression
+   ========================================================= */
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "showOverlay": false,
+  "lineOpacity": 0.23,
+  "highlightShare": 0,
+  "ridgeGain": 0,
+  "fogDensity": 0,
+  "palette": "coral"
+}/*EDITMODE-END*/;
+
+let tweaks = { ...TWEAK_DEFAULTS };
+applyTweaks(tweaks);
+
+function applyTweaks(t){
+  document.body.classList.toggle('bare', !t.showOverlay);
+  lineMat.opacity = t.lineOpacity;
+  scene.fog.density = t.fogDensity;
+
+  // Palette swap — recolour nodes + lines
+  const PALETTES = {
+    sienna:   { node: '#A1CACC', dim: '#6B5350', hi: '#FF6139', line: '#A1CACC', bg1:'#1A0F0E', bg2:'#2A1A18' },
+    coral:    { node: '#FF8C6B', dim: '#743734', hi: '#FFD9A8', line: '#FF6139', bg1:'#1A0F0E', bg2:'#361F1D' },
+    cool:     { node: '#A1CACC', dim: '#3A4D52', hi: '#A1CACC', line: '#A1CACC', bg1:'#0E1518', bg2:'#1A2528' },
+    parchment:{ node: '#361F1D', dim: '#A1958A', hi: '#FF6139', line: '#743734', bg1:'#F5F5ED', bg2:'#E8E1D4' },
+  };
+  const p = PALETTES[t.palette] || PALETTES.sienna;
+  COLORS.node.set(p.node);
+  COLORS.nodeDim.set(p.dim);
+  COLORS.highlight.set(p.hi);
+  COLORS.line.set(p.line);
+
+  // Re-assign which nodes are "highlight" using the chosen share
+  const wantedHiShare = t.highlightShare / 100;
+  const colAttr  = pointsGeo.attributes.color.array;
+  const sizeAttr = pointsGeo.attributes.aSize.array;
+  for (let i = 0; i < nodes.length; i++){
+    const n = nodes[i];
+    n.isHi = (Math.random() < wantedHiShare);
+    const col = n.isHi
+      ? COLORS.highlight
+      : (i % 2 === 0 ? COLORS.node : COLORS.nodeDim.clone().lerp(COLORS.node, 0.6));
+    colAttr[i*3+0] = col.r; colAttr[i*3+1] = col.g; colAttr[i*3+2] = col.b;
+    sizeAttr[i] = (n.isHi ? 0.95 : 0.7) * n.sizeMul;
+  }
+  pointsGeo.attributes.color.needsUpdate = true;
+  pointsGeo.attributes.aSize.needsUpdate = true;
+
+  // Recolour lines using new tint
+  for (let li = 0; li < linkIndices.length; li += 2){
+    const a = nodes[linkIndices[li]];
+    const b = nodes[linkIndices[li+1]];
+    const off = li * 3;
+    const tint = (a.isHi || b.isHi) ? COLORS.highlight : COLORS.line;
+    const hf1 = THREE.MathUtils.clamp((a.basePos.y + 4) / RIDGE_GAIN, 0.15, 1);
+    const hf2 = THREE.MathUtils.clamp((b.basePos.y + 4) / RIDGE_GAIN, 0.15, 1);
+    lineColors[off+0] = tint.r * hf1; lineColors[off+1] = tint.g * hf1; lineColors[off+2] = tint.b * hf1;
+    lineColors[off+3] = tint.r * hf2; lineColors[off+4] = tint.g * hf2; lineColors[off+5] = tint.b * hf2;
+  }
+  lineGeo.attributes.color.needsUpdate = true;
+
+  // Stage background
+  document.documentElement.style.setProperty('--stage-bg-1', p.bg1);
+  document.documentElement.style.setProperty('--stage-bg-2', p.bg2);
+  scene.fog.color.set(p.bg1);
+  document.body.style.color = (t.palette === 'parchment') ? '#1A1A1A' : '#FFFFFF';
+}
+
+/* ---------- Edit-mode protocol ---------- */
+window.addEventListener('message', (e) => {
+  const msg = e.data;
+  if (!msg || typeof msg !== 'object') return;
+  if (msg.type === '__activate_edit_mode')   showPanel();
+  if (msg.type === '__deactivate_edit_mode') hidePanel();
+});
+window.parent.postMessage({type: '__edit_mode_available'}, '*');
+
+/* ---------- Tweaks panel UI (vanilla; no React needed for this small surface) ---------- */
+function buildPanel(){
+  const wrap = document.createElement('div');
+  wrap.id = 'tweaks-panel';
+  wrap.innerHTML = `
+    <style>
+      #tweaks-panel{
+        position:fixed; right:24px; bottom:24px; z-index:10;
+        width:280px;
+        background:#FFFFFF;
+        color:#1A1A1A;
+        border:1px solid #D8D0C8;
+        border-top:3px solid #FF6139;
+        font-family:'Inter', system-ui, sans-serif;
+        font-size:12px;
+        padding:18px 18px 16px;
+        display:none;
+        box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+      }
+      #tweaks-panel.open{display:block;}
+      #tweaks-panel header{
+        display:flex; justify-content:space-between; align-items:center;
+        font-family:'Playfair Display', serif; font-weight:700; font-size:18px;
+        color:#361F1D; margin-bottom:14px;
+      }
+      #tweaks-panel header button{
+        all:unset; cursor:pointer; font-size:14px; color:#6B5350; padding:4px 8px;
+      }
+      #tweaks-panel header button:hover{ color:#FF6139; }
+      #tweaks-panel .row{
+        display:flex; flex-direction:column; gap:6px; margin-bottom:14px;
+      }
+      #tweaks-panel label{
+        font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;
+        color:#6B5350;
+        display:flex; justify-content:space-between; align-items:center;
+      }
+      #tweaks-panel label span{
+        font-family:'Playfair Display', serif; font-weight:700;
+        font-size:13px; color:#361F1D; letter-spacing:0; text-transform:none;
+      }
+      #tweaks-panel input[type=range]{ width:100%; accent-color:#FF6139; }
+      #tweaks-panel .palette{
+        display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
+      }
+      #tweaks-panel .swatch{
+        all:unset; cursor:pointer;
+        height:28px; border:1px solid #D8D0C8;
+        position:relative;
+        font-size:9px; font-weight:600; letter-spacing:0.08em;
+        text-transform:uppercase; color:#fff;
+        display:flex; align-items:flex-end; padding:3px 5px;
+      }
+      #tweaks-panel .swatch.active{ outline:2px solid #FF6139; outline-offset:2px; }
+      #tweaks-panel .toggle{
+        display:flex; justify-content:space-between; align-items:center;
+        padding:6px 0;
+      }
+      #tweaks-panel .toggle button{
+        all:unset; cursor:pointer;
+        width:36px; height:20px; background:#D8D0C8; border-radius:999px;
+        position:relative; transition:background 0.15s;
+      }
+      #tweaks-panel .toggle button::after{
+        content:""; position:absolute; left:2px; top:2px;
+        width:16px; height:16px; background:#fff; border-radius:50%;
+        transition:left 0.15s;
+      }
+      #tweaks-panel .toggle button.on{ background:#FF6139; }
+      #tweaks-panel .toggle button.on::after{ left:18px; }
+    </style>
+    <header>
+      <div>Tweaks</div>
+      <button id="tw-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="row">
+      <label>Palette</label>
+      <div class="palette" id="tw-palette">
+        <button class="swatch" data-p="sienna"    style="background:linear-gradient(135deg,#1A0F0E,#A1CACC)">Sienna</button>
+        <button class="swatch" data-p="coral"     style="background:linear-gradient(135deg,#361F1D,#FF6139)">Coral</button>
+        <button class="swatch" data-p="cool"      style="background:linear-gradient(135deg,#0E1518,#A1CACC)">Cool</button>
+        <button class="swatch" data-p="parchment" style="background:linear-gradient(135deg,#F5F5ED,#743734); color:#361F1D">Light</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Line opacity <span id="tw-line-v"></span></label>
+      <input id="tw-line" type="range" min="0.05" max="1" step="0.01" />
+    </div>
+
+    <div class="row">
+      <label>Highlight density <span id="tw-hi-v"></span></label>
+      <input id="tw-hi" type="range" min="0" max="20" step="1" />
+    </div>
+
+    <div class="row">
+      <label>Ridge climb <span id="tw-ridge-v"></span></label>
+      <input id="tw-ridge" type="range" min="0" max="30" step="0.5" />
+    </div>
+
+    <div class="row">
+      <label>Atmosphere <span id="tw-fog-v"></span></label>
+      <input id="tw-fog" type="range" min="0" max="0.05" step="0.001" />
+    </div>
+
+    <div class="toggle">
+      <label style="margin:0">Show overlay copy</label>
+      <button id="tw-overlay" aria-label="Toggle overlay"></button>
+    </div>
+  `;
+  document.body.appendChild(wrap);
+
+  const $ = (s) => wrap.querySelector(s);
+
+  const lineEl = $('#tw-line');
+  const lineV  = $('#tw-line-v');
+  const hiEl   = $('#tw-hi');
+  const hiV    = $('#tw-hi-v');
+  const ridgeEl= $('#tw-ridge');
+  const ridgeV = $('#tw-ridge-v');
+  const fogEl  = $('#tw-fog');
+  const fogV   = $('#tw-fog-v');
+  const ovBtn  = $('#tw-overlay');
+
+  function syncUI(){
+    lineEl.value = tweaks.lineOpacity;   lineV.textContent  = tweaks.lineOpacity.toFixed(2);
+    hiEl.value   = tweaks.highlightShare; hiV.textContent   = tweaks.highlightShare + '%';
+    ridgeEl.value= tweaks.ridgeGain;      ridgeV.textContent= tweaks.ridgeGain.toFixed(0);
+    fogEl.value  = tweaks.fogDensity;     fogV.textContent  = tweaks.fogDensity.toFixed(3);
+    ovBtn.classList.toggle('on', tweaks.showOverlay);
+    wrap.querySelectorAll('.swatch').forEach(s => {
+      s.classList.toggle('active', s.dataset.p === tweaks.palette);
+    });
+  }
+  syncUI();
+
+  function setKey(key, val){
+    tweaks[key] = val;
+    if (key === 'ridgeGain'){
+      // Re-derive y-positions for all base nodes when the ridge gain changes
+      const old = TWEAK_DEFAULTS.ridgeGain;
+      const ratio = val / old;
+      for (let i = 0; i < nodes.length; i++){
+        const n = nodes[i];
+        // stretch around y = -4 baseline
+        n.basePos.y = (n.basePos.y + 4) * (val / old) - 4;
+        // also rebase noise — but simple stretch is fine and reversible if we cache; we accept drift
+      }
+      // Reset old to current so further changes stretch from current
+      TWEAK_DEFAULTS.ridgeGain = val;
+      // Also rebuild line geometry endpoints from new basePos
+      for (let li = 0; li < linkIndices.length; li += 2){
+        const a = nodes[linkIndices[li]];
+        const b = nodes[linkIndices[li+1]];
+        const off = li * 3;
+        linesArr[off+1] = a.basePos.y;
+        linesArr[off+4] = b.basePos.y;
+      }
+      lineGeo.attributes.position.needsUpdate = true;
+    }
+    applyTweaks(tweaks);
+    syncUI();
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits:{[key]: val}}, '*');
+  }
+
+  lineEl.addEventListener('input',  e => setKey('lineOpacity',    parseFloat(e.target.value)));
+  hiEl.addEventListener('input',    e => setKey('highlightShare', parseInt(e.target.value, 10)));
+  ridgeEl.addEventListener('input', e => setKey('ridgeGain',      parseFloat(e.target.value)));
+  fogEl.addEventListener('input',   e => setKey('fogDensity',     parseFloat(e.target.value)));
+  ovBtn.addEventListener('click',   () => setKey('showOverlay',   !tweaks.showOverlay));
+  wrap.querySelectorAll('.swatch').forEach(s => {
+    s.addEventListener('click', () => setKey('palette', s.dataset.p));
+  });
+
+  $('#tw-close').addEventListener('click', () => {
+    hidePanel();
+    window.parent.postMessage({type:'__edit_mode_dismissed'}, '*');
+  });
+
+  return wrap;
+}
+const panel = buildPanel();
+function showPanel(){ panel.classList.add('open'); }
+function hidePanel(){ panel.classList.remove('open'); }
+</script>
+</body>
+</html>

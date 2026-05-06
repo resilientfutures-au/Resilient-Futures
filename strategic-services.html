@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategic Services — Resilient Futures</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #1A1A1A;
+      background: #0B1D26;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-display { font-family: 'Nunito Sans', sans-serif; }
+    .section-label {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7B9BD1;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .section-label--light { color: #7B9BD1; }
+    .btn-primary {
+      display: inline-block;
+      background: #7B9BD1;
+      color: #0B1D26;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-primary:focus-visible { outline: 2px solid #7B9BD1; outline-offset: 3px; }
+    .btn-primary:active { transform: translateY(1px); }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .nav-link {
+      color: rgba(255,255,255,0.72);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: rgba(255,255,255,0.9); }
+    .nav-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; color: rgba(255,255,255,0.9); }
+    .nav-link:active { color: #fff; }
+    .nav-link--active { color: rgba(255,255,255,0.9) !important; }
+    .nav-logo-link { text-decoration: none; transition: opacity 0.2s; }
+    .nav-logo-link:hover { opacity: 0.8; }
+    .nav-logo-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; }
+    /* Dropdown */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.72); font-size: 15px; font-weight: 500;
+      font-family: 'Nunito Sans', sans-serif; text-decoration: none;
+      transition: color 0.2s; display: flex; align-items: center; gap: 4px;
+      padding: 4px 8px;
+    }
+    .nav-dropdown-trigger:hover { color: rgba(255,255,255,0.9); }
+    .nav-caret { font-size: 12px; opacity: 1; transition: transform 0.15s; display: inline-block; }
+    .nav-dropdown.open .nav-caret { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+      background: #0d2535; border: 1px solid rgba(255,255,255,0.08);
+      min-width: 190px; padding: 6px 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .nav-dropdown.open .nav-dropdown-menu {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-item {
+      display: block; padding: 9px 20px;
+      color: rgba(255,255,255,0.80); font-size: 15px; font-weight: 400;
+      text-decoration: none; transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .footer-email {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-email:hover { color: rgba(255,255,255,0.8); }
+
+    /* Service cards */
+    .service-card {
+      background: #fff;
+      padding: 40px;
+      border-top: 3px solid #7B9BD1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .service-card:hover {
+      box-shadow: 0 8px 40px rgba(11,29,38,0.10);
+    }
+    .duration-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3A5A92;
+      background: rgba(58,90,146,0.08);
+      border: 1px solid rgba(58,90,146,0.18);
+      padding: 4px 10px;
+      border-radius: 2px;
+      width: fit-content;
+    }
+    .ideal-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(11,29,38,0.07);
+    }
+    .ideal-item:last-child { border-bottom: none; }
+    .ideal-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: #7B9BD1;
+    }
+
+    /* Explore cards */
+    .explore-card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      padding: 28px 28px 24px;
+      border-top: 3px solid #7B9BD1;
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+      flex: 1;
+      min-width: 240px;
+    }
+    .explore-card:hover {
+      box-shadow: 0 8px 32px rgba(11,29,38,0.12);
+      transform: translateY(-2px);
+    }
+    .explore-card--dim { border-top-color: rgba(123,155,209,0.35); }
+
+    /* Responsive */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero-section { padding: 64px 32px 80px !important; }
+      .hero-section h1 { font-size: 40px !important; }
+      .intro-section { padding: 80px 32px !important; }
+      .intro-grid { grid-template-columns: 1fr !important; }
+      .services-section { padding: 80px 32px !important; }
+      .services-grid { grid-template-columns: 1fr !important; }
+      footer { padding: 28px 32px !important; }
+    }
+    @media (max-width: 767px) {
+      nav > div:last-child { display: none !important; }
+      .hero-section { padding: 48px 24px 72px !important; }
+      .hero-section h1 { font-size: 32px !important; }
+      .hero-meta { flex-direction: column !important; align-items: flex-start !important; }
+      .hero-accent-line { display: none !important; }
+      .intro-section { padding: 64px 24px !important; }
+      .intro-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .services-section { padding: 64px 24px !important; }
+      .services-grid { grid-template-columns: 1fr !important; }
+      .pathway-grid { grid-template-columns: 1fr !important; }
+      .cta-section { padding: 64px 24px !important; }
+      .explore-strip { padding: 48px 24px !important; }
+      .explore-cards { flex-direction: column !important; }
+      footer {
+        padding: 28px 24px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 12px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav style="
+  background: #0B1D26;
+  height: 64px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+">
+  <a href="index.html" class="nav-logo-link"><img src="brand_assets/Resilient Futures LOGOS (4).png" alt="Resilient Futures" style="height:36px; width:auto; display:block;"></a>
+  <div style="display:flex; gap:4px; align-items:center;">
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">About <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="why.html" class="nav-dropdown-item">Why Resilient Futures</a>
+      </div>
+    </div>
+    <a href="strategy-in-action.html" class="nav-link" style="padding:4px 8px;">Strategy in Action</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger nav-link--active" style="color:rgba(255,255,255,0.9);">Services <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="strategic-services.html" class="nav-dropdown-item" style="color:#fff;">Strategic Services</a>
+        <a href="strategic-fitness.html" class="nav-dropdown-item">Strategic Fitness</a>
+        <a href="leadership-building.html" class="nav-dropdown-item">Leadership Building</a>
+      </div>
+    </div>
+    <a href="getstarted.html" class="btn-primary" style="padding:8px 20px; font-size: 12px; margin-left:16px;">Get in touch</a>
+  </div>
+  <script>
+    document.querySelectorAll('.nav-dropdown-trigger').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const dropdown = btn.closest('.nav-dropdown');
+        const isOpen = dropdown.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+        if (!isOpen) dropdown.classList.add('open');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    });
+  </script>
+</nav>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero-section" style="
+  background: #0B1D26;
+  padding: 80px 48px 96px;
+  position: relative;
+  overflow: hidden;
+">
+  <!-- Radial glows -->
+  <div style="
+    position:absolute; top:-80px; right:-80px;
+    width:500px; height:500px; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,155,209,0.1) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+  <div style="
+    position:absolute; bottom:40px; left:-60px;
+    width:350px; height:350px; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,155,209,0.06) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <!-- Breadcrumb -->
+    <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:40px; border-left:2px solid rgba(123,155,209,0.4); padding-left:12px;">
+      <a href="index.html" style="font-size: 12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a>
+      <span style="font-size: 12px; color:rgba(255,255,255,0.2);">&#47;</span>
+      <a href="#" style="font-size: 12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none;">Services</a>
+      <span style="font-size: 12px; color:rgba(255,255,255,0.2);">&#47;</span>
+      <span style="font-size: 12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#7B9BD1;">Strategic Services</span>
+    </div>
+
+    <div style="display:flex; gap:48px; align-items:flex-start;">
+      <!-- Vertical accent line -->
+      <div class="hero-accent-line" style="
+        width: 3px;
+        flex-shrink: 0;
+        min-height: 260px;
+        margin-top: 4px;
+        background: linear-gradient(to bottom, #7B9BD1, rgba(123,155,209,0));
+      "></div>
+      <!-- Copy -->
+      <div style="flex:1;">
+        <div style="font-size:13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:20px;">Flexible Strategy · Services</div>
+        <h1 class="font-display" style="
+          font-size: 56px;
+          font-weight: 700;
+          color: #fff;
+          line-height: 1.08;
+          letter-spacing: -0.025em;
+          margin-bottom: 20px;
+          max-width: 700px;
+        ">
+          Applying Strategy in Action to your organisation.
+        </h1>
+        <p style="
+          color: rgba(255,255,255,0.82);
+          font-size: 19px;
+          line-height: 1.7;
+          max-width: 560px;
+          margin-bottom: 16px;
+        ">
+          Strategy in Action (SiA) is Resilient Futures' unique strategy framework —
+          designed for formulating agile strategy and timely responses in our current
+          disruptive environment.
+        </p>
+        <p style="
+          color: rgba(255,255,255,0.6);
+          font-size: 16px;
+          line-height: 1.7;
+          max-width: 520px;
+          margin-bottom: 40px;
+        ">
+          Seven service packages, each a different way to engage with and embed SiA.
+          Every starting point is tailored to your organisation's needs.
+        </p>
+        <div class="hero-meta" style="display:flex; gap:28px; align-items:center; flex-wrap:wrap;">
+          <a href="#services" style="color:rgba(255,255,255,0.35); font-size:13px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">View all services &#8595;</a>
+          <span style="width:1px; height:14px; background:rgba(255,255,255,0.12);"></span>
+          <a href="strategy-in-action.html" style="color:rgba(255,255,255,0.35); font-size:13px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">About the SiA framework &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ INTRO / IDEAL FOR ═══════════════════════════ -->
+<section class="intro-section" style="background: #FAFAF7; padding: 96px 48px;">
+  <div class="section-inner">
+    <div class="intro-grid" style="display: grid; grid-template-columns: 1fr 420px; gap: 72px; align-items: start;">
+
+      <!-- Left: what SiA services are -->
+      <div>
+        <span class="section-label" style="color:#3A5A92;">The Approach</span>
+        <h2 class="font-display" style="
+          font-size: 40px; font-weight: 700; color: #0B1D26;
+          line-height: 1.15; letter-spacing: -0.02em;
+          max-width: 560px; margin-bottom: 24px;
+        ">Every organisation has a unique starting point.</h2>
+
+        <p style="font-size: 18px; line-height: 1.75; color: #1A1A1A; margin-bottom: 20px;">
+          That starting point acts as a 'proof-of-value' project — one that provides you with
+          immediate, implementable outcomes and demonstrates how we work. All of our services
+          are delivered in person and through online facilitation, and come with instructional
+          materials.
+        </p>
+        <p style="font-size: 17px; line-height: 1.75; color: #4a6080; margin-bottom: 20px;">
+          Based on the outcomes of the proof-of-value project, we begin to design a pathway
+          of growth and a program of specific services that will take you toward being able
+          to future-proof your organisation. We do this by packaging services specifically
+          based on your organisation's needs.
+        </p>
+        <p class="font-display" style="font-size: 18px; font-weight: 700; color: #0B1D26; line-height: 1.4; letter-spacing: -0.01em;">
+          Every program is custom made.
+        </p>
+
+        <div style="margin-top: 40px; padding: 28px 32px; background: rgba(11,29,38,0.04); border-left: 3px solid #7B9BD1;">
+          <p style="font-size: 15px; font-weight: 500; line-height: 1.65; color: #0B1D26; margin: 0;">
+            Not sure where to start? A SiA Kick-Start or Hack is typically the right first
+            conversation. It gives your leadership team direct exposure to the framework and
+            creates the clarity needed to design a longer program.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: ideal for -->
+      <div>
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #3A5A92; margin-bottom: 24px;">Ideal for organisations that are</div>
+        <div>
+
+          <div class="ideal-item">
+            <svg class="ideal-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="10" cy="10" r="9" stroke="#7B9BD1" stroke-width="1.5"/>
+              <line x1="10" y1="6" x2="10" y2="10" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="10" cy="13" r="1" fill="#7B9BD1"/>
+            </svg>
+            <p style="font-size: 16px; line-height: 1.6; color: #1A1A1A; margin: 0;">In a current, or perceiving a future state of turbulent change as a result of known or emerging disruptive conditions</p>
+          </div>
+
+          <div class="ideal-item">
+            <svg class="ideal-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="10" cy="10" r="9" stroke="#7B9BD1" stroke-width="1.5"/>
+              <line x1="10" y1="6" x2="10" y2="10" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="10" cy="13" r="1" fill="#7B9BD1"/>
+            </svg>
+            <p style="font-size: 16px; line-height: 1.6; color: #1A1A1A; margin: 0;">Undergoing transformational change</p>
+          </div>
+
+          <div class="ideal-item">
+            <svg class="ideal-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="10" cy="10" r="9" stroke="#7B9BD1" stroke-width="1.5"/>
+              <line x1="10" y1="6" x2="10" y2="10" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="10" cy="13" r="1" fill="#7B9BD1"/>
+            </svg>
+            <p style="font-size: 16px; line-height: 1.6; color: #1A1A1A; margin: 0;">Wanting agile strategy and projects that deliver real outcomes</p>
+          </div>
+
+          <div class="ideal-item">
+            <svg class="ideal-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="10" cy="10" r="9" stroke="#7B9BD1" stroke-width="1.5"/>
+              <line x1="10" y1="6" x2="10" y2="10" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="10" cy="13" r="1" fill="#7B9BD1"/>
+            </svg>
+            <p style="font-size: 16px; line-height: 1.6; color: #1A1A1A; margin: 0;">Seeking to innovate without a clear strategic framing for that work</p>
+          </div>
+
+          <div class="ideal-item">
+            <svg class="ideal-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="10" cy="10" r="9" stroke="#7B9BD1" stroke-width="1.5"/>
+              <line x1="10" y1="6" x2="10" y2="10" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="10" cy="13" r="1" fill="#7B9BD1"/>
+            </svg>
+            <p style="font-size: 16px; line-height: 1.6; color: #1A1A1A; margin: 0;">Valuing customer-centric transformation</p>
+          </div>
+
+          <div class="ideal-item">
+            <svg class="ideal-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="10" cy="10" r="9" stroke="#7B9BD1" stroke-width="1.5"/>
+              <line x1="10" y1="6" x2="10" y2="10" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="10" cy="13" r="1" fill="#7B9BD1"/>
+            </svg>
+            <p style="font-size: 16px; line-height: 1.6; color: #1A1A1A; margin: 0;">Hit by a major change and needing immediate action</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ SERVICES GRID ═══════════════════════════ -->
+<section id="services" class="services-section" style="background: #F0F4F8; padding: 96px 48px;">
+  <div class="section-inner">
+    <span class="section-label section-label--light">Service Packages</span>
+    <h2 class="font-display" style="
+      font-size: 43px; font-weight: 700; color: #0B1D26;
+      line-height: 1.15; letter-spacing: -0.02em;
+      max-width: 700px; margin-bottom: 12px;
+    ">Seven ways to engage with Strategy in Action.</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #4a6080; max-width: 620px; margin-bottom: 56px;">
+      From a three-hour orientation to a full organisational embedding program. Each service
+      is a distinct engagement — and each can serve as the proof-of-value starting point
+      for a broader program.
+    </p>
+
+    <div class="services-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(11,29,38,0.1);">
+
+      <!-- SiA Kick-Start -->
+      <div class="service-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div>
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:8px;">01</div>
+            <h3 class="font-display" style="font-size:26px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em;">SiA Kick-Start</h3>
+          </div>
+          <span class="duration-tag">3-hour session</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          An excellent place to start strategy work. You'll get an understanding of disruption
+          and be introduced to Strategy in Action as a framework that enables organisations
+          to embrace and take advantage of disruption. Participants typically wake up to the
+          reality that different thinking and action really is required.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
+          Well suited to ensuring your executive team, leadership group, or team is aligned
+          on the need for a new approach to strategy formulation and implementation.
+        </p>
+      </div>
+
+      <!-- SiA Hack -->
+      <div class="service-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div>
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:8px;">02</div>
+            <h3 class="font-display" style="font-size:26px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em;">SiA Hack</h3>
+          </div>
+          <span class="duration-tag">1 day</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          A dynamic one-day application of Strategy in Action for organisations that need
+          to crack open a problem and rapidly find solutions or progress opportunities.
+          A hands-on execution that exposes participants to the framework while quickly
+          hacking through to key actions and delivering definite viable pathways forward.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
+          Works well for teams seeking to expose, evaluate, and prioritise a range of options,
+          or for those seeking to unclog a blockage in an existing project or program.
+        </p>
+      </div>
+
+      <!-- SiA Project -->
+      <div class="service-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div>
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:8px;">03</div>
+            <h3 class="font-display" style="font-size:26px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em;">SiA Project</h3>
+          </div>
+          <span class="duration-tag">3 × ½-day</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          Teaches you the basics of Strategy in Action by focussing on a project that is
+          in formulation, being planned, or already underway. This project-based approach
+          ensures you'll learn and apply the framework to an area of immediate focus —
+          enabling you to learn the concepts while enhancing the delivery of work already
+          underway.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
+          Can also be used to sense-check the focus and validity of projects that are not
+          gaining traction or delivering expected results.
+        </p>
+      </div>
+
+      <!-- SiA Accelerator -->
+      <div class="service-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div>
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:8px;">04</div>
+            <h3 class="font-display" style="font-size:26px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em;">SiA Accelerator</h3>
+          </div>
+          <span class="duration-tag">6 × ½-day</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          Provides in-depth working knowledge of Strategy in Action through a
+          learning-in-action approach. Participants apply SiA across six workshops to
+          analyse immediate and emergent conditions, assess strategic opportunity-risks,
+          and validate opportunities as part of making a case about where to focus.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
+          Ideal for organisations seeking to build, empower, and connect genuine strategic
+          capability at all levels — helping embed strategic agility as a skill that can
+          be passed on throughout the broader organisation.
+        </p>
+      </div>
+
+      <!-- SiA Facilitation -->
+      <div class="service-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div>
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:8px;">05</div>
+            <h3 class="font-display" style="font-size:26px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em;">SiA Facilitation</h3>
+          </div>
+          <span class="duration-tag">Custom program</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          A facilitated formulation of strategy through the application of SiA, supporting
+          the activation of a refreshed strategic focus. You are guided through the analysis
+          of conditions and the identification of strategic opportunity-risks (SORs) —
+          then validated against an existing strategy or used to chart a new strategic
+          direction.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
+          Resilient Futures also acts as an objective observer throughout, providing
+          feedback and critique on the quality of thinking and outputs driving the
+          strategic focus.
+        </p>
+      </div>
+
+      <!-- Capability Analysis and Mapping -->
+      <div class="service-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div>
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:8px;">06</div>
+            <h3 class="font-display" style="font-size:26px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em;">Capability Analysis and Mapping</h3>
+          </div>
+          <span class="duration-tag">Custom program</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          Determines which future-focused capabilities need to be developed or acquired,
+          and which current capabilities need to be retired. These decisions are best made
+          when an organisation clearly understands both its current capabilities and future
+          requirements. Resilient Futures coaches and supports you to develop internal
+          competence to map and analyse capability.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
+          Perfect for organisations looking to speed up processes, break through silos,
+          identify and free up blockages, and unlock new value.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- SiA Embedding — full-width featured card -->
+    <div style="margin-top:2px; background:#0B1D26; padding:48px 48px 48px; border-top:3px solid #7B9BD1; display:grid; grid-template-columns:1fr 360px; gap:48px; align-items:center;">
+      <div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:8px;">07</div>
+        <h3 class="font-display" style="font-size:30px; font-weight:700; color:#fff; line-height:1.15; letter-spacing:-0.02em; margin-bottom:20px;">SiA Embedding</h3>
+        <p style="font-size:17px; line-height:1.75; color:rgba(255,255,255,0.78); margin-bottom:16px;">
+          A customised approach to developing and embedding the capability needed for
+          SiA to be implemented within an organisation at all key levels. While a specific
+          approach and program can be designed to support your organisation's particular
+          requirements, it is often best to start with a SiA Hack accelerator to develop
+          an insight into how SiA is applied.
+        </p>
+        <p style="font-size:16px; line-height:1.7; color:rgba(255,255,255,0.55);">
+          SiA Embedding works best for organisations seeking to reframe and refocus their
+          core approach to business operations — building strategic capability that endures
+          at every level.
+        </p>
+      </div>
+      <div style="border-left:1px solid rgba(255,255,255,0.1); padding-left:48px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:20px;">The full embedding includes</div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            <span style="font-size:15px; color:rgba(255,255,255,0.72);">Process development</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            <span style="font-size:15px; color:rgba(255,255,255,0.72);">Team establishment</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            <span style="font-size:15px; color:rgba(255,255,255,0.72);">Team leadership development</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            <span style="font-size:15px; color:rgba(255,255,255,0.72);">Team training</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            <span style="font-size:15px; color:rgba(255,255,255,0.72);">Building competency, capacity, and commitment</span>
+          </div>
+        </div>
+        <div style="margin-top:24px; padding:1px; background: rgba(123,155,209,0.15);">
+          <p style="font-size:13px; font-style:italic; line-height:1.6; color:rgba(255,255,255,0.5); padding:16px; margin:0;">
+            Enables your organisation to authentically empower people at all levels to
+            engage with the strategic focus of the business.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PATHWAY CONTEXT ═══════════════════════════ -->
+<section style="background: #FAFAF7; padding: 96px 48px;">
+  <div class="section-inner">
+    <span class="section-label" style="color:#3A5A92;">Your Pathway</span>
+    <h2 class="font-display" style="
+      font-size: 43px; font-weight: 700; color: #0B1D26;
+      line-height: 1.15; letter-spacing: -0.02em;
+      max-width: 680px; margin-bottom: 16px;
+    ">Making disruption work for you.</h2>
+    <p style="font-size: 18px; line-height: 1.75; color: #4a6080; max-width: 680px; margin-bottom: 56px;">
+      The services above are not a sequential program. They are a portfolio of capabilities —
+      each addressable at any point, each capable of serving as a proof-of-value starting point.
+      The pathway that's right for your organisation emerges from understanding where you are now.
+    </p>
+
+    <div class="pathway-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(11,29,38,0.1);">
+
+      <div style="background: #fff; padding: 36px 32px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:20px;">Orientation</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Get aligned on the need</div>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0 0 20px;">
+          Build shared understanding of what disruption means for your organisation
+          and why a different strategic approach is required.
+        </p>
+        <div style="font-size:13px; font-weight:600; color:#3A5A92;">SiA Kick-Start · SiA Hack</div>
+      </div>
+
+      <div style="background: #fff; padding: 36px 32px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:20px;">Application</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Apply it to real work</div>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0 0 20px;">
+          Apply Strategy in Action to a live project, strategic challenge, or the full
+          formulation of your organisation's strategic direction.
+        </p>
+        <div style="font-size:13px; font-weight:600; color:#3A5A92;">SiA Project · SiA Accelerator · SiA Facilitation</div>
+      </div>
+
+      <div style="background: #fff; padding: 36px 32px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:20px;">Integration</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Build lasting capability</div>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0 0 20px;">
+          Embed Strategy in Action as a living practice within the organisation — not
+          dependent on external support, but owned by your people at every level.
+        </p>
+        <div style="font-size:13px; font-weight:600; color:#3A5A92;">Capability Analysis &amp; Mapping · SiA Embedding</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CTA ═══════════════════════════ -->
+<section class="cta-section" style="
+  background: linear-gradient(135deg, #0B1D26 0%, #0B1D26 100%);
+  padding: 96px 48px;
+  text-align: center;
+  position: relative; overflow: hidden;
+">
+  <div style="
+    position:absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    width:600px; height:600px; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,155,209,0.08) 0%, transparent 60%);
+    pointer-events:none;
+  "></div>
+  <div style="position:relative; z-index:1;">
+    <h2 class="font-display" style="
+      font-size: 47px; font-weight: 700; color: #fff;
+      line-height: 1.15; letter-spacing: -0.02em;
+      max-width: 560px; margin: 0 auto 16px;
+    ">Find your starting point.</h2>
+    <p style="
+      font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.78);
+      max-width: 480px; margin: 0 auto 16px;
+    ">
+      A short conversation with Larry or David will identify which SiA service is the
+      right proof-of-value starting point for your organisation.
+    </p>
+    <p style="font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.5); max-width: 480px; margin: 0 auto 40px;">
+      No commitment required. Just a genuine conversation about where your organisation
+      is and what the right next step looks like.
+    </p>
+    <a href="getstarted.html" class="btn-primary" style="font-size: 15px; padding: 16px 40px;">
+      Book a Conversation
+    </a>
+    <div style="margin-top:32px; display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:4px;">Phone</div>
+        <div style="font-size:15px; color:rgba(255,255,255,0.65);">+61 390 218 970</div>
+      </div>
+      <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:4px;">Email</div>
+        <a href="mailto:services@resilientfutures.com" style="font-size:15px; color:rgba(255,255,255,0.65); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">services@resilientfutures.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ EXPLORE FURTHER ═══════════════════════════ -->
+<section class="explore-strip" style="background: #EEF2F9; padding: 64px 48px; border-top: 1px solid rgba(11,29,38,0.08);">
+  <div class="section-inner">
+    <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(11,29,38,0.55); margin-bottom: 32px;">Explore further</p>
+    <div class="explore-cards" style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <a href="strategy-in-action.html" class="explore-card">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7B9BD1; margin-bottom: 14px;">The Framework</div>
+        <div class="font-display" style="font-size: 25px; font-weight: 700; color: #0B1D26; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Strategy in Action</div>
+        <p style="font-size: 15px; line-height: 1.6; color: #4a6080; margin: 0 0 20px; flex: 1;">The five interconnected standards that make up the SiA decision-making system — and the philosophy behind it.</p>
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #7B9BD1;">Explore the framework &rarr;</span>
+      </a>
+      <a href="strategic-fitness.html" class="explore-card explore-card--dim">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(123,155,209,0.65); margin-bottom: 14px;">Services</div>
+        <div class="font-display" style="font-size: 25px; font-weight: 700; color: #0B1D26; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Strategic Fitness</div>
+        <p style="font-size: 15px; line-height: 1.6; color: #4a6080; margin: 0 0 20px; flex: 1;">Diagnostic programs that test and maintain your organisation's readiness to take advantage of disruption.</p>
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(123,155,209,0.65);">Explore services &rarr;</span>
+      </a>
+      <a href="leadership-building.html" class="explore-card explore-card--dim">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(123,155,209,0.65); margin-bottom: 14px;">Services</div>
+        <div class="font-display" style="font-size: 25px; font-weight: 700; color: #0B1D26; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Leadership Building</div>
+        <p style="font-size: 15px; line-height: 1.6; color: #4a6080; margin: 0 0 20px; flex: 1;">Programs for empowering people and embedding disruption-ready capability within your organisation.</p>
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(123,155,209,0.65);">Explore services &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer style="background: #060f14; border-top: 1px solid rgba(255,255,255,0.06);">
+
+  <div style="padding: 40px 48px 28px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px;">
+
+    <a href="index.html" class="nav-logo-link">
+      <img src="brand_assets/Resilient Futures LOGOS (4).png" alt="Resilient Futures" style="height:32px; width:auto; display:block; opacity:0.9;">
+    </a>
+
+    <div style="display: flex; gap: 48px; flex-wrap: wrap;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">About</span>
+        <a href="why.html" class="nav-link">Why Resilient Futures</a>
+        <a href="strategy-in-action.html" class="nav-link">Strategy in Action</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">Services</span>
+        <a href="strategic-services.html" class="nav-link">Strategic Services</a>
+        <a href="strategic-fitness.html" class="nav-link">Strategic Fitness</a>
+        <a href="leadership-building.html" class="nav-link">Leadership Building</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">Contact</span>
+        <a href="mailto:services@resilientfutures.com" class="nav-link">Get In Touch</a>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <a href="#" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="#" aria-label="X (Twitter)" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="#" aria-label="Facebook" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div style="padding: 20px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+    <p style="font-size: 13px; color: rgba(255,255,255,0.45); margin: 0;">
+      Resilient Futures &copy; 2026 &middot; All rights reserved
+    </p>
+    <p style="font-size: 13px; color: rgba(255,255,255,0.38); margin: 0;">
+      Strategy for a world that won&rsquo;t hold still
+    </p>
+  </div>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,292 @@
+/* ─────────────────────────────────────────────────────────────
+   Resilient Futures — Colour & Type Tokens
+   Palette: "Sienna" — deep warm earth + coral action + blue-green trust
+   Typography: Playfair Display (headings) + Inter (body/UI)
+   ───────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ── PRIMARY PALETTE (Sienna) ───────────────────────────── */
+  --rf-primary:     #361F1D; /* Deep warm brown — navs, heroes, footer bg, primary headings */
+  --rf-accent:      #743734; /* Brick — sub-headings, hover states, pull quotes */
+  --rf-highlight:   #FF6139; /* Coral-orange — CTAs, +, section labels, key metrics */
+
+  /* Deeper ambient tones used in gradients */
+  --rf-primary-deep:    #2a1816; /* Hero gradient start, footer deep */
+  --rf-primary-mid:     #4a2826; /* Hero gradient end, service card hover */
+  --rf-footer-bg:       #1a0f0e; /* Deep footer */
+  --rf-card-dark:       #2d1a18; /* Card on dark sections */
+
+  /* ── SECONDARY PALETTE ──────────────────────────────────── */
+  --rf-secondary:   #A1CACC; /* Blue-green — trust signals, secondary labels on dark */
+  --rf-background:  #F5F5ED; /* Warm off-white page bg */
+  --rf-background-alt: #EFEFE7; /* Slightly deeper off-white for strips */
+  --rf-white:       #FFFFFF;
+
+  /* ── TEXT COLOURS ───────────────────────────────────────── */
+  --rf-body:        #1A1A1A; /* Primary body copy */
+  --rf-mid-grey:    #6B5350; /* Secondary / captions (warm grey) */
+  --rf-light-grey:  #D8D0C8; /* Borders, dividers */
+
+  /* Alpha tints (white on dark, dark on light) */
+  --rf-on-dark-90:  rgba(255,255,255,0.90);
+  --rf-on-dark-70:  rgba(255,255,255,0.70);
+  --rf-on-dark-55:  rgba(255,255,255,0.55);
+  --rf-on-dark-45:  rgba(255,255,255,0.45);
+  --rf-on-dark-30:  rgba(255,255,255,0.30);
+
+  /* ── SEMANTIC TOKENS ────────────────────────────────────── */
+  --rf-fg:          var(--rf-body);
+  --rf-fg-muted:    var(--rf-mid-grey);
+  --rf-bg:          var(--rf-background);
+  --rf-bg-surface:  var(--rf-white);
+  --rf-bg-inverse:  var(--rf-primary);
+  --rf-border:      var(--rf-light-grey);
+  --rf-action:      var(--rf-highlight);
+
+  /* ── TYPOGRAPHY STACKS ──────────────────────────────────── */
+  --rf-font-display: 'Playfair Display', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --rf-font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* ── TYPE SCALE (desktop) ───────────────────────────────── */
+  /* Weights: display 700 / 400; body 300, 400, 500, 600 */
+  --rf-display-size:   52px;  /* Hero H1 */
+  --rf-h1-size:        42px;  /* Page title */
+  --rf-h2-size:        38px;  /* Section */
+  --rf-h3-size:        28px;  /* Sub-section */
+  --rf-h4-size:        22px;  /* Card title */
+  --rf-lead-size:      17px;  /* Lead / intro paragraph */
+  --rf-body-size:      15px;  /* Body copy */
+  --rf-small-size:     13px;  /* Secondary body */
+  --rf-caption-size:   11px;  /* Captions, eyebrows */
+  --rf-label-size:     10px;  /* ALL CAPS section labels */
+
+  /* Line heights */
+  --rf-lh-body:    1.7;
+  --rf-lh-heading: 1.15;
+  --rf-lh-tight:   1.08;
+  --rf-lh-caption: 1.4;
+
+  /* Tracking */
+  --rf-tracking-display:  -0.025em;
+  --rf-tracking-heading:  -0.02em;
+  --rf-tracking-tight:   -0.01em;
+  --rf-tracking-label:    0.14em;  /* Section labels, uppercase small */
+  --rf-tracking-mini:     0.1em;   /* Numbered 01, 02 tags */
+
+  /* ── SPACING SCALE ──────────────────────────────────────── */
+  /* 4px base grid, intentional steps */
+  --rf-space-1:   4px;
+  --rf-space-2:   8px;
+  --rf-space-3:  12px;
+  --rf-space-4:  16px;
+  --rf-space-5:  20px;
+  --rf-space-6:  24px;
+  --rf-space-8:  32px;
+  --rf-space-10: 40px;
+  --rf-space-12: 48px;
+  --rf-space-16: 64px;
+  --rf-space-20: 80px;
+  --rf-space-24: 96px;  /* Section vertical padding on desktop */
+
+  /* ── RADII ──────────────────────────────────────────────── */
+  /* Brand is angular. Corners are deliberately hard. */
+  --rf-radius-0:  0;       /* DEFAULT. Cards, buttons, chips — no rounding. */
+  --rf-radius-sm: 3px;     /* Rare — tiny pills only */
+  --rf-radius-full: 9999px;/* Avatar monograms, social icons */
+
+  /* ── BORDERS ────────────────────────────────────────────── */
+  --rf-border-accent:  3px solid var(--rf-highlight); /* Top accent on cards, pull-quote left border */
+  --rf-border-accent-dim: 3px solid rgba(255,97,57,0.3);
+  --rf-divider-light:  1px solid var(--rf-light-grey);
+  --rf-divider-dark:   1px solid rgba(255,255,255,0.08);
+
+  /* ── SHADOWS ────────────────────────────────────────────── */
+  /* Subtle warm-toned shadow, not flat grey */
+  --rf-shadow-card:    0 4px 24px rgba(54,31,29,0.06);
+  --rf-shadow-hover:   0 8px 32px rgba(54,31,29,0.12);
+  --rf-shadow-ring:    0 0 0 4px rgba(161,202,204,0.06); /* ring on dark surfaces */
+
+  /* ── MOTION ─────────────────────────────────────────────── */
+  --rf-transition-fast: 0.15s;
+  --rf-transition:      0.2s;
+  --rf-ease:            ease;
+
+  /* ── LAYOUT ─────────────────────────────────────────────── */
+  --rf-container:      1100px;
+  --rf-section-pad-x:  48px;  /* Desktop horizontal section padding */
+  --rf-section-pad-y:  96px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BASE ELEMENT STYLES
+   ───────────────────────────────────────────────────────────── */
+body {
+  font-family: var(--rf-font-body);
+  font-size: var(--rf-body-size);
+  line-height: var(--rf-lh-body);
+  color: var(--rf-body);
+  background: var(--rf-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings — sentence case. Never Title Case. */
+h1, h2, h3, h4 {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  color: var(--rf-primary);
+  line-height: var(--rf-lh-heading);
+  letter-spacing: var(--rf-tracking-heading);
+}
+h1 { font-size: var(--rf-h1-size); letter-spacing: var(--rf-tracking-display); line-height: var(--rf-lh-tight); }
+h2 { font-size: var(--rf-h2-size); }
+h3 { font-size: var(--rf-h3-size); }
+h4 { font-size: var(--rf-h4-size); color: var(--rf-accent); } /* H4 shifts to accent brick */
+
+p  { font-size: var(--rf-body-size); line-height: var(--rf-lh-body); color: var(--rf-body); }
+
+em, i { font-style: italic; }
+strong, b { font-weight: 600; color: inherit; }
+
+hr {
+  border: 0;
+  border-top: var(--rf-divider-light);
+  margin: var(--rf-space-8) 0;
+}
+
+/* Links are coral when they're actions; brick when inline in body */
+a { color: var(--rf-accent); text-decoration: underline; text-underline-offset: 3px; }
+a:hover { color: var(--rf-highlight); }
+
+/* ─────────────────────────────────────────────────────────────
+   UTILITY / SEMANTIC CLASSES
+   ───────────────────────────────────────────────────────────── */
+
+/* Display hero headline — Playfair 52px, tight leading */
+.rf-display {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: var(--rf-display-size);
+  line-height: var(--rf-lh-tight);
+  letter-spacing: var(--rf-tracking-display);
+  color: var(--rf-primary);
+}
+
+/* Eyebrow / section label — ALL CAPS, coral, tracked */
+.rf-label {
+  font-family: var(--rf-font-body);
+  font-size: var(--rf-caption-size);
+  font-weight: 600;
+  letter-spacing: var(--rf-tracking-label);
+  text-transform: uppercase;
+  color: var(--rf-highlight);
+  display: inline-block;
+}
+.rf-label--light { color: var(--rf-secondary); } /* On dark surfaces, use blue-green */
+
+/* Lead / intro paragraph — slightly larger, often italic Playfair */
+.rf-lead {
+  font-family: var(--rf-font-display);
+  font-size: var(--rf-lead-size);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--rf-accent);
+}
+
+/* Body / caption utility */
+.rf-body { font-size: var(--rf-body-size); line-height: var(--rf-lh-body); color: var(--rf-body); }
+.rf-body-muted { color: var(--rf-mid-grey); }
+.rf-caption {
+  font-size: var(--rf-caption-size);
+  color: var(--rf-mid-grey);
+  line-height: var(--rf-lh-caption);
+  letter-spacing: 0.02em;
+}
+
+/* Small numeric/alpha label: "01", "02" used inside cards */
+.rf-mini-num {
+  font-family: var(--rf-font-body);
+  font-size: var(--rf-label-size);
+  font-weight: 700;
+  letter-spacing: var(--rf-tracking-mini);
+  color: var(--rf-highlight);
+}
+
+/* Pull quote — left coral rule, warm off-white tint */
+.rf-pullquote {
+  border-left: var(--rf-border-accent);
+  padding: var(--rf-space-5) var(--rf-space-8);
+  background: rgba(54,31,29,0.04);
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--rf-primary);
+}
+
+/* Surfaces */
+.rf-surface-light    { background: var(--rf-background); color: var(--rf-body); }
+.rf-surface-lighter  { background: var(--rf-background-alt); color: var(--rf-body); }
+.rf-surface-card     { background: var(--rf-white); color: var(--rf-body); }
+.rf-surface-dark     { background: var(--rf-primary); color: var(--rf-on-dark-70); }
+.rf-surface-deep     { background: var(--rf-primary-deep); color: var(--rf-on-dark-70); }
+
+/* Coral action button — hard corners, small uppercase */
+.rf-btn-primary {
+  display: inline-block;
+  background: var(--rf-highlight);
+  color: var(--rf-white);
+  font-family: var(--rf-font-body);
+  font-size: var(--rf-caption-size);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--rf-radius-0);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--rf-transition);
+}
+.rf-btn-primary:hover  { opacity: 0.88; color: var(--rf-white); }
+.rf-btn-primary:active { transform: translateY(1px); }
+.rf-btn-primary:focus-visible { outline: 2px solid var(--rf-highlight); outline-offset: 3px; }
+
+.rf-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--rf-on-dark-45);
+  font-size: var(--rf-small-size);
+  font-weight: 400;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--rf-transition);
+}
+.rf-btn-ghost:hover { color: var(--rf-on-dark-70); }
+
+/* Card with coral top rule — the signature container */
+.rf-card {
+  background: var(--rf-white);
+  border-top: var(--rf-border-accent);
+  padding: 24px 20px;
+}
+.rf-card--dim { border-top-color: rgba(255,97,57,0.3); }
+
+/* Responsive type (mobile) */
+@media (max-width: 767px) {
+  :root {
+    --rf-display-size: 32px;
+    --rf-h1-size: 28px;
+    --rf-h2-size: 26px;
+    --rf-h3-size: 22px;
+    --rf-section-pad-x: 24px;
+    --rf-section-pad-y: 64px;
+  }
+}
