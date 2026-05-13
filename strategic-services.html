@@ -31,24 +31,46 @@
       margin-bottom: 20px;
     }
     .section-label--light { color: #7B9BD1; }
-    .btn-primary {
-      display: inline-block;
-      background: #7B9BD1;
-      color: #0B1D26;
+    /* ── Button system ── */
+    .btn-primary,
+    .btn-primary--inverse,
+    .btn-secondary,
+    .btn-secondary--dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       font-family: 'Nunito Sans', sans-serif;
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 600;
       letter-spacing: 0.07em;
       text-transform: uppercase;
       padding: 14px 28px;
-      border: none;
+      border: 1.5px solid transparent;
+      border-radius: 0;
       cursor: pointer;
       text-decoration: none;
-      transition: opacity 0.2s;
+      line-height: 1;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
     }
-    .btn-primary:hover { opacity: 0.88; }
-    .btn-primary:focus-visible { outline: 2px solid #7B9BD1; outline-offset: 3px; }
-    .btn-primary:active { transform: translateY(1px); }
+    .btn-primary:active,
+    .btn-primary--inverse:active,
+    .btn-secondary:active,
+    .btn-secondary--dark:active { transform: translateY(1px); }
+    .btn-primary { background: #7B9BD1; border-color: #7B9BD1; color: #fff; }
+    .btn-primary:hover { background: #6889bf; border-color: #6889bf; }
+    .btn-primary:focus-visible { outline: 3px solid #7B9BD1; outline-offset: 3px; box-shadow: 0 0 0 5px rgba(123,155,209,0.25); }
+    .btn-primary--inverse { background: #fff; border-color: #fff; color: #0B1D26; }
+    .btn-primary--inverse:hover { background: #EEF2F9; border-color: #EEF2F9; }
+    .btn-primary--inverse:focus-visible { outline: 3px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 5px rgba(255,255,255,0.3); }
+    .btn-secondary { background: transparent; border-color: rgba(255,255,255,0.45); color: #fff; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.9); }
+    .btn-secondary:focus-visible { outline: 2px solid rgba(255,255,255,0.85); outline-offset: 3px; }
+    .btn-secondary--dark { background: transparent; border-color: rgba(30,53,96,0.4); color: #1E3560; }
+    .btn-secondary--dark:hover { background: rgba(30,53,96,0.05); border-color: #1E3560; }
+    .btn-secondary--dark:focus-visible { outline: 2px solid #1E3560; outline-offset: 3px; }
+    .btn--sm { padding: 9px 20px; font-size: 12px; }
+    .btn--lg { padding: 16px 40px; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .nav-link {
       color: rgba(255,255,255,0.72);
@@ -228,7 +250,7 @@
         <a href="leadership-building.html" class="nav-dropdown-item">Leadership Building</a>
       </div>
     </div>
-    <a href="contact.html" class="btn-primary" style="padding:8px 20px; font-size: 12px; margin-left:16px;">Get in touch</a>
+    <a href="contact.html" class="btn-primary btn--sm" style="margin-left:16px;">Get in touch</a>
   </div>
   <script>
     document.querySelectorAll('.nav-dropdown-trigger').forEach(btn => {
@@ -723,9 +745,7 @@
       No commitment required. Just a genuine conversation about where your organisation
       is and what the right next step looks like.
     </p>
-    <a href="contact.html" class="btn-primary" style="font-size: 15px; padding: 16px 40px;">
-      Book a Conversation
-    </a>
+    <a href="contact.html" class="btn-primary btn--lg">Book a Conversation</a>
     <div style="margin-top:32px; display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
       <div style="text-align:center;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:4px;">Phone</div>
