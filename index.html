@@ -551,21 +551,35 @@
 
 <!-- ═══════════════════════════ PULL QUOTE ═══════════════════════════ -->
 <div style="background:#0B1D26; padding:88px 48px;">
-  <div style="max-width:780px; margin:0 auto;">
-    <div style="
-      font-family:'Cormorant Garamond',serif;
-      font-size:96px; line-height:0.75;
-      color:#7B9BD1; opacity:0.5;
-      margin-bottom:28px;
-    ">&ldquo;</div>
-    <p class="font-display" style="
-      font-size:30px; font-weight:400; font-style:italic;
-      color:#fff; line-height:1.45; letter-spacing:-0.01em;
-      margin:0 0 32px;
-    ">The most dangerous place any organisation can be is confidently executing a strategy that is no longer aligned to reality.</p>
-    <p style="font-size:13px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#7B9BD1; margin:0;">David Platt &mdash; Resilient Futures</p>
+  <div class="pull-quote-grid" style="max-width:920px; margin:0 auto; display:grid; grid-template-columns:auto 1fr; gap:56px; align-items:center;">
+    <div style="flex-shrink:0;">
+      <div style="
+        width:148px; height:148px; border-radius:50%;
+        border:1px solid rgba(123,155,209,0.25);
+        box-shadow:0 0 0 6px rgba(123,155,209,0.06);
+        overflow:hidden;
+      "><img src="brand_assets/David.png" alt="David Platt" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+    </div>
+    <div>
+      <p class="font-display" style="
+        font-size:30px; font-weight:400; font-style:italic;
+        color:#fff; line-height:1.45; letter-spacing:-0.01em;
+        margin:0 0 24px;
+      ">&ldquo;The most dangerous place any organisation can be is confidently executing a strategy that is no longer aligned to reality.&rdquo;</p>
+      <p style="font-size:13px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#7B9BD1; margin:0;">David Platt &middot; Resilient Futures</p>
+    </div>
   </div>
 </div>
+<style>
+  @media (max-width: 767px) {
+    .pull-quote-grid {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+      text-align: left;
+    }
+    .pull-quote-grid > div:first-child { justify-self: start; }
+  }
+</style>
 
 <!-- ════════════════════════ WHY DIFFERENT ════════════════════════ -->
 <section id="why-different" style="background:#FFFFFF; padding:96px 48px;">
@@ -851,7 +865,7 @@
         &ldquo;Our role is to work alongside your leadership team &mdash; bringing the thinking, challenging the assumptions, and transferring the tools &mdash; so your organisation builds real strategic capability over time. <span style="color:#3A5A92;">Not dependency.&rdquo;</span>
       </p>
       <p style="font-size: 13px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#5a6a7a; margin:0;">
-        &mdash; David Platt, Resilient Futures
+        David Platt &middot; Resilient Futures
       </p>
     </div>
 
@@ -872,30 +886,34 @@
         background:#fff; padding:36px;
         border-left:3px solid #3A5A92;
         box-shadow: 0 4px 24px rgba(11,29,38,0.06);
+        display:flex; flex-direction:column;
       ">
         <p class="font-display" style="
           font-size: 19px; color:#0B1D26;
           line-height:1.55; font-style:italic;
-          margin-bottom:20px;
+          margin-bottom:20px; flex:0 0 auto;
         ">&ldquo;My personal trajectory has been exponential&hellip; I went to a strategic planning day yesterday and it was the most frustrating day, and I kept thinking, you people have got no idea.&rdquo;</p>
         <p style="
           font-size: 15px; font-weight:600; letter-spacing:0.06em;
           text-transform:uppercase; color:#4a6080;
-        ">Debra Cerasa, CEO &middot; Amplify Alliance (2025)</p>
+          margin-top:auto; margin-bottom:0;
+        ">Debra Cerasa, CEO &middot; Amplify Alliance</p>
       </div>
       <div style="
         background:#fff; padding:36px;
         border-left:3px solid #3A5A92;
         box-shadow: 0 4px 24px rgba(11,29,38,0.06);
+        display:flex; flex-direction:column;
       ">
         <p class="font-display" style="
           font-size: 19px; color:#0B1D26;
           line-height:1.55; font-style:italic;
-          margin-bottom:20px;
+          margin-bottom:20px; flex:0 0 auto;
         ">&ldquo;Turns strategy from being a static, elitist, esoteric discipline into a simple way of working for everyone in an organisation.&rdquo;</p>
         <p style="
           font-size: 15px; font-weight:600; letter-spacing:0.06em;
           text-transform:uppercase; color:#4a6080;
+          margin-top:auto; margin-bottom:0;
         ">Ron Ferdinands &middot; ThinkAhead Consulting</p>
       </div>
     </div>
