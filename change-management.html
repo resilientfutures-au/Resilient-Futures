@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategy Execution and Change Management — Resilient Futures</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #1A1A1A;
+      background: #0B1D26;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-display { font-family: 'Nunito Sans', sans-serif; }
+    .section-label {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7B9BD1;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .section-label--light { color: #7B9BD1; }
+    /* ── Button system ── */
+    .btn-primary,
+    .btn-primary--inverse,
+    .btn-secondary,
+    .btn-secondary--dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border: 1.5px solid transparent;
+      border-radius: 0;
+      cursor: pointer;
+      text-decoration: none;
+      line-height: 1;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-primary:active,
+    .btn-primary--inverse:active,
+    .btn-secondary:active,
+    .btn-secondary--dark:active { transform: translateY(1px); }
+    .btn-primary { background: #7B9BD1; border-color: #7B9BD1; color: #fff; }
+    .btn-primary:hover { background: #6889bf; border-color: #6889bf; }
+    .btn-primary:focus-visible { outline: 3px solid #7B9BD1; outline-offset: 3px; box-shadow: 0 0 0 5px rgba(123,155,209,0.25); }
+    .btn-primary--inverse { background: #fff; border-color: #fff; color: #0B1D26; }
+    .btn-primary--inverse:hover { background: #EEF2F9; border-color: #EEF2F9; }
+    .btn-primary--inverse:focus-visible { outline: 3px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 5px rgba(255,255,255,0.3); }
+    .btn-secondary { background: transparent; border-color: rgba(255,255,255,0.45); color: #fff; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.9); }
+    .btn-secondary:focus-visible { outline: 2px solid rgba(255,255,255,0.85); outline-offset: 3px; }
+    .btn-secondary--dark { background: transparent; border-color: rgba(30,53,96,0.4); color: #1E3560; }
+    .btn-secondary--dark:hover { background: rgba(30,53,96,0.05); border-color: #1E3560; }
+    .btn-secondary--dark:focus-visible { outline: 2px solid #1E3560; outline-offset: 3px; }
+    .btn--sm { padding: 9px 20px; font-size: 12px; }
+    .btn--lg { padding: 16px 40px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .nav-link {
+      color: rgba(255,255,255,0.72);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: rgba(255,255,255,0.9); }
+    .nav-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; color: rgba(255,255,255,0.9); }
+    .nav-link:active { color: #fff; }
+    .nav-link--active { color: rgba(255,255,255,0.9) !important; }
+    .nav-logo-link { text-decoration: none; transition: opacity 0.2s; }
+    .nav-logo-link:hover { opacity: 0.8; }
+    .nav-logo-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; }
+    /* Dropdown */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.72); font-size: 15px; font-weight: 500;
+      font-family: 'Nunito Sans', sans-serif; text-decoration: none;
+      transition: color 0.2s; display: flex; align-items: center; gap: 4px;
+      padding: 4px 8px;
+    }
+    .nav-dropdown-trigger:hover { color: rgba(255,255,255,0.9); }
+    .nav-caret { font-size: 12px; opacity: 1; transition: transform 0.15s; display: inline-block; }
+    .nav-dropdown.open .nav-caret { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+      background: #0d2535; border: 1px solid rgba(255,255,255,0.08);
+      min-width: 220px; padding: 6px 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .nav-dropdown.open .nav-dropdown-menu {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-item {
+      display: block; padding: 9px 20px;
+      color: rgba(255,255,255,0.80); font-size: 15px; font-weight: 400;
+      text-decoration: none; transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+
+    /* Engagement cards */
+    .engagement-card {
+      background: #fff;
+      padding: 40px;
+      border-top: 3px solid #7B9BD1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: box-shadow 0.2s;
+    }
+    .engagement-card:hover { box-shadow: 0 8px 40px rgba(11,29,38,0.10); }
+    .engagement-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3A5A92;
+      background: rgba(58,90,146,0.08);
+      border: 1px solid rgba(58,90,146,0.18);
+      padding: 4px 10px;
+      border-radius: 2px;
+      width: fit-content;
+    }
+    .engagement-tag--accent {
+      color: #fff;
+      background: #3A5A92;
+      border-color: #3A5A92;
+    }
+
+    /* Outcome rows */
+    .outcome-row {
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .outcome-row:last-child { border-bottom: none; }
+    .outcome-num {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: #7B9BD1;
+    }
+    .outcome-text {
+      font-size: 18px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+    }
+    .outcome-text strong { color: #fff; font-weight: 600; }
+
+    /* Difference cards (3-up) */
+    .diff-card {
+      background: #fff;
+      padding: 36px 32px;
+      border-top: 3px solid #7B9BD1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .diff-card:hover {
+      box-shadow: 0 8px 32px rgba(11,29,38,0.08);
+      transform: translateY(-2px);
+    }
+    .diff-card--featured { border-top-color: #3A5A92; border-top-width: 4px; background: #fff; }
+    .diff-card-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #3A5A92;
+    }
+    .diff-card-eyebrow::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: rgba(11,29,38,0.12);
+    }
+
+    /* Explore cards */
+    .explore-card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      padding: 28px 28px 24px;
+      border-top: 3px solid #7B9BD1;
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+      flex: 1;
+      min-width: 240px;
+    }
+    .explore-card:hover {
+      box-shadow: 0 8px 32px rgba(11,29,38,0.12);
+      transform: translateY(-2px);
+    }
+    .explore-card--dim { border-top-color: rgba(123,155,209,0.35); }
+
+    /* Quote band */
+    .quote-band {
+      background: #0B1D26;
+      padding: 88px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-mark {
+      font-family: Georgia, serif;
+      font-size: 180px;
+      line-height: 0.6;
+      color: rgba(123,155,209,0.18);
+      position: absolute;
+      top: 64px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Hero arrow chevron motif */
+    @keyframes chevronPulse {
+      0%, 100% { opacity: 0.18; transform: translateX(0); }
+      50% { opacity: 0.42; transform: translateX(6px); }
+    }
+    .chevron-row { display:flex; gap:18px; opacity:0.9; }
+    .chevron {
+      width: 16px; height: 32px;
+      border-right: 2px solid rgba(123,155,209,0.55);
+      border-top: 2px solid rgba(123,155,209,0.55);
+      transform: rotate(45deg);
+      animation: chevronPulse 2.4s ease-in-out infinite;
+    }
+    .chevron:nth-child(2) { animation-delay: 0.2s; opacity: 0.5; }
+    .chevron:nth-child(3) { animation-delay: 0.4s; opacity: 0.25; }
+
+    /* Motion-condition strip (intro) */
+    .motion-strip {
+      background: #0B1D26;
+      color: #fff;
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .motion-strip-step .label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #7B9BD1; margin-bottom: 6px;
+    }
+    .motion-strip-step .text {
+      font-size: 15px; font-weight: 500;
+      line-height: 1.35; color: rgba(255,255,255,0.9);
+    }
+    .motion-strip-arrow {
+      color: rgba(123,155,209,0.5);
+      font-size: 22px;
+      font-weight: 300;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero-section { padding: 64px 32px 80px !important; }
+      .hero-section h1 { font-size: 42px !important; }
+      .intro-section { padding: 80px 32px !important; }
+      .intro-grid { grid-template-columns: 1fr !important; }
+      .motion-strip { grid-template-columns: 1fr !important; gap: 12px !important; padding: 24px !important; }
+      .motion-strip-arrow { display: none !important; }
+      .engagements-section { padding: 80px 32px !important; }
+      .engagements-grid { grid-template-columns: 1fr !important; }
+      .diff-section { padding: 80px 32px !important; }
+      .diff-grid { grid-template-columns: 1fr !important; }
+      .outcomes-section { padding: 80px 32px !important; }
+      .who-section { padding: 80px 32px !important; }
+      .who-grid { grid-template-columns: 1fr !important; }
+      .cta-section { padding: 80px 32px !important; }
+      .explore-strip { padding: 56px 32px !important; }
+      .quote-band { padding: 72px 32px !important; }
+      .quote-band p { font-size: 26px !important; }
+      footer { padding: 28px 32px !important; }
+    }
+    @media (max-width: 767px) {
+      nav > div:last-child { display: none !important; }
+      .hero-section { padding: 48px 24px 72px !important; }
+      .hero-section h1 { font-size: 32px !important; }
+      .hero-meta { flex-direction: column !important; align-items: flex-start !important; }
+      .hero-accent-line { display: none !important; }
+      .chevron-row { display: none !important; }
+      .intro-section { padding: 64px 24px !important; }
+      .intro-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+      .motion-strip { grid-template-columns: 1fr !important; gap: 12px !important; padding: 24px !important; }
+      .motion-strip-arrow { display: none !important; }
+      .engagements-section { padding: 64px 24px !important; }
+      .engagements-grid { grid-template-columns: 1fr !important; }
+      .diff-section { padding: 64px 24px !important; }
+      .diff-grid { grid-template-columns: 1fr !important; }
+      .outcomes-section { padding: 64px 24px !important; }
+      .outcome-row { grid-template-columns: 44px 1fr !important; gap: 16px !important; padding: 20px 0 !important; }
+      .outcome-text { font-size: 16px !important; }
+      .who-section { padding: 64px 24px !important; }
+      .who-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+      .cta-section { padding: 64px 24px !important; }
+      .cta-paths { grid-template-columns: 1fr !important; }
+      .explore-strip { padding: 48px 24px !important; }
+      .explore-cards { flex-direction: column !important; }
+      .quote-band { padding: 56px 24px !important; }
+      .quote-band p { font-size: 22px !important; }
+      .quote-mark { font-size: 120px !important; top: 36px !important; }
+      footer {
+        padding: 28px 24px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 12px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav style="
+  background: #0B1D26;
+  height: 64px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+">
+  <a href="index.html" class="nav-logo-link"><img src="brand_assets/Resilient Futures LOGOS (4).png" alt="Resilient Futures" style="height:36px; width:auto; display:block;"></a>
+  <div style="display:flex; gap:4px; align-items:center;">
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">About <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="why.html" class="nav-dropdown-item">Why Resilient Futures</a>
+      </div>
+    </div>
+    <a href="strategy-in-action.html" class="nav-link" style="padding:4px 8px;">Strategy in Action</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger nav-link--active" style="color:rgba(255,255,255,0.9);">Services <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="strategy-and-planning.html" class="nav-dropdown-item">Strategy and Planning</a>
+        <a href="change-management.html" class="nav-dropdown-item" style="color:#fff;">Change Management</a>
+        <a href="leadership-development.html" class="nav-dropdown-item">Leadership Development</a>
+        <a href="strategic-intelligence.html" class="nav-dropdown-item">Strategic Intelligence</a>
+      </div>
+    </div>
+    <a href="contact.html" class="btn-primary btn--sm" style="margin-left:16px;">Get in touch</a>
+  </div>
+  <script>
+    document.querySelectorAll('.nav-dropdown-trigger').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const dropdown = btn.closest('.nav-dropdown');
+        const isOpen = dropdown.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+        if (!isOpen) dropdown.classList.add('open');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    });
+  </script>
+</nav>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero-section" style="
+  background: #0B1D26;
+  padding: 80px 48px 96px;
+  position: relative;
+  overflow: hidden;
+">
+  <!-- Radial glows -->
+  <div style="
+    position:absolute; top:-80px; right:-80px;
+    width:520px; height:520px; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,155,209,0.10) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+  <div style="
+    position:absolute; bottom:40px; left:-60px;
+    width:360px; height:360px; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,155,209,0.06) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <!-- Breadcrumb -->
+    <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:40px; border-left:2px solid rgba(123,155,209,0.4); padding-left:12px;">
+      <a href="index.html" style="font-size: 12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a>
+      <span style="font-size: 12px; color:rgba(255,255,255,0.2);">&#47;</span>
+      <span style="font-size: 12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45);">Services</span>
+      <span style="font-size: 12px; color:rgba(255,255,255,0.2);">&#47;</span>
+      <span style="font-size: 12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#7B9BD1;">Execution &amp; Change</span>
+    </div>
+
+    <div style="display:flex; gap:48px; align-items:flex-start;">
+      <!-- Vertical accent line -->
+      <div class="hero-accent-line" style="
+        width: 3px;
+        flex-shrink: 0;
+        min-height: 280px;
+        margin-top: 4px;
+        background: linear-gradient(to bottom, #7B9BD1, rgba(123,155,209,0));
+      "></div>
+      <!-- Copy -->
+      <div style="flex:1; max-width:780px;">
+        <div style="font-size:13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:20px;">Services · Strategy Execution &amp; Change Management</div>
+        <h1 class="font-display" style="
+          font-size: 60px;
+          font-weight: 700;
+          color: #fff;
+          line-height: 1.05;
+          letter-spacing: -0.025em;
+          margin-bottom: 18px;
+        ">
+          Strategy doesn&rsquo;t fail in design.<br>
+          <span style="color:#7B9BD1;">It fails in motion.</span>
+        </h1>
+        <p style="
+          color: rgba(255,255,255,0.82);
+          font-size: 19px;
+          line-height: 1.7;
+          max-width: 640px;
+          margin-bottom: 36px;
+        ">
+          The gap between a sound strategy and an organisation that actually changes is rarely a thinking gap. It&rsquo;s an execution gap &mdash; and the systems traditionally used to close it were designed for stable conditions that no longer exist.
+        </p>
+
+        <!-- Chevron motion motif -->
+        <div class="chevron-row" aria-hidden="true" style="margin-bottom: 36px;">
+          <div class="chevron"></div>
+          <div class="chevron"></div>
+          <div class="chevron"></div>
+        </div>
+
+        <div class="hero-meta" style="display:flex; gap:28px; align-items:center; flex-wrap:wrap;">
+          <a href="#engagements" style="color:rgba(255,255,255,0.55); font-size:13px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Explore engagements &#8595;</a>
+          <span style="width:1px; height:14px; background:rgba(255,255,255,0.12);"></span>
+          <a href="strategy-in-action.html" style="color:rgba(255,255,255,0.35); font-size:13px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">About Strategy in Action &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ THE APPROACH ═══════════════════════════ -->
+<section class="intro-section" style="background: #FAFAF7; padding: 96px 48px;">
+  <div class="section-inner">
+    <div class="intro-grid" style="display: grid; grid-template-columns: 360px 1fr; gap: 80px; align-items: start;">
+
+      <!-- Left: section heading -->
+      <div>
+        <span class="section-label" style="color:#3A5A92;">The Shift</span>
+        <h2 class="font-display" style="
+          font-size: 40px; font-weight: 700; color: #0B1D26;
+          line-height: 1.15; letter-spacing: -0.02em;
+          margin-bottom: 24px;
+        ">Change has stopped being a project.</h2>
+        <div style="margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(11,29,38,0.12);">
+          <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #3A5A92; margin-bottom: 14px;">Built for stability</p>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:#1A1A1A;">
+              <div style="width:18px; height:1px; background:#7B9BD1; flex-shrink:0;"></div>
+              Linear roadmaps
+            </li>
+            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:#1A1A1A;">
+              <div style="width:18px; height:1px; background:#7B9BD1; flex-shrink:0;"></div>
+              Communication cadences
+            </li>
+            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:#1A1A1A;">
+              <div style="width:18px; height:1px; background:#7B9BD1; flex-shrink:0;"></div>
+              Training rollouts
+            </li>
+            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:#1A1A1A;">
+              <div style="width:18px; height:1px; background:#7B9BD1; flex-shrink:0;"></div>
+              Stage-gate reviews
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right: body copy -->
+      <div>
+        <p style="font-size: 19px; line-height: 1.7; color: #0B1D26; margin-bottom: 24px; font-weight: 500; letter-spacing: -0.005em;">
+          Most strategy execution and change management practice still assumes that change is a defined initiative with a beginning, middle, and end &mdash; a program to be delivered, measured, and closed out.
+        </p>
+        <p style="font-size: 17px; line-height: 1.75; color: #4a6080; margin-bottom: 22px;">
+          In the conditions most organisations are now operating in, that shape no longer fits. Change is not an event to be managed. It is the <strong style="color:#0B1D26; font-weight:700;">permanent operating condition</strong>. Large, slow, linear programs run their course past the conditions that justified them &mdash; and by the time they land, the world has moved on.
+        </p>
+        <p style="font-size: 17px; line-height: 1.75; color: #4a6080;">
+          What works in these conditions is fundamentally different: <strong style="color:#0B1D26; font-weight:700;">catalytic action</strong>. Focused initiatives with multi-pronged impact that generate fast feedback, determine the next move, and keep the organisation in flow with the pace of change. This is the execution discipline at the heart of <strong style="color:#0B1D26; font-weight:700;">Strategy in Action (SiA)</strong>.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Motion-condition strip -->
+    <div class="motion-strip">
+      <div class="motion-strip-step">
+        <div class="label">Act</div>
+        <div class="text">Focused, multi-pronged initiative</div>
+      </div>
+      <div class="motion-strip-arrow">&rarr;</div>
+      <div class="motion-strip-step">
+        <div class="label">Sense</div>
+        <div class="text">Fast feedback from what actually happens</div>
+      </div>
+      <div class="motion-strip-arrow">&rarr;</div>
+      <div class="motion-strip-step">
+        <div class="label">Decide</div>
+        <div class="text">The next move from real conditions, not the plan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PULL QUOTE BAND ═══════════════════════════ -->
+<section class="quote-band">
+  <div style="
+    position:absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    width:700px; height:700px; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,155,209,0.08) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+  <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+  <div class="section-inner" style="position:relative; z-index:1; text-align:center; padding-top: 24px;">
+    <p class="font-display" style="
+      font-size: 30px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+      color: rgba(255,255,255,0.92);
+      max-width: 900px;
+      margin: 0 auto;
+    ">
+      Big, slow, linear change programs were built for conditions that have ceased to exist. The work is catalytic &mdash; focused, fast-feeding, designed to learn.
+    </p>
+    <div style="margin-top:36px; display:flex; justify-content:center; align-items:center; gap:14px;">
+      <span style="width:32px; height:1px; background:rgba(123,155,209,0.5);"></span>
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #7B9BD1;">Resilient Futures</span>
+      <span style="width:32px; height:1px; background:rgba(123,155,209,0.5);"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ENGAGEMENTS ═══════════════════════════ -->
+<section id="engagements" class="engagements-section" style="background: #EEF2F9; padding: 96px 48px;">
+  <div class="section-inner">
+    <span class="section-label section-label--light">Where We Engage</span>
+    <h2 class="font-display" style="
+      font-size: 43px; font-weight: 700; color: #0B1D26;
+      line-height: 1.15; letter-spacing: -0.02em;
+      max-width: 720px; margin-bottom: 16px;
+    ">Where most leaders engage us.</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #4a6080; max-width: 660px; margin-bottom: 56px;">
+      Strategy execution and change engagements take different shapes depending on the scale of the shift required and the conditions the organisation is navigating. We typically work across four areas.
+    </p>
+
+    <div class="engagements-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(11,29,38,0.1);">
+
+      <!-- Strategic change leadership -->
+      <div class="engagement-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div style="flex:1;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:10px;">01</div>
+            <h3 class="font-display" style="font-size:25px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.02em;">Strategic change leadership</h3>
+          </div>
+          <span class="engagement-tag">Partnership</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          Working alongside Boards and Executives navigating significant transitions &mdash; organisational transformation, target or future operating model shifts, departmental or portfolio restructure, or substantive change in external conditions.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.6); margin:0; padding-top:8px; border-top:1px solid rgba(11,29,38,0.08);">
+          <strong style="color:#0B1D26; font-weight:600;">Not:</strong> program management. <strong style="color:#0B1D26; font-weight:600;">Is:</strong> strategic partnership through the change.
+        </p>
+      </div>
+
+      <!-- Culture and capability -->
+      <div class="engagement-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div style="flex:1;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:10px;">02</div>
+            <h3 class="font-display" style="font-size:25px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.02em;">Culture and capability</h3>
+          </div>
+          <span class="engagement-tag">Foundational</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          The deeper, slower work of shifting how an organisation thinks, decides, and acts. Capability investment in people, systems, and operating models is the engine of sustained value.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.6); margin:0; padding-top:8px; border-top:1px solid rgba(11,29,38,0.08);">
+          <strong style="color:#0B1D26; font-weight:600;">Why it matters:</strong> the foundation that makes strategic change actually take hold &mdash; rather than wash off when the program ends.
+        </p>
+      </div>
+
+      <!-- Strategic Fitness -->
+      <div class="engagement-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div style="flex:1;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:10px;">03</div>
+            <h3 class="font-display" style="font-size:25px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.02em;">Strategic Fitness</h3>
+          </div>
+          <span class="engagement-tag engagement-tag--accent">½ &ndash; 1 day</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          A focused diagnostic workshop for Boards, CEOs, and Senior Leadership Teams to assess organisational readiness for ongoing structural instability &mdash; and surface the specific capability investments that will most strengthen it.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.6); margin:0; padding-top:8px; border-top:1px solid rgba(11,29,38,0.08);">
+          <strong style="color:#0B1D26; font-weight:600;">Often:</strong> the starting point for deeper engagement.
+        </p>
+      </div>
+
+      <!-- Strategy execution support -->
+      <div class="engagement-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div style="flex:1;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:10px;">04</div>
+            <h3 class="font-display" style="font-size:25px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.02em;">Strategy execution support</h3>
+          </div>
+          <span class="engagement-tag">Ongoing advisory</span>
+        </div>
+        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+          Ongoing advisory during execution &mdash; providing course-correction when conditions shift, supporting Board engagement on emerging conditions, and bringing strategic intelligence to leadership decisions.
+        </p>
+        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.6); margin:0; padding-top:8px; border-top:1px solid rgba(11,29,38,0.08);">
+          <strong style="color:#0B1D26; font-weight:600;">In real time:</strong> not at the next planning interval.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ WHAT'S DIFFERENT ═══════════════════════════ -->
+<section class="diff-section" style="background: #FAFAF7; padding: 96px 48px;">
+  <div class="section-inner">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 56px;">
+      <div>
+        <span class="section-label" style="color:#3A5A92;">Our Practice</span>
+        <h2 class="font-display" style="
+          font-size: 43px; font-weight: 700; color: #0B1D26;
+          line-height: 1.15; letter-spacing: -0.02em;
+          max-width: 520px;
+        ">What&rsquo;s different about how we do this.</h2>
+      </div>
+      <div>
+        <p style="font-size: 17px; line-height: 1.7; color: #4a6080; max-width: 420px;">
+          Three deliberate choices distinguish how Resilient Futures runs an execution and change engagement.
+        </p>
+      </div>
+    </div>
+
+    <div class="diff-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+
+      <div class="diff-card diff-card--featured">
+        <div class="diff-card-eyebrow">A · The Shape of the Work</div>
+        <h3 class="font-display" style="font-size: 22px; font-weight: 700; color: #0B1D26; line-height: 1.25; letter-spacing: -0.015em; margin-bottom: 4px;">
+          Catalytic action, not linear program.
+        </h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #4a6080; margin: 0;">
+          The traditional change-management toolkit is optimised for stability. We work with the toolkit that fits the actual conditions &mdash; small focused initiatives with multi-pronged impact, fast feedback loops, and the discipline to determine the next move from what&rsquo;s actually happening.
+        </p>
+      </div>
+
+      <div class="diff-card">
+        <div class="diff-card-eyebrow">B · Who Does the Work</div>
+        <h3 class="font-display" style="font-size: 22px; font-weight: 700; color: #0B1D26; line-height: 1.25; letter-spacing: -0.015em; margin-bottom: 4px;">
+          Depth over delegation.
+        </h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #4a6080; margin: 0;">
+          Senior practitioners do the work. There is no junior team running the engagement behind the scenes.
+        </p>
+        <p style="font-size: 14px; line-height: 1.6; color: #0B1D26; font-weight: 600; margin: 0; padding-top: 10px; border-top: 1px solid rgba(11,29,38,0.08);">
+          Your investment trains your people, not ours.
+        </p>
+      </div>
+
+      <div class="diff-card">
+        <div class="diff-card-eyebrow">C · What We Leave Behind</div>
+        <h3 class="font-display" style="font-size: 22px; font-weight: 700; color: #0B1D26; line-height: 1.25; letter-spacing: -0.015em; margin-bottom: 4px;">
+          Capability transfer is built in.
+        </h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #4a6080; margin: 0;">
+          The goal is not dependency on us. It&rsquo;s the kind of strategic and execution capability inside your organisation that means, when we step back, the practice of adapting strategy is genuinely yours.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ OUTCOMES ═══════════════════════════ -->
+<section class="outcomes-section" style="background: #0B1D26; padding: 96px 48px; position: relative; overflow: hidden;">
+  <div style="
+    position:absolute; top:-100px; right:-100px;
+    width:480px; height:480px; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,155,209,0.07) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+  <div style="
+    position:absolute; bottom:-80px; left:-80px;
+    width:380px; height:380px; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,155,209,0.05) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: end; margin-bottom: 48px;">
+      <div>
+        <span class="section-label">What You Walk Away With</span>
+        <h2 class="font-display" style="
+          font-size: 43px; font-weight: 700; color: #fff;
+          line-height: 1.15; letter-spacing: -0.02em;
+          max-width: 520px;
+        ">What you can expect to come out with.</h2>
+      </div>
+      <div>
+        <p style="font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 420px;">
+          Five outcomes &mdash; capacities your organisation carries forward, not artefacts that age on a shelf.
+        </p>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid rgba(255,255,255,0.12);">
+
+      <div class="outcome-row">
+        <div class="outcome-num">01</div>
+        <p class="outcome-text">
+          A clear-eyed view of which strategic priorities are <strong>still alive in current conditions</strong>, and which need to be reset.
+        </p>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="outcome-row">
+        <div class="outcome-num">02</div>
+        <p class="outcome-text">
+          <strong>Strategic Opportunity-Risks (SORs)</strong> reprioritised against the actual change landscape &mdash; not against the assumptions of the last planning cycle.
+        </p>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="outcome-row">
+        <div class="outcome-num">03</div>
+        <p class="outcome-text">
+          A <strong>leadership team aligned</strong> on what the next period demands &mdash; with the language and tools to keep adapting as conditions evolve.
+        </p>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="outcome-row">
+        <div class="outcome-num">04</div>
+        <p class="outcome-text">
+          <strong>Capability investment</strong> directed where it&rsquo;ll make the biggest practical difference to organisational performance.
+        </p>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="outcome-row">
+        <div class="outcome-num">05</div>
+        <p class="outcome-text">
+          An <strong>internal strategic practice</strong> &mdash; so adapting strategy and leading change become continuous capabilities, not crisis-driven interventions.
+        </p>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="#7B9BD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ WHO WE WORK WITH ═══════════════════════════ -->
+<section class="who-section" style="background: #FAFAF7; padding: 96px 48px;">
+  <div class="section-inner">
+    <div class="who-grid" style="display:grid; grid-template-columns: 360px 1fr; gap: 80px; align-items:start;">
+
+      <div>
+        <span class="section-label" style="color:#3A5A92;">Who We Work With</span>
+        <h2 class="font-display" style="
+          font-size: 36px; font-weight: 700; color: #0B1D26;
+          line-height: 1.2; letter-spacing: -0.02em;
+        ">Calibrated for organisations where execution failure is costly.</h2>
+      </div>
+
+      <div>
+        <p style="font-size: 18px; line-height: 1.75; color: #1A1A1A; margin-bottom: 28px;">
+          This work is calibrated for the <strong style="color:#0B1D26; font-weight:700;">Boards and Executives</strong> of complex, member-based, and multi-stakeholder organisations &mdash; navigating transformation, structural change, or operating model shifts in conditions where <strong style="color:#0B1D26; font-weight:700;">the cost of execution failure is high and the runway for course-correction is short.</strong>
+        </p>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; padding-top:28px; border-top:1px solid rgba(11,29,38,0.12);">
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            Professional associations
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            Peak bodies
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            Health &amp; human services
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            Education
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            Government
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
+            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            Purpose-driven enterprises
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CTA ═══════════════════════════ -->
+<section class="cta-section" style="
+  background: linear-gradient(135deg, #0B1D26 0%, #0B1D26 100%);
+  padding: 96px 48px;
+  position: relative; overflow: hidden;
+">
+  <div style="
+    position:absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    width:680px; height:680px; border-radius:50%;
+    background: radial-gradient(circle, rgba(123,155,209,0.09) 0%, transparent 60%);
+    pointer-events:none;
+  "></div>
+  <div class="section-inner" style="position:relative; z-index:1; text-align:center;">
+    <span class="section-label" style="display:inline-block; margin-bottom:24px;">Start Where It&rsquo;s Honest</span>
+    <h2 class="font-display" style="
+      font-size: 47px; font-weight: 700; color: #fff;
+      line-height: 1.15; letter-spacing: -0.02em;
+      max-width: 720px; margin: 0 auto 18px;
+    ">Start with a Strategic Fitness conversation.</h2>
+    <p style="
+      font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.78);
+      max-width: 580px; margin: 0 auto 48px;
+    ">
+      A focused diagnostic with Larry or David is the cleanest way to see where execution discipline is genuinely fit for current conditions &mdash; and where the gap is hiding.
+    </p>
+
+    <!-- Dual path -->
+    <div class="cta-paths" style="display:grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(255,255,255,0.08); max-width: 760px; margin: 0 auto 40px; text-align:left;">
+      <div style="background: rgba(11,29,38,0.6); padding: 32px 32px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Recommended</div>
+        <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:10px; line-height:1.25; letter-spacing:-0.015em;">Strategic Fitness workshop</div>
+        <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin: 0 0 20px;">
+          Half or full-day diagnostic. Best entry point for Boards and Executives.
+        </p>
+        <a href="contact.html" class="btn-primary btn--sm">Book the Workshop</a>
+      </div>
+      <div style="background: rgba(11,29,38,0.6); padding: 32px 32px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:14px;">Or</div>
+        <div class="font-display" style="font-size:20px; font-weight:700; color:#fff; margin-bottom:10px; line-height:1.25; letter-spacing:-0.015em;">Open conversation</div>
+        <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.6); margin: 0 0 20px;">
+          No commitment &mdash; just a clear-eyed conversation about where execution is straining.
+        </p>
+        <a href="contact.html" class="btn-secondary btn--sm">Get in Touch</a>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); max-width: 760px; margin: 0 auto;">
+      <div style="text-align:center; padding-top:24px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:4px;">Phone</div>
+        <div style="font-size:15px; color:rgba(255,255,255,0.65);">+61 390 218 970</div>
+      </div>
+      <div style="width:1px; background:rgba(255,255,255,0.1); margin-top:24px;"></div>
+      <div style="text-align:center; padding-top:24px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:4px;">Email</div>
+        <a href="mailto:james.cacciottolo@resilientfutures.com" style="font-size:15px; color:rgba(255,255,255,0.65); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">james.cacciottolo@resilientfutures.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ EXPLORE FURTHER ═══════════════════════════ -->
+<section class="explore-strip" style="background: #EEF2F9; padding: 64px 48px; border-top: 1px solid rgba(11,29,38,0.08);">
+  <div class="section-inner">
+    <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(11,29,38,0.55); margin-bottom: 32px;">Other Services</p>
+    <div class="explore-cards" style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <a href="strategy-and-planning.html" class="explore-card explore-card--dim">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(123,155,209,0.75); margin-bottom: 14px;">Service 01</div>
+        <div class="font-display" style="font-size: 25px; font-weight: 700; color: #0B1D26; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Strategy and Planning</div>
+        <p style="font-size: 15px; line-height: 1.6; color: #4a6080; margin: 0 0 20px; flex: 1;">Plans that are built to hold up &mdash; not just to be written.</p>
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(123,155,209,0.75);">Explore &rarr;</span>
+      </a>
+      <a href="leadership-development.html" class="explore-card explore-card--dim">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(123,155,209,0.75); margin-bottom: 14px;">Service 03</div>
+        <div class="font-display" style="font-size: 25px; font-weight: 700; color: #0B1D26; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Leadership Development</div>
+        <p style="font-size: 15px; line-height: 1.6; color: #4a6080; margin: 0 0 20px; flex: 1;">Leaders who can think, decide, and act in disruptive conditions &mdash; not wait them out.</p>
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(123,155,209,0.75);">Explore &rarr;</span>
+      </a>
+      <a href="strategic-intelligence.html" class="explore-card explore-card--dim">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(123,155,209,0.75); margin-bottom: 14px;">Service 04</div>
+        <div class="font-display" style="font-size: 25px; font-weight: 700; color: #0B1D26; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Strategic Intelligence</div>
+        <p style="font-size: 15px; line-height: 1.6; color: #4a6080; margin: 0 0 20px; flex: 1;">Looking past what&rsquo;s in front of you &mdash; the signals and shifts that will define your environment.</p>
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(123,155,209,0.75);">Explore &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer style="background: #060f14; border-top: 1px solid rgba(255,255,255,0.06);">
+
+  <div style="padding: 40px 48px 28px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px;">
+
+    <a href="index.html" class="nav-logo-link">
+      <img src="brand_assets/Resilient Futures LOGOS (4).png" alt="Resilient Futures" style="height:32px; width:auto; display:block; opacity:0.9;">
+    </a>
+
+    <div style="display: flex; gap: 48px; flex-wrap: wrap;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">About</span>
+        <a href="why.html" class="nav-link">Why Resilient Futures</a>
+        <a href="strategy-in-action.html" class="nav-link">Strategy in Action</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">Services</span>
+        <a href="strategy-and-planning.html" class="nav-link">Strategy and Planning</a>
+        <a href="change-management.html" class="nav-link">Change Management</a>
+        <a href="leadership-development.html" class="nav-link">Leadership Development</a>
+        <a href="strategic-intelligence.html" class="nav-link">Strategic Intelligence</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">Contact</span>
+        <a href="contact.html" class="nav-link">Get In Touch</a>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <a href="https://au.linkedin.com/company/resilient-futures" target="_blank" rel="noopener" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://x.com/resilientf" target="_blank" rel="noopener" aria-label="X (Twitter)" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://siapracticecommunity.com/" target="_blank" rel="noopener" aria-label="SiA Practice Community" style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:opacity 0.2s;opacity:0.65;" onmouseover="this.style.opacity='0.95'" onmouseout="this.style.opacity='0.65'">
+        <div style="width:36px;height:36px;border-radius:50%;background:#FFFFFF;-webkit-mask-image:url('brand_assets/SiA%20Pratice%20Community%20-%20Logo%20%26%20Group%20Images.png');mask-image:url('brand_assets/SiA%20Pratice%20Community%20-%20Logo%20%26%20Group%20Images.png');-webkit-mask-mode:luminance;mask-mode:luminance;-webkit-mask-size:72% 72%;mask-size:72% 72%;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;"></div>
+      </a>
+      <a href="https://www.youtube.com/c/Resilientfutures" target="_blank" rel="noopener" aria-label="YouTube" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/resilient.futures" target="_blank" rel="noopener" aria-label="Instagram" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div style="padding: 20px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+    <p style="font-size: 13px; color: rgba(255,255,255,0.45); margin: 0;">
+      Resilient Futures &copy; 2026 &middot; All rights reserved
+    </p>
+    <p style="font-size: 13px; color: rgba(255,255,255,0.38); margin: 0;">
+      Strategy for a world that won&rsquo;t hold still
+    </p>
+  </div>
+
+</footer>
+</body>
+</html>
