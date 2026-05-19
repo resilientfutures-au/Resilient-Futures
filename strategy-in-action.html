@@ -128,46 +128,84 @@
     /* Standard cards */
     .standard-card {
       border-top: 2px solid rgba(123,155,209,0.2);
-      padding: 40px 0;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 48px;
-      align-items: start;
+      padding: 56px 0;
     }
     .standard-card + .standard-card {
       border-top-color: rgba(123,155,209,0.12);
     }
+    .standard-card__eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .standard-card__eyebrow-bar {
+      width: 48px;
+      height: 2px;
+      background: #7B9BD1;
+      flex-shrink: 0;
+    }
     .standard-number {
       font-family: 'Nunito Sans', sans-serif;
-      font-size: 90px;
+      font-size: 26px;
       font-weight: 700;
-      color: rgba(123,155,209,0.45);
+      color: #3A5A92;
       line-height: 1;
-      letter-spacing: -0.04em;
+      letter-spacing: 0.04em;
     }
-    .standard-label {
+    .standard-card__qlabel {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #7B9BD1;
-      margin-bottom: 10px;
+      color: #3A5A92;
+      margin: 32px 0 16px;
       display: block;
     }
+    .q-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .q-grid > .principle-chip { height: 100%; }
 
-    /* Principles grid */
+    /* Principle chip — strengthened */
     .principle-chip {
-      background: rgba(11,29,38,0.04);
-      border: 1px solid rgba(11,29,38,0.08);
-      border-left: 2px solid rgba(123,155,209,0.4);
-      padding: 20px 20px 20px 18px;
+      position: relative;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(30, 53, 96, 0.18);
+      border-left: 3px solid #3A5A92;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .principle-chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(30, 53, 96, 0.45);
+      border-left-color: #1E3560;
+      box-shadow: 0 8px 24px rgba(11, 29, 38, 0.08);
+    }
+    .principle-chip__num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #7B9BD1;
+      display: block;
+      margin-bottom: 10px;
     }
     .principle-chip p {
       font-size: 15px;
-      font-weight: 500;
-      line-height: 1.6;
-      color: rgba(11,29,38,0.65);
+      font-weight: 600;
+      line-height: 1.55;
+      color: #0B1D26;
       margin: 0;
+      flex: 1;
+    }
+    @media (max-width: 767px) {
+      .q-grid { grid-template-columns: 1fr !important; }
     }
 
     /* Explore cards */
@@ -195,8 +233,6 @@
       .intro-section { padding: 80px 32px !important; }
       .foundations-section { padding: 80px 32px !important; }
       .standards-section { padding: 80px 32px !important; }
-      .standard-card { grid-template-columns: 1fr !important; gap: 16px !important; }
-      .standard-number { font-size: 63px !important; }
       .diagram-section { padding: 80px 32px !important; }
       .diagram-cols { grid-template-columns: 1fr !important; }
       .system-section { padding: 80px 32px !important; }
@@ -214,8 +250,6 @@
       .foundations-section { padding: 64px 24px !important; }
       .foundations-grid { grid-template-columns: 1fr !important; }
       .standards-section { padding: 64px 24px !important; }
-      .standard-card { grid-template-columns: 1fr !important; gap: 12px !important; }
-      .standard-number { font-size: 54px !important; }
       .diagram-section { padding: 64px 24px !important; }
       .diagram-cols { grid-template-columns: 1fr !important; }
       .system-section { padding: 64px 24px !important; }
@@ -306,7 +340,7 @@
     pointer-events:none;
   "></div>
 
-  <div class="section-inner" style="position:relative; z-index:1;">
+  <div class="section-inner" style="position:relative; z-index:1; max-width:1240px;">
     <!-- Breadcrumb -->
     <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:40px; border-left:2px solid rgba(123,155,209,0.4); padding-left:12px;">
       <a href="index.html" style="font-size: 12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a>
@@ -314,7 +348,7 @@
       <span style="font-size: 12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#7B9BD1;">Strategy in Action</span>
     </div>
 
-    <div class="hero-inner-flex" style="display:flex; gap:48px; align-items:flex-start;">
+    <div class="hero-inner-flex" style="display:flex; gap:64px; align-items:flex-start;">
       <!-- Vertical coral accent line -->
       <div class="hero-accent-line" style="
         width: 3px;
@@ -332,9 +366,9 @@
           line-height: 1.08;
           letter-spacing: -0.025em;
           margin-bottom: 20px;
-          max-width: 640px;
+          max-width: 720px;
         ">
-          Strategy as a living system &mdash; built for complexity, unpredictability, and permanent instability.
+          Strategy as a living system.
         </h1>
         <p class="font-display" style="
           font-size: 21px;
@@ -342,14 +376,14 @@
           color: #7B9BD1;
           line-height: 1.4;
           letter-spacing: -0.01em;
-          max-width: 520px;
+          max-width: 600px;
           margin-bottom: 24px;
-        ">Making your organisation the strategist.</p>
+        ">Built for complexity, unpredictability, and permanent instability.</p>
         <p style="
           color: rgba(255,255,255,0.82);
           font-size: 18px;
           line-height: 1.7;
-          max-width: 520px;
+          max-width: 600px;
           margin-bottom: 16px;
         ">
           Strategy in Action (SiA) is not a methodology for writing better plans.
@@ -360,18 +394,39 @@
           color: rgba(255,255,255,0.82);
           font-size: 16px;
           line-height: 1.7;
-          max-width: 520px;
+          max-width: 600px;
           margin-bottom: 40px;
         ">
           Developed over 25 years of working at the intersection of strategy, complex systems,
           and organisational transformation with Australian Boards and Executives.
         </p>
         <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
-          <a href="#standards" style="color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif; font-size: 13px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Explore the five standards &#8595;</a>
+          <a href="#standards" class="btn-secondary hero-scroll-cue">
+            Explore the five standards
+            <svg class="hero-scroll-cue__chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="3 5 7 9 11 5"/>
+            </svg>
+          </a>
         </div>
+        <style>
+          .hero-scroll-cue__chevron {
+            animation: heroScrollCueBounce 1.6s ease-in-out infinite;
+            will-change: transform;
+          }
+          .hero-scroll-cue:hover .hero-scroll-cue__chevron {
+            animation-duration: 0.9s;
+          }
+          @keyframes heroScrollCueBounce {
+            0%, 100% { transform: translateY(0);   opacity: 0.9; }
+            50%      { transform: translateY(3px); opacity: 1; }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .hero-scroll-cue__chevron { animation: none; opacity: 1; }
+          }
+        </style>
       </div>
       <!-- Right side graphic -->
-      <div class="hero-graphic" style="flex-shrink:0; width:300px; padding-top:16px; align-self:center;">
+      <div class="hero-graphic" style="flex-shrink:0; width:clamp(300px, 38vw, 520px); align-self:center;">
         <svg viewBox="0 0 300 270" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
           <defs>
             <pattern id="ringHatch" x="0" y="0" width="7" height="9999" patternUnits="userSpaceOnUse">
@@ -383,25 +438,60 @@
             </mask>
           </defs>
 
-          <!-- Lines (bottom layer, behind everything) -->
-          <line x1="147" y1="42"  x2="45"  y2="175" stroke="#7B9BD1" stroke-width="0.75" opacity="0.32"/>
-          <line x1="147" y1="42"  x2="249" y2="175" stroke="#7B9BD1" stroke-width="0.75" opacity="0.32"/>
-          <line x1="45"  y1="175" x2="249" y2="175" stroke="#7B9BD1" stroke-width="0.75" opacity="0.32"/>
-          <line x1="147" y1="130" x2="147" y2="42"  stroke="#7B9BD1" stroke-width="0.5"  opacity="0.22"/>
-          <line x1="147" y1="130" x2="45"  y2="175" stroke="#7B9BD1" stroke-width="0.5"  opacity="0.22"/>
-          <line x1="147" y1="130" x2="249" y2="175" stroke="#7B9BD1" stroke-width="0.5"  opacity="0.22"/>
+          <g class="node-diagram-root">
+            <!-- Lines (bottom layer, behind everything) -->
+            <line x1="147" y1="42"  x2="45"  y2="175" stroke="#7B9BD1" stroke-width="0.75" opacity="0.32"/>
+            <line x1="147" y1="42"  x2="249" y2="175" stroke="#7B9BD1" stroke-width="0.75" opacity="0.32"/>
+            <line x1="45"  y1="175" x2="249" y2="175" stroke="#7B9BD1" stroke-width="0.75" opacity="0.32"/>
+            <line x1="147" y1="130" x2="147" y2="42"  stroke="#7B9BD1" stroke-width="0.5"  opacity="0.22"/>
+            <line x1="147" y1="130" x2="45"  y2="175" stroke="#7B9BD1" stroke-width="0.5"  opacity="0.22"/>
+            <line x1="147" y1="130" x2="249" y2="175" stroke="#7B9BD1" stroke-width="0.5"  opacity="0.22"/>
 
-          <!-- Oval ring (middle layer) -->
-          <ellipse cx="147" cy="130" rx="133" ry="102" fill="url(#ringHatch)" mask="url(#ovalRingMask)" opacity="0.38"/>
-          <ellipse cx="147" cy="130" rx="133" ry="102" stroke="#7B9BD1" stroke-width="0.75" fill="none" opacity="0.42"/>
-          <ellipse cx="147" cy="130" rx="95"  ry="64"  fill="#0B1D26" stroke="#7B9BD1" stroke-width="0.75" opacity="0.32"/>
+            <!-- Oval ring (middle layer) -->
+            <ellipse cx="147" cy="130" rx="133" ry="102" fill="url(#ringHatch)" mask="url(#ovalRingMask)" opacity="0.38"/>
+            <ellipse cx="147" cy="130" rx="133" ry="102" stroke="#7B9BD1" stroke-width="0.75" fill="none" opacity="0.42"/>
+            <ellipse cx="147" cy="130" rx="95"  ry="64"  fill="#0B1D26" stroke="#7B9BD1" stroke-width="0.75" opacity="0.32"/>
 
-          <!-- Donut nodes (top layer) -->
-          <circle cx="147" cy="130" r="22" fill="#0B1D26" stroke="#7B9BD1" stroke-width="1.5" opacity="0.75"/>
-          <circle cx="147" cy="42"  r="28" fill="#0B1D26" stroke="#7B9BD1" stroke-width="2"   opacity="0.9"/>
-          <circle cx="45"  cy="175" r="26" fill="#0B1D26" stroke="#7B9BD1" stroke-width="2"   opacity="0.85"/>
-          <circle cx="249" cy="175" r="26" fill="#0B1D26" stroke="#7B9BD1" stroke-width="2"   opacity="0.85"/>
+            <!-- Donut nodes (top layer) -->
+            <circle class="node-pulse node-pulse--core" cx="147" cy="130" r="22" fill="#0B1D26" stroke="#7B9BD1" stroke-width="1.5" opacity="0.75"/>
+            <circle class="node-pulse node-pulse--top"  cx="147" cy="42"  r="28" fill="#0B1D26" stroke="#7B9BD1" stroke-width="2"   opacity="0.9"/>
+            <circle class="node-pulse node-pulse--bl"   cx="45"  cy="175" r="26" fill="#0B1D26" stroke="#7B9BD1" stroke-width="2"   opacity="0.85"/>
+            <circle class="node-pulse node-pulse--br"   cx="249" cy="175" r="26" fill="#0B1D26" stroke="#7B9BD1" stroke-width="2"   opacity="0.85"/>
+          </g>
         </svg>
+        <style>
+          .node-diagram-root {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: nodeDiagramRock 18s ease-in-out infinite;
+            will-change: transform;
+          }
+          @keyframes nodeDiagramRock {
+            0%, 100% { transform: rotate(-1.2deg); }
+            50%      { transform: rotate(1.2deg); }
+          }
+
+          .node-pulse {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: nodePulse 5s ease-in-out infinite;
+            will-change: transform;
+          }
+          .node-pulse--core { animation-duration: 5.6s; animation-delay: -0.4s; }
+          .node-pulse--top  { animation-duration: 4.4s; animation-delay: -1.2s; }
+          .node-pulse--bl   { animation-duration: 4.8s; animation-delay: -2.6s; }
+          .node-pulse--br   { animation-duration: 5.2s; animation-delay: -3.5s; }
+
+          @keyframes nodePulse {
+            0%, 100% { transform: scale(1);    }
+            50%      { transform: scale(1.07); }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .node-diagram-root,
+            .node-pulse { animation: none; }
+          }
+        </style>
       </div>
     </div>
   </div>
@@ -609,187 +699,197 @@
 
     <!-- Standard 01 -->
     <div class="standard-card">
-      <div>
-        <div class="standard-number">01</div>
-        <div style="width:40px; height:2px; background:#7B9BD1; margin-top:16px;"></div>
+      <div class="standard-card__eyebrow">
+        <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
+        <span class="standard-number">01</span>
       </div>
-      <div>
-        <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px;">Conditions</h3>
-        <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px;">
-          This standard examines the real change landscape honestly &mdash; not through a SWOT
-          analysis or a list of known risks, but through a structured reading of the forces actually
-          driving change and their specific implications for the organisation.
-        </p>
-        <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:24px;">
-          It builds a shared, evidence-based understanding across the leadership team of what is
-          happening, what is driving it, and what the meaningful signals of change reveal about the
-          trajectory ahead. It distinguishes between noise and signal. Between conditions that are
-          transient and those that are structural.
-        </p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div class="principle-chip">
-            <p>What forces are driving change &mdash; and how do they interact?</p>
-          </div>
-          <div class="principle-chip">
-            <p>What is the realistic trajectory for our operating environment?</p>
-          </div>
-          <div class="principle-chip">
-            <p>Where are the interdependencies that our risk process is missing?</p>
-          </div>
-          <div class="principle-chip">
-            <p>What does the change landscape mean specifically for us?</p>
-          </div>
-        </div>
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Conditions</h3>
+      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px; max-width:780px;">
+        This standard examines the real change landscape honestly &mdash; not through a SWOT
+        analysis or a list of known risks, but through a structured reading of the forces actually
+        driving change and their specific implications for the organisation.
+      </p>
+      <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:0; max-width:780px;">
+        It builds a shared, evidence-based understanding across the leadership team of what is
+        happening, what is driving it, and what the meaningful signals of change reveal about the
+        trajectory ahead. It distinguishes between noise and signal. Between conditions that are
+        transient and those that are structural.
+      </p>
+      <span class="standard-card__qlabel">A Board working this standard would be able to answer:</span>
+      <div class="q-grid">
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q1</span>
+          <p>Which forces are reshaping our environment &mdash; and how do they interact?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q2</span>
+          <p>What is the realistic trajectory for our operating environment?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q3</span>
+          <p>Which wild cards could reshape our operating environment?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q4</span>
+          <p>What does the change landscape mean specifically for us?</p>        </div>
       </div>
     </div>
 
     <!-- Standard 02 -->
     <div class="standard-card">
-      <div>
-        <div class="standard-number">02</div>
-        <div style="width:40px; height:2px; background:#7B9BD1; margin-top:16px;"></div>
+      <div class="standard-card__eyebrow">
+        <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
+        <span class="standard-number">02</span>
       </div>
-      <div>
-        <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px;">Sustainable Value Generation</h3>
-        <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px;">
-          Conditions change what value an organisation must generate. This standard forces a
-          clear-eyed conversation about what the organisation actually exists to do, for whom,
-          and whether that value proposition is still relevant given current and emerging conditions.
-        </p>
-        <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:24px;">
-          It surfaces where value is being created, renewed, and quietly eroded &mdash; regularly
-          exposing the gap between the value an organisation believes it delivers and the value its
-          stakeholders actually need. It challenges assumptions at the level of strategic purpose,
-          not presentation.
-        </p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div class="principle-chip">
-            <p>Is the value we generate still the value that's needed?</p>
-          </div>
-          <div class="principle-chip">
-            <p>Where is value being eroded without triggering an alarm?</p>
-          </div>
-          <div class="principle-chip">
-            <p>What value must be renewed or reimagined given what conditions are telling us?</p>
-          </div>
-          <div class="principle-chip">
-            <p>Where is our organisation at risk of optimising toward irrelevance?</p>
-          </div>
-        </div>
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Sustainable Value Generation</h3>
+      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px; max-width:780px;">
+        Conditions change the value an organisation must generate &mdash; and widen the gap
+        between the value an organisation believes it delivers and the value its stakeholders
+        actually expect. This standard forces a clear-eyed conversation about what the
+        organisation actually exists to do, for whom, and whether that value proposition is
+        still relevant given current and emerging conditions.
+      </p>
+      <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:0; max-width:780px;">
+        It surfaces where value is being created, renewed, and quietly eroded &mdash; regularly
+        exposing the gap between the value an organisation believes it delivers and the value its
+        stakeholders actually need. It challenges assumptions at the level of strategic purpose,
+        not presentation.
+      </p>
+      <span class="standard-card__qlabel">A Board working this standard would be able to answer:</span>
+      <div class="q-grid">
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q1</span>
+          <p>Is the value we generate still the value our stakeholders need?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q2</span>
+          <p>Where is value eroding before it shows up in our metrics?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q3</span>
+          <p>Which parts of our value proposition need to be renewed &mdash; or retired?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q4</span>
+          <p>Where are we at risk of optimising toward irrelevance?</p>        </div>
       </div>
     </div>
 
     <!-- Standard 03 -->
     <div class="standard-card">
-      <div>
-        <div class="standard-number">03</div>
-        <div style="width:40px; height:2px; background:#7B9BD1; margin-top:16px;"></div>
+      <div class="standard-card__eyebrow">
+        <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
+        <span class="standard-number">03</span>
       </div>
-      <div>
-        <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px;">Strategic Opportunity &amp; Risk</h3>
-        <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px;">
-          With conditions and value clarity established, this standard surfaces the choices and
-          conditions with the most significant implications for the organisation&rsquo;s trajectory.
-          This is distinct from a conventional risk register.
-        </p>
-        <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:24px;">
-          Strategic Opportunity-Risk integrates both sides of the same strategic question simultaneously:
-          what could accelerate the organisation&rsquo;s path, and what could derail it. It asks which
-          conditions and choices are consequential enough to warrant deliberate Board-level attention
-          &mdash; and which are being managed at the wrong level of the organisation.
-        </p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div class="principle-chip">
-            <p>What conditions could accelerate our path to relevance?</p>
-          </div>
-          <div class="principle-chip">
-            <p>What are the strategic risks we are underweighting?</p>
-          </div>
-          <div class="principle-chip">
-            <p>Which choices are consequential enough for Board attention?</p>
-          </div>
-          <div class="principle-chip">
-            <p>What dynamics are we missing that our risk register cannot see?</p>
-          </div>
-        </div>
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Strategic Opportunity &amp; Risk</h3>
+      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px; max-width:780px;">
+        With conditions and value in sharp focus, this standard surfaces the conditions with
+        the most significant implications for the organisation&rsquo;s forward trajectory.
+        Consequential, direction-setting choices must be made about which SORs to actively
+        pursue and which to leave alone.
+      </p>
+      <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:0; max-width:780px;">
+        This is different from conventional risk management. SOR thinking integrates both the
+        opportunities a changing environment opens and the risks it carries &mdash; including
+        the often-invisible risk exposed when opportunities are not taken, or a do-nothing path
+        is pursued by default. It asks which choices are consequential enough to warrant
+        deliberate Board-level attention &mdash; and which are being managed at the wrong
+        level of the organisation.
+      </p>
+      <span class="standard-card__qlabel">A Board working this standard would be able to answer:</span>
+      <div class="q-grid">
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q1</span>
+          <p>Which conditions will most determine our future relevance &mdash; for better or worse?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q2</span>
+          <p>Which strategic risks are we underweighting &mdash; including the risk of doing nothing?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q3</span>
+          <p>Which choices are consequential enough to demand our Board&rsquo;s attention?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q4</span>
+          <p>Which interdependencies are we missing that conventional tools can&rsquo;t surface?</p>        </div>
       </div>
     </div>
 
     <!-- Standard 04 -->
     <div class="standard-card">
-      <div>
-        <div class="standard-number">04</div>
-        <div style="width:40px; height:2px; background:#7B9BD1; margin-top:16px;"></div>
+      <div class="standard-card__eyebrow">
+        <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
+        <span class="standard-number">04</span>
       </div>
-      <div>
-        <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px;">Capability Investment</h3>
-        <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px;">
-          A clear view of the strategic opportunity-risk landscape creates a different basis for
-          capability investment decisions. This standard provides a deliberate view of the capabilities
-          to build, acquire, or release &mdash; grounded in what conditions require, not what the
-          organisation has historically invested in.
-        </p>
-        <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:24px;">
-          It asks what the organisation needs to be able to do that it cannot do today &mdash; and
-          which capabilities are being over-invested in because they were valuable in conditions
-          that no longer exist. Most organisations discover they are simultaneously under-building
-          the capabilities they need and over-investing in those they no longer do.
-        </p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div class="principle-chip">
-            <p>What must we be able to do that we cannot do today?</p>
-          </div>
-          <div class="principle-chip">
-            <p>Which capabilities are we over-investing in given what conditions now require?</p>
-          </div>
-          <div class="principle-chip">
-            <p>What do we build, buy, borrow, or release?</p>
-          </div>
-          <div class="principle-chip">
-            <p>Where is the capability gap widening silently?</p>
-          </div>
-        </div>
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Capability Investment</h3>
+      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:20px; max-width:780px;">
+        A clear view of the strategic opportunity-risk landscape creates a different basis for
+        capability investment decisions. This standard provides a deliberate view of the capabilities
+        to build, acquire, or retire &mdash; grounded in what conditions require, not what the
+        organisation has historically invested in.
+      </p>
+      <p class="font-display" style="
+        font-size: 19px; line-height:1.55; color:#0B1D26;
+        font-weight:700; letter-spacing:-0.01em;
+        margin: 0 0 20px;
+        max-width:760px;
+        border-left:3px solid #7B9BD1;
+        padding: 4px 0 4px 18px;
+      ">
+        The most crucial move is to build capability that serves now &mdash; and what comes next.
+      </p>
+      <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:0; max-width:780px;">
+        It asks what the organisation needs to be able to do that it cannot do today &mdash; and
+        which capabilities are being over-invested in because they were valuable in conditions
+        that no longer exist. Most organisations discover they are simultaneously under-building
+        the capabilities they need and over-investing in those they no longer do.
+      </p>
+      <span class="standard-card__qlabel">A Board working this standard would be able to answer:</span>
+      <div class="q-grid">
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q1</span>
+          <p>What must we be able to do that we cannot do today?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q2</span>
+          <p>Which capabilities are we over-investing in for conditions that no longer exist?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q3</span>
+          <p>What do we build, buy, borrow, or retire?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q4</span>
+          <p>Where are our capability gaps widening silently?</p>        </div>
       </div>
     </div>
 
     <!-- Standard 05 -->
     <div class="standard-card" style="border-bottom: 2px solid rgba(123,155,209,0.12); padding-bottom:56px;">
-      <div>
-        <div class="standard-number">05</div>
-        <div style="width:40px; height:2px; background:#7B9BD1; margin-top:16px;"></div>
+      <div class="standard-card__eyebrow">
+        <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
+        <span class="standard-number">05</span>
       </div>
-      <div>
-        <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px;">Catalytic Action</h3>
-        <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px;">
-          This standard translates strategic clarity into targeted action &mdash; selecting initiatives
-          specifically for their multi-pronged impact. Each action simultaneously builds capability,
-          tests strategic assumptions, creates new value, and generates the feedback the organisation
-          needs to keep adapting.
-        </p>
-        <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:24px;">
-          It moves fast enough to generate real learning before conditions change again &mdash; keeping
-          the organisation&rsquo;s strategy alive not as a document reviewed annually, but as a system
-          continuously informed by what is actually happening.
-        </p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div class="principle-chip">
-            <p>Which actions will have multi-pronged strategic impact?</p>
-          </div>
-          <div class="principle-chip">
-            <p>How fast can we generate real feedback from action?</p>
-          </div>
-          <div class="principle-chip">
-            <p>What is each action teaching us about the real conditions?</p>
-          </div>
-          <div class="principle-chip">
-            <p>How do we keep strategy moving at the pace of change?</p>
-          </div>
-        </div>
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Catalytic Action</h3>
+      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px; max-width:780px;">
+        This standard translates strategic clarity into targeted action &mdash; selecting initiatives
+        specifically for their multi-pronged impact. Each action simultaneously builds capability,
+        tests strategic assumptions, creates new value, and generates the feedback the organisation
+        needs to keep adapting.
+      </p>
+      <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:0; max-width:780px;">
+        It moves fast enough to generate real learning before conditions change again &mdash; keeping
+        the organisation&rsquo;s strategy alive not as a document reviewed annually, but as a system
+        continuously informed by what is actually happening.
+      </p>
+      <span class="standard-card__qlabel">A Board working this standard would be able to answer:</span>
+      <div class="q-grid">
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q1</span>
+          <p>Which actions will have multi-pronged strategic impact?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q2</span>
+          <p>How fast can we put an action into the world and learn from it?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q3</span>
+          <p>What is each action teaching us about the real conditions?</p>        </div>
+        <div class="principle-chip">
+          <span class="principle-chip__num">Q4</span>
+          <p>How do we keep strategy moving as fast as our environment is?</p>        </div>
       </div>
     </div>
 
     <!-- Bottom coda -->
-    <div style="margin-top:48px; padding:0 0 0 248px;">
+    <div style="margin-top:48px;">
       <p style="font-size: 13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.5);">
         Five Interconnected Standards &nbsp;&middot;&nbsp; Not Sequential Steps &nbsp;&middot;&nbsp; A Living System
       </p>
