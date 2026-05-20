@@ -148,6 +148,27 @@
       border-color: #3A5A92;
     }
 
+    /* Workshop cards */
+    .workshop-card {
+      background: #FFFFFF;
+      padding: 40px 36px;
+      border-top: 2px solid rgba(123,155,209,0.4);
+    }
+    .workshop-focus-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(11,29,38,0.08);
+    }
+    .workshop-focus-item:last-child { border-bottom: none; }
+    .workshop-gain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 0;
+    }
+
     /* Outcome rows */
     .outcome-row {
       display: grid;
@@ -295,6 +316,7 @@
       .motion-strip-arrow { display: none !important; }
       .engagements-section { padding: 80px 32px !important; }
       .engagements-grid { grid-template-columns: 1fr !important; }
+      .workshop-grid { grid-template-columns: 1fr !important; }
       .diff-section { padding: 80px 32px !important; }
       .diff-grid { grid-template-columns: 1fr !important; }
       .outcomes-section { padding: 80px 32px !important; }
@@ -319,6 +341,7 @@
       .motion-strip-arrow { display: none !important; }
       .engagements-section { padding: 64px 24px !important; }
       .engagements-grid { grid-template-columns: 1fr !important; }
+      .workshop-grid { grid-template-columns: 1fr !important; }
       .diff-section { padding: 64px 24px !important; }
       .diff-grid { grid-template-columns: 1fr !important; }
       .outcomes-section { padding: 64px 24px !important; }
@@ -436,7 +459,6 @@
       "></div>
       <!-- Copy -->
       <div style="flex:1; max-width:780px;">
-        <div style="font-size:13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:20px;">Services · Strategy Execution &amp; Change Management</div>
         <h1 class="font-display" style="
           font-size: 60px;
           font-weight: 700;
@@ -465,10 +487,9 @@
           <div class="chevron"></div>
         </div>
 
-        <div class="hero-meta" style="display:flex; gap:28px; align-items:center; flex-wrap:wrap;">
-          <a href="#engagements" style="color:rgba(255,255,255,0.55); font-size:13px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Explore engagements &#8595;</a>
-          <span style="width:1px; height:14px; background:rgba(255,255,255,0.12);"></span>
-          <a href="strategy-in-action.html" style="color:rgba(255,255,255,0.35); font-size:13px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">About Strategy in Action &rarr;</a>
+        <div class="hero-meta" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+          <a href="contact.html" class="btn-primary">Book a Conversation</a>
+          <a href="#engagements" style="color:rgba(255,255,255,0.42); font-size:13px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.72)'" onmouseout="this.style.color='rgba(255,255,255,0.42)'">Explore engagements &#8595;</a>
         </div>
       </div>
     </div>
@@ -658,6 +679,171 @@
         <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.6); margin:0; padding-top:8px; border-top:1px solid rgba(11,29,38,0.08);">
           <strong style="color:#0B1D26; font-weight:600;">In real time:</strong> not at the next planning interval.
         </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ STRATEGIC FITNESS ═══════════════════════════ -->
+<section id="strategic-fitness" style="background:#FAFAF7; padding:96px 48px;">
+  <div class="section-inner">
+    <span class="section-label" style="color:#3A5A92;">Strategic Fitness</span>
+    <h2 class="font-display" style="font-size: 43px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; max-width:720px; margin-bottom:16px;">
+      Diagnostic-led executive workshops.
+    </h2>
+    <p style="font-size: 17px; line-height:1.7; color:#4a6080; max-width:680px; margin-bottom:56px;">
+      Focused executive interventions grounded in observed reality, not abstract discussion. Strategic Fitness workshops surface where your organisation is genuinely fit for current conditions &mdash; and where the gap is hiding. They most often serve as the starting point for deeper change engagement.
+    </p>
+
+    <div class="workshop-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2px; background:rgba(11,29,38,0.1);">
+
+      <!-- Workshop 1: Strategic Readiness -->
+      <div class="workshop-card">
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:20px;">Strategic Readiness Workshop</div>
+        <div class="font-display" style="font-size: 27px; font-weight:700; color:#0B1D26; line-height:1.15; margin-bottom:8px;">Testing Strategy Under Conditions of Ongoing Change</div>
+
+        <div style="display:flex; gap:24px; margin:24px 0; padding:20px 0; border-top:1px solid rgba(11,29,38,0.1); border-bottom:1px solid rgba(11,29,38,0.1);">
+          <div>
+            <div style="font-size: 11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(11,29,38,0.45); margin-bottom:4px;">Duration</div>
+            <div style="font-size: 15px; font-weight:500; color:#4a6080;">1 full-day or 2 half-days</div>
+          </div>
+          <div style="width:1px; background:rgba(11,29,38,0.12);"></div>
+          <div>
+            <div style="font-size: 11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(11,29,38,0.45); margin-bottom:4px;">For</div>
+            <div style="font-size: 15px; font-weight:500; color:#4a6080;">Boards, CEOs, Executives</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:28px;">
+          <div style="font-size: 11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Focus</div>
+          <div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Pressure-test current strategy against immediate + emerging conditions</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Map value exchange + exposure to value destruction</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Identify strategic opportunity&ndash;risk dynamics and blind spots</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Triage capability alignment and resource reallocations</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Strengthen decision systems and operating rhythms</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size: 11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Leaders Gain</div>
+          <div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Clear visibility of strategic strengths and exposure areas</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Clarity on which assumptions still hold and which do not</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Insight into value at risk and emerging opportunity</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Alignment on priority shifts required</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Agreed next steps to strengthen strategic fitness</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Strengthened decision cadence and operating rhythm</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workshop 2: Leadership Elevation -->
+      <div class="workshop-card">
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:20px;">Leadership Elevation Workshop</div>
+        <div class="font-display" style="font-size: 27px; font-weight:700; color:#0B1D26; line-height:1.15; margin-bottom:8px;">Strengthening Leadership Capability Under Conditions of Uncertainty</div>
+
+        <div style="display:flex; gap:24px; margin:24px 0; padding:20px 0; border-top:1px solid rgba(11,29,38,0.1); border-bottom:1px solid rgba(11,29,38,0.1);">
+          <div>
+            <div style="font-size: 11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(11,29,38,0.45); margin-bottom:4px;">Duration</div>
+            <div style="font-size: 15px; font-weight:500; color:#4a6080;">1 half-day</div>
+          </div>
+          <div style="width:1px; background:rgba(11,29,38,0.12);"></div>
+          <div>
+            <div style="font-size: 11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(11,29,38,0.45); margin-bottom:4px;">For</div>
+            <div style="font-size: 15px; font-weight:500; color:#4a6080;">Executive and Senior Leadership Teams</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:28px;">
+          <div style="font-size: 11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Focus</div>
+          <div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Strengthen the human system beneath strategy</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Improve shared sense-making within uncertainty</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Reinforce disciplined trade-offs and prioritisation</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Increase learning velocity</p>
+            </div>
+            <div class="workshop-focus-item">
+              <div style="width:5px; height:5px; background:#7B9BD1; border-radius:50%; flex-shrink:0; margin-top:7px; opacity:0.7;"></div>
+              <p style="font-size: 16px; line-height:1.6; color:rgba(11,29,38,0.55); margin:0;">Build trust, legitimacy, and coherence in decision-making</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size: 11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Leaders Gain</div>
+          <div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Visibility of behavioural strengths and constraints</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Clarity on decision disciplines requiring strengthening</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Alignment on leadership shifts required</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Agreed practical actions to elevate leadership capability</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">Greater confidence operating without false certainty</p>
+            </div>
+            <div class="workshop-gain-item">
+              <div style="width:5px; height:5px; border:1.5px solid rgba(123,155,209,0.55); border-radius:50%; flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size: 15px; line-height:1.6; color:rgba(11,29,38,0.45); margin:0;">A shared view of the change landscape and its implications</p>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -874,7 +1060,7 @@
       font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.78);
       max-width: 580px; margin: 0 auto 48px;
     ">
-      A focused diagnostic with Larry or David is the cleanest way to see where execution discipline is genuinely fit for current conditions &mdash; and where the gap is hiding.
+      A focused diagnostic with David and Niloo is the cleanest way to see where execution discipline is genuinely fit for current conditions &mdash; and where the gap is hiding.
     </p>
 
     <!-- Dual path -->
@@ -897,17 +1083,6 @@
       </div>
     </div>
 
-    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); max-width: 760px; margin: 0 auto;">
-      <div style="text-align:center; padding-top:24px;">
-        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:4px;">Phone</div>
-        <div style="font-size:15px; color:rgba(255,255,255,0.65);">+61 390 218 970</div>
-      </div>
-      <div style="width:1px; background:rgba(255,255,255,0.1); margin-top:24px;"></div>
-      <div style="text-align:center; padding-top:24px;">
-        <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:4px;">Email</div>
-        <a href="mailto:james.cacciottolo@resilientfutures.com" style="font-size:15px; color:rgba(255,255,255,0.65); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">james.cacciottolo@resilientfutures.com</a>
-      </div>
-    </div>
   </div>
 </section>
 
