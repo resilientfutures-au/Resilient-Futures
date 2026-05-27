@@ -1,3 +1,6 @@
 node_modules/
 temporary screenshots/
 preview-*.html
+_preview/
+.claude/
+.superpowers/

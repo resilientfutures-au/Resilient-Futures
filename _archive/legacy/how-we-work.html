@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How We Work — Resilient Futures</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1A1A1A;
+      background: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #FF6139;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .section-label--light { color: #A1CACC; }
+    .btn-primary {
+      display: inline-block;
+      background: #FF6139;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-primary:focus-visible { outline: 2px solid #FF6139; outline-offset: 3px; }
+    .btn-primary:active { transform: translateY(1px); }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .nav-link {
+      color: rgba(255,255,255,0.72);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: rgba(255,255,255,0.9); }
+    .nav-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; color: rgba(255,255,255,0.9); }
+    .nav-link:active { color: #fff; }
+    .nav-link--active { color: rgba(255,255,255,0.9) !important; }
+    .nav-logo-link {
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-logo-link:hover { opacity: 0.8; }
+    .nav-logo-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; }
+    /* ── Dropdown nav ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.72); font-size: 13px; font-weight: 500;
+      font-family: 'Inter', sans-serif; text-decoration: none;
+      transition: color 0.2s; display: flex; align-items: center; gap: 4px;
+      padding: 4px 8px;
+    }
+    .nav-dropdown-trigger:hover { color: rgba(255,255,255,0.9); }
+    .nav-caret { font-size: 11px; opacity: 1; transition: transform 0.15s; display: inline-block; }
+    .nav-dropdown.open .nav-caret { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+      background: #2a1816; border: 1px solid rgba(255,255,255,0.08);
+      min-width: 190px; padding: 6px 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .nav-dropdown.open .nav-dropdown-menu {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-item {
+      display: block; padding: 9px 20px;
+      color: rgba(255,255,255,0.80); font-size: 13px; font-weight: 400;
+      text-decoration: none; transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .nav-dropdown-trigger--active { color: rgba(255,255,255,0.9) !important; }
+    .footer-email {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-email:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── Principle cards ── */
+    .principle-card {
+      background: #fff;
+      border-top: 3px solid #FF6139;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .principle-card--dim {
+      border-top-color: rgba(255,97,57,0.3);
+    }
+
+    /* ── RF3D feature panels ── */
+    .rf3d-panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Entry point cards ── */
+    .entry-card {
+      background: #fff;
+      border-top: 3px solid #FF6139;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .entry-card:hover {
+      box-shadow: 0 8px 32px rgba(54,31,29,0.12);
+      transform: translateY(-2px);
+    }
+
+    /* ── Explore further cards ── */
+    .explore-card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      padding: 28px 28px 24px;
+      border-top: 3px solid #FF6139;
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+      flex: 1;
+      min-width: 240px;
+    }
+    .explore-card:hover {
+      box-shadow: 0 8px 32px rgba(54,31,29,0.12);
+      transform: translateY(-2px);
+    }
+    .explore-card--dim { border-top-color: rgba(255,97,57,0.35); }
+
+    /* ── Responsive ── */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero-section { padding: 64px 32px 72px !important; }
+      .hero-section h1 { font-size: 38px !important; }
+      .principles-section { padding: 80px 32px !important; }
+      .principles-grid { grid-template-columns: repeat(2,1fr) !important; }
+      .rf3d-section { padding: 80px 32px !important; }
+      .rf3d-grid { grid-template-columns: 1fr !important; }
+      .rf3d-panels { grid-template-columns: repeat(2,1fr) !important; }
+      .entry-section { padding: 80px 32px !important; }
+      .entry-grid { grid-template-columns: repeat(2,1fr) !important; }
+      .cta-section { padding: 80px 32px !important; }
+      footer { padding: 28px 32px !important; }
+    }
+    @media (max-width: 767px) {
+      nav > div:last-child { display: none !important; }
+      .hero-section { padding: 48px 24px 64px !important; }
+      .hero-section h1 { font-size: 30px !important; }
+      .hero-inner-flex { flex-direction: column !important; }
+      .hero-accent-line { display: none !important; }
+      .principles-section { padding: 64px 24px !important; }
+      .principles-grid { grid-template-columns: 1fr 1fr !important; }
+      .rf3d-section { padding: 64px 24px !important; }
+      .rf3d-grid { grid-template-columns: 1fr !important; }
+      .rf3d-panels { grid-template-columns: 1fr !important; }
+      .entry-section { padding: 64px 24px !important; }
+      .entry-grid { grid-template-columns: 1fr !important; }
+      .cta-section { padding: 64px 24px !important; }
+      footer {
+        padding: 28px 24px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 12px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav style="
+  background: #361F1D;
+  height: 64px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+">
+  <a href="index.html" class="nav-logo-link">
+    <span class="font-display" style="
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    ">
+      <span style="color:#fff;">resilient</span><span style="color:#743734;">futures</span><span style="color:#FF6139;">+</span>
+    </span>
+  </a>
+  <div style="display:flex; gap:4px; align-items:center;">
+    <!-- About dropdown (active on this page) -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger nav-dropdown-trigger--active">About <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="why.html" class="nav-dropdown-item">Why Resilient Futures</a>
+        <a href="how-we-work.html" class="nav-dropdown-item" style="color:#FF6139;">How We Work</a>
+        <a href="team.html" class="nav-dropdown-item">Our Team</a>
+      </div>
+    </div>
+    <a href="strategy-in-action.html" class="nav-link" style="padding:4px 8px;">Strategy in Action</a>
+    <!-- Services dropdown -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">Services <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="#" class="nav-dropdown-item">Strategic Services</a>
+        <a href="strategic-fitness.html" class="nav-dropdown-item">Strategic Fitness</a>
+      </div>
+    </div>
+    <a href="getstarted.html" class="btn-primary" style="padding:8px 20px; font-size:11px; margin-left:16px;">Get in touch</a>
+  </div>
+  <script>
+    document.querySelectorAll('.nav-dropdown-trigger').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const dropdown = btn.closest('.nav-dropdown');
+        const isOpen = dropdown.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+        if (!isOpen) dropdown.classList.add('open');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    });
+  </script>
+</nav>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero-section" style="
+  background: linear-gradient(155deg, #2a1816 0%, #361F1D 45%, #4a2826 100%);
+  padding: 80px 48px 96px;
+  position: relative;
+  overflow: hidden;
+">
+  <!-- Coral radial glow -->
+  <div style="
+    position:absolute; top:-80px; right:-80px;
+    width:500px; height:500px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,97,57,0.1) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+  <!-- Blue-green glow -->
+  <div style="
+    position:absolute; bottom:40px; left:-60px;
+    width:350px; height:350px; border-radius:50%;
+    background: radial-gradient(circle, rgba(161,202,204,0.07) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <!-- Breadcrumb -->
+    <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:40px; border-left:2px solid rgba(255,97,57,0.4); padding-left:12px;">
+      <a href="index.html" style="font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a>
+      <span style="font-size:11px; color:rgba(255,255,255,0.2);">&#47;</span>
+      <span style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#FF6139;">How We Work</span>
+    </div>
+
+    <div class="hero-inner-flex" style="display:flex; gap:48px; align-items:flex-start;">
+      <!-- Vertical coral accent line -->
+      <div class="hero-accent-line" style="
+        width: 3px;
+        flex-shrink: 0;
+        min-height: 280px;
+        margin-top: 4px;
+        background: linear-gradient(to bottom, #FF6139, rgba(255,97,57,0));
+      "></div>
+      <!-- Copy -->
+      <div style="flex:1;">
+        <h1 class="font-display" style="
+          font-size: 48px;
+          font-weight: 700;
+          color: #fff;
+          line-height: 1.1;
+          letter-spacing: -0.025em;
+          margin-bottom: 28px;
+          max-width: 580px;
+        ">
+          Capability, not dependency.<br>
+          <span style="color:rgba(255,255,255,0.55);">A different kind of practice.</span>
+        </h1>
+        <p style="
+          font-size: 17px;
+          line-height: 1.7;
+          color: rgba(255,255,255,0.82);
+          max-width: 520px;
+          margin-bottom: 16px;
+        ">
+          We are not a traditional consultancy. Our role is to work alongside your leadership team &mdash; bringing the thinking, challenging the assumptions, and transferring the tools &mdash; so that your organisation builds real strategic capability over time.
+        </p>
+        <p style="
+          font-size: 17px;
+          line-height: 1.7;
+          color: rgba(255,255,255,0.82);
+          max-width: 520px;
+          margin-bottom: 40px;
+        ">
+          Not dependency. When we step back, strategic fitness is an ongoing internal practice &mdash; not a periodic external intervention.
+        </p>
+        <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+          <a href="../contact.html" class="btn-primary">Book a Conversation</a>
+          <a href="#principles" style="color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif; font-size:12px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Read on &#8595;</a>
+        </div>
+      </div>
+      <!-- Right side: abstract signal network graphic -->
+      <div style="flex-shrink:0; width:300px; padding-top:16px; align-self:center;">
+        <svg viewBox="0 0 300 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <defs>
+            <radialGradient id="dotFadeHWW" cx="50%" cy="45%" r="55%">
+              <stop offset="0%" stop-opacity="1"/>
+              <stop offset="100%" stop-opacity="0"/>
+            </radialGradient>
+            <mask id="gridMaskHWW">
+              <rect width="300" height="320" fill="url(#dotFadeHWW)"/>
+            </mask>
+          </defs>
+          <g mask="url(#gridMaskHWW)" opacity="0.3">
+            <circle cx="20" cy="20" r="1.5" fill="#A1CACC"/><circle cx="60" cy="20" r="1.5" fill="#A1CACC"/><circle cx="100" cy="20" r="1.5" fill="#A1CACC"/><circle cx="140" cy="20" r="1.5" fill="#A1CACC"/><circle cx="180" cy="20" r="1.5" fill="#A1CACC"/><circle cx="220" cy="20" r="1.5" fill="#A1CACC"/><circle cx="260" cy="20" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="60" r="1.5" fill="#A1CACC"/><circle cx="60" cy="60" r="1.5" fill="#A1CACC"/><circle cx="100" cy="60" r="1.5" fill="#A1CACC"/><circle cx="140" cy="60" r="1.5" fill="#A1CACC"/><circle cx="180" cy="60" r="1.5" fill="#A1CACC"/><circle cx="220" cy="60" r="1.5" fill="#A1CACC"/><circle cx="260" cy="60" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="100" r="1.5" fill="#A1CACC"/><circle cx="60" cy="100" r="1.5" fill="#A1CACC"/><circle cx="100" cy="100" r="1.5" fill="#A1CACC"/><circle cx="140" cy="100" r="1.5" fill="#A1CACC"/><circle cx="180" cy="100" r="1.5" fill="#A1CACC"/><circle cx="220" cy="100" r="1.5" fill="#A1CACC"/><circle cx="260" cy="100" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="140" r="1.5" fill="#A1CACC"/><circle cx="60" cy="140" r="1.5" fill="#A1CACC"/><circle cx="100" cy="140" r="1.5" fill="#A1CACC"/><circle cx="140" cy="140" r="1.5" fill="#A1CACC"/><circle cx="180" cy="140" r="1.5" fill="#A1CACC"/><circle cx="220" cy="140" r="1.5" fill="#A1CACC"/><circle cx="260" cy="140" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="180" r="1.5" fill="#A1CACC"/><circle cx="60" cy="180" r="1.5" fill="#A1CACC"/><circle cx="100" cy="180" r="1.5" fill="#A1CACC"/><circle cx="140" cy="180" r="1.5" fill="#A1CACC"/><circle cx="180" cy="180" r="1.5" fill="#A1CACC"/><circle cx="220" cy="180" r="1.5" fill="#A1CACC"/><circle cx="260" cy="180" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="220" r="1.5" fill="#A1CACC"/><circle cx="60" cy="220" r="1.5" fill="#A1CACC"/><circle cx="100" cy="220" r="1.5" fill="#A1CACC"/><circle cx="140" cy="220" r="1.5" fill="#A1CACC"/><circle cx="180" cy="220" r="1.5" fill="#A1CACC"/><circle cx="220" cy="220" r="1.5" fill="#A1CACC"/><circle cx="260" cy="220" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="260" r="1.5" fill="#A1CACC"/><circle cx="60" cy="260" r="1.5" fill="#A1CACC"/><circle cx="100" cy="260" r="1.5" fill="#A1CACC"/><circle cx="140" cy="260" r="1.5" fill="#A1CACC"/><circle cx="180" cy="260" r="1.5" fill="#A1CACC"/><circle cx="220" cy="260" r="1.5" fill="#A1CACC"/><circle cx="260" cy="260" r="1.5" fill="#A1CACC"/>
+            <circle cx="20" cy="300" r="1.5" fill="#A1CACC"/><circle cx="60" cy="300" r="1.5" fill="#A1CACC"/><circle cx="100" cy="300" r="1.5" fill="#A1CACC"/><circle cx="140" cy="300" r="1.5" fill="#A1CACC"/><circle cx="180" cy="300" r="1.5" fill="#A1CACC"/><circle cx="220" cy="300" r="1.5" fill="#A1CACC"/><circle cx="260" cy="300" r="1.5" fill="#A1CACC"/>
+          </g>
+          <!-- Connected nodes representing collaboration network -->
+          <circle cx="150" cy="80" r="7" fill="#A1CACC" opacity="0.9"/>
+          <circle cx="80" cy="140" r="5" fill="#A1CACC" opacity="0.7"/>
+          <circle cx="220" cy="130" r="5" fill="#A1CACC" opacity="0.7"/>
+          <circle cx="120" cy="210" r="5" fill="#A1CACC" opacity="0.6"/>
+          <circle cx="210" cy="220" r="6" fill="#FF6139" opacity="0.9"/>
+          <circle cx="150" cy="170" r="4" fill="#FF6139" opacity="0.7"/>
+          <circle cx="60" cy="200" r="3.5" fill="#FF6139" opacity="0.5"/>
+          <circle cx="260" cy="170" r="3" fill="#FF6139" opacity="0.45"/>
+          <line x1="150" y1="80" x2="80" y2="140" stroke="#A1CACC" stroke-width="0.75" opacity="0.35"/>
+          <line x1="150" y1="80" x2="220" y2="130" stroke="#A1CACC" stroke-width="0.75" opacity="0.35"/>
+          <line x1="80" y1="140" x2="150" y2="170" stroke="#A1CACC" stroke-width="0.75" opacity="0.3"/>
+          <line x1="220" y1="130" x2="150" y2="170" stroke="#A1CACC" stroke-width="0.75" opacity="0.3"/>
+          <line x1="150" y1="170" x2="120" y2="210" stroke="#FF6139" stroke-width="0.75" opacity="0.3"/>
+          <line x1="150" y1="170" x2="210" y2="220" stroke="#FF6139" stroke-width="0.75" opacity="0.3"/>
+          <line x1="80" y1="140" x2="60" y2="200" stroke="#A1CACC" stroke-width="0.75" opacity="0.2"/>
+          <line x1="220" y1="130" x2="260" y2="170" stroke="#A1CACC" stroke-width="0.75" opacity="0.2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PRINCIPLES ═══════════════════════════ -->
+<section id="principles" class="principles-section" style="background:#F5F5ED; padding:96px 48px;">
+  <div class="section-inner">
+    <span class="section-label" style="color:#B8360F;">Our Commitments</span>
+    <h2 class="font-display" style="font-size:38px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; max-width:700px; margin-bottom:24px;">Four principles that define every engagement.</h2>
+
+    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:16px;">
+      We are a small, senior team. Every engagement is led by a principal &mdash; not handed to a junior after the pitch. That is not a policy. It is how we work.
+    </p>
+    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:48px;">
+      These commitments are not aspirational statements. They are the operating conditions of every Resilient Futures engagement.
+    </p>
+
+    <!-- 4 principle cards -->
+    <div class="principles-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:stretch;">
+
+      <div class="principle-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:12px;">01</div>
+        <div class="font-display" style="font-size:18px; font-weight:700; color:#361F1D; margin-bottom:10px; line-height:1.2;">Senior-Led, Always</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.6; color:#6B5350; margin:0;">You work directly with the people who bring the deepest expertise &mdash; from the first conversation to the final workshop. Not with juniors learning on your investment.</p>
+      </div>
+
+      <div class="principle-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:#FF6139; margin-bottom:12px;">02</div>
+        <div class="font-display" style="font-size:18px; font-weight:700; color:#361F1D; margin-bottom:10px; line-height:1.2;">Capability, Not Dependency</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.6; color:#6B5350; margin:0;">Our goal is to build real strategic capability inside your organisation. When we step back, that capability remains &mdash; embedded in your people, your rhythms, your practice.</p>
+      </div>
+
+      <div class="principle-card principle-card--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:12px;">03</div>
+        <div class="font-display" style="font-size:18px; font-weight:700; color:#361F1D; margin-bottom:10px; line-height:1.2;">Evidence Before Assumption</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.6; color:#6B5350; margin:0;">Every engagement begins with an honest diagnosis &mdash; not a pre-packaged solution mapped onto your situation. We start with reality, not with a proposal we need to justify.</p>
+      </div>
+
+      <div class="principle-card principle-card--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; color:rgba(255,97,57,0.5); margin-bottom:12px;">04</div>
+        <div class="font-display" style="font-size:18px; font-weight:700; color:#361F1D; margin-bottom:10px; line-height:1.2;">Adaptive Throughout</div>
+        <p style="font-size:13px; font-weight:500; line-height:1.6; color:#6B5350; margin:0;">We don&rsquo;t hand over a static document. Our approach is designed to evolve as conditions change &mdash; so your strategy remains connected to operating reality, not just a planning cycle.</p>
+      </div>
+
+    </div>
+
+    <!-- Pullquote -->
+    <blockquote style="
+      border-left: 3px solid #FF6139;
+      padding: 20px 28px;
+      margin: 48px 0 0;
+      background: rgba(54,31,29,0.04);
+    ">
+      <p class="font-display" style="
+        font-size:20px; font-weight:700; color:#361F1D;
+        line-height:1.4; font-style:italic;
+      ">&ldquo;The goal of every Resilient Futures engagement is to build that capability inside the organisation &mdash; so that when we step back, strategic fitness is an ongoing internal practice, not a periodic external intervention.&rdquo;</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ RF3D COLLABORATION ═══════════════════════════ -->
+<section class="rf3d-section" style="
+  background: #361F1D;
+  padding: 80px 48px;
+  position:relative; overflow:hidden;
+">
+  <!-- Teal glow top left -->
+  <div style="
+    position:absolute; top:-100px; left:-100px;
+    width:500px; height:500px; border-radius:50%;
+    background: radial-gradient(circle, rgba(161,202,204,0.06) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+  <!-- Coral glow bottom right -->
+  <div style="
+    position:absolute; bottom:-60px; right:-60px;
+    width:400px; height:400px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,97,57,0.06) 0%, transparent 65%);
+    pointer-events:none;
+  "></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <span class="section-label section-label--light">How We Deliver</span>
+
+    <!-- RF3D: acronym + name -->
+    <div style="margin-bottom:48px;">
+      <div style="display:flex; align-items:baseline; gap:20px; flex-wrap:wrap; margin-bottom:12px;">
+        <span class="font-display" style="
+          font-size:72px; font-weight:700;
+          color:#A1CACC; letter-spacing:-0.04em; line-height:1;
+        ">RF3D</span>
+        <span class="font-display" style="
+          font-size:20px; font-weight:700;
+          color:rgba(255,255,255,0.4); letter-spacing:-0.01em; line-height:1;
+          padding-bottom:4px;
+        ">Collaboration</span>
+      </div>
+      <div style="width:60px; height:3px; background:#A1CACC; margin-bottom:20px;"></div>
+      <p style="font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(161,202,204,0.7); max-width:500px;">Dynamic Dialogue and Documentation</p>
+    </div>
+
+    <div class="rf3d-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;">
+      <div>
+        <p style="font-size:16px; line-height:1.75; color:rgba(255,255,255,0.82); margin-bottom:20px;">
+          Resilient Futures operates as a fully distributed, hybrid practice. We deliver engagements in person and online, synchronously and asynchronously &mdash; through what we call RF3D Collaboration: Dynamic Dialogue and Documentation.
+        </p>
+        <p style="font-size:16px; line-height:1.75; color:rgba(255,255,255,0.78); margin-bottom:20px;">
+          This approach reflects both a principled commitment to minimising unnecessary travel and a genuine capability advantage: our cloud-based virtual project environment means that analysis, synthesis, and strategic dialogue are available continuously to all participants &mdash; not just during workshop days.
+        </p>
+        <p style="font-size:15px; line-height:1.75; color:rgba(255,255,255,0.78);">
+          It also means that participants who cannot attend scheduled sessions do not fall behind. They can engage asynchronously, at their own pace, and re-enter the program flow without disruption.
+        </p>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="rf3d-panel">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <div style="width:32px; height:32px; background:rgba(161,202,204,0.12); border:1px solid rgba(161,202,204,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A1CACC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div style="font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#A1CACC;">In Person &amp; Online</div>
+          </div>
+          <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.65); margin:0;">Engagements delivered face-to-face or virtually &mdash; whichever best serves your organisation and your people.</p>
+        </div>
+
+        <div class="rf3d-panel">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <div style="width:32px; height:32px; background:rgba(161,202,204,0.12); border:1px solid rgba(161,202,204,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A1CACC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div style="font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#A1CACC;">Synchronous &amp; Asynchronous</div>
+          </div>
+          <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.65); margin:0;">Live sessions combined with an always-on virtual environment. Participants engage when it works for them &mdash; not just on workshop days.</p>
+        </div>
+
+        <div class="rf3d-panel">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <div style="width:32px; height:32px; background:rgba(255,97,57,0.12); border:1px solid rgba(255,97,57,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF6139" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div style="font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#FF6139;">Always Available</div>
+          </div>
+          <p style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.65); margin:0;">Our cloud-based project environment keeps analysis, synthesis, and strategic dialogue accessible to all participants at all times.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ENTRY POINTS ═══════════════════════════ -->
+<section class="entry-section" style="background:#F5F5ED; padding:96px 48px;">
+  <div class="section-inner">
+    <span class="section-label" style="color:#B8360F;">Starting Points</span>
+    <h2 class="font-display" style="
+      font-size:38px; font-weight:700; color:#361F1D;
+      line-height:1.15; letter-spacing:-0.02em;
+      max-width:680px; margin-bottom:24px;
+    ">Every entry point is a proof-of-value experience.</h2>
+
+    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:16px;">
+      We design our starting points so you get a clear sense of who we are, how we think, and whether the fit is right &mdash; before any longer-term commitment is made.
+    </p>
+    <p style="font-size:15px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:48px;">
+      All three are real engagements, not sales conversations. Each one delivers genuine strategic value on its own terms.
+    </p>
+
+    <div class="entry-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; align-items:stretch;">
+
+      <a href="strategic-fitness.html" class="entry-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:14px;">Start Here</div>
+        <div class="font-display" style="font-size:20px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:12px;">Strategic Fitness Diagnostic</div>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">A half-day diagnostic workshop that creates a rapid, honest assessment of your organisation&rsquo;s strategic health &mdash; and surfaces the questions that most need answering.</p>
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#FF6139;">Learn more &rarr;</span>
+      </a>
+
+      <a href="strategy-in-action.html" class="entry-card" style="border-top-color: rgba(255,97,57,0.45);">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,97,57,0.7); margin-bottom:14px;">Go Deeper</div>
+        <div class="font-display" style="font-size:20px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:12px;">SiA Kick-Start Session</div>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">An introduction to Strategy in Action for leadership teams ready to explore a new approach to strategy in complex, fast-changing conditions.</p>
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,97,57,0.7);">Explore the framework &rarr;</span>
+      </a>
+
+      <a href="strategy-in-action.html" class="entry-card" style="border-top-color: rgba(255,97,57,0.3);">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,97,57,0.55); margin-bottom:14px;">Full Engagement</div>
+        <div class="font-display" style="font-size:20px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:12px;">Full SiA Facilitation</div>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">A complete strategy facilitation program built around the SiA framework and your organisation&rsquo;s specific conditions &mdash; from diagnostic to adaptive strategy and embedded capability.</p>
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,97,57,0.55);">See our approach &rarr;</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CTA SECTION ═══════════════════════════ -->
+<section class="cta-section" style="
+  background: linear-gradient(135deg, #2a1816 0%, #361F1D 100%);
+  padding: 96px 48px;
+  position:relative; overflow:hidden;
+">
+  <!-- Radial glow -->
+  <div style="
+    position:absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    width:700px; height:700px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,97,57,0.07) 0%, transparent 60%);
+    pointer-events:none;
+  "></div>
+
+  <div class="section-inner" style="position:relative; z-index:1; max-width:720px;">
+    <span class="section-label section-label--light">Want to understand how we work before committing?</span>
+    <h2 class="font-display" style="
+      font-size:46px; font-weight:700; color:#fff;
+      line-height:1.1; letter-spacing:-0.02em;
+      margin-bottom:24px;
+    ">
+      A short conversation is the best place to start.
+      <span style="color:#FF6139;"> No obligation. No pitch.</span>
+    </h2>
+    <p style="font-size:16px; line-height:1.7; color:rgba(255,255,255,0.82); margin-bottom:48px;">
+      You&rsquo;ll get a clear sense of who we are, how we think, and whether the fit is right &mdash; before committing to anything. If there isn&rsquo;t a genuine fit, we&rsquo;ll tell you that too.
+    </p>
+    <a href="../contact.html" class="btn-primary" style="font-size:13px; padding:16px 40px;">
+      Book a Conversation
+    </a>
+    <p style="font-size:12px; color:rgba(255,255,255,0.45); margin-top:16px; letter-spacing:0.04em;">No commitment required</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ NEXT STEP STRIP ═══════════════════════════ -->
+<section style="background:#EFEFE7; padding:64px 48px; border-top:1px solid rgba(54,31,29,0.08);">
+  <div class="section-inner">
+    <p style="font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:rgba(54,31,29,0.55); margin-bottom:32px;">Explore further</p>
+    <div style="display:flex; gap:16px; flex-wrap:wrap;">
+
+      <a href="why.html" class="explore-card">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FF6139; margin-bottom:14px;">Why Resilient Futures</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">The Problem We Solve</div>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">The operating environment has changed. Most strategic systems haven&rsquo;t. Understand the conditions we work in and why they demand a different approach.</p>
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#FF6139;">Read more &rarr;</span>
+      </a>
+
+      <a href="strategy-in-action.html" class="explore-card explore-card--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,97,57,0.65); margin-bottom:14px;">Our Approach</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">Strategy in Action (SiA)</div>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">A decision-making system built not to plan around disruption, but to operate effectively within it.</p>
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,97,57,0.65);">Explore the framework &rarr;</span>
+      </a>
+
+      <a href="team.html" class="explore-card explore-card--dim">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,97,57,0.65); margin-bottom:14px;">Our Team</div>
+        <div class="font-display" style="font-size:22px; font-weight:700; color:#361F1D; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">The People Behind the Work</div>
+        <p style="font-size:13px; line-height:1.6; color:#6B5350; margin:0 0 20px; flex:1;">Every engagement is led by the people with the deepest expertise — not delegated down after the pitch.</p>
+        <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,97,57,0.65);">Meet the team &rarr;</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer style="background:#1a0f0e; border-top:1px solid rgba(255,255,255,0.06);">
+
+  <div style="padding:40px 48px 28px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:32px;">
+
+    <a href="index.html" class="nav-logo-link">
+      <img src="brand_assets/Resilient Futures LOGO.png" alt="Resilient Futures" style="height:32px; width:auto; display:block; filter:brightness(0) invert(1); opacity:0.55;">
+    </a>
+
+    <div style="display:flex; gap:48px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:4px;">About</span>
+        <a href="why.html" class="nav-link">Why Resilient Futures</a>
+        <a href="how-we-work.html" class="nav-link">How We Work</a>
+        <a href="team.html" class="nav-link">Our Team</a>
+        <a href="strategy-in-action.html" class="nav-link">Strategy in Action</a>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:4px;">Services</span>
+        <a href="#" class="nav-link">Strategic Services</a>
+        <a href="strategic-fitness.html" class="nav-link">Strategic Fitness</a>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <span style="font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:4px;">Contact</span>
+        <a href="../contact.html" class="nav-link">Get In Touch</a>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="#" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="#" aria-label="X (Twitter)" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="#" aria-label="Facebook" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="#" aria-label="YouTube" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div style="padding:20px 48px; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <p style="font-size:12px; color:rgba(255,255,255,0.45); margin:0;">
+      Resilient Futures &copy; 2026 &middot; All rights reserved
+    </p>
+    <p style="font-size:12px; color:rgba(255,255,255,0.38); margin:0;">
+      Strategy for a world that won&rsquo;t hold still
+    </p>
+  </div>
+
+</footer>
+
+</body>
+</html>

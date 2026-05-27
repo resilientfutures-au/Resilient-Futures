@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,317 +7,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 17px;
-      line-height: 1.7;
-      color: #1A1A1A;
-      background: #0B1D26;
-      -webkit-font-smoothing: antialiased;
-    }
-    .font-display { font-family: 'Nunito Sans', sans-serif; }
-    .section-label {
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #7B9BD1;
-      display: block;
-      margin-bottom: 20px;
-    }
-    .section-label--light { color: #7B9BD1; }
-    /* ── Button system ── */
-    .btn-primary,
-    .btn-primary--inverse,
-    .btn-secondary,
-    .btn-secondary--dark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      padding: 14px 28px;
-      border: 1.5px solid transparent;
-      border-radius: 0;
-      cursor: pointer;
-      text-decoration: none;
-      line-height: 1;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .btn-primary:active,
-    .btn-primary--inverse:active,
-    .btn-secondary:active,
-    .btn-secondary--dark:active { transform: translateY(1px); }
-    .btn-primary { background: #7B9BD1; border-color: #7B9BD1; color: #fff; }
-    .btn-primary:hover { background: #6889bf; border-color: #6889bf; }
-    .btn-primary:focus-visible { outline: 3px solid #7B9BD1; outline-offset: 3px; box-shadow: 0 0 0 5px rgba(123,155,209,0.25); }
-    .btn-primary--inverse { background: #fff; border-color: #fff; color: #0B1D26; }
-    .btn-primary--inverse:hover { background: #EEF2F9; border-color: #EEF2F9; }
-    .btn-primary--inverse:focus-visible { outline: 3px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 5px rgba(255,255,255,0.3); }
-    .btn-secondary { background: transparent; border-color: rgba(255,255,255,0.45); color: #fff; }
-    .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.9); }
-    .btn-secondary:focus-visible { outline: 2px solid rgba(255,255,255,0.85); outline-offset: 3px; }
-    .btn-secondary--dark { background: transparent; border-color: rgba(30,53,96,0.4); color: #1E3560; }
-    .btn-secondary--dark:hover { background: rgba(30,53,96,0.05); border-color: #1E3560; }
-    .btn-secondary--dark:focus-visible { outline: 2px solid #1E3560; outline-offset: 3px; }
-    .btn--sm { padding: 9px 20px; font-size: 12px; }
-    .btn--lg { padding: 16px 40px; }
-    .section-inner { max-width: 1100px; margin: 0 auto; }
-    .nav-link {
-      color: rgba(255,255,255,0.72);
-      font-size: 15px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: rgba(255,255,255,0.9); }
-    .nav-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; color: rgba(255,255,255,0.9); }
-    .nav-link:active { color: #fff; }
-    .nav-link--active { color: rgba(255,255,255,0.9) !important; }
-    .nav-logo-link { text-decoration: none; transition: opacity 0.2s; }
-    .nav-logo-link:hover { opacity: 0.8; }
-    .nav-logo-link:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 4px; }
-    /* Dropdown */
-    .nav-dropdown { position: relative; }
-    .nav-dropdown-trigger {
-      background: none; border: none; cursor: pointer;
-      color: rgba(255,255,255,0.72); font-size: 15px; font-weight: 500;
-      font-family: 'Nunito Sans', sans-serif; text-decoration: none;
-      transition: color 0.2s; display: flex; align-items: center; gap: 4px;
-      padding: 4px 8px;
-    }
-    .nav-dropdown-trigger:hover { color: rgba(255,255,255,0.9); }
-    .nav-caret { font-size: 12px; opacity: 1; transition: transform 0.15s; display: inline-block; }
-    .nav-dropdown.open .nav-caret { transform: rotate(180deg); }
-    .nav-dropdown-menu {
-      position: absolute; top: calc(100% + 10px); left: 50%;
-      transform: translateX(-50%) translateY(-4px);
-      background: #0d2535; border: 1px solid rgba(255,255,255,0.08);
-      min-width: 190px; padding: 6px 0;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.15s, transform 0.15s;
-    }
-    .nav-dropdown.open .nav-dropdown-menu {
-      opacity: 1; pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
-    }
-    .nav-dropdown-item {
-      display: block; padding: 9px 20px;
-      color: rgba(255,255,255,0.80); font-size: 15px; font-weight: 400;
-      text-decoration: none; transition: color 0.15s, background 0.15s;
-      white-space: nowrap;
-    }
-    .nav-dropdown-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
-    .footer-email {
-      font-size: 13px;
-      color: rgba(255,255,255,0.65);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-email:hover { color: rgba(255,255,255,0.8); }
-
-    /* Standard cards */
-    .standard-card {
-      border-top: 2px solid rgba(123,155,209,0.2);
-      padding: 56px 0;
-    }
-    .standard-card + .standard-card {
-      border-top-color: rgba(123,155,209,0.12);
-    }
-    .standard-card__eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-    .standard-card__eyebrow-bar {
-      width: 48px;
-      height: 2px;
-      background: #7B9BD1;
-      flex-shrink: 0;
-    }
-    .standard-number {
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: #3A5A92;
-      line-height: 1;
-      letter-spacing: 0.04em;
-    }
-    .standard-card__qlabel {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #3A5A92;
-      margin: 32px 0 16px;
-      display: block;
-    }
-    .q-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      align-items: stretch;
-    }
-    .q-grid > .principle-chip { height: 100%; }
-
-    /* Principle chip — strengthened */
-    .principle-chip {
-      position: relative;
-      background: #FFFFFF;
-      border: 1.5px solid rgba(30, 53, 96, 0.18);
-      border-left: 3px solid #3A5A92;
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-    .principle-chip:hover {
-      transform: translateY(-2px);
-      border-color: rgba(30, 53, 96, 0.45);
-      border-left-color: #1E3560;
-      box-shadow: 0 8px 24px rgba(11, 29, 38, 0.08);
-    }
-    .principle-chip__num {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #7B9BD1;
-      display: block;
-      margin-bottom: 10px;
-    }
-    .principle-chip p {
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.55;
-      color: #0B1D26;
-      margin: 0;
-      flex: 1;
-    }
-    @media (max-width: 767px) {
-      .q-grid { grid-template-columns: 1fr !important; }
-    }
-
-    /* Explore cards */
-    .explore-card {
-      display: flex;
-      flex-direction: column;
-      background: #fff;
-      padding: 28px 28px 24px;
-      border-top: 3px solid #7B9BD1;
-      text-decoration: none;
-      transition: box-shadow 0.2s, transform 0.2s;
-      flex: 1;
-      min-width: 240px;
-    }
-    .explore-card:hover {
-      box-shadow: 0 8px 32px rgba(11,29,38,0.12);
-      transform: translateY(-2px);
-    }
-    .explore-card--dim { border-top-color: rgba(123,155,209,0.35); }
-
-    /* Responsive */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      .hero-section { padding: 64px 32px 80px !important; }
-      .hero-section h1 { font-size: 43px !important; }
-      .intro-section { padding: 80px 32px !important; }
-      .foundations-section { padding: 80px 32px !important; }
-      .standards-section { padding: 80px 32px !important; }
-      .diagram-section { padding: 80px 32px !important; }
-      .diagram-cols { grid-template-columns: 1fr !important; }
-      .system-section { padding: 80px 32px !important; }
-      .principles-grid { grid-template-columns: repeat(2,1fr) !important; }
-      footer { padding: 28px 32px !important; }
-    }
-    @media (max-width: 767px) {
-      nav > div:last-child { display: none !important; }
-      .hero-section { padding: 48px 24px 72px !important; }
-      .hero-section h1 { font-size: 34px !important; }
-      .hero-inner-flex { flex-direction: column !important; }
-      .hero-accent-line { display: none !important; }
-      .hero-graphic { display: none !important; }
-      .intro-section { padding: 64px 24px !important; }
-      .foundations-section { padding: 64px 24px !important; }
-      .foundations-grid { grid-template-columns: 1fr !important; }
-      .standards-section { padding: 64px 24px !important; }
-      .diagram-section { padding: 64px 24px !important; }
-      .diagram-cols { grid-template-columns: 1fr !important; }
-      .system-section { padding: 64px 24px !important; }
-      .principles-grid { grid-template-columns: 1fr !important; }
-      .testimonials-grid { grid-template-columns: 1fr !important; }
-      .cta-section { padding: 64px 24px !important; }
-      .explore-strip { padding: 48px 24px !important; }
-      .explore-cards { flex-direction: column !important; }
-      footer {
-        padding: 28px 24px !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        gap: 12px !important;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body>
+<body class="page-sia">
 
 <!-- ═══════════════════════════ NAV ═══════════════════════════ -->
-<nav style="
-  background: #0B1D26;
-  height: 64px;
-  padding: 0 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-">
-  <a href="index.html" class="nav-logo-link"><img src="brand_assets/Resilient Futures LOGOS (4).png" alt="Resilient Futures" style="height:36px; width:auto; display:block;"></a>
-  <div style="display:flex; gap:4px; align-items:center;">
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-trigger">About <span class="nav-caret">▾</span></button>
-      <div class="nav-dropdown-menu">
-        <a href="why.html" class="nav-dropdown-item">Why Resilient Futures</a>
-      </div>
-    </div>
-    <a href="strategy-in-action.html" class="nav-link nav-link--active" style="padding:4px 8px;">Strategy in Action</a>
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-trigger">Services <span class="nav-caret">▾</span></button>
-      <div class="nav-dropdown-menu">
-        <a href="strategy-and-planning.html" class="nav-dropdown-item">Strategy and Planning</a>
-        <a href="change-management.html" class="nav-dropdown-item">Change Management</a>
-        <a href="leadership-development.html" class="nav-dropdown-item">Leadership Development</a>
-        <a href="strategic-intelligence.html" class="nav-dropdown-item">Strategic Intelligence</a>
-      </div>
-    </div>
-    <a href="contact.html" class="btn-primary btn--sm" style="margin-left:16px;">Get in touch</a>
-  </div>
-  <script>
-    document.querySelectorAll('.nav-dropdown-trigger').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const dropdown = btn.closest('.nav-dropdown');
-        const isOpen = dropdown.classList.contains('open');
-        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
-        if (!isOpen) dropdown.classList.add('open');
-      });
-    });
-    document.addEventListener('click', () => {
-      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
-    });
-  </script>
-</nav>
+<div data-include="nav"></div>
 
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section class="hero-section" style="
@@ -359,7 +55,7 @@
         background: linear-gradient(to bottom, #7B9BD1, rgba(123,155,209,0));
       "></div>
       <!-- Copy -->
-      <div style="flex:1;">
+      <div class="reveal" style="flex:1;">
         <h1 class="font-display" style="
           font-size: 58px;
           font-weight: 700;
@@ -409,22 +105,7 @@
             </svg>
           </a>
         </div>
-        <style>
-          .hero-scroll-cue__chevron {
-            animation: heroScrollCueBounce 1.6s ease-in-out infinite;
-            will-change: transform;
-          }
-          .hero-scroll-cue:hover .hero-scroll-cue__chevron {
-            animation-duration: 0.9s;
-          }
-          @keyframes heroScrollCueBounce {
-            0%, 100% { transform: translateY(0);   opacity: 0.9; }
-            50%      { transform: translateY(3px); opacity: 1; }
-          }
-          @media (prefers-reduced-motion: reduce) {
-            .hero-scroll-cue__chevron { animation: none; opacity: 1; }
-          }
-        </style>
+        
       </div>
       <!-- Right side graphic -->
       <div class="hero-graphic" style="flex-shrink:0; width:clamp(300px, 38vw, 520px); align-self:center;">
@@ -460,56 +141,26 @@
             <circle class="node-pulse node-pulse--br"   cx="249" cy="175" r="26" fill="#0B1D26" stroke="#7B9BD1" stroke-width="2"   opacity="0.85"/>
           </g>
         </svg>
-        <style>
-          .node-diagram-root {
-            transform-box: fill-box;
-            transform-origin: center;
-            animation: nodeDiagramRock 18s ease-in-out infinite;
-            will-change: transform;
-          }
-          @keyframes nodeDiagramRock {
-            0%, 100% { transform: rotate(-1.2deg); }
-            50%      { transform: rotate(1.2deg); }
-          }
 
-          .node-pulse {
-            transform-box: fill-box;
-            transform-origin: center;
-            animation: nodePulse 5s ease-in-out infinite;
-            will-change: transform;
-          }
-          .node-pulse--core { animation-duration: 5.6s; animation-delay: -0.4s; }
-          .node-pulse--top  { animation-duration: 4.4s; animation-delay: -1.2s; }
-          .node-pulse--bl   { animation-duration: 4.8s; animation-delay: -2.6s; }
-          .node-pulse--br   { animation-duration: 5.2s; animation-delay: -3.5s; }
-
-          @keyframes nodePulse {
-            0%, 100% { transform: scale(1);    }
-            50%      { transform: scale(1.07); }
-          }
-
-          @media (prefers-reduced-motion: reduce) {
-            .node-diagram-root,
-            .node-pulse { animation: none; }
-          }
-        </style>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════ WHAT IS SiA ═══════════════════════════ -->
-<section class="intro-section" style="background:#FAFAF7; padding:96px 48px;">
-  <div class="section-inner">
-    <span class="section-label" style="color:#3A5A92;">The Philosophy</span>
-    <h2 class="font-display" style="
-      font-size: 43px; font-weight:700; color:#0B1D26;
-      line-height:1.15; letter-spacing:-0.02em;
-      max-width:680px; margin-bottom:24px;
-    ">Built from a different premise about what strategy is for.</h2>
+<section class="intro-section" style="background:#FAFAF7; padding: 96px 0;">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow" style="color:#3A5A92;">The Philosophy</span>
+      <h2 class="font-display" style="
+        font-size: 43px; font-weight:700; color:#0B1D26;
+        line-height:1.15; letter-spacing:-0.02em;
+        max-width:680px; margin-bottom:24px;
+      ">Built from a different premise about what strategy is for.</h2>
+    </div>
 
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;">
-      <div>
+      <div class="reveal">
         <p style="font-size: 18px; line-height:1.75; color:#1A1A1A; margin-bottom:20px;">
           Most strategy processes begin with the assumption that the environment is knowable enough
           to plan around. Set direction. Build the plan. Execute. Review annually.
@@ -525,7 +176,7 @@
           from an event to a capability.
         </p>
       </div>
-      <div>
+      <div class="reveal" style="transition-delay:120ms;">
         <!-- Pullquote -->
         <blockquote style="
           border-left: 3px solid #7B9BD1;
@@ -550,19 +201,19 @@
 
     <!-- Three key distinctions -->
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(11,29,38,0.1); margin-top:56px;">
-      <div style="background:#FAFAF7; padding:28px 24px;">
+      <div class="reveal" style="background:#FAFAF7; padding:28px 24px;">
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Not This</div>
         <div class="font-display" style="font-size: 18px; font-weight:700; color:rgba(11,29,38,0.4); text-decoration:line-through; margin-bottom:10px; line-height:1.3;">An annual planning process</div>
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#3A5A92; margin-bottom:10px; margin-top:20px;">But This</div>
         <div class="font-display" style="font-size: 18px; font-weight:700; color:#0B1D26; line-height:1.3;">A continuous strategic operating system</div>
       </div>
-      <div style="background:#FAFAF7; padding:28px 24px;">
+      <div class="reveal" style="background:#FAFAF7; padding:28px 24px; transition-delay:80ms;">
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Not This</div>
         <div class="font-display" style="font-size: 18px; font-weight:700; color:rgba(11,29,38,0.4); text-decoration:line-through; margin-bottom:10px; line-height:1.3;">Sequential steps to follow</div>
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#3A5A92; margin-bottom:10px; margin-top:20px;">But This</div>
         <div class="font-display" style="font-size: 18px; font-weight:700; color:#0B1D26; line-height:1.3;">Five interconnected, mutually-reinforcing standards</div>
       </div>
-      <div style="background:#FAFAF7; padding:28px 24px;">
+      <div class="reveal" style="background:#FAFAF7; padding:28px 24px; transition-delay:160ms;">
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Not This</div>
         <div class="font-display" style="font-size: 18px; font-weight:700; color:rgba(11,29,38,0.4); text-decoration:line-through; margin-bottom:10px; line-height:1.3;">External consultant dependency</div>
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#3A5A92; margin-bottom:10px; margin-top:20px;">But This</div>
@@ -573,28 +224,30 @@
 </section>
 
 <!-- ═══════════════════════════ FOUNDATIONS ═══════════════════════════ -->
-<section class="foundations-section" style="background:#FFFFFF; padding:96px 48px; position:relative; overflow:hidden;">
+<section class="foundations-section" style="background:#FFFFFF; padding: 96px 0; position:relative; overflow:hidden;">
   <!-- Soft atmospheric glow, top-left -->
   <div style="position:absolute; top:-140px; left:-140px; width:460px; height:460px; border-radius:50%; background: radial-gradient(circle, rgba(30,53,96,0.05) 0%, transparent 65%); pointer-events:none;"></div>
 
-  <div class="section-inner" style="position:relative; z-index:1;">
-    <span class="section-label" style="color:#3A5A92;">The Foundations</span>
-    <h2 class="font-display" style="font-size:43px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; max-width:780px; margin-bottom:28px;">
-      Grounded in four disciplines conventional strategy ignores.
-    </h2>
-    <p style="font-size:18px; line-height:1.75; color:#1A1A1A; max-width:800px; margin-bottom:64px;">
-      SiA has been developed and refined over 25 years of working with Boards, Executives,
-      senior leaders and people across Corporations, Government, Not-for-Profit, Associations
-      and Peak Bodies. The organisations we work with sit across a broad range of sectors yet
-      all share the challenge and opportunity of complex stakeholder networks, changing
-      regulatory frameworks, operational interdependencies and real-world pressures that make
-      conventional strategy not just insufficient, but actively misleading.
-    </p>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="reveal">
+      <span class="eyebrow" style="color:#3A5A92;">The Foundations</span>
+      <h2 class="font-display" style="font-size:43px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; max-width:780px; margin-bottom:28px;">
+        Grounded in four disciplines conventional strategy ignores.
+      </h2>
+      <p style="font-size:18px; line-height:1.75; color:#1A1A1A; max-width:800px; margin-bottom:64px;">
+        SiA has been developed and refined over 25 years of working with Boards, Executives,
+        senior leaders and people across Corporations, Government, Not-for-Profit, Associations
+        and Peak Bodies. The organisations we work with sit across a broad range of sectors yet
+        all share the challenge and opportunity of complex stakeholder networks, changing
+        regulatory frameworks, operational interdependencies and real-world pressures that make
+        conventional strategy not just insufficient, but actively misleading.
+      </p>
+    </div>
 
     <div class="foundations-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(11,29,38,0.08);">
 
       <!-- 01 -->
-      <article style="background:#FFFFFF; padding:40px 36px;">
+      <article class="reveal" style="background:#FFFFFF; padding:40px 36px;">
         <div style="width:40px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Discipline 01</div>
         <h3 class="font-display" style="font-size:27px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Complex Adaptive Systems</h3>
@@ -611,7 +264,7 @@
       </article>
 
       <!-- 02 -->
-      <article style="background:#FFFFFF; padding:40px 36px;">
+      <article class="reveal" style="background:#FFFFFF; padding:40px 36px; transition-delay:80ms;">
         <div style="width:40px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Discipline 02</div>
         <h3 class="font-display" style="font-size:27px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Cognitive Psychology</h3>
@@ -628,7 +281,7 @@
       </article>
 
       <!-- 03 -->
-      <article style="background:#FFFFFF; padding:40px 36px;">
+      <article class="reveal" style="background:#FFFFFF; padding:40px 36px; transition-delay:160ms;">
         <div style="width:40px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Discipline 03</div>
         <h3 class="font-display" style="font-size:27px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Systems Thinking</h3>
@@ -645,7 +298,7 @@
       </article>
 
       <!-- 04 -->
-      <article style="background:#FFFFFF; padding:40px 36px;">
+      <article class="reveal" style="background:#FFFFFF; padding:40px 36px; transition-delay:240ms;">
         <div style="width:40px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Discipline 04</div>
         <h3 class="font-display" style="font-size:27px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Resilience Science</h3>
@@ -674,7 +327,7 @@
 <!-- ═══════════════════════════ FIVE STANDARDS ═══════════════════════════ -->
 <section id="standards" class="standards-section" style="
   background: #FAFAF7;
-  padding: 96px 48px;
+  padding: 96px 0;
   position:relative; overflow:hidden;
 ">
   <!-- Teal glow top-right -->
@@ -685,21 +338,23 @@
     pointer-events:none;
   "></div>
 
-  <div class="section-inner" style="position:relative; z-index:1;">
-    <span class="section-label section-label--light">The Five Standards</span>
-    <h2 class="font-display" style="
-      font-size: 43px; font-weight:700; color:#0B1D26;
-      line-height:1.15; letter-spacing:-0.02em;
-      max-width:680px; margin-bottom:12px;
-    ">Not sequential steps. An integrated system.</h2>
-    <p style="font-size: 17px; line-height:1.7; color:#4a6080; max-width:620px; margin-bottom:64px;">
-      Each standard is distinct. Each is essential. And each is strengthened by its relationship
-      to the others. The power of SiA lies not in any single standard, but in the rigour of
-      maintaining all five simultaneously.
-    </p>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="reveal">
+      <span class="eyebrow">The Five Standards</span>
+      <h2 class="font-display" style="
+        font-size: 43px; font-weight:700; color:#0B1D26;
+        line-height:1.15; letter-spacing:-0.02em;
+        max-width:680px; margin-bottom:12px;
+      ">Not sequential steps. An integrated system.</h2>
+      <p style="font-size: 17px; line-height:1.7; color:#4a6080; max-width:620px; margin-bottom:64px;">
+        Each standard is distinct. Each is essential. And each is strengthened by its relationship
+        to the others. The power of SiA lies not in any single standard, but in the rigour of
+        maintaining all five simultaneously.
+      </p>
+    </div>
 
     <!-- Standard 01 -->
-    <div class="standard-card">
+    <div class="standard-card reveal">
       <div class="standard-card__eyebrow">
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">01</span>
@@ -734,7 +389,7 @@
     </div>
 
     <!-- Standard 02 -->
-    <div class="standard-card">
+    <div class="standard-card reveal">
       <div class="standard-card__eyebrow">
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">02</span>
@@ -771,7 +426,7 @@
     </div>
 
     <!-- Standard 03 -->
-    <div class="standard-card">
+    <div class="standard-card reveal">
       <div class="standard-card__eyebrow">
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">03</span>
@@ -809,7 +464,7 @@
     </div>
 
     <!-- Standard 04 -->
-    <div class="standard-card">
+    <div class="standard-card reveal">
       <div class="standard-card__eyebrow">
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">04</span>
@@ -855,7 +510,7 @@
     </div>
 
     <!-- Standard 05 -->
-    <div class="standard-card" style="border-bottom: 2px solid rgba(123,155,209,0.12); padding-bottom:56px;">
+    <div class="standard-card reveal" style="border-bottom: 2px solid rgba(123,155,209,0.12); padding-bottom:56px;">
       <div class="standard-card__eyebrow">
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">05</span>
@@ -899,11 +554,11 @@
 </section>
 
 <!-- ═══════════════════════════ SiA ALGORITHM DIAGRAM ═══════════════════════════ -->
-<section class="diagram-section" style="background:#FAFAF7; padding:96px 48px;">
-  <div class="section-inner">
-    <span class="section-label" style="color:#3A5A92;">The Algorithm</span>
-    <div class="diagram-cols" style="display:grid; grid-template-columns:1fr 540px; gap:64px; align-items:center;">
-      <div>
+<section class="diagram-section" style="background:#FAFAF7; padding: 96px 0;">
+  <div class="container">
+    <span class="eyebrow reveal" style="color:#3A5A92;">The Algorithm</span>
+    <div class="diagram-cols" style="display:flex; flex-direction:column; gap:48px; align-items:stretch;">
+      <div class="reveal" style="max-width:780px;">
         <h2 class="font-display" style="
           font-size: 40px; font-weight:700; color:#0B1D26;
           line-height:1.15; letter-spacing:-0.02em;
@@ -931,11 +586,12 @@
           </p>
         </div>
       </div>
-      <div style="display:flex; align-items:center; justify-content:center;">
+      <div class="reveal" style="display:flex; align-items:center; justify-content:center; transition-delay:160ms;">
         <img
-          src="brand_assets/SiAAlgorithm_Original2022.png"
-          alt="Strategy in Action algorithm — five interconnected standards"
-          style="width:100%; max-width:520px; height:auto; display:block;"
+          src="brand_assets/SiA_Light.png"
+          alt="Strategy in Action algorithm showing the five interconnected standards"
+          loading="lazy"
+          style="width:100%; max-width:640px; height:auto; display:block;"
         >
       </div>
     </div>
@@ -945,7 +601,7 @@
 <!-- ═══════════════════════════ MAKING YOUR ORG THE STRATEGIST ═══════════════════════════ -->
 <section class="system-section" style="
   background: #EEF2F9;
-  padding: 96px 48px;
+  padding: 96px 0;
   position:relative; overflow:hidden;
 ">
   <div style="
@@ -955,13 +611,14 @@
     pointer-events:none;
   "></div>
 
-  <div class="section-inner" style="position:relative; z-index:1;">
-    <span class="section-label section-label--light">The Outcome</span>
-    <h2 class="font-display" style="
-      font-size: 43px; font-weight:700; color:#0B1D26;
-      line-height:1.15; letter-spacing:-0.02em;
-      max-width:680px; margin-bottom:16px;
-    ">Making your organisation the strategist.</h2>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="reveal">
+      <span class="eyebrow">The Outcome</span>
+      <h2 class="font-display" style="
+        font-size: 43px; font-weight:700; color:#0B1D26;
+        line-height:1.15; letter-spacing:-0.02em;
+        max-width:680px; margin-bottom:16px;
+      ">Making your organisation the strategist.</h2>
     <p class="font-display" style="font-size: 20px; font-weight:700; color:#7B9BD1; letter-spacing:-0.01em; margin-bottom:24px; max-width:560px;">
       Not dependency. Capability.
     </p>
@@ -974,10 +631,11 @@
       This is why capability building is embedded into every SiA engagement from the outset. We are
       not building client dependency; we are building client capacity.
     </p>
+    </div>
 
     <!-- Principles grid -->
     <div class="principles-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(11,29,38,0.08);">
-      <div style="background:#FFFFFF; padding:32px 28px;">
+      <div class="reveal" style="background:#FFFFFF; padding:32px 28px;">
         <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Clarity, not complexity</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
@@ -986,7 +644,7 @@
           what is happening and why.
         </p>
       </div>
-      <div style="background:#FFFFFF; padding:32px 28px;">
+      <div class="reveal" style="background:#FFFFFF; padding:32px 28px; transition-delay:80ms;">
         <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Speed, not paralysis</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
@@ -995,7 +653,7 @@
           what is actually at stake.
         </p>
       </div>
-      <div style="background:#FFFFFF; padding:32px 28px;">
+      <div class="reveal" style="background:#FFFFFF; padding:32px 28px; transition-delay:160ms;">
         <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Alignment, not fragmentation</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
@@ -1004,7 +662,7 @@
           organisation&rsquo;s ability to act.
         </p>
       </div>
-      <div style="background:#FFFFFF; padding:32px 28px;">
+      <div class="reveal" style="background:#FFFFFF; padding:32px 28px; transition-delay:240ms;">
         <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Adaptability, not rigidity</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
@@ -1013,7 +671,7 @@
           conditions have changed.
         </p>
       </div>
-      <div style="background:#FFFFFF; padding:32px 28px;">
+      <div class="reveal" style="background:#FFFFFF; padding:32px 28px;">
         <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Relevance, not decline</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
@@ -1022,7 +680,7 @@
           relevance against changing conditions.
         </p>
       </div>
-      <div style="background:#FFFFFF; padding:32px 28px;">
+      <div class="reveal" style="background:#FFFFFF; padding:32px 28px; transition-delay:80ms;">
         <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
         <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Capability, not dependency</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
@@ -1034,7 +692,7 @@
     </div>
 
     <!-- Pull quote -->
-    <div style="margin-top:64px; background:rgba(11,29,38,0.04); padding:52px 56px;">
+    <div class="reveal" style="margin-top:64px; background:rgba(11,29,38,0.04); padding:52px 56px;">
       <p class="font-display" style="
         font-size: 25px; font-weight:700;
         color:#0B1D26; line-height:1.6;
@@ -1050,16 +708,18 @@
 </section>
 
 <!-- ═══════════════════════════ TESTIMONIALS ═══════════════════════════ -->
-<section style="background:#FAFAF7; padding:96px 48px;">
-  <div class="section-inner">
-    <span class="section-label" style="color:#3A5A92;">What Leaders Say</span>
-    <h2 class="font-display" style="
-      font-size: 43px; font-weight:700; color:#0B1D26;
-      line-height:1.15; letter-spacing:-0.02em;
-      max-width:680px; margin-bottom:48px;
-    ">Organisations that have made SiA their strategic operating system.</h2>
+<section style="background:#FAFAF7; padding: 96px 0;">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow" style="color:#3A5A92;">What Leaders Say</span>
+      <h2 class="font-display" style="
+        font-size: 43px; font-weight:700; color:#0B1D26;
+        line-height:1.15; letter-spacing:-0.02em;
+        max-width:680px; margin-bottom:48px;
+      ">Organisations that have made SiA their strategic operating system.</h2>
+    </div>
     <div class="testimonials-grid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px;">
-      <div style="
+      <div class="reveal" style="
         background:#fff; padding:40px;
         border-left:3px solid #7B9BD1;
         box-shadow: 0 4px 24px rgba(11,29,38,0.06);
@@ -1073,10 +733,11 @@
         and a system we trust.&rdquo;</p>
         <p style="font-size: 12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#4a6080;">CEO &middot; Multinational Organisation</p>
       </div>
-      <div style="
+      <div class="reveal" style="
         background:#fff; padding:40px;
         border-left:3px solid #7B9BD1;
         box-shadow: 0 4px 24px rgba(11,29,38,0.06);
+        transition-delay:120ms;
       ">
         <p class="font-display" style="
           font-size: 20px; color:#0B1D26;
@@ -1094,7 +755,7 @@
 <!-- ═══════════════════════════ CTA ═══════════════════════════ -->
 <section class="cta-section" style="
   background: linear-gradient(135deg, #0B1D26 0%, #0B1D26 100%);
-  padding: 96px 48px;
+  padding: 96px 0;
   text-align: center;
   position:relative; overflow:hidden;
 ">
@@ -1105,7 +766,7 @@
     background: radial-gradient(circle, rgba(123,155,209,0.08) 0%, transparent 60%);
     pointer-events:none;
   "></div>
-  <div style="position:relative; z-index:1;">
+  <div class="reveal" style="position:relative; z-index:1;">
     <h2 class="font-display" style="
       font-size: 47px; font-weight:700; color:#fff;
       line-height:1.15; letter-spacing:-0.02em;
@@ -1129,8 +790,8 @@
 </section>
 
 <!-- ═══════════════════════════ EXPLORE FURTHER ═══════════════════════════ -->
-<section class="explore-strip" style="background:#EEF2F9; padding:64px 48px; border-top:1px solid rgba(11,29,38,0.08);">
-  <div class="section-inner">
+<section class="explore-strip" style="background:#EEF2F9; padding: 64px 0; border-top:1px solid rgba(11,29,38,0.08);">
+  <div class="container">
     <p style="font-size: 13px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:rgba(11,29,38,0.55); margin-bottom:32px;">Explore further</p>
     <div class="explore-cards" style="display:flex; gap:16px; flex-wrap:wrap;">
       <a href="why.html" class="explore-card">
@@ -1156,62 +817,9 @@
 </section>
 
 <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
-<footer style="background:#060f14; border-top:1px solid rgba(255,255,255,0.06);">
-
-  <div style="padding:40px 48px 28px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:32px;">
-
-    <a href="index.html" class="nav-logo-link">
-      <img src="brand_assets/Resilient Futures LOGOS (4).png" alt="Resilient Futures" style="height:32px; width:auto; display:block; opacity:0.9;">
-    </a>
-
-    <div style="display:flex; gap:48px; flex-wrap:wrap;">
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <span style="font-size: 13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:4px;">About</span>
-        <a href="why.html" class="nav-link">Why Resilient Futures</a>
-        <a href="strategy-in-action.html" class="nav-link">Strategy in Action</a>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <span style="font-size: 13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:4px;">Services</span>
-        <a href="strategy-and-planning.html" class="nav-link">Strategy and Planning</a>
-        <a href="change-management.html" class="nav-link">Change Management</a>
-        <a href="leadership-development.html" class="nav-link">Leadership Development</a>
-        <a href="strategic-intelligence.html" class="nav-link">Strategic Intelligence</a>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <span style="font-size: 13px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:4px;">Contact</span>
-        <a href="contact.html" class="nav-link">Get In Touch</a>
-      </div>
-    </div>
-
-    <div style="display:flex; gap:10px; align-items:center;">
-      <a href="https://au.linkedin.com/company/resilient-futures" target="_blank" rel="noopener" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-      <a href="https://x.com/resilientf" target="_blank" rel="noopener" aria-label="X (Twitter)" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-      <a href="https://siapracticecommunity.com/" target="_blank" rel="noopener" aria-label="SiA Practice Community" style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:opacity 0.2s;opacity:0.65;" onmouseover="this.style.opacity='0.95'" onmouseout="this.style.opacity='0.65'">
-        <div style="width:36px;height:36px;border-radius:50%;background:#FFFFFF;-webkit-mask-image:url('brand_assets/SiA%20Pratice%20Community%20-%20Logo%20%26%20Group%20Images.png');mask-image:url('brand_assets/SiA%20Pratice%20Community%20-%20Logo%20%26%20Group%20Images.png');-webkit-mask-mode:luminance;mask-mode:luminance;-webkit-mask-size:72% 72%;mask-size:72% 72%;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;"></div>
-      </a>
-      <a href="https://www.youtube.com/c/Resilientfutures" target="_blank" rel="noopener" aria-label="YouTube" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/resilient.futures" target="_blank" rel="noopener" aria-label="Instagram" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.65);text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='rgba(255,255,255,0.95)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      </a>
-    </div>
-  </div>
-
-  <div style="padding:20px 48px; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-    <p style="font-size: 13px; color:rgba(255,255,255,0.45); margin:0;">
-      Resilient Futures &copy; 2026 &middot; All rights reserved
-    </p>
-    <p style="font-size: 13px; color:rgba(255,255,255,0.38); margin:0;">
-      Strategy for a world that won&rsquo;t hold still
-    </p>
-  </div>
-
-</footer>
+<div data-include="footer"></div>
+  <script src="assets/js/includes.js" defer></script>
+  <script src="assets/js/reveal.js" defer></script>
 </body>
 </html>
 
