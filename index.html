@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>document.documentElement.classList.add('js');</script>
   <title>New Thinking, New Tools, New Strategy for a New World Order: Focus, Action &amp; Results</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
@@ -91,20 +92,19 @@
 <!-- ═══════════════════════════ PROBLEM ═══════════════════════════ -->
 <section id="problem" style="background:#FAFAF7; padding: 96px 0;">
   <div class="container">
-    <div class="reveal">
+    <div class="problem-heading reveal">
       <span class="eyebrow" style="color:#7B9BD1;">The Problem</span>
       <h2 class="font-display" style="
         font-size: 43px; font-weight:700; color:#0B1D26;
         line-height:1.15; letter-spacing:-0.02em;
-        max-width:700px; margin-bottom:24px;
       ">Why traditional strategic planning is failing in disruptive conditions</h2>
-      <p style="font-size: 17px; line-height:1.7; color:#1A1A1A; max-width:680px; margin-bottom:40px;">
+      <p style="font-size: 17px; line-height:1.7; color:#1A1A1A;">
         The operating environment has changed. Disruptions are no longer episodic. Cause and effect are no longer traceable. Planning assumptions no longer hold long enough for execution to stabilise.
       </p>
     </div>
 
-    <!-- Problem grid — 3-up desktop, 2-up tablet, 1-col mobile -->
-    <div class="problem-grid" style="margin-bottom:40px;">
+    <!-- Problem grid — 5-up desktop, 3-up tablet, 1-col mobile -->
+    <div class="problem-grid">
       <div class="problem-card reveal">
         <div class="problem-card__number">01</div>
         <p class="problem-card__body">Strategy cycles too slow &mdash; plans are obsolete before execution begins</p>
@@ -127,19 +127,21 @@
       </div>
     </div>
 
-    <p style="font-size: 17px; line-height:1.7; color:#1A1A1A; max-width:680px; margin-bottom:16px;">
-      That world is gone. Not temporarily disrupted &mdash; structurally gone. Technological,
-      geopolitical, regulatory, and social forces are now continuous, interconnected, and
-      self-reinforcing. There is no stable baseline to return to. Cause and effect are no
-      longer traceable in the linear way strategy models assume. The conditions that made
-      annual planning cycles, scenario matrices, and SWOT analysis coherent tools no longer exist.
-    </p>
-    <p style="font-size: 17px; line-height:1.7; color:#1A1A1A; max-width:680px; margin-bottom:0;">
-      Using those tools in this environment does not produce imprecise strategy. It produces
-      confidently wrong strategy. The rigour of the methodology gives leaders a false sense
-      of alignment with reality. Most organisations are not failing to execute their strategy.
-      They are expertly executing a strategy that is no longer fit for the conditions.
-    </p>
+    <div class="problem-trailing reveal">
+      <p>
+        That world is gone. Not temporarily disrupted &mdash; structurally gone. Technological,
+        geopolitical, regulatory, and social forces are now continuous, interconnected, and
+        self-reinforcing. There is no stable baseline to return to. Cause and effect are no
+        longer traceable in the linear way strategy models assume. The conditions that made
+        annual planning cycles, scenario matrices, and SWOT analysis coherent tools no longer exist.
+      </p>
+      <p>
+        Using those tools in this environment does not produce imprecise strategy. It produces
+        confidently wrong strategy. The rigour of the methodology gives leaders a false sense
+        of alignment with reality. Most organisations are not failing to execute their strategy.
+        They are expertly executing a strategy that is no longer fit for the conditions.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -211,9 +213,9 @@
 
         <div style="display:flex; align-items:flex-start; gap:16px; padding:20px 24px; border-bottom:1px solid rgba(11,29,38,0.08);">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0;">
-            <circle cx="12" cy="12" r="6.5" stroke="#4A8FCF" stroke-width="1.5"/>
-            <line x1="12" y1="22" x2="12" y2="4" stroke="#4A8FCF" stroke-width="1.5" stroke-linecap="round"/>
-            <polyline points="8.5,7.5 12,4 15.5,7.5" stroke="#4A8FCF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="15" r="5.5" stroke="#4A8FCF" stroke-width="1.5"/>
+            <polyline points="9,5.5 12,2.5 15,5.5" stroke="#4A8FCF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="12" y1="21.5" x2="12" y2="2.5" stroke="#4A8FCF" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           <div>
             <div style="font-size:16px; font-weight:700; color:#0B1D26; line-height:1.3; margin-bottom:4px;">Genuine capability uplift &mdash; Strategic Fitness</div>
@@ -371,12 +373,11 @@
 
       <!-- SiA diagram -->
       <div class="reveal" style="display:flex; align-items:center; justify-content:flex-end; padding-left:48px; transition-delay:160ms;">
-        <img
-          src="brand_assets/SiA_Light.png"
-          alt="Strategy in Action algorithm showing the five interconnected standards"
-          loading="lazy"
-          style="width:100%; max-width:none; height:auto; display:block; mix-blend-mode:multiply;"
-        >
+        <img src="brand_assets/SiA_Light.svg"
+             alt="Strategy in Action framework showing the five
+                  interconnected standards"
+             loading="lazy"
+             class="sia-diagram" />
       </div>
 
     </div>

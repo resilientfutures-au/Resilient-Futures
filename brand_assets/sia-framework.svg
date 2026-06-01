@@ -1,67 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="100%" height="auto" role="img" aria-labelledby="sia-title sia-desc" preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="100%" height="auto" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="sia-title sia-desc">
   <title id="sia-title">Strategy in Action framework</title>
-  <desc id="sia-desc">A diagram showing Value Generation at the centre, surrounded by three interconnected nodes — Strategic Opportunity-Risk, Capability Investment, and Catalytic Action — framed by Immediate Conditions and Emergent Conditions arcs.</desc>
+  <desc id="sia-desc">Five interconnected standards — Conditions, Sustainable Value Generation, Strategic Opportunity-Risk, Capability Investment, and Catalytic Action — arranged around a central Value Generation node, bounded by outer arcs labelled Immediate Conditions and Emergent Conditions.</desc>
 
   <defs>
-    <path id="sia-arc-left"  d="M 96 100 A 257 257 0 0 0 96 412" fill="none"/>
-    <path id="sia-arc-right" d="M 504 100 A 257 257 0 0 1 504 412" fill="none"/>
+    <path id="sia-arc-left"  d="M 96 94 A 257 257 0 0 0 96 406" fill="none"/>
+    <path id="sia-arc-right" d="M 504 94 A 257 257 0 0 1 504 406" fill="none"/>
   </defs>
 
-  <!-- Arc labels -->
-  <g fill="#4A5568" font-family="'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="500" letter-spacing="1.8">
-    <text>
-      <textPath href="#sia-arc-left" startOffset="50%" text-anchor="middle">IMMEDIATE CONDITIONS</textPath>
-    </text>
-    <text>
-      <textPath href="#sia-arc-right" startOffset="50%" text-anchor="middle">EMERGENT CONDITIONS</textPath>
-    </text>
+  <!-- Outer arcs: dashed field-boundary lines in slate -->
+  <use href="#sia-arc-left"  stroke="#4A5568" stroke-width="1" stroke-dasharray="2 6" fill="none"/>
+  <use href="#sia-arc-right" stroke="#4A5568" stroke-width="1" stroke-dasharray="2 6" fill="none"/>
+
+  <!-- Arc labels along the curves -->
+  <g fill="#4A5568" font-family="'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="11" font-weight="500" letter-spacing="0.15em">
+    <text><textPath href="#sia-arc-left"  startOffset="50%" text-anchor="middle">IMMEDIATE CONDITIONS</textPath></text>
+    <text><textPath href="#sia-arc-right" startOffset="50%" text-anchor="middle">EMERGENT CONDITIONS</textPath></text>
   </g>
 
-  <!-- Connecting lines (every node to every other node) -->
-  <g stroke="#4A8FCF" stroke-width="1.25" stroke-opacity="0.55" stroke-linecap="round">
-    <!-- Center → Top -->
-    <line x1="300" y1="198" x2="300" y2="154"/>
-    <!-- Center → Bottom-Left -->
-    <line x1="250" y1="285" x2="211" y2="307"/>
-    <!-- Center → Bottom-Right -->
-    <line x1="350" y1="285" x2="389" y2="307"/>
-    <!-- Top → Bottom-Left -->
-    <line x1="271" y1="146" x2="190" y2="286"/>
-    <!-- Top → Bottom-Right -->
-    <line x1="329" y1="146" x2="410" y2="286"/>
-    <!-- Bottom-Left → Bottom-Right -->
-    <line x1="219" y1="336" x2="381" y2="336"/>
+  <!-- Connecting lines: every node to every other (10 pairs) -->
+  <g stroke="#4A8FCF" stroke-width="1.25" stroke-opacity="0.5" stroke-linecap="round" fill="none">
+    <line x1="300" y1="225" x2="300" y2="155"/>
+    <line x1="273" y1="306" x2="237" y2="354"/>
+    <line x1="327" y1="306" x2="363" y2="354"/>
+    <line x1="255" y1="272" x2="130" y2="278"/>
+    <line x1="286" y1="153" x2="224" y2="347"/>
+    <line x1="314" y1="153" x2="376" y2="347"/>
+    <line x1="265" y1="139" x2="122" y2="258"/>
+    <line x1="255" y1="390" x2="345" y2="390"/>
+    <line x1="177" y1="359" x2="120" y2="304"/>
+    <line x1="348" y1="374" x2="128" y2="292"/>
   </g>
 
-  <!-- Nodes -->
+  <!-- Main nodes: cream fill, accent blue stroke -->
   <g fill="#FAF7F0" stroke="#4A8FCF" stroke-width="2">
-    <circle cx="300" cy="256" r="58"/>
-    <circle cx="300" cy="96"  r="58"/>
-    <circle cx="161" cy="336" r="58"/>
-    <circle cx="439" cy="336" r="58"/>
+    <circle cx="300" cy="270" r="45"/>
+    <circle cx="300" cy="110" r="45"/>
+    <circle cx="210" cy="390" r="45"/>
+    <circle cx="390" cy="390" r="45"/>
   </g>
 
-  <!-- Node labels -->
-  <g fill="#0B1D26" font-family="'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif" font-size="13" font-weight="500" text-anchor="middle">
-    <!-- Center: Value Generation -->
-    <text x="300" y="252">
-      <tspan x="300" dy="0">Value</tspan>
-      <tspan x="300" dy="17">Generation</tspan>
+  <!-- Floating Conditions node: soft-blue tint -->
+  <circle cx="95" cy="280" r="35" fill="#7BB0E2" fill-opacity="0.15" stroke="#7BB0E2" stroke-width="1"/>
+
+  <!-- Node labels: Source Serif, navy -->
+  <g fill="#0B1D26" font-family="'Source Serif 4', Georgia, serif" font-size="14" font-weight="500" text-anchor="middle" dominant-baseline="central">
+    <text x="300" y="270">
+      <tspan x="300" dy="-0.55em">Value</tspan>
+      <tspan x="300" dy="1.1em">Generation</tspan>
     </text>
-    <!-- Top: Strategic Opportunity-Risk -->
-    <text x="300" y="84">
-      <tspan x="300" dy="0">Strategic</tspan>
-      <tspan x="300" dy="17">Opportunity-Risk</tspan>
+    <text x="300" y="110">
+      <tspan x="300" dy="-0.55em">Strategic</tspan>
+      <tspan x="300" dy="1.1em">Opportunity-Risk</tspan>
     </text>
-    <!-- Bottom-Left: Capability Investment -->
-    <text x="161" y="332">
-      <tspan x="161" dy="0">Capability</tspan>
-      <tspan x="161" dy="17">Investment</tspan>
+    <text x="210" y="390">
+      <tspan x="210" dy="-0.55em">Capability</tspan>
+      <tspan x="210" dy="1.1em">Investment</tspan>
     </text>
-    <!-- Bottom-Right: Catalytic Action -->
-    <text x="439" y="332">
-      <tspan x="439" dy="0">Catalytic</tspan>
-      <tspan x="439" dy="17">Action</tspan>
+    <text x="390" y="390">
+      <tspan x="390" dy="-0.55em">Catalytic</tspan>
+      <tspan x="390" dy="1.1em">Action</tspan>
     </text>
+    <text x="95" y="280" font-size="13">Conditions</text>
   </g>
 </svg>
