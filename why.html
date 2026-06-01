@@ -203,21 +203,26 @@
 
 <!-- ═══════════════════════════ MAD SECTION ═══════════════════════════ -->
 <section class="mad-section" style="
-  background: #EEF2F9;
-  padding: 56px 0;
+  background: #E8EEF7;
+  padding: 96px 0 104px;
   position:relative; overflow:hidden;
+  border-top: 1px solid rgba(46,92,142,0.14);
+  border-bottom: 1px solid rgba(46,92,142,0.08);
 ">
 
   <!-- Blue-green glow -->
   <div style="
     position:absolute; top:-100px; left:-100px;
     width:450px; height:450px; border-radius:50%;
-    background: radial-gradient(circle, rgba(123,155,209,0.06) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(46,92,142,0.07) 0%, transparent 65%);
     pointer-events:none;
   "></div>
 
   <div class="container" style="position:relative; z-index:1;">
-    <span class="eyebrow reveal">The Consequence</span>
+    <div class="reveal">
+      <span class="eyebrow">The Consequence</span>
+      <hr class="mad-eyebrow-rule" aria-hidden="true">
+    </div>
 
     <!-- MAD: acronym + name + tag -->
     <div class="reveal">
@@ -225,34 +230,36 @@
         <span class="mad-headline__abbr">MAD</span>
         <span class="mad-headline__expansion">Managed Adaptive Decline</span>
       </div>
-      <p class="mad-headline__tag">The slow-motion failure that doesn&rsquo;t trigger an alarm.</p>
+      <p class="mad-headline__tag">Rational at every step. Ruinous in aggregate.</p>
     </div>
 
     <div class="mad-cols">
       <div class="reveal mad-text">
-        <p style="font-size: 18px; line-height:1.75; color:rgba(11,29,38,0.72); margin-bottom:20px;">
+        <p class="mad-body">
           When organisations adapt to deteriorating conditions in a seemingly rational way &mdash;
           cutting costs, tightening focus, incrementally adjusting &mdash; they can maintain the
           appearance of function while steadily losing relevance, influence, and value.
         </p>
-        <p style="font-size: 18px; line-height:1.75; color:rgba(11,29,38,0.65); margin-bottom:20px;">
+        <p class="mad-body">
           This is what we call Managed Adaptive Decline, or MAD. MAD is insidious precisely
           because it is gradual. Performance metrics may hold. Board confidence may remain high.
           But the organisation is slowly becoming less capable of generating the value that made
           it important in the first place.
         </p>
-        <p style="font-size: 17px; line-height:1.75; color:rgba(11,29,38,0.72); margin-bottom:0;">
+        <p class="mad-body">
           Each adaptive decision is locally rational. Collectively, they produce an irreversible
           drift away from relevance.
         </p>
+        <aside class="mad-callout">
+          The capability gap between what is required and what is available
+          accelerates as disruptive conditions intensify.
+        </aside>
       </div>
 
       <div class="reveal mad-diagram" style="transition-delay:160ms;">
         <!-- Disruptive Conditions diagram -->
         <img src="brand_assets/Disruptive%20Conditions%20(2).svg" alt="Disruptive conditions diagram" style="width:100%; height:auto; display:block;">
-        <p style="font-size: 13px; color:rgba(11,29,38,0.4); margin-top:12px; letter-spacing:0.06em; line-height:1.5;">
-          The capability gap between what is required and what is available accelerates as disruptive conditions intensify.
-        </p>
+        <p class="mad-figcaption">Capability gap vs. disruptive conditions, over time</p>
       </div>
     </div>
 
