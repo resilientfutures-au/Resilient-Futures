@@ -1,8 +1,9 @@
 import { XMLParser } from 'fast-xml-parser';
 import * as cheerio from 'cheerio';
-import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { mkdir, stat, writeFile, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { dirname, basename, extname, join } from 'node:path';
+import { dirname, basename, extname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const parser = new XMLParser({
   ignoreAttributes: true,
@@ -144,4 +145,114 @@ export async function rewriteImageSrcs(html, slug, projectRoot) {
 
   await Promise.all(tasks);
   return $.root().html() ?? '';
+}
+
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+export function formatDate(d) {
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  const mon = MONTHS[d.getUTCMonth()];
+  const year = d.getUTCFullYear();
+  return `${day} ${mon} ${year}`;
+}
+
+export function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function fillTemplate(template, vars) {
+  let out = template;
+  for (const [k, v] of Object.entries(vars)) {
+    out = out.split(`{{${k}}}`).join(v);
+  }
+  return out;
+}
+
+export function renderPost(template, { title, date, body, slug }) {
+  return fillTemplate(template, {
+    title: escapeHtml(title),
+    date: escapeHtml(date),
+    body,             // already-cleaned HTML, do not escape
+    slug,
+  });
+}
+
+export function renderListing(template, rowTemplate, posts) {
+  const sorted = [...posts].sort((a, b) => b.date - a.date);
+  const rows = sorted.map(p => fillTemplate(rowTemplate, {
+    date: escapeHtml(formatDate(p.date)),
+    title: escapeHtml(p.title),
+    excerpt: escapeHtml(p.excerpt ?? ''),
+    slug: p.slug,
+  })).join('\n');
+  return fillTemplate(template, { rows, count: String(posts.length) });
+}
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export async function main() {
+  const projectRoot = resolve(__dirname, '..');
+  const xmlPath = resolve(projectRoot, 'brand_assets/Squarespace-Wordpress-Export-06-03-2026.xml');
+  const postTmplPath = resolve(__dirname, 'templates/post.html');
+  const listingTmplPath = resolve(__dirname, 'templates/listing.html');
+  const rowTmplPath = resolve(__dirname, 'templates/listing-row.html');
+
+  const [xml, postTmpl, listingTmpl, rowTmpl] = await Promise.all([
+    readFile(xmlPath, 'utf8'),
+    readFile(postTmplPath, 'utf8'),
+    readFile(listingTmplPath, 'utf8'),
+    readFile(rowTmplPath, 'utf8'),
+  ]);
+
+  const rawPosts = parseXml(xml);
+  console.log(`Parsed ${rawPosts.length} published posts.`);
+
+  let imagesRewritten = 0;
+  const enriched = [];
+
+  for (const p of rawPosts) {
+    const cleanedTitle = cleanMojibake(p.title);
+    const cleanedHtml = stripSquarespaceHtml(cleanMojibake(p.contentHtml));
+    const beforeImgCount = (cleanedHtml.match(/images\.squarespace-cdn\.com/g) || []).length;
+    const finalHtml = await rewriteImageSrcs(cleanedHtml, p.slug, projectRoot);
+    const afterImgCount = (finalHtml.match(/images\.squarespace-cdn\.com/g) || []).length;
+
+    const excerpt = generateExcerpt(finalHtml);
+    const dateStr = formatDate(p.date);
+
+    const html = renderPost(postTmpl, {
+      title: cleanedTitle,
+      date: dateStr,
+      body: finalHtml,
+      slug: p.slug,
+    });
+
+    const outDir = resolve(projectRoot, 'articles', p.slug);
+    await mkdir(outDir, { recursive: true });
+    await writeFile(resolve(outDir, 'index.html'), html, 'utf8');
+
+    imagesRewritten += beforeImgCount - afterImgCount;
+    enriched.push({ ...p, title: cleanedTitle, excerpt });
+    console.log(`  ✓ /articles/${p.slug}/`);
+  }
+
+  // Listing page
+  const listingHtml = renderListing(listingTmpl, rowTmpl, enriched);
+  await writeFile(resolve(projectRoot, 'articles/index.html'), listingHtml, 'utf8');
+  console.log(`  ✓ /articles/index.html`);
+
+  console.log(`\nDone. ${enriched.length} posts written, ${imagesRewritten} images relocated.`);
+}
+
+// Run only when invoked directly (not when imported by tests).
+// fileURLToPath normalises import.meta.url to a native path so this
+// comparison works on Windows (where the URL has three slashes:
+// file:///C:/... — naive string-template comparison fails there).
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch(err => { console.error(err); process.exit(1); });
 }

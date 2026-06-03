@@ -72,3 +72,35 @@ test('generateExcerpt collapses whitespace', () => {
   const ex = generateExcerpt(html);
   assert.equal(ex, 'multiple spaces and lines');
 });
+
+import { renderPost, renderListing, formatDate, escapeHtml } from './migrate-articles.mjs';
+
+test('formatDate produces "17 Apr 2023" form', () => {
+  assert.equal(formatDate(new Date('2023-04-17T00:00:00Z')), '17 Apr 2023');
+});
+
+test('escapeHtml escapes ampersands and angle brackets', () => {
+  assert.equal(escapeHtml('a & b < c'), 'a &amp; b &lt; c');
+});
+
+test('renderPost injects placeholders', () => {
+  const template = '<title>{{title}}</title><time>{{date}}</time><main>{{body}}</main>';
+  const out = renderPost(template, { title: 'Hi', date: '17 Apr 2023', body: '<p>x</p>', slug: 'hi' });
+  assert.match(out, /<title>Hi<\/title>/);
+  assert.match(out, /<time>17 Apr 2023<\/time>/);
+  assert.match(out, /<main><p>x<\/p><\/main>/);
+});
+
+test('renderListing produces N rows in date-descending order', () => {
+  const tmpl = '<ul>{{rows}}</ul>';
+  const row = '<li>{{date}} {{title}} {{slug}}</li>';
+  const posts = [
+    { title: 'old', slug: 'old', date: new Date('2020-01-01'), excerpt: 'a' },
+    { title: 'new', slug: 'new', date: new Date('2023-04-17'), excerpt: 'b' },
+  ];
+  const out = renderListing(tmpl, row, posts);
+  const newPos = out.indexOf('new');
+  const oldPos = out.indexOf('old');
+  assert.ok(newPos > 0 && oldPos > 0, 'both present');
+  assert.ok(newPos < oldPos, 'newest first');
+});
