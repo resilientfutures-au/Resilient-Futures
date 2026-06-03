@@ -1,4 +1,8 @@
 import { XMLParser } from 'fast-xml-parser';
+import * as cheerio from 'cheerio';
+import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { dirname, basename, extname, join } from 'node:path';
 
 const parser = new XMLParser({
   ignoreAttributes: true,
@@ -20,8 +24,6 @@ export function parseXml(xmlString) {
       link: String(it.link ?? ''),
     }));
 }
-
-import * as cheerio from 'cheerio';
 
 // Squarespace's WordPress export double-encodes punctuation: UTF-8 bytes
 // served by Squarespace get mis-decoded by some readers as Windows-1252,
@@ -98,10 +100,6 @@ export function generateExcerpt(html, maxLen = 180) {
   return cut.replace(/[,.;:—–-]$/, '') + '…';
 }
 
-import { mkdir, stat, writeFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
-import { dirname, basename, extname } from 'node:path';
-
 // Download a single image to `destPath`. Skips if the file already exists.
 // Returns { downloaded: true|false, bytes: number }.
 export async function downloadImage(url, destPath) {
@@ -136,7 +134,7 @@ export async function rewriteImageSrcs(html, slug, projectRoot) {
     if (!extname(filename)) filename = `image-${fallbackCounter++}.jpg`;
 
     const localRel = `/assets/images/articles/${slug}/${filename}`;
-    const localAbs = `${projectRoot}/assets/images/articles/${slug}/${filename}`;
+    const localAbs = join(projectRoot, 'assets/images/articles', slug, filename);
     $(el).attr('src', localRel);
 
     tasks.push(downloadImage(src, localAbs).catch(err => {
