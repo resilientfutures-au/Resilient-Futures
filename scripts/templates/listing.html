@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Articles — Resilient Futures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    .articles-hero { background: var(--rf-navy); padding: 104px 0 96px; position: relative; overflow: hidden; }
+    .articles-hero::before {
+      content: ""; position: absolute; top: -240px; right: -160px;
+      width: 720px; height: 720px;
+      background: radial-gradient(circle at 50% 50%,
+        rgba(123, 155, 209, 0.18) 0%, rgba(123, 155, 209, 0.05) 38%, rgba(123, 155, 209, 0) 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .articles-hero__inner { position: relative; z-index: 1; display: flex; gap: 32px; align-items: flex-start; }
+    .articles-hero__rule { width: 3px; flex-shrink: 0; min-height: 168px; margin-top: 8px;
+      background: linear-gradient(to bottom, var(--rf-accent), rgba(123,155,209,0)); }
+    .articles-hero__copy { flex: 0 1 760px; min-width: 0; }
+    .articles-hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--rf-font-sans); font-weight: 500; font-size: 13px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--rf-accent);
+      margin-bottom: 22px;
+    }
+    .articles-hero__eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background: var(--rf-accent); }
+    .articles-hero__title {
+      font-family: var(--rf-font-serif); font-size: clamp(44px, 6vw, 72px);
+      font-weight: 500; color: var(--rf-white); line-height: 1.04;
+      letter-spacing: -0.025em; margin: 0 0 24px;
+    }
+    .articles-hero__subhead { color: rgba(255,255,255,0.78); font-size: 18px;
+      line-height: 1.65; max-width: 580px; margin: 0; }
+    .articles-hero__meta {
+      display: inline-flex; align-items: center; gap: 14px; margin-top: 32px;
+      color: rgba(255,255,255,0.45); font-size: 12px; letter-spacing: 0.22em;
+      text-transform: uppercase; font-weight: 500;
+    }
+    .articles-hero__meta::before { content:''; display:inline-block; width:28px; height:1px; background: rgba(255,255,255,0.25); }
+    .articles-hero__meta strong { font-weight: 600; color: var(--rf-accent); }
+
+    .articles-section { background: var(--rf-cream); padding: 88px 0 128px; position: relative; }
+    .articles-list { max-width: 900px; margin: 0 auto; }
+    .articles-list__row {
+      display: grid; grid-template-columns: 140px 1fr; gap: 56px;
+      padding: 44px 0; border-bottom: 1px solid var(--rf-divider-soft);
+      align-items: baseline;
+    }
+    .articles-list__row:first-child { padding-top: 4px; }
+    .articles-list__row:last-child { border-bottom: none; }
+    .articles-list__date {
+      font-family: var(--rf-font-sans); font-size: 12px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--rf-accent-deep); padding-top: 10px; position: relative;
+    }
+    .articles-list__date::before {
+      content: ""; position: absolute; left: 0; top: 14px;
+      width: 16px; height: 1px; background: var(--rf-accent);
+      opacity: 0; transform: translateX(-12px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+    .articles-list__row:hover .articles-list__date::before,
+    .articles-list__row:focus-within .articles-list__date::before {
+      opacity: 1; transform: translateX(-22px);
+    }
+    .articles-list__link { display: block; text-decoration: none; color: inherit; }
+    .articles-list__title {
+      font-family: var(--rf-font-serif); font-size: 32px; font-weight: 500;
+      line-height: 1.22; letter-spacing: -0.018em; color: var(--rf-navy);
+      margin: 0 0 14px; transition: color 200ms ease; max-width: 36ch;
+    }
+    .articles-list__link:hover .articles-list__title,
+    .articles-list__link:focus-visible .articles-list__title { color: var(--rf-accent-deep); }
+    .articles-list__link:focus-visible { outline: 2px solid var(--rf-accent); outline-offset: 8px; border-radius: 2px; }
+    .articles-list__excerpt {
+      font-family: var(--rf-font-sans); font-size: 16px; line-height: 1.65;
+      color: var(--rf-text-muted); margin: 0; max-width: 62ch;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+
+    @media (max-width: 720px) {
+      .articles-hero { padding: 80px 0 72px; }
+      .articles-section { padding: 64px 0 96px; }
+      .articles-hero__inner { gap: 20px; }
+      .articles-hero__rule { min-height: 140px; }
+      .articles-list__row { grid-template-columns: 1fr; gap: 10px; padding: 36px 0; }
+      .articles-list__date { padding-top: 0; }
+      .articles-list__date::before { display: none; }
+      .articles-list__title { font-size: 24px; max-width: none; }
+    }
+  </style>
+</head>
+<body class="page-articles">
+
+<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:var(--rf-accent-deep);color:var(--rf-white);padding:12px 20px;font-size:15px;font-weight:600;border-radius:0 0 4px 4px;text-decoration:none;" onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto';" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px';">Skip to main content</a>
+
+<div data-include="nav"></div>
+
+<section id="main-content" class="articles-hero">
+  <div class="container">
+    <div class="articles-hero__inner">
+      <div class="articles-hero__rule"></div>
+      <div class="articles-hero__copy">
+        <span class="articles-hero__eyebrow">Archive</span>
+        <h1 class="articles-hero__title">Articles</h1>
+        <p class="articles-hero__subhead">
+          Strategy, leadership, and observations on a world that won't sit still &mdash; drawn from our work with Australian boards and executive teams.
+        </p>
+        <div class="articles-hero__meta">
+          <span><strong>{{count}}</strong>&nbsp;articles &nbsp;·&nbsp; 2019&ndash;2023</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="articles-section">
+  <div class="container">
+    <div class="articles-list">
+{{rows}}
+    </div>
+  </div>
+</section>
+
+<div data-include="footer"></div>
+
+<script type="module" src="/assets/js/includes.js"></script>
+
+</body>
+</html>
