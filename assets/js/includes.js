@@ -7,15 +7,21 @@
     host.innerHTML = await res.text();
   }
   await Promise.all([
-    include('[data-include="nav"]', 'partials/nav.html'),
-    include('[data-include="footer"]', 'partials/footer.html'),
+    include('[data-include="nav"]', '/partials/nav.html'),
+    include('[data-include="footer"]', '/partials/footer.html'),
   ]);
 
-  // Mark current page active in the nav (preserves per-page highlighting
-  // that used to be hand-coded into each page's inline nav block).
-  const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  // Mark the matching nav link active. Matches either the exact current path
+  // or, for section links that end with '/', any URL whose path starts with
+  // that section (so /articles/<slug>/ highlights the /articles/ entry).
+  const path = location.pathname.toLowerCase();
+  const here = path === '/' ? '/index.html' : path;
   document.querySelectorAll('[data-include="nav"] a[href]').forEach(a => {
-    if (a.getAttribute('href').toLowerCase() !== here) return;
+    const href = a.getAttribute('href').toLowerCase();
+    const isMatch =
+      href === here ||
+      (href.endsWith('/') && here.startsWith(href));
+    if (!isMatch) return;
     if (a.classList.contains('nav-link')) {
       a.classList.add('nav-link--active');
     }
