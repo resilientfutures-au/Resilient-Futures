@@ -97,3 +97,53 @@ export function generateExcerpt(html, maxLen = 180) {
   const cut = lastSpace > maxLen * 0.6 ? slice.slice(0, lastSpace) : slice;
   return cut.replace(/[,.;:—–-]$/, '') + '…';
 }
+
+import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { dirname, basename, extname } from 'node:path';
+
+// Download a single image to `destPath`. Skips if the file already exists.
+// Returns { downloaded: true|false, bytes: number }.
+export async function downloadImage(url, destPath) {
+  if (existsSync(destPath)) {
+    const st = await stat(destPath);
+    return { downloaded: false, bytes: st.size };
+  }
+  await mkdir(dirname(destPath), { recursive: true });
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`fetch ${url} failed: ${res.status}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  await writeFile(destPath, buf);
+  return { downloaded: true, bytes: buf.length };
+}
+
+// Walk the post HTML, download every Squarespace-hosted image, and rewrite
+// the <img src> to a local path under /assets/images/articles/<slug>/.
+// Returns the rewritten HTML.
+export async function rewriteImageSrcs(html, slug, projectRoot) {
+  const $ = cheerio.load(html, null, false);
+  const tasks = [];
+  let fallbackCounter = 1;
+
+  $('img').each((_, el) => {
+    const src = $(el).attr('src') || '';
+    if (!src.startsWith('https://images.squarespace-cdn.com/')) return;
+
+    // Strip query string and derive filename
+    const noQuery = src.split('?')[0];
+    let filename = decodeURIComponent(basename(noQuery));
+    filename = filename.replace(/[^a-zA-Z0-9._-]/g, '-');
+    if (!extname(filename)) filename = `image-${fallbackCounter++}.jpg`;
+
+    const localRel = `/assets/images/articles/${slug}/${filename}`;
+    const localAbs = `${projectRoot}/assets/images/articles/${slug}/${filename}`;
+    $(el).attr('src', localRel);
+
+    tasks.push(downloadImage(src, localAbs).catch(err => {
+      console.warn(`  WARN image ${src} -> ${err.message}`);
+    }));
+  });
+
+  await Promise.all(tasks);
+  return $.root().html() ?? '';
+}
