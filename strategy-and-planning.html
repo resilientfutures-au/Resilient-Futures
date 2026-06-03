@@ -18,33 +18,23 @@
 
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section class="hero-section" style="
-  background: #0B1D26;
+  background: var(--rf-navy);
   padding: 80px 48px 96px;
   position: relative;
   overflow: hidden;
 ">
   <!-- Radial glows -->
-  <div style="
-    position:absolute; top:-80px; right:-80px;
-    width:520px; height:520px; border-radius:50%;
-    background: radial-gradient(circle, rgba(123,155,209,0.10) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
-  <div style="
-    position:absolute; bottom:40px; left:-60px;
-    width:360px; height:360px; border-radius:50%;
-    background: radial-gradient(circle, rgba(123,155,209,0.06) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
+  <div class="hero-glow--tr"></div>
+  <div class="hero-glow--bl"></div>
 
   <div class="section-inner" style="position:relative; z-index:1;">
     <!-- Breadcrumb -->
-    <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:40px; border-left:2px solid rgba(123,155,209,0.4); padding-left:12px;">
-      <a href="index.html" style="font-size: 12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a>
-      <span style="font-size: 12px; color:rgba(255,255,255,0.2);">&#47;</span>
-      <span style="font-size: 12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45);">Services</span>
-      <span style="font-size: 12px; color:rgba(255,255,255,0.2);">&#47;</span>
-      <span style="font-size: 12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#7B9BD1;">Strategy and Planning</span>
+    <div class="hero-breadcrumb">
+      <a href="index.html" class="hero-breadcrumb__link">Home</a>
+      <span class="hero-breadcrumb__sep">&#47;</span>
+      <span class="hero-breadcrumb__section">Services</span>
+      <span class="hero-breadcrumb__sep">&#47;</span>
+      <span class="hero-breadcrumb__current">Strategy and Planning</span>
     </div>
 
     <div style="display:flex; gap:48px; align-items:flex-start;">
@@ -54,14 +44,14 @@
         flex-shrink: 0;
         min-height: 280px;
         margin-top: 4px;
-        background: linear-gradient(to bottom, #7B9BD1, rgba(123,155,209,0));
+        background: linear-gradient(to bottom, var(--rf-accent), rgba(123,155,209,0));
       "></div>
       <!-- Copy -->
       <div class="reveal" style="flex:1;">
         <h1 class="font-display" style="
           font-size: 58px;
           font-weight: 700;
-          color: #fff;
+          color: var(--rf-white);
           line-height: 1.06;
           letter-spacing: -0.025em;
           margin-bottom: 24px;
@@ -80,7 +70,7 @@
         </p>
         <div class="hero-meta" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
           <a href="contact.html" class="btn-primary">Book a Conversation</a>
-          <a href="#engagements" style="color:rgba(255,255,255,0.42); font-size:13px; font-weight:400; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.72)'" onmouseout="this.style.color='rgba(255,255,255,0.42)'">Explore engagements &#8595;</a>
+          <a href="#engagements" class="hero-ghost-link">Explore engagements &#8595;</a>
         </div>
       </div>
     </div>
@@ -88,31 +78,31 @@
 </section>
 
 <!-- ═══════════════════════════ THE APPROACH ═══════════════════════════ -->
-<section class="intro-section" style="background: #FAFAF7; padding: 96px 0;">
+<section class="intro-section" style="background: var(--rf-cream); padding: 96px 0;">
   <div class="container">
     <div class="intro-grid" style="display: grid; grid-template-columns: 360px 1fr; gap: 80px; align-items: start;">
 
       <!-- Left: section heading -->
       <div class="reveal">
-        <span class="eyebrow" style="color:#3A5A92;">The Approach</span>
+        <span class="eyebrow" style="color:var(--rf-accent-deep);">The Approach</span>
         <h2 class="font-display" style="
-          font-size: 40px; font-weight: 700; color: #0B1D26;
+          font-size: 40px; font-weight: 700; color: var(--rf-navy);
           line-height: 1.15; letter-spacing: -0.02em;
           margin-bottom: 24px;
         ">The work behind a plan that actually holds.</h2>
         <div style="margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(11,29,38,0.12);">
-          <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #3A5A92; margin-bottom: 14px;">Grounded in</p>
+          <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rf-accent-deep); margin-bottom: 14px;">Grounded in</p>
           <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
-            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:#1A1A1A;">
-              <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:var(--rf-text);">
+              <div style="width:6px; height:6px; background:var(--rf-accent); flex-shrink:0;"></div>
               Complex adaptive systems thinking
             </li>
-            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:#1A1A1A;">
-              <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:var(--rf-text);">
+              <div style="width:6px; height:6px; background:var(--rf-accent); flex-shrink:0;"></div>
               Resilience science
             </li>
-            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:#1A1A1A;">
-              <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+            <li style="display:flex; align-items:center; gap:12px; font-size: 15px; color:var(--rf-text);">
+              <div style="width:6px; height:6px; background:var(--rf-accent); flex-shrink:0;"></div>
               Cognitive science
             </li>
           </ul>
@@ -121,16 +111,16 @@
 
       <!-- Right: body copy -->
       <div class="reveal" style="transition-delay:120ms;">
-        <p style="font-size: 19px; line-height: 1.7; color: #0B1D26; margin-bottom: 24px; font-weight: 500; letter-spacing: -0.005em;">
+        <p style="font-size: 19px; line-height: 1.7; color: var(--rf-navy); margin-bottom: 24px; font-weight: 500; letter-spacing: -0.005em;">
           Strategy and planning, done well, is not a document-production exercise.
         </p>
-        <p style="font-size: 18px; line-height: 1.75; color: #1A1A1A; margin-bottom: 22px;">
+        <p style="font-size: 18px; line-height: 1.75; color: var(--rf-text); margin-bottom: 22px;">
           It&rsquo;s the disciplined work of building a shared, evidence-based view of the conditions your organisation is actually operating in &mdash; then translating that view into the priorities, capability investments, and catalytic actions that will keep you relevant as those conditions continue to shift.
         </p>
-        <p style="font-size: 17px; line-height: 1.75; color: #4a6080; margin-bottom: 22px;">
-          At Resilient Futures, we approach strategy and planning through <strong style="color:#0B1D26; font-weight:700;">Strategy in Action (SiA)</strong> &mdash; a living decision-making system grounded in complex adaptive systems thinking, resilience science, and cognitive science.
+        <p style="font-size: 17px; line-height: 1.75; color: var(--rf-text-muted); margin-bottom: 22px;">
+          At Resilient Futures, we approach strategy and planning through <strong style="color:var(--rf-navy); font-weight:700;">Strategy in Action (SiA)</strong> &mdash; a living decision-making system grounded in complex adaptive systems thinking, resilience science, and cognitive science.
         </p>
-        <p style="font-size: 17px; line-height: 1.75; color: #4a6080;">
+        <p style="font-size: 17px; line-height: 1.75; color: var(--rf-text-muted);">
           The intent is not a polished plan that sits on a server. It&rsquo;s a plan your Board and Executive understand deeply, can defend confidently, and can adapt continuously as conditions evolve.
         </p>
       </div>
@@ -141,117 +131,102 @@
 
 <!-- ═══════════════════════════ PULL QUOTE BAND ═══════════════════════════ -->
 <section class="quote-band">
-  <div style="
-    position:absolute; top:50%; left:50%;
-    transform: translate(-50%,-50%);
-    width:700px; height:700px; border-radius:50%;
-    background: radial-gradient(circle, rgba(123,155,209,0.08) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
+  <div class="quote-band__glow"></div>
   <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-  <div class="section-inner reveal" style="position:relative; z-index:1; text-align:center; padding-top: 24px;">
-    <p class="font-display" style="
-      font-size: 32px;
-      font-weight: 400;
-      font-style: italic;
-      line-height: 1.4;
-      letter-spacing: -0.015em;
-      color: rgba(255,255,255,0.92);
-      max-width: 880px;
-      margin: 0 auto;
-    ">
+  <div class="section-inner reveal quote-band__inner">
+    <p class="font-display quote-band__text">
       The most dangerous place any organisation can be is confidently executing a strategy that is no longer aligned to reality.
     </p>
-    <div style="margin-top:36px; display:flex; justify-content:center; align-items:center; gap:14px;">
-      <span style="width:32px; height:1px; background:rgba(123,155,209,0.5);"></span>
-      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #7B9BD1;">Resilient Futures</span>
-      <span style="width:32px; height:1px; background:rgba(123,155,209,0.5);"></span>
+    <div class="quote-band__attribution">
+      <span class="quote-band__rule"></span>
+      <span class="quote-band__label">Resilient Futures</span>
+      <span class="quote-band__rule"></span>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════ ENGAGEMENTS ═══════════════════════════ -->
-<section id="engagements" class="engagements-section" style="background: #EEF2F9; padding: 96px 0;">
+<section id="engagements" class="engagements-section" style="background: var(--rf-surface-blue); padding: 96px 0;">
   <div class="container">
     <div class="reveal">
       <span class="eyebrow">Where We Engage</span>
       <h2 class="font-display" style="
-        font-size: 43px; font-weight: 700; color: #0B1D26;
+        font-size: 43px; font-weight: 700; color: var(--rf-navy);
         line-height: 1.15; letter-spacing: -0.02em;
         max-width: 700px; margin-bottom: 16px;
       ">Where most leaders engage us.</h2>
-      <p style="font-size: 17px; line-height: 1.7; color: #4a6080; max-width: 660px; margin-bottom: 56px;">
+      <p style="font-size: 17px; line-height: 1.7; color: var(--rf-text-muted); max-width: 660px; margin-bottom: 56px;">
         Strategy and planning engagements take different shapes depending on where an organisation is in its cycle and the conditions it&rsquo;s facing. We typically work across four areas.
       </p>
     </div>
 
-    <div class="engagements-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(11,29,38,0.1);">
+    <div class="engagements-grid">
 
       <!-- New strategic plan development -->
       <div class="engagement-card reveal">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
-          <div style="flex:1;">
-            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:10px;">01</div>
-            <h3 class="font-display" style="font-size:25px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.02em;">New strategic plan development</h3>
+        <div class="engagement-card__header">
+          <div>
+            <div class="engagement-card__number">01</div>
+            <h3 class="font-display engagement-card__heading">New strategic plan development</h3>
           </div>
           <span class="engagement-tag">End-to-end</span>
         </div>
-        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+        <p class="engagement-card__body">
           A co-designed, end-to-end strategy engagement &mdash; from conditions analysis through to Board-endorsed priorities, capability investment pathway, and implementation framework.
         </p>
-        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.6); margin:0; padding-top:8px; border-top:1px solid rgba(11,29,38,0.08);">
-          <strong style="color:#0B1D26; font-weight:600;">Best when:</strong> the current cycle is ending, or the operating reality has shifted enough that a reset, not a refresh, is required.
+        <p class="engagement-card__footer">
+          <strong>Best when:</strong> the current cycle is ending, or the operating reality has shifted enough that a reset, not a refresh, is required.
         </p>
       </div>
 
       <!-- Refresh or sense-check -->
       <div class="engagement-card reveal" style="transition-delay:80ms;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
-          <div style="flex:1;">
-            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:10px;">02</div>
-            <h3 class="font-display" style="font-size:25px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.02em;">Refresh or sense-check of an existing plan</h3>
+        <div class="engagement-card__header">
+          <div>
+            <div class="engagement-card__number">02</div>
+            <h3 class="font-display engagement-card__heading">Refresh or sense-check of an existing plan</h3>
           </div>
           <span class="engagement-tag">Stress-test</span>
         </div>
-        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+        <p class="engagement-card__body">
           A structured stress-test of a current strategic plan against the actual change landscape. Identifies where the plan still holds, where conditions have moved past it, and where adaptive course-correction is needed.
         </p>
-        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.6); margin:0; padding-top:8px; border-top:1px solid rgba(11,29,38,0.08);">
-          <strong style="color:#0B1D26; font-weight:600;">Best when:</strong> the strategic direction still has merit, but the assumptions underneath it need testing &mdash; without throwing out work that remains sound.
+        <p class="engagement-card__footer">
+          <strong>Best when:</strong> the strategic direction still has merit, but the assumptions underneath it need testing &mdash; without throwing out work that remains sound.
         </p>
       </div>
 
       <!-- Operational and annual planning -->
       <div class="engagement-card reveal" style="transition-delay:160ms;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
-          <div style="flex:1;">
-            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:10px;">03</div>
-            <h3 class="font-display" style="font-size:25px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.02em;">Operational and annual planning</h3>
+        <div class="engagement-card__header">
+          <div>
+            <div class="engagement-card__number">03</div>
+            <h3 class="font-display engagement-card__heading">Operational and annual planning</h3>
           </div>
           <span class="engagement-tag">Strategy &rarr; execution</span>
         </div>
-        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+        <p class="engagement-card__body">
           Translating strategic direction into annual business plans and operational priorities &mdash; with the kind of integration between strategy and execution that prevents the annual plan from quietly drifting away from the strategic intent it&rsquo;s meant to serve.
         </p>
-        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.6); margin:0; padding-top:8px; border-top:1px solid rgba(11,29,38,0.08);">
-          <strong style="color:#0B1D26; font-weight:600;">Best when:</strong> a strategy exists at the top, but the annual planning cycle isn&rsquo;t reliably translating it into what teams actually do.
+        <p class="engagement-card__footer">
+          <strong>Best when:</strong> a strategy exists at the top, but the annual planning cycle isn&rsquo;t reliably translating it into what teams actually do.
         </p>
       </div>
 
       <!-- Sub-plan and service planning -->
       <div class="engagement-card reveal" style="transition-delay:240ms;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
-          <div style="flex:1;">
-            <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(11,29,38,0.4); margin-bottom:10px;">04</div>
-            <h3 class="font-display" style="font-size:25px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.02em;">Sub-plan and service planning</h3>
+        <div class="engagement-card__header">
+          <div>
+            <div class="engagement-card__number">04</div>
+            <h3 class="font-display engagement-card__heading">Sub-plan and service planning</h3>
           </div>
           <span class="engagement-tag">Domain-specific</span>
         </div>
-        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin:0;">
+        <p class="engagement-card__body">
           Domain-specific planning at the service, portfolio, or function level &mdash; including Council plans, service plans, and sub-plans across growth, innovation, customer, workforce, and technology.
         </p>
-        <p style="font-size:15px; line-height:1.65; color:rgba(11,29,38,0.6); margin:0; padding-top:8px; border-top:1px solid rgba(11,29,38,0.08);">
-          <strong style="color:#0B1D26; font-weight:600;">Always:</strong> aligned to the broader strategic frame, never built in isolation.
+        <p class="engagement-card__footer">
+          <strong>Always:</strong> aligned to the broader strategic frame, never built in isolation.
         </p>
       </div>
 
@@ -260,54 +235,42 @@
 </section>
 
 <!-- ═══════════════════════════ WHAT'S DIFFERENT ═══════════════════════════ -->
-<section class="diff-section" style="background: #FAFAF7; padding: 96px 0;">
+<section class="diff-section" style="background: var(--rf-cream); padding: 96px 0;">
   <div class="container">
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 56px;">
+    <div class="section-intro">
       <div>
-        <span class="eyebrow" style="color:#3A5A92;">Our Practice</span>
-        <h2 class="font-display" style="
-          font-size: 43px; font-weight: 700; color: #0B1D26;
-          line-height: 1.15; letter-spacing: -0.02em;
-          max-width: 520px;
-        ">What&rsquo;s different about how we do this.</h2>
+        <span class="eyebrow" style="color:var(--rf-accent-deep);">Our Practice</span>
+        <h2 class="font-display section-intro__h2" style="max-width: 520px;">What&rsquo;s different about how we do this.</h2>
       </div>
-      <div>
-        <p style="font-size: 17px; line-height: 1.7; color: #4a6080; max-width: 420px;">
-          Two principles distinguish how Resilient Futures runs a strategy and planning engagement &mdash; and both are deliberate.
-        </p>
-      </div>
+      <p class="section-intro__lead" style="max-width: 420px;">
+        Two principles distinguish how Resilient Futures runs a strategy and planning engagement &mdash; and both are deliberate.
+      </p>
     </div>
 
-    <div class="diff-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+    <div class="diff-grid">
 
       <div class="diff-card">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:6px;">
-          <div style="font-size:13px; font-weight:700; letter-spacing:0.16em; color:#7B9BD1;">A</div>
-          <div style="height:1px; flex:1; background:rgba(11,29,38,0.12);"></div>
-        </div>
-        <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: #0B1D26; line-height: 1.25; letter-spacing: -0.015em; margin-bottom: 4px;">
+        <div class="diff-card-eyebrow diff-card-eyebrow--lg">A</div>
+        <h3 class="font-display diff-card__heading">
           Depth over delegation.
         </h3>
-        <p style="font-size: 16px; line-height: 1.7; color: #4a6080; margin: 0;">
+        <p class="diff-card__body">
           The senior practitioners you meet are the senior practitioners who do the work. There is no junior team running the engagement behind the scenes.
         </p>
-        <p style="font-size: 15px; line-height: 1.65; color: #0B1D26; font-weight: 600; margin: 0; padding-top: 12px; border-top: 1px solid rgba(11,29,38,0.08);">
+        <p class="diff-card__footer">
           Your investment trains your people, not ours.
         </p>
       </div>
 
       <div class="diff-card">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:6px;">
-          <div style="font-size:13px; font-weight:700; letter-spacing:0.16em; color:#7B9BD1;">B</div>
-          <div style="height:1px; flex:1; background:rgba(11,29,38,0.12);"></div>
-        </div>
-        <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: #0B1D26; line-height: 1.25; letter-spacing: -0.015em; margin-bottom: 4px;">
+        <div class="diff-card-eyebrow diff-card-eyebrow--lg">B</div>
+        <h3 class="font-display diff-card__heading">
           Capability transfer is built in.
         </h3>
-        <p style="font-size: 16px; line-height: 1.7; color: #4a6080; margin: 0;">
+        <p class="diff-card__body">
           Every Strategy in Action engagement deliberately develops your internal strategic capability &mdash; the mindset, tools, and behaviours your leadership team needs to keep strategy alive after we&rsquo;ve stepped back.
         </p>
-        <p style="font-size: 15px; line-height: 1.65; color: #0B1D26; font-weight: 600; margin: 0; padding-top: 12px; border-top: 1px solid rgba(11,29,38,0.08);">
+        <p class="diff-card__footer">
           The goal is not dependency. It&rsquo;s strategic fitness inside your organisation.
         </p>
       </div>
@@ -317,7 +280,7 @@
 </section>
 
 <!-- ═══════════════════════════ OUTCOMES ═══════════════════════════ -->
-<section class="outcomes-section" style="background: #0B1D26; padding: 96px 0; position: relative; overflow: hidden;">
+<section class="outcomes-section" style="background: var(--rf-navy); padding: 96px 0; position: relative; overflow: hidden;">
   <div style="
     position:absolute; top:-100px; right:-100px;
     width:480px; height:480px; border-radius:50%;
@@ -336,7 +299,7 @@
       <div>
         <span class="eyebrow">What You Walk Away With</span>
         <h2 class="font-display" style="
-          font-size: 43px; font-weight: 700; color: #fff;
+          font-size: 43px; font-weight: 700; color: var(--rf-white);
           line-height: 1.15; letter-spacing: -0.02em;
           max-width: 520px;
         ">What you can expect to come out with.</h2>
@@ -395,46 +358,46 @@
 </section>
 
 <!-- ═══════════════════════════ WHO WE WORK WITH ═══════════════════════════ -->
-<section class="who-section" style="background: #FAFAF7; padding: 96px 0;">
+<section class="who-section" style="background: var(--rf-cream); padding: 96px 0;">
   <div class="container">
     <div class="who-grid" style="display:grid; grid-template-columns: 360px 1fr; gap: 80px; align-items:start;">
 
       <div>
-        <span class="eyebrow" style="color:#3A5A92;">Who We Work With</span>
+        <span class="eyebrow" style="color:var(--rf-accent-deep);">Who We Work With</span>
         <h2 class="font-display" style="
-          font-size: 36px; font-weight: 700; color: #0B1D26;
+          font-size: 36px; font-weight: 700; color: var(--rf-navy);
           line-height: 1.2; letter-spacing: -0.02em;
         ">Calibrated for complex, multi-stakeholder organisations.</h2>
       </div>
 
       <div>
-        <p style="font-size: 18px; line-height: 1.75; color: #1A1A1A; margin-bottom: 28px;">
-          This work is calibrated for the <strong style="color:#0B1D26; font-weight:700;">Boards and Executives</strong> of complex, member-based, and multi-stakeholder organisations &mdash; where relevance and legitimacy are non-negotiable, and where the cost of a plan that&rsquo;s quietly diverging from reality is high.
+        <p style="font-size: 18px; line-height: 1.75; color: var(--rf-text); margin-bottom: 28px;">
+          This work is calibrated for the <strong style="color:var(--rf-navy); font-weight:700;">Boards and Executives</strong> of complex, member-based, and multi-stakeholder organisations &mdash; where relevance and legitimacy are non-negotiable, and where the cost of a plan that&rsquo;s quietly diverging from reality is high.
         </p>
 
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; padding-top:28px; border-top:1px solid rgba(11,29,38,0.12);">
-          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
-            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:var(--rf-navy); font-weight:500;">
+            <div style="width:6px; height:6px; background:var(--rf-accent); flex-shrink:0;"></div>
             Professional associations
           </div>
-          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
-            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:var(--rf-navy); font-weight:500;">
+            <div style="width:6px; height:6px; background:var(--rf-accent); flex-shrink:0;"></div>
             Peak bodies
           </div>
-          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
-            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:var(--rf-navy); font-weight:500;">
+            <div style="width:6px; height:6px; background:var(--rf-accent); flex-shrink:0;"></div>
             Health &amp; human services
           </div>
-          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
-            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:var(--rf-navy); font-weight:500;">
+            <div style="width:6px; height:6px; background:var(--rf-accent); flex-shrink:0;"></div>
             Education
           </div>
-          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
-            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:var(--rf-navy); font-weight:500;">
+            <div style="width:6px; height:6px; background:var(--rf-accent); flex-shrink:0;"></div>
             Government
           </div>
-          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:#0B1D26; font-weight:500;">
-            <div style="width:6px; height:6px; background:#7B9BD1; flex-shrink:0;"></div>
+          <div style="display:flex; align-items:center; gap:12px; font-size:15px; color:var(--rf-navy); font-weight:500;">
+            <div style="width:6px; height:6px; background:var(--rf-accent); flex-shrink:0;"></div>
             Purpose-driven enterprises
           </div>
         </div>
@@ -446,7 +409,7 @@
 
 <!-- ═══════════════════════════ CTA ═══════════════════════════ -->
 <section class="cta-section" style="
-  background: linear-gradient(135deg, #0B1D26 0%, #0B1D26 100%);
+  background: linear-gradient(135deg, var(--rf-navy) 0%, var(--rf-navy) 100%);
   padding: 96px 0;
   text-align: center;
   position: relative; overflow: hidden;
@@ -461,7 +424,7 @@
   <div class="reveal" style="position:relative; z-index:1;">
     <span class="eyebrow" style="margin-bottom:24px;">Start the Conversation</span>
     <h2 class="font-display" style="
-      font-size: 47px; font-weight: 700; color: #fff;
+      font-size: 47px; font-weight: 700; color: var(--rf-white);
       line-height: 1.15; letter-spacing: -0.02em;
       max-width: 620px; margin: 0 auto 18px;
     ">A plan that holds starts with a real conversation.</h2>
@@ -479,26 +442,26 @@
 </section>
 
 <!-- ═══════════════════════════ EXPLORE FURTHER ═══════════════════════════ -->
-<section class="explore-strip" style="background: #EEF2F9; padding: 64px 0; border-top: 1px solid rgba(11,29,38,0.08);">
+<section class="explore-strip" style="background: var(--rf-surface-blue); padding: 64px 0; border-top: 1px solid rgba(11,29,38,0.08);">
   <div class="container">
     <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(11,29,38,0.55); margin-bottom: 32px;">Other Services</p>
     <div class="explore-cards" style="display: flex; gap: 16px; flex-wrap: wrap;">
       <a href="change-management.html" class="explore-card explore-card--dim">
         <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(123,155,209,0.75); margin-bottom: 14px;">Service 02</div>
-        <div class="font-display" style="font-size: 25px; font-weight: 700; color: #0B1D26; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Change Management</div>
-        <p style="font-size: 15px; line-height: 1.6; color: #4a6080; margin: 0 0 20px; flex: 1;">Turning intent into traction &mdash; execution that actually lands inside the organisation.</p>
+        <div class="font-display" style="font-size: 25px; font-weight: 700; color: var(--rf-navy); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Change Management</div>
+        <p style="font-size: 15px; line-height: 1.6; color: var(--rf-text-muted); margin: 0 0 20px; flex: 1;">Turning intent into traction &mdash; execution that actually lands inside the organisation.</p>
         <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(123,155,209,0.75);">Explore &rarr;</span>
       </a>
       <a href="leadership-development.html" class="explore-card explore-card--dim">
         <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(123,155,209,0.75); margin-bottom: 14px;">Service 03</div>
-        <div class="font-display" style="font-size: 25px; font-weight: 700; color: #0B1D26; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Leadership Development</div>
-        <p style="font-size: 15px; line-height: 1.6; color: #4a6080; margin: 0 0 20px; flex: 1;">Leaders who can think, decide, and act in disruptive conditions &mdash; not wait them out.</p>
+        <div class="font-display" style="font-size: 25px; font-weight: 700; color: var(--rf-navy); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Leadership Development</div>
+        <p style="font-size: 15px; line-height: 1.6; color: var(--rf-text-muted); margin: 0 0 20px; flex: 1;">Leaders who can think, decide, and act in disruptive conditions &mdash; not wait them out.</p>
         <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(123,155,209,0.75);">Explore &rarr;</span>
       </a>
       <a href="strategic-intelligence.html" class="explore-card explore-card--dim">
         <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(123,155,209,0.75); margin-bottom: 14px;">Service 04</div>
-        <div class="font-display" style="font-size: 25px; font-weight: 700; color: #0B1D26; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Strategic Intelligence</div>
-        <p style="font-size: 15px; line-height: 1.6; color: #4a6080; margin: 0 0 20px; flex: 1;">Looking past what&rsquo;s in front of you &mdash; the signals and shifts that will define your environment.</p>
+        <div class="font-display" style="font-size: 25px; font-weight: 700; color: var(--rf-navy); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px;">Strategic Intelligence</div>
+        <p style="font-size: 15px; line-height: 1.6; color: var(--rf-text-muted); margin: 0 0 20px; flex: 1;">Looking past what&rsquo;s in front of you &mdash; the signals and shifts that will define your environment.</p>
         <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(123,155,209,0.75);">Explore &rarr;</span>
       </a>
     </div>

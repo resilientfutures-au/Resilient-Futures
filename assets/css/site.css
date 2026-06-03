@@ -20,19 +20,41 @@
     14. Responsive — body-class scoped per page
    ============================================================ */
 
-/* ── 1. Brand tokens ── */
+/* ── 1. Brand tokens ──
+   Source of truth: brand_assets/brand-spec.md (derived from index.html).
+   Supersedes the Sienna palette in resilient-futures-brand-guidelines.docx. */
 :root {
+  /* Navy + elevated */
   --rf-navy:                  #0B1D26;
-  --rf-cream:                 #FAF7F0;
-  --rf-accent:                #4A8FCF;
-  --rf-soft-blue:             #7BB0E2;
-  --rf-slate:                 #4A5568;
-  --rf-white:                 #FFFFFF;
-  --rf-max-width:             1280px;
-  --rf-section-pad-y:         120px;
-  --rf-section-pad-y-mobile:  72px;
+  --rf-navy-elevated:         #122C3A;
 
-  /* Font tokens — Source Serif 4 (display) + Inter (UI/body) */
+  /* Accent blues */
+  --rf-accent-deep:           #3A5A92;
+  --rf-accent:                #7B9BD1;
+  --rf-accent-icon:           #4A8FCF;
+
+  /* Surfaces */
+  --rf-white:                 #FFFFFF;
+  --rf-cream:                 #FAFAF7;
+  --rf-surface-blue:          #EEF2F9;
+
+  /* Dividers */
+  --rf-divider:               #D4DCE8;
+  --rf-divider-soft:          rgba(11, 29, 38, 0.08);
+
+  /* Text on light */
+  --rf-text:                  #1A1A1A;
+  --rf-text-muted:            #4a6080;
+  --rf-text-subtle:           #5a6a7a;
+
+  /* Layout */
+  --rf-max-width:             1280px;
+  --rf-section-pad-y:         96px;
+  --rf-section-pad-y-mobile:  72px;
+  --rf-section-pad-y-tall:    140px;
+  --rf-section-pad-y-short:   88px;
+
+  /* Fonts — Source Serif 4 (display) + Inter (UI/body) */
   --rf-font-serif: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
   --rf-font-sans:  'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
@@ -95,7 +117,7 @@ p {
   font-size: 13px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--rf-soft-blue);
+  color: var(--rf-accent);
   margin-bottom: 16px;
 }
 .eyebrow::before {
@@ -111,6 +133,39 @@ p {
 .section-heading h2 + p { margin-top: 24px; max-width: 65ch; }
 @media (max-width: 767px) {
   .section-heading { margin-bottom: 32px; }
+}
+
+/* Split section intro — eyebrow + H2 on the left, lead paragraph on the right.
+   Used on diff-sections and audience sections across Strategy & Planning,
+   Change Management, Leadership Development, Strategic Intelligence.
+   - .section-intro: the 1fr/1fr grid wrapper
+   - .section-intro__h2: 43px display serif heading
+   - .section-intro__lead: 17px muted body paragraph
+   Max-width on h2/lead is intentionally per-instance (content-specific). */
+.section-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+.section-intro__h2 {
+  font-family: var(--rf-font-serif);
+  font-size: 43px; font-weight: 700;
+  color: var(--rf-navy);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.section-intro__lead {
+  font-family: var(--rf-font-sans);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--rf-text-muted);
+  margin: 0;
+}
+@media (max-width: 1023px) {
+  .section-intro { grid-template-columns: 1fr; gap: 24px; align-items: start; }
 }
 
 blockquote, .quote, .pull-quote {
@@ -193,7 +248,7 @@ section + section.same-bg { padding-top: 0; }
   font-family: var(--rf-font-serif);
   font-weight: 500;
   font-size: 40px;
-  color: var(--rf-soft-blue);
+  color: var(--rf-accent);
   line-height: 1;
   margin-bottom: 14px;
 }
@@ -397,56 +452,255 @@ section + section.same-bg { padding-top: 0; }
 .site-footer {
   background: var(--rf-navy);
   color: var(--rf-cream);
-  padding: 96px 0 48px;
+  padding: 64px 0 32px;
 }
+
+/* Four-column grid: anchor + 3 nav columns */
 .site-footer__columns {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 48px;
-  max-width: 800px;
-  margin: 0 auto 64px;
+  grid-template-columns: 1.6fr 1fr 1.2fr 1.2fr;
+  gap: 56px;
+  margin: 0 0 56px;
 }
-.site-footer__columns a {
+
+.site-footer__anchor { padding-right: 16px; }
+.site-footer__logo {
+  height: 44px;
+  width: auto;
   display: block;
-  padding: 4px 0;
+  margin-bottom: 20px;
+}
+.site-footer__tagline {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(250, 250, 247, 0.62);
+  max-width: 26ch;
+  margin: 0;
+}
+
+.site-footer__col { min-width: 0; }
+.site-footer__heading {
+  font-family: var(--rf-font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #A8C0E6;
+  margin: 0 0 20px;
+}
+.site-footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-footer__list li {
+  font-size: 14.5px;
+  line-height: 1.9;
   color: var(--rf-cream);
-  font-size: 15px;
+}
+.site-footer__list a {
+  color: var(--rf-cream);
   text-decoration: none;
   transition: color 150ms ease;
 }
-.site-footer__columns a:hover { color: var(--rf-accent); }
+.site-footer__list a:hover { color: var(--rf-accent); }
+.site-footer__list a:focus-visible {
+  outline: 2px solid var(--rf-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+/* Bottom bar */
 .site-footer__bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 32px;
-  border-top: 1px solid var(--rf-slate);
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 13px;
-  color: var(--rf-slate);
+  color: rgba(255, 255, 255, 0.5);
 }
-.site-footer__brand img { height: 36px; margin-right: 16px; }
-.site-footer__brand { display: flex; align-items: center; }
-.site-footer__social { display: flex; gap: 16px; }
-.site-footer__social a { color: var(--rf-cream); opacity: 0.8; }
-.site-footer__social a:hover { opacity: 1; }
-@media (max-width: 767px) {
-  .site-footer__columns { grid-template-columns: 1fr; gap: 32px; }
-  .site-footer__bottom { flex-direction: column; gap: 16px; }
+.site-footer__copy { margin: 0; }
+.site-footer__social { display: flex; gap: 22px; align-items: center; }
+.site-footer__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: rgba(250, 250, 247, 0.55);
+  transition: color 150ms ease, transform 150ms ease;
+}
+.site-footer__social a:hover { color: var(--rf-cream); }
+.site-footer__social a:focus-visible {
+  outline: 2px solid var(--rf-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.site-footer__social svg { display: block; width: 18px; height: 18px; }
+.site-footer__social-mask {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask-mode: luminance; mask-mode: luminance;
+  -webkit-mask-size: contain; mask-size: contain;
+  -webkit-mask-position: center; mask-position: center;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+}
+
+@media (max-width: 1023px) {
+  .site-footer__columns {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px 40px;
+  }
+  .site-footer__anchor { grid-column: 1 / -1; padding-right: 0; }
+  .site-footer__tagline { max-width: 42ch; }
+}
+@media (max-width: 639px) {
+  .site-footer { padding: 48px 0 28px; }
+  .site-footer__columns { grid-template-columns: 1fr; gap: 36px; }
+  .site-footer__bottom { flex-direction: column; align-items: flex-start; gap: 18px; }
+}
+
+/* Hero decorative pieces (radial glows, breadcrumb, ghost CTA link).
+   Page-specific .hero-section padding/background and .hero-h1 sizing
+   are still handled per-page; these are the shared chrome bits. */
+.hero-glow--tr {
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 520px; height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,155,209,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-glow--bl {
+  position: absolute;
+  bottom: 40px; left: -60px;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,155,209,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  border-left: 2px solid rgba(123,155,209,0.4);
+  padding-left: 12px;
+}
+.hero-breadcrumb__link,
+.hero-breadcrumb__link:visited {
+  font-family: var(--rf-font-sans);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.hero-breadcrumb__link:hover { color: rgba(255,255,255,0.8); }
+.hero-breadcrumb__link:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.85);
+  outline-offset: 3px;
+}
+.hero-breadcrumb__sep {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+}
+.hero-breadcrumb__section,
+.hero-breadcrumb__current {
+  font-family: var(--rf-font-sans);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hero-breadcrumb__section {
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+}
+.hero-breadcrumb__current {
+  font-weight: 600;
+  color: var(--rf-accent);
+}
+
+/* Ghost secondary link below hero CTA (e.g. "Explore engagements ↓") */
+.hero-ghost-link {
+  font-family: var(--rf-font-sans);
+  color: rgba(255,255,255,0.42);
+  font-size: 13px; font-weight: 400;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.hero-ghost-link:hover { color: rgba(255,255,255,0.72); }
+.hero-ghost-link:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.85);
+  outline-offset: 3px;
 }
 
 /* ── 8. Card components ── */
-/* Service cards (homepage) */
-.svc-card { background: var(--rf-white); padding: 36px 28px; transition: background 0.2s; display: flex; flex-direction: column; }
+/* Service cards (homepage 4-up "What We Do" grid)
+   - .svc-grid: 4-column grid with hairline divider visible through 1px gap
+   - .svc-card: vertical flex column on white surface
+   - .svc-card__number: large faint numeral (45px, 10% accent-deep)
+   - .svc-card__heading: display-serif title
+   - .svc-card__tagline: italic accent-deep one-liner
+   - .svc-card__body: main paragraph (flex:1 pushes link to bottom)
+   - .svc-link: "Learn more →" CTA pinned to bottom of card */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(11,29,38,0.06);
+  margin-top: 48px;
+}
+.svc-card {
+  background: var(--rf-white);
+  padding: 36px 28px;
+  display: flex; flex-direction: column;
+  transition: background 0.2s;
+}
 .svc-card:hover { background: #dce6f5; }
+.svc-card__number {
+  font-family: var(--rf-font-serif);
+  font-size: 45px; font-weight: 700;
+  line-height: 1;
+  color: rgba(58,90,146,0.10);
+  margin-bottom: 16px;
+}
+.svc-card__heading {
+  font-family: var(--rf-font-serif);
+  font-size: 20px; font-weight: 700;
+  line-height: 1.2;
+  color: var(--rf-navy);
+  margin-bottom: 8px;
+}
+.svc-card__tagline {
+  font-family: var(--rf-font-sans);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--rf-accent-deep);
+  margin-bottom: 14px;
+}
+.svc-card__body {
+  font-family: var(--rf-font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--rf-text);
+  margin-bottom: 0;
+  flex: 1;
+}
 .svc-link {
   display: inline-flex; align-items: center; gap: 6px;
-  color: #7B9BD1; font-size: 15px; font-weight: 600;
+  color: var(--rf-accent-deep);
+  font-size: 15px; font-weight: 600;
   letter-spacing: 0.06em; text-transform: uppercase;
-  margin-top: auto; padding-top: 20px;
+  margin-top: 20px;
   text-decoration: none; transition: opacity 0.2s;
 }
 .svc-link:hover { opacity: 0.75; }
-.svc-link:focus-visible { outline: 2px solid #7B9BD1; outline-offset: 3px; }
+.svc-link:focus-visible { outline: 2px solid var(--rf-accent-deep); outline-offset: 3px; }
 .svc-link:active { opacity: 0.55; }
 
 /* Why-page: implication chips, need cards */
@@ -503,10 +757,27 @@ section + section.same-bg { padding-top: 0; }
 .ideal-item:last-child { border-bottom: none; }
 .ideal-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px; color: #7B9BD1; }
 
-/* Engagement cards */
+/* Engagement cards
+   - .engagements-grid: 2-up grid with hairline divider bg (default)
+   - .page-leadership-development .engagements-grid: 3-up grid with gap
+   - .engagement-card: outer card surface
+   - .engagement-card__header: top row (number/heading on left, tag on right)
+   - .engagement-card__number / __heading / __body / __footer: child elements
+   - .engagement-card--featured: signature variant with badge */
+.engagements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: rgba(11,29,38,0.1);
+}
+.page-leadership-development .engagements-grid {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  background: none;
+}
 .engagement-card {
   background: var(--rf-white); padding: 40px;
-  border-top: 3px solid #7B9BD1;
+  border-top: 3px solid var(--rf-accent);
   display: flex; flex-direction: column; gap: 16px;
   transition: box-shadow 0.2s;
 }
@@ -519,27 +790,76 @@ section + section.same-bg { padding-top: 0; }
   box-shadow: 0 8px 32px rgba(11,29,38,0.10);
   transform: translateY(-2px);
 }
+.engagement-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.engagement-card__header > div { flex: 1; }
+.engagement-card__number {
+  font-family: var(--rf-font-sans);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(11,29,38,0.4);
+  margin-bottom: 10px;
+}
+.engagement-card__heading {
+  font-family: var(--rf-font-serif);
+  font-size: 25px; font-weight: 700;
+  line-height: 1.2; letter-spacing: -0.02em;
+  color: var(--rf-navy);
+  margin: 0;
+}
+.engagement-card__body {
+  font-family: var(--rf-font-sans);
+  font-size: 16px; line-height: 1.7;
+  color: var(--rf-text-muted);
+  margin: 0;
+}
+.engagement-card__footer {
+  font-family: var(--rf-font-sans);
+  font-size: 15px; line-height: 1.65;
+  color: rgba(11,29,38,0.6);
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid rgba(11,29,38,0.08);
+}
+.engagement-card__footer strong { color: var(--rf-navy); font-weight: 600; }
+
+/* Tighter typography for the 3-up grid on Leadership Development */
+.page-leadership-development .engagement-card__heading { font-size: 22px; margin-bottom: 8px; }
+.page-leadership-development .engagement-card__body    { font-size: 15px; line-height: 1.65; }
+.page-leadership-development .engagement-card__footer  { font-size: 14px; line-height: 1.6; padding-top: 10px; }
+
 .engagement-tag {
   display: inline-block;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: #3A5A92;
+  color: var(--rf-accent-deep);
   background: rgba(58,90,146,0.08);
   border: 1px solid rgba(58,90,146,0.18);
   padding: 4px 10px; border-radius: 2px;
   width: fit-content;
 }
-.engagement-tag--accent { color: var(--rf-white); background: #3A5A92; border-color: #3A5A92; }
+.engagement-tag--accent {
+  color: var(--rf-white);
+  background: var(--rf-accent-deep);
+  border-color: var(--rf-accent-deep);
+}
 .engagement-card--featured {
-  border-top-color: #3A5A92; border-top-width: 4px;
-  background: linear-gradient(180deg, var(--rf-white) 0%, var(--rf-white) 100%);
+  border-top-color: var(--rf-accent-deep);
+  border-top-width: 4px;
+  background: var(--rf-white);
   position: relative;
 }
 .engagement-card--featured::before {
   content: 'SIGNATURE PROGRAM';
   position: absolute;
   top: -11px; left: 50%; transform: translateX(-50%);
-  background: #3A5A92; color: var(--rf-white);
+  background: var(--rf-accent-deep);
+  color: var(--rf-white);
   font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
   padding: 4px 14px; white-space: nowrap;
 }
@@ -564,42 +884,181 @@ section + section.same-bg { padding-top: 0; }
 }
 .outcome-text strong { color: var(--rf-white); font-weight: 600; }
 
-/* Difference cards (3-up) */
+/* Difference cards ("Our Practice" / "Our Thinking" 3-up)
+   - .diff-grid: 3-up grid (2-up on Strategy & Planning)
+   - .diff-card: card surface — top-border on most pages, left-border on S&P
+   - .diff-card__heading / __body / __footer: child elements
+   - .diff-card--featured: signature variant (deeper border, thicker)
+   - .diff-card-eyebrow: "A · Title" label with trailing rule
+   - .diff-card-eyebrow--lg: larger S&P variant (letter only, lavender accent) */
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.page-strategy-and-planning .diff-grid {
+  grid-template-columns: 1fr 1fr;
+}
 .diff-card {
   background: var(--rf-white); padding: 36px 32px;
-  border-top: 3px solid #7B9BD1;
+  border-top: 3px solid var(--rf-accent);
   display: flex; flex-direction: column; gap: 14px;
   transition: box-shadow 0.2s, transform 0.2s;
 }
 .diff-card:hover { box-shadow: 0 8px 32px rgba(11,29,38,0.08); transform: translateY(-2px); }
-.diff-card--featured { border-top-color: #3A5A92; border-top-width: 4px; }
+.diff-card--featured {
+  border-top-color: var(--rf-accent-deep);
+  border-top-width: 4px;
+}
 .page-change-management .diff-card--featured { background: var(--rf-white); }
 /* Strategy & Planning uses a different diff-card treatment (border-left, no hover transform) */
 .page-strategy-and-planning .diff-card {
   padding: 44px 40px;
   border-top: none;
-  border-left: 3px solid #7B9BD1;
+  border-left: 3px solid var(--rf-accent);
   gap: 18px;
   transition: none;
 }
 .page-strategy-and-planning .diff-card:hover { box-shadow: none; transform: none; }
+
+.diff-card__heading {
+  font-family: var(--rf-font-serif);
+  font-size: 22px; font-weight: 700;
+  line-height: 1.25; letter-spacing: -0.015em;
+  color: var(--rf-navy);
+  margin: 0 0 4px;
+}
+.diff-card__body {
+  font-family: var(--rf-font-sans);
+  font-size: 15px; line-height: 1.65;
+  color: var(--rf-text-muted);
+  margin: 0;
+}
+.diff-card__footer {
+  font-family: var(--rf-font-sans);
+  font-size: 14px; line-height: 1.6;
+  font-weight: 600;
+  color: var(--rf-navy);
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px solid rgba(11,29,38,0.08);
+}
+/* S&P uses larger typography for its 2-up layout */
+.page-strategy-and-planning .diff-card__heading { font-size: 24px; }
+.page-strategy-and-planning .diff-card__body    { font-size: 16px; line-height: 1.7; }
+.page-strategy-and-planning .diff-card__footer  { font-size: 15px; line-height: 1.65; padding-top: 12px; }
+
 .diff-card-eyebrow {
   display: flex; align-items: center; gap: 12px;
+  font-family: var(--rf-font-sans);
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.16em; text-transform: uppercase;
-  color: #3A5A92;
+  color: var(--rf-accent-deep);
 }
 .diff-card-eyebrow::after { content: ''; height: 1px; flex: 1; background: rgba(11,29,38,0.12); }
+.diff-card-eyebrow--lg {
+  font-size: 13px;
+  color: var(--rf-accent);
+}
 
-/* Workshop cards */
-.workshop-card { background: var(--rf-white); padding: 40px 36px; border-top: 2px solid rgba(123,155,209,0.4); }
+/* Workshop cards
+   - .workshop-grid: 2-up layout
+   - .workshop-card: outer card
+   - .workshop-card__eyebrow / __heading: top labels
+   - .workshop-card__meta: Duration/For row with vertical rule between
+   - .workshop-card__section: a Focus or Leaders-Gain block
+   - .workshop-focus-item / .workshop-gain-item: the two bullet list variants
+     (filled dot for focus, outlined dot for gain) */
+.workshop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.workshop-card {
+  background: var(--rf-white);
+  padding: 40px 36px;
+  border-top: 2px solid rgba(123,155,209,0.4);
+}
+.workshop-card__eyebrow {
+  font-family: var(--rf-font-sans);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--rf-accent);
+  margin-bottom: 20px;
+}
+.workshop-card__heading {
+  font-family: var(--rf-font-serif);
+  font-size: 27px; font-weight: 700;
+  line-height: 1.15;
+  color: var(--rf-navy);
+  margin-bottom: 8px;
+}
+.workshop-card__meta {
+  display: flex; gap: 24px;
+  margin: 24px 0;
+  padding: 20px 0;
+  border-top: 1px solid rgba(11,29,38,0.1);
+  border-bottom: 1px solid rgba(11,29,38,0.1);
+}
+.workshop-card__meta-rule {
+  width: 1px;
+  background: rgba(11,29,38,0.12);
+}
+.workshop-card__meta-label {
+  font-family: var(--rf-font-sans);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(11,29,38,0.45);
+  margin-bottom: 4px;
+}
+.workshop-card__meta-value {
+  font-family: var(--rf-font-sans);
+  font-size: 15px; font-weight: 500;
+  color: var(--rf-text-muted);
+}
+.workshop-card__section { margin-bottom: 28px; }
+.workshop-card__section:last-child { margin-bottom: 0; }
+.workshop-card__section-label {
+  font-family: var(--rf-font-sans);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--rf-accent);
+  margin-bottom: 14px;
+}
 .workshop-focus-item {
   display: flex; align-items: flex-start; gap: 12px;
   padding: 9px 0;
   border-bottom: 1px solid rgba(11,29,38,0.08);
 }
 .workshop-focus-item:last-child { border-bottom: none; }
+.workshop-focus-item__dot {
+  width: 5px; height: 5px;
+  background: var(--rf-accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+  opacity: 0.7;
+}
+.workshop-focus-item p {
+  font-family: var(--rf-font-sans);
+  font-size: 16px; line-height: 1.6;
+  color: rgba(11,29,38,0.55);
+  margin: 0;
+}
 .workshop-gain-item { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; }
+.workshop-gain-item__dot {
+  width: 5px; height: 5px;
+  border: 1.5px solid rgba(123,155,209,0.55);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+.workshop-gain-item p {
+  font-family: var(--rf-font-sans);
+  font-size: 15px; line-height: 1.6;
+  color: rgba(11,29,38,0.45);
+  margin: 0;
+}
 
 /* Tier rows (Leadership Development) */
 .tier-row {
@@ -730,16 +1189,135 @@ section + section.same-bg { padding-top: 0; }
   border-left: 2px solid rgba(123,155,209,0.4);
 }
 
-/* Booking card (Contact) */
+/* Bio card (homepage Leaders section)
+   - .bio-grid: 2-up layout under the eyebrow/lead
+   - .bio-card: vertical card with top accent rule
+   - .bio-card__portrait: 110px circular photo with halo
+   - .bio-card__name / __role / __meta / __body: vertical content stack */
+.bio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 56px;
+}
+.bio-card {
+  border-top: 2px solid rgba(58,90,146,0.25);
+  padding-top: 32px;
+}
+.bio-card__portrait {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(123,155,209,0.4);
+  box-shadow: 0 0 0 4px rgba(123,155,209,0.06);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.bio-card__portrait img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bio-card__name {
+  font-family: var(--rf-font-serif);
+  font-size: 27px; font-weight: 700;
+  color: var(--rf-navy);
+  line-height: 1.1;
+  margin: 0 0 6px;
+}
+.bio-card__role {
+  font-family: var(--rf-font-sans);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--rf-accent-deep);
+  margin-bottom: 12px;
+}
+.bio-card__meta {
+  font-family: var(--rf-font-sans);
+  font-size: 15px;
+  color: var(--rf-text-subtle);
+  letter-spacing: 0.02em;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rf-divider);
+}
+.bio-card__body {
+  font-family: var(--rf-font-sans);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--rf-text);
+  margin: 0;
+}
+
+/* Booking card (Contact)
+   - .booking-grid: 2-up layout
+   - .booking-card: white card with top accent border + hover lift
+   - .booking-card__portrait: 80px circular photo
+   - .booking-card__name-row: name + LinkedIn icon row
+   - .booking-card__name / __role / __body: text stack
+   - .booking-card__linkedin: small social icon link */
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
 .booking-card {
-  background: var(--rf-white); padding: 36px 32px 32px;
-  border-top: 3px solid #7B9BD1;
+  background: var(--rf-white);
+  padding: 36px 32px 32px;
+  border-top: 3px solid var(--rf-accent);
   display: flex; flex-direction: column;
   transition: box-shadow 0.2s, transform 0.2s;
 }
 .booking-card:hover {
   box-shadow: 0 8px 32px rgba(11,29,38,0.12);
   transform: translateY(-2px);
+}
+.booking-card__portrait {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+.booking-card__name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.booking-card__name {
+  font-family: var(--rf-font-serif);
+  font-size: 25px; font-weight: 700;
+  color: var(--rf-navy);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.booking-card__linkedin {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  color: var(--rf-accent);
+  text-decoration: none;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+.booking-card__linkedin:hover { color: var(--rf-accent-deep); }
+.booking-card__linkedin:focus-visible {
+  outline: 2px solid var(--rf-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.booking-card__role {
+  font-family: var(--rf-font-sans);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--rf-accent);
+  margin-bottom: 16px;
+}
+.booking-card__body {
+  font-family: var(--rf-font-sans);
+  font-size: 15px; line-height: 1.7;
+  color: var(--rf-text-muted);
+  flex: 1;
+  margin-bottom: 28px;
 }
 
 /* Client logos — monochrome strip (homepage) */
@@ -780,7 +1358,16 @@ section + section.same-bg { padding-top: 0; }
 }
 
 /* ── 9. Section bands ── */
-/* Quote band (Strategy & Planning, Change Management, Leadership Dev, Strategic Intelligence) */
+/* Quote band (Strategy & Planning, Change Management, Leadership Dev, Strategic Intelligence)
+   - .quote-band: dark navy band with relative positioning
+   - .quote-mark: large Georgia opening-quote glyph (decorative)
+   - .quote-band__glow: centered radial decoration
+   - .quote-band__inner: content wrapper (z-index above glow)
+   - .quote-band__text: italic display quote
+   - .quote-band__emphasis: in-quote highlight span (accent colour, upright)
+   - .quote-band__attribution: rule + label + rule row
+   - .quote-band__rule: thin hairline either side of the attribution
+   - .quote-band__label: small uppercase attribution text */
 .quote-band {
   background: var(--rf-navy);
   padding: 88px 48px;
@@ -794,6 +1381,59 @@ section + section.same-bg { padding-top: 0; }
   position: absolute;
   top: 64px; left: 50%; transform: translateX(-50%);
   pointer-events: none; user-select: none;
+}
+.quote-band__glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,155,209,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.quote-band__inner {
+  position: relative; z-index: 1;
+  text-align: center;
+  padding-top: 24px;
+}
+.quote-band__text {
+  font-family: var(--rf-font-serif);
+  font-size: 30px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: rgba(255,255,255,0.92);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.quote-band__emphasis {
+  color: var(--rf-accent);
+  font-style: normal;
+  font-weight: 600;
+}
+.quote-band__attribution {
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+.quote-band__rule {
+  width: 32px;
+  height: 1px;
+  background: rgba(123,155,209,0.5);
+}
+.quote-band__label {
+  font-family: var(--rf-font-sans);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--rf-accent);
+}
+
+/* Slightly larger text variant on S&P + Strategic Intel */
+.page-strategy-and-planning .quote-band__text,
+.page-strategic-intelligence .quote-band__text {
+  font-size: 32px;
+  max-width: 880px;
 }
 
 /* Pull quote (dark-navy editorial quote block) */
@@ -834,7 +1474,7 @@ section + section.same-bg { padding-top: 0; }
   font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--rf-soft-blue);
+  color: var(--rf-accent);
 }
 .pull-quote__attribution span {
   display: block;
@@ -1068,7 +1708,7 @@ section + section.same-bg { padding-top: 0; }
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(74, 143, 207, 0.3);
 }
-.comparison-col--left .comparison-col__heading  { color: var(--rf-slate); }
+.comparison-col--left .comparison-col__heading  { color: var(--rf-text-subtle); }
 .comparison-col--right .comparison-col__heading { color: var(--rf-navy); }
 
 .comparison-list { list-style: none; padding: 0; margin: 0; }
@@ -1088,7 +1728,7 @@ section + section.same-bg { padding-top: 0; }
   width: 14px; height: 1px;
   background: var(--rf-accent);
 }
-.comparison-col--left .comparison-list li { color: var(--rf-slate); }
+.comparison-col--left .comparison-list li { color: var(--rf-text-subtle); }
 
 /* Why-page: "What leaders actually need" 4-up grid (matches homepage svc-card) */
 .needs-heading {
@@ -1222,7 +1862,7 @@ section + section.same-bg { padding-top: 0; }
   font-family: var(--rf-font-sans);
   font-size: 15px;
   line-height: 1.6;
-  color: var(--rf-slate);
+  color: var(--rf-text-muted);
   margin: 0 0 28px;
   max-width: none;
   flex: 1;

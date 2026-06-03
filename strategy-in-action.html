@@ -18,32 +18,21 @@
 
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section class="hero-section" style="
-  background: linear-gradient(155deg, #0B1D26 0%, #0B1D26 45%, #0B1D26 100%);
+  background: linear-gradient(155deg, var(--rf-navy) 0%, var(--rf-navy) 45%, var(--rf-navy) 100%);
   padding: 80px 48px 96px;
   position: relative;
   overflow: hidden;
 ">
-  <!-- Coral radial glow top-right -->
-  <div style="
-    position:absolute; top:-80px; right:-80px;
-    width:500px; height:500px; border-radius:50%;
-    background: radial-gradient(circle, rgba(123,155,209,0.1) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
-  <!-- Blue-green glow bottom-left -->
-  <div style="
-    position:absolute; bottom:40px; left:-60px;
-    width:350px; height:350px; border-radius:50%;
-    background: radial-gradient(circle, rgba(123,155,209,0.07) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
+  <!-- Radial glows -->
+  <div class="hero-glow--tr"></div>
+  <div class="hero-glow--bl"></div>
 
   <div class="section-inner" style="position:relative; z-index:1; max-width:1240px;">
     <!-- Breadcrumb -->
-    <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:40px; border-left:2px solid rgba(123,155,209,0.4); padding-left:12px;">
-      <a href="index.html" style="font-size: 12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a>
-      <span style="font-size: 12px; color:rgba(255,255,255,0.2);">&#47;</span>
-      <span style="font-size: 12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#7B9BD1;">Strategy in Action</span>
+    <div class="hero-breadcrumb">
+      <a href="index.html" class="hero-breadcrumb__link">Home</a>
+      <span class="hero-breadcrumb__sep">&#47;</span>
+      <span class="hero-breadcrumb__current">Strategy in Action</span>
     </div>
 
     <div class="hero-inner-flex" style="display:flex; gap:64px; align-items:flex-start;">
@@ -53,14 +42,14 @@
         flex-shrink: 0;
         min-height: 300px;
         margin-top: 4px;
-        background: linear-gradient(to bottom, #7B9BD1, rgba(123,155,209,0));
+        background: linear-gradient(to bottom, var(--rf-accent), rgba(123,155,209,0));
       "></div>
       <!-- Copy -->
       <div class="reveal" style="flex:1;">
         <h1 class="font-display" style="
           font-size: 58px;
           font-weight: 700;
-          color: #fff;
+          color: var(--rf-white);
           line-height: 1.08;
           letter-spacing: -0.025em;
           margin-bottom: 20px;
@@ -71,7 +60,7 @@
         <p class="font-display" style="
           font-size: 21px;
           font-weight: 700;
-          color: #7B9BD1;
+          color: var(--rf-accent);
           line-height: 1.4;
           letter-spacing: -0.01em;
           max-width: 600px;
@@ -149,12 +138,12 @@
 </section>
 
 <!-- ═══════════════════════════ WHAT IS SiA ═══════════════════════════ -->
-<section class="intro-section" style="background:#FAFAF7; padding: 96px 0;">
+<section class="intro-section" style="background:var(--rf-cream); padding: 96px 0;">
   <div class="container">
     <div class="reveal">
-      <span class="eyebrow" style="color:#3A5A92;">The Philosophy</span>
+      <span class="eyebrow" style="color:var(--rf-accent-deep);">The Philosophy</span>
       <h2 class="font-display" style="
-        font-size: 43px; font-weight:700; color:#0B1D26;
+        font-size: 43px; font-weight:700; color:var(--rf-navy);
         line-height:1.15; letter-spacing:-0.02em;
         max-width:680px; margin-bottom:24px;
       ">Built from a different premise about what strategy is for.</h2>
@@ -162,17 +151,17 @@
 
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;">
       <div class="reveal">
-        <p style="font-size: 18px; line-height:1.75; color:#1A1A1A; margin-bottom:20px;">
+        <p style="font-size: 18px; line-height:1.75; color:var(--rf-text); margin-bottom:20px;">
           Most strategy processes begin with the assumption that the environment is knowable enough
           to plan around. Set direction. Build the plan. Execute. Review annually.
         </p>
-        <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:20px;">
+        <p style="font-size: 18px; line-height:1.75; color:var(--rf-text-muted); margin-bottom:20px;">
           Strategy in Action begins from a different premise: that the operating environment is
           continuously shifting, that change is structural rather than episodic, and that what
           organisations need is not a better plan &mdash; but a better system for making consequential
           decisions continuously.
         </p>
-        <p style="font-size: 17px; line-height:1.75; color:#4a6080;">
+        <p style="font-size: 17px; line-height:1.75; color:var(--rf-text-muted);">
           SiA does not replace strategic planning. It fundamentally changes its nature &mdash;
           from an event to a capability.
         </p>
@@ -180,18 +169,18 @@
       <div class="reveal" style="transition-delay:120ms;">
         <!-- Pullquote -->
         <blockquote style="
-          border-left: 3px solid #7B9BD1;
+          border-left: 3px solid var(--rf-accent);
           padding: 24px 28px;
           margin-bottom: 24px;
           background: rgba(11,29,38,0.04);
         ">
           <p class="font-display" style="
-            font-size: 21px; font-weight:700; color:#0B1D26;
+            font-size: 21px; font-weight:700; color:var(--rf-navy);
             line-height:1.45; font-style:italic; margin-bottom:16px;
           ">&ldquo;The goal is not an organisation that has a strategy. It is an organisation that <em>is</em> strategic &mdash; continuously.&rdquo;</p>
-          <p style="font-size: 12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#3A5A92;">Larry Quick &middot; Co-founder, Resilient Futures</p>
+          <p style="font-size: 12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--rf-accent-deep);">Larry Quick &middot; Co-founder, Resilient Futures</p>
         </blockquote>
-        <p style="font-size: 15px; line-height:1.65; color:#4a6080;">
+        <p style="font-size: 15px; line-height:1.65; color:var(--rf-text-muted);">
           SiA was developed over 25 years working with Boards and Executives across Government,
           Health, Education, and peak bodies &mdash; organisations where the complexity of stakeholder
           maps, regulatory environments, and operational interdependencies makes conventional strategy
@@ -202,40 +191,40 @@
 
     <!-- Three key distinctions -->
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(11,29,38,0.1); margin-top:56px;">
-      <div class="reveal" style="background:#FAFAF7; padding:28px 24px;">
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Not This</div>
+      <div class="reveal" style="background:var(--rf-cream); padding:28px 24px;">
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--rf-accent); margin-bottom:14px;">Not This</div>
         <div class="font-display" style="font-size: 18px; font-weight:700; color:rgba(11,29,38,0.4); text-decoration:line-through; margin-bottom:10px; line-height:1.3;">An annual planning process</div>
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#3A5A92; margin-bottom:10px; margin-top:20px;">But This</div>
-        <div class="font-display" style="font-size: 18px; font-weight:700; color:#0B1D26; line-height:1.3;">A continuous strategic operating system</div>
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--rf-accent-deep); margin-bottom:10px; margin-top:20px;">But This</div>
+        <div class="font-display" style="font-size: 18px; font-weight:700; color:var(--rf-navy); line-height:1.3;">A continuous strategic operating system</div>
       </div>
-      <div class="reveal" style="background:#FAFAF7; padding:28px 24px; transition-delay:80ms;">
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Not This</div>
+      <div class="reveal" style="background:var(--rf-cream); padding:28px 24px; transition-delay:80ms;">
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--rf-accent); margin-bottom:14px;">Not This</div>
         <div class="font-display" style="font-size: 18px; font-weight:700; color:rgba(11,29,38,0.4); text-decoration:line-through; margin-bottom:10px; line-height:1.3;">Sequential steps to follow</div>
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#3A5A92; margin-bottom:10px; margin-top:20px;">But This</div>
-        <div class="font-display" style="font-size: 18px; font-weight:700; color:#0B1D26; line-height:1.3;">Five interconnected, mutually-reinforcing standards</div>
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--rf-accent-deep); margin-bottom:10px; margin-top:20px;">But This</div>
+        <div class="font-display" style="font-size: 18px; font-weight:700; color:var(--rf-navy); line-height:1.3;">Five interconnected, mutually-reinforcing standards</div>
       </div>
-      <div class="reveal" style="background:#FAFAF7; padding:28px 24px; transition-delay:160ms;">
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Not This</div>
+      <div class="reveal" style="background:var(--rf-cream); padding:28px 24px; transition-delay:160ms;">
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--rf-accent); margin-bottom:14px;">Not This</div>
         <div class="font-display" style="font-size: 18px; font-weight:700; color:rgba(11,29,38,0.4); text-decoration:line-through; margin-bottom:10px; line-height:1.3;">External consultant dependency</div>
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#3A5A92; margin-bottom:10px; margin-top:20px;">But This</div>
-        <div class="font-display" style="font-size: 18px; font-weight:700; color:#0B1D26; line-height:1.3;">Internal strategic capability, built to endure</div>
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--rf-accent-deep); margin-bottom:10px; margin-top:20px;">But This</div>
+        <div class="font-display" style="font-size: 18px; font-weight:700; color:var(--rf-navy); line-height:1.3;">Internal strategic capability, built to endure</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════ FOUNDATIONS ═══════════════════════════ -->
-<section class="foundations-section" style="background:#FFFFFF; padding: 96px 0; position:relative; overflow:hidden;">
+<section class="foundations-section" style="background:var(--rf-white); padding: 96px 0; position:relative; overflow:hidden;">
   <!-- Soft atmospheric glow, top-left -->
   <div style="position:absolute; top:-140px; left:-140px; width:460px; height:460px; border-radius:50%; background: radial-gradient(circle, rgba(30,53,96,0.05) 0%, transparent 65%); pointer-events:none;"></div>
 
   <div class="container" style="position:relative; z-index:1;">
     <div class="reveal">
-      <span class="eyebrow" style="color:#3A5A92;">The Foundations</span>
-      <h2 class="font-display" style="font-size:43px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; max-width:780px; margin-bottom:28px;">
+      <span class="eyebrow" style="color:var(--rf-accent-deep);">The Foundations</span>
+      <h2 class="font-display" style="font-size:43px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; max-width:780px; margin-bottom:28px;">
         Grounded in four disciplines conventional strategy ignores.
       </h2>
-      <p style="font-size:18px; line-height:1.75; color:#1A1A1A; max-width:800px; margin-bottom:64px;">
+      <p style="font-size:18px; line-height:1.75; color:var(--rf-text); max-width:800px; margin-bottom:64px;">
         SiA has been developed and refined over 25 years of working with Boards, Executives,
         senior leaders and people across Corporations, Government, Not-for-Profit, Associations
         and Peak Bodies. The organisations we work with sit across a broad range of sectors yet
@@ -248,68 +237,68 @@
     <div class="foundations-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(11,29,38,0.08);">
 
       <!-- 01 -->
-      <article class="reveal" style="background:#FFFFFF; padding:40px 36px;">
-        <div style="width:40px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Discipline 01</div>
-        <h3 class="font-display" style="font-size:27px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Complex Adaptive Systems</h3>
-        <p class="font-display" style="font-size:14px; font-style:italic; color:#3A5A92; line-height:1.5; margin-bottom:20px;">The science of emergence and self-organisation.</p>
-        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin-bottom:18px;">
+      <article class="reveal" style="background:var(--rf-white); padding:40px 36px;">
+        <div style="width:40px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--rf-accent); margin-bottom:14px;">Discipline 01</div>
+        <h3 class="font-display" style="font-size:27px; font-weight:700; color:var(--rf-navy); line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Complex Adaptive Systems</h3>
+        <p class="font-display" style="font-size:14px; font-style:italic; color:var(--rf-accent-deep); line-height:1.5; margin-bottom:20px;">The science of emergence and self-organisation.</p>
+        <p style="font-size:16px; line-height:1.7; color:var(--rf-text-muted); margin-bottom:18px;">
           Systems where many independent agents interact, adapt, and produce outcomes
           that cannot be predicted by analysing the parts in isolation. Behaviour emerges
           from interactions, not from any single component.
         </p>
-        <p style="font-size:15px; line-height:1.7; color:#0B1D26; font-style:italic; border-top:1px solid rgba(11,29,38,0.08); padding-top:18px; margin-bottom:0;">
+        <p style="font-size:15px; line-height:1.7; color:var(--rf-navy); font-style:italic; border-top:1px solid rgba(11,29,38,0.08); padding-top:18px; margin-bottom:0;">
           Organisations and their environments are complex adaptive systems. Strategy
           must work with emergence &mdash; not pretend it can be designed out.
         </p>
       </article>
 
       <!-- 02 -->
-      <article class="reveal" style="background:#FFFFFF; padding:40px 36px; transition-delay:80ms;">
-        <div style="width:40px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Discipline 02</div>
-        <h3 class="font-display" style="font-size:27px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Cognitive Psychology</h3>
-        <p class="font-display" style="font-size:14px; font-style:italic; color:#3A5A92; line-height:1.5; margin-bottom:20px;">How humans actually decide under uncertainty.</p>
-        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin-bottom:18px;">
+      <article class="reveal" style="background:var(--rf-white); padding:40px 36px; transition-delay:80ms;">
+        <div style="width:40px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--rf-accent); margin-bottom:14px;">Discipline 02</div>
+        <h3 class="font-display" style="font-size:27px; font-weight:700; color:var(--rf-navy); line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Cognitive Psychology</h3>
+        <p class="font-display" style="font-size:14px; font-style:italic; color:var(--rf-accent-deep); line-height:1.5; margin-bottom:20px;">How humans actually decide under uncertainty.</p>
+        <p style="font-size:16px; line-height:1.7; color:var(--rf-text-muted); margin-bottom:18px;">
           The study of how humans perceive, decide, and reason &mdash; including the
           biases, blind spots, and pattern-matching shortcuts that distort judgement
           when conditions are ambiguous and stakes are high.
         </p>
-        <p style="font-size:15px; line-height:1.7; color:#0B1D26; font-style:italic; border-top:1px solid rgba(11,29,38,0.08); padding-top:18px; margin-bottom:0;">
+        <p style="font-size:15px; line-height:1.7; color:var(--rf-navy); font-style:italic; border-top:1px solid rgba(11,29,38,0.08); padding-top:18px; margin-bottom:0;">
           Strategic decisions are made by humans under pressure. Methods that ignore
           cognitive limits produce confident but wrong choices.
         </p>
       </article>
 
       <!-- 03 -->
-      <article class="reveal" style="background:#FFFFFF; padding:40px 36px; transition-delay:160ms;">
-        <div style="width:40px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Discipline 03</div>
-        <h3 class="font-display" style="font-size:27px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Systems Thinking</h3>
-        <p class="font-display" style="font-size:14px; font-style:italic; color:#3A5A92; line-height:1.5; margin-bottom:20px;">Feedback, leverage, and unintended consequences.</p>
-        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin-bottom:18px;">
+      <article class="reveal" style="background:var(--rf-white); padding:40px 36px; transition-delay:160ms;">
+        <div style="width:40px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--rf-accent); margin-bottom:14px;">Discipline 03</div>
+        <h3 class="font-display" style="font-size:27px; font-weight:700; color:var(--rf-navy); line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Systems Thinking</h3>
+        <p class="font-display" style="font-size:14px; font-style:italic; color:var(--rf-accent-deep); line-height:1.5; margin-bottom:20px;">Feedback, leverage, and unintended consequences.</p>
+        <p style="font-size:16px; line-height:1.7; color:var(--rf-text-muted); margin-bottom:18px;">
           A discipline for understanding how parts of a system interact &mdash;
           feedback loops, time delays, leverage points, and the unintended
           consequences of well-intentioned interventions.
         </p>
-        <p style="font-size:15px; line-height:1.7; color:#0B1D26; font-style:italic; border-top:1px solid rgba(11,29,38,0.08); padding-top:18px; margin-bottom:0;">
+        <p style="font-size:15px; line-height:1.7; color:var(--rf-navy); font-style:italic; border-top:1px solid rgba(11,29,38,0.08); padding-top:18px; margin-bottom:0;">
           Strategy lives in interdependencies. Linear cause-and-effect models break
           down precisely when the stakes are highest.
         </p>
       </article>
 
       <!-- 04 -->
-      <article class="reveal" style="background:#FFFFFF; padding:40px 36px; transition-delay:240ms;">
-        <div style="width:40px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">Discipline 04</div>
-        <h3 class="font-display" style="font-size:27px; font-weight:700; color:#0B1D26; line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Resilience Science</h3>
-        <p class="font-display" style="font-size:14px; font-style:italic; color:#3A5A92; line-height:1.5; margin-bottom:20px;">Absorbing disturbance without losing function.</p>
-        <p style="font-size:16px; line-height:1.7; color:#4a6080; margin-bottom:18px;">
+      <article class="reveal" style="background:var(--rf-white); padding:40px 36px; transition-delay:240ms;">
+        <div style="width:40px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--rf-accent); margin-bottom:14px;">Discipline 04</div>
+        <h3 class="font-display" style="font-size:27px; font-weight:700; color:var(--rf-navy); line-height:1.2; letter-spacing:-0.01em; margin-bottom:8px;">Resilience Science</h3>
+        <p class="font-display" style="font-size:14px; font-style:italic; color:var(--rf-accent-deep); line-height:1.5; margin-bottom:20px;">Absorbing disturbance without losing function.</p>
+        <p style="font-size:16px; line-height:1.7; color:var(--rf-text-muted); margin-bottom:18px;">
           The study of how systems absorb disturbance, adapt, and reorganise without
           losing their essential function &mdash; across ecology, engineering, and
           human organisations.
         </p>
-        <p style="font-size:15px; line-height:1.7; color:#0B1D26; font-style:italic; border-top:1px solid rgba(11,29,38,0.08); padding-top:18px; margin-bottom:0;">
+        <p style="font-size:15px; line-height:1.7; color:var(--rf-navy); font-style:italic; border-top:1px solid rgba(11,29,38,0.08); padding-top:18px; margin-bottom:0;">
           The goal is not immunity to disruption. It is the capacity to keep
           generating value through it.
         </p>
@@ -318,7 +307,7 @@
     </div>
 
     <!-- Bridge into the standards -->
-    <p style="font-size:17px; line-height:1.75; color:#4a6080; max-width:780px; margin:64px 0 0; padding-top:28px; border-top:1px solid rgba(11,29,38,0.08);">
+    <p style="font-size:17px; line-height:1.75; color:var(--rf-text-muted); max-width:780px; margin:64px 0 0; padding-top:28px; border-top:1px solid rgba(11,29,38,0.08);">
       These are not abstract reference points. They are the operating principles built into
       every standard, decision rhythm, and tool that follows.
     </p>
@@ -327,7 +316,7 @@
 
 <!-- ═══════════════════════════ FIVE STANDARDS ═══════════════════════════ -->
 <section id="standards" class="standards-section" style="
-  background: #FAFAF7;
+  background: var(--rf-cream);
   padding: 96px 0;
   position:relative; overflow:hidden;
 ">
@@ -343,11 +332,11 @@
     <div class="reveal">
       <span class="eyebrow">The Five Standards</span>
       <h2 class="font-display" style="
-        font-size: 43px; font-weight:700; color:#0B1D26;
+        font-size: 43px; font-weight:700; color:var(--rf-navy);
         line-height:1.15; letter-spacing:-0.02em;
         max-width:680px; margin-bottom:12px;
       ">Not sequential steps. An integrated system.</h2>
-      <p style="font-size: 17px; line-height:1.7; color:#4a6080; max-width:620px; margin-bottom:64px;">
+      <p style="font-size: 17px; line-height:1.7; color:var(--rf-text-muted); max-width:620px; margin-bottom:64px;">
         Each standard is distinct. Each is essential. And each is strengthened by its relationship
         to the others. The power of SiA lies not in any single standard, but in the rigour of
         maintaining all five simultaneously.
@@ -360,8 +349,8 @@
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">01</span>
       </div>
-      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Conditions</h3>
-      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px; max-width:780px;">
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Conditions</h3>
+      <p style="font-size: 18px; line-height:1.75; color:var(--rf-text-muted); margin-bottom:16px; max-width:780px;">
         This standard examines the real change landscape honestly &mdash; not through a SWOT
         analysis or a list of known risks, but through a structured reading of the forces actually
         driving change and their specific implications for the organisation.
@@ -395,8 +384,8 @@
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">02</span>
       </div>
-      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Sustainable Value Generation</h3>
-      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px; max-width:780px;">
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Sustainable Value Generation</h3>
+      <p style="font-size: 18px; line-height:1.75; color:var(--rf-text-muted); margin-bottom:16px; max-width:780px;">
         Conditions change the value an organisation must generate &mdash; and widen the gap
         between the value an organisation believes it delivers and the value its stakeholders
         actually expect. This standard forces a clear-eyed conversation about what the
@@ -432,8 +421,8 @@
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">03</span>
       </div>
-      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Strategic Opportunity &amp; Risk</h3>
-      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px; max-width:780px;">
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Strategic Opportunity &amp; Risk</h3>
+      <p style="font-size: 18px; line-height:1.75; color:var(--rf-text-muted); margin-bottom:16px; max-width:780px;">
         With conditions and value in sharp focus, this standard surfaces the conditions with
         the most significant implications for the organisation&rsquo;s forward trajectory.
         Consequential, direction-setting choices must be made about which SORs to actively
@@ -470,19 +459,19 @@
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">04</span>
       </div>
-      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Capability Investment</h3>
-      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:20px; max-width:780px;">
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Capability Investment</h3>
+      <p style="font-size: 18px; line-height:1.75; color:var(--rf-text-muted); margin-bottom:20px; max-width:780px;">
         A clear view of the strategic opportunity-risk landscape creates a different basis for
         capability investment decisions. This standard provides a deliberate view of the capabilities
         to build, acquire, or retire &mdash; grounded in what conditions require, not what the
         organisation has historically invested in.
       </p>
       <p class="font-display" style="
-        font-size: 19px; line-height:1.55; color:#0B1D26;
+        font-size: 19px; line-height:1.55; color:var(--rf-navy);
         font-weight:700; letter-spacing:-0.01em;
         margin: 0 0 20px;
         max-width:760px;
-        border-left:3px solid #7B9BD1;
+        border-left:3px solid var(--rf-accent);
         padding: 4px 0 4px 18px;
       ">
         The most crucial move is to build capability that serves now &mdash; and what comes next.
@@ -516,8 +505,8 @@
         <span class="standard-card__eyebrow-bar" aria-hidden="true"></span>
         <span class="standard-number">05</span>
       </div>
-      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Catalytic Action</h3>
-      <p style="font-size: 18px; line-height:1.75; color:#4a6080; margin-bottom:16px; max-width:780px;">
+      <h3 class="font-display" style="font-size: 32px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; max-width:760px;">Catalytic Action</h3>
+      <p style="font-size: 18px; line-height:1.75; color:var(--rf-text-muted); margin-bottom:16px; max-width:780px;">
         This standard translates strategic clarity into targeted action &mdash; selecting initiatives
         specifically for their multi-pronged impact. Each action simultaneously builds capability,
         tests strategic assumptions, creates new value, and generates the feedback the organisation
@@ -555,32 +544,32 @@
 </section>
 
 <!-- ═══════════════════════════ SiA ALGORITHM DIAGRAM ═══════════════════════════ -->
-<section class="diagram-section" style="background:#FAFAF7; padding: 96px 0;">
+<section class="diagram-section" style="background:var(--rf-cream); padding: 96px 0;">
   <div class="container">
-    <span class="eyebrow reveal" style="color:#3A5A92;">The Algorithm</span>
+    <span class="eyebrow reveal" style="color:var(--rf-accent-deep);">The Algorithm</span>
     <div class="diagram-cols" style="display:grid; grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr); gap:48px; align-items:center;">
       <div class="reveal">
         <h2 class="font-display" style="
-          font-size: 40px; font-weight:700; color:#0B1D26;
+          font-size: 40px; font-weight:700; color:var(--rf-navy);
           line-height:1.15; letter-spacing:-0.02em;
           max-width:480px; margin-bottom:24px;
         ">Five standards. One integrated system.</h2>
-        <p style="font-size: 18px; line-height:1.75; color:#1A1A1A; margin-bottom:20px;">
+        <p style="font-size: 18px; line-height:1.75; color:var(--rf-text); margin-bottom:20px;">
           The SiA Algorithm visualises how the five standards operate together. The power is not
           in any single standard but in the discipline of maintaining all five simultaneously &mdash;
           and in understanding how each standard informs and strengthens the others.
         </p>
-        <p style="font-size: 17px; line-height:1.75; color:#4a6080; margin-bottom:20px;">
+        <p style="font-size: 17px; line-height:1.75; color:var(--rf-text-muted); margin-bottom:20px;">
           This is what makes SiA fundamentally different from frameworks that treat strategy as a
           linear process. In conditions of structural instability, linear processes create the
           illusion of control while conditions continue to shift beneath them.
         </p>
-        <p style="font-size: 17px; line-height:1.75; color:#4a6080; margin-bottom:32px;">
+        <p style="font-size: 17px; line-height:1.75; color:var(--rf-text-muted); margin-bottom:32px;">
           SiA acknowledges the complexity and builds a system that is designed to operate within
           it &mdash; not to pretend it away.
         </p>
         <div style="border-left:3px solid rgba(123,155,209,0.4); padding:16px 20px; background:rgba(11,29,38,0.04);">
-          <p style="font-size: 15px; font-weight:500; line-height:1.65; color:#0B1D26; margin:0;">
+          <p style="font-size: 15px; font-weight:500; line-height:1.65; color:var(--rf-navy); margin:0;">
             The algorithm was first published in <em>Disrupted</em> (2015), co-authored by Larry Quick
             and David Platt. It has been refined through 10+ years of application with Boards and
             Executives across Australian organisations navigating genuine complexity.
@@ -600,7 +589,7 @@
 
 <!-- ═══════════════════════════ MAKING YOUR ORG THE STRATEGIST ═══════════════════════════ -->
 <section class="system-section" style="
-  background: #EEF2F9;
+  background: var(--rf-surface-blue);
   padding: 96px 0;
   position:relative; overflow:hidden;
 ">
@@ -615,19 +604,19 @@
     <div class="reveal">
       <span class="eyebrow">The Outcome</span>
       <h2 class="font-display" style="
-        font-size: 43px; font-weight:700; color:#0B1D26;
+        font-size: 43px; font-weight:700; color:var(--rf-navy);
         line-height:1.15; letter-spacing:-0.02em;
         max-width:680px; margin-bottom:16px;
       ">Making your organisation the strategist.</h2>
-    <p class="font-display" style="font-size: 20px; font-weight:700; color:#7B9BD1; letter-spacing:-0.01em; margin-bottom:24px; max-width:560px;">
+    <p class="font-display" style="font-size: 20px; font-weight:700; color:var(--rf-accent); letter-spacing:-0.01em; margin-bottom:24px; max-width:560px;">
       Not dependency. Capability.
     </p>
-    <p style="font-size: 18px; line-height:1.75; color:#4a6080; max-width:680px; margin-bottom:16px;">
+    <p style="font-size: 18px; line-height:1.75; color:var(--rf-text-muted); max-width:680px; margin-bottom:16px;">
       The goal of SiA is not that your organisation requires Resilient Futures to navigate uncertainty.
       The goal is that your leadership team develops the thinking, tools, and behaviours to remain
       strategically effective as conditions keep shifting &mdash; without us in the room.
     </p>
-    <p style="font-size: 17px; line-height:1.75; color:#4a6080; max-width:680px; margin-bottom:56px;">
+    <p style="font-size: 17px; line-height:1.75; color:var(--rf-text-muted); max-width:680px; margin-bottom:56px;">
       This is why capability building is embedded into every SiA engagement from the outset. We are
       not building client dependency; we are building client capacity.
     </p>
@@ -635,54 +624,54 @@
 
     <!-- Principles grid -->
     <div class="principles-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(11,29,38,0.08);">
-      <div class="reveal" style="background:#FFFFFF; padding:32px 28px;">
-        <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Clarity, not complexity</div>
+      <div class="reveal" style="background:var(--rf-white); padding:32px 28px;">
+        <div style="width:32px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div class="font-display" style="font-size: 20px; font-weight:700; color:var(--rf-navy); margin-bottom:12px; line-height:1.25;">Clarity, not complexity</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
           SiA makes the complex navigable. Not simple &mdash; the complexity is real. But navigable,
           because the organisation has a shared language and a structured system for understanding
           what is happening and why.
         </p>
       </div>
-      <div class="reveal" style="background:#FFFFFF; padding:32px 28px; transition-delay:80ms;">
-        <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Speed, not paralysis</div>
+      <div class="reveal" style="background:var(--rf-white); padding:32px 28px; transition-delay:80ms;">
+        <div style="width:32px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div class="font-display" style="font-size: 20px; font-weight:700; color:var(--rf-navy); margin-bottom:12px; line-height:1.25;">Speed, not paralysis</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
           Organisations with SiA embedded make consequential decisions faster &mdash; because they
           have already done the work of understanding conditions, clarifying value, and identifying
           what is actually at stake.
         </p>
       </div>
-      <div class="reveal" style="background:#FFFFFF; padding:32px 28px; transition-delay:160ms;">
-        <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Alignment, not fragmentation</div>
+      <div class="reveal" style="background:var(--rf-white); padding:32px 28px; transition-delay:160ms;">
+        <div style="width:32px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div class="font-display" style="font-size: 20px; font-weight:700; color:var(--rf-navy); margin-bottom:12px; line-height:1.25;">Alignment, not fragmentation</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
           When the Board, CEO, and Executive team share a common understanding of conditions, value,
           and strategic priorities, governance functions as intended: enabling, not impeding, the
           organisation&rsquo;s ability to act.
         </p>
       </div>
-      <div class="reveal" style="background:#FFFFFF; padding:32px 28px; transition-delay:240ms;">
-        <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Adaptability, not rigidity</div>
+      <div class="reveal" style="background:var(--rf-white); padding:32px 28px; transition-delay:240ms;">
+        <div style="width:32px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div class="font-display" style="font-size: 20px; font-weight:700; color:var(--rf-navy); margin-bottom:12px; line-height:1.25;">Adaptability, not rigidity</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
           A living strategy system that is designed to update itself in response to new information
           &mdash; not a static plan that requires a formal review cycle to acknowledge that
           conditions have changed.
         </p>
       </div>
-      <div class="reveal" style="background:#FFFFFF; padding:32px 28px;">
-        <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Relevance, not decline</div>
+      <div class="reveal" style="background:var(--rf-white); padding:32px 28px;">
+        <div style="width:32px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div class="font-display" style="font-size: 20px; font-weight:700; color:var(--rf-navy); margin-bottom:12px; line-height:1.25;">Relevance, not decline</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
           The antidote to Managed Adaptive Decline. Organisations operating on SiA do not drift
           toward irrelevance through incremental adaptation. They continuously retest their
           relevance against changing conditions.
         </p>
       </div>
-      <div class="reveal" style="background:#FFFFFF; padding:32px 28px; transition-delay:80ms;">
-        <div style="width:32px; height:2px; background:#7B9BD1; margin-bottom:20px;"></div>
-        <div class="font-display" style="font-size: 20px; font-weight:700; color:#0B1D26; margin-bottom:12px; line-height:1.25;">Capability, not dependency</div>
+      <div class="reveal" style="background:var(--rf-white); padding:32px 28px; transition-delay:80ms;">
+        <div style="width:32px; height:2px; background:var(--rf-accent); margin-bottom:20px;"></div>
+        <div class="font-display" style="font-size: 20px; font-weight:700; color:var(--rf-navy); margin-bottom:12px; line-height:1.25;">Capability, not dependency</div>
         <p style="font-size: 16px; line-height:1.65; color:rgba(11,29,38,0.65); margin:0;">
           Every SiA engagement builds internal capability. The thinking, tools, and behaviours are
           transferred to the leadership team so that strategic rigour becomes an enduring internal
@@ -695,10 +684,10 @@
     <div class="reveal" style="margin-top:64px; background:rgba(11,29,38,0.04); padding:52px 56px;">
       <p class="font-display" style="
         font-size: 25px; font-weight:700;
-        color:#0B1D26; line-height:1.6;
+        color:var(--rf-navy); line-height:1.6;
         max-width:800px; margin:0 0 32px;
       ">
-        &ldquo;Our role is to work alongside your leadership team &mdash; bringing the thinking, challenging the assumptions, and transferring the tools &mdash; so your organisation builds real strategic capability over time. <span style="color:#7B9BD1;">Not dependency.&rdquo;</span>
+        &ldquo;Our role is to work alongside your leadership team &mdash; bringing the thinking, challenging the assumptions, and transferring the tools &mdash; so your organisation builds real strategic capability over time. <span style="color:var(--rf-accent);">Not dependency.&rdquo;</span>
       </p>
       <p style="font-size: 12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(11,29,38,0.5); margin:0;">
         &mdash; David Platt &middot; Co-founder, Resilient Futures
@@ -708,45 +697,45 @@
 </section>
 
 <!-- ═══════════════════════════ TESTIMONIALS ═══════════════════════════ -->
-<section style="background:#FAFAF7; padding: 96px 0;">
+<section style="background:var(--rf-cream); padding: 96px 0;">
   <div class="container">
     <div class="reveal">
-      <span class="eyebrow" style="color:#3A5A92;">What Leaders Say</span>
+      <span class="eyebrow" style="color:var(--rf-accent-deep);">What Leaders Say</span>
       <h2 class="font-display" style="
-        font-size: 43px; font-weight:700; color:#0B1D26;
+        font-size: 43px; font-weight:700; color:var(--rf-navy);
         line-height:1.15; letter-spacing:-0.02em;
         max-width:680px; margin-bottom:48px;
       ">Organisations that have made SiA their strategic operating system.</h2>
     </div>
     <div class="testimonials-grid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px;">
       <div class="reveal" style="
-        background:#fff; padding:40px;
-        border-left:3px solid #7B9BD1;
+        background:var(--rf-white); padding:40px;
+        border-left:3px solid var(--rf-accent);
         box-shadow: 0 4px 24px rgba(11,29,38,0.06);
       ">
         <p class="font-display" style="
-          font-size: 20px; color:#0B1D26;
+          font-size: 20px; color:var(--rf-navy);
           line-height:1.55; font-style:italic;
           margin-bottom:24px;
         ">&ldquo;Strategy in Action has enabled me and my team to develop an approach to managing
         a complex set of conditions that are constantly changing. It has given us a shared language
         and a system we trust.&rdquo;</p>
-        <p style="font-size: 12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#4a6080;">CEO &middot; Multinational Organisation</p>
+        <p style="font-size: 12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--rf-text-muted);">CEO &middot; Multinational Organisation</p>
       </div>
       <div class="reveal" style="
-        background:#fff; padding:40px;
-        border-left:3px solid #7B9BD1;
+        background:var(--rf-white); padding:40px;
+        border-left:3px solid var(--rf-accent);
         box-shadow: 0 4px 24px rgba(11,29,38,0.06);
         transition-delay:120ms;
       ">
         <p class="font-display" style="
-          font-size: 20px; color:#0B1D26;
+          font-size: 20px; color:var(--rf-navy);
           line-height:1.55; font-style:italic;
           margin-bottom:24px;
         ">&ldquo;We&rsquo;re only a third of the way through the program, but it&rsquo;s already having a
         profound impact on our organisation. The way our leadership team thinks about strategy
         has fundamentally shifted.&rdquo;</p>
-        <p style="font-size: 12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#4a6080;">CEO &middot; Health and Human Services Organisation</p>
+        <p style="font-size: 12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--rf-text-muted);">CEO &middot; Health and Human Services Organisation</p>
       </div>
     </div>
   </div>
@@ -754,7 +743,7 @@
 
 <!-- ═══════════════════════════ CTA ═══════════════════════════ -->
 <section class="cta-section" style="
-  background: linear-gradient(135deg, #0B1D26 0%, #0B1D26 100%);
+  background: linear-gradient(135deg, var(--rf-navy) 0%, var(--rf-navy) 100%);
   padding: 96px 0;
   text-align: center;
   position:relative; overflow:hidden;
@@ -768,7 +757,7 @@
   "></div>
   <div class="reveal" style="position:relative; z-index:1;">
     <h2 class="font-display" style="
-      font-size: 47px; font-weight:700; color:#fff;
+      font-size: 47px; font-weight:700; color:var(--rf-white);
       line-height:1.15; letter-spacing:-0.02em;
       max-width:600px; margin:0 auto 16px;
     ">See how SiA applies to your organisation.</h2>
@@ -790,26 +779,26 @@
 </section>
 
 <!-- ═══════════════════════════ EXPLORE FURTHER ═══════════════════════════ -->
-<section class="explore-strip" style="background:#EEF2F9; padding: 64px 0; border-top:1px solid rgba(11,29,38,0.08);">
+<section class="explore-strip" style="background:var(--rf-surface-blue); padding: 64px 0; border-top:1px solid rgba(11,29,38,0.08);">
   <div class="container">
     <p style="font-size: 13px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:rgba(11,29,38,0.55); margin-bottom:32px;">Explore further</p>
     <div class="explore-cards" style="display:flex; gap:16px; flex-wrap:wrap;">
       <a href="why.html" class="explore-card">
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#7B9BD1; margin-bottom:14px;">The Problem</div>
-        <div class="font-display" style="font-size: 25px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">Why Resilient Futures</div>
-        <p style="font-size: 15px; line-height:1.6; color:#4a6080; margin:0 0 20px; flex:1;">Why most strategic systems are built for a world that no longer exists &mdash; and what the consequences are.</p>
-        <span style="font-size: 12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#7B9BD1;">Read the argument &rarr;</span>
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--rf-accent); margin-bottom:14px;">The Problem</div>
+        <div class="font-display" style="font-size: 25px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">Why Resilient Futures</div>
+        <p style="font-size: 15px; line-height:1.6; color:var(--rf-text-muted); margin:0 0 20px; flex:1;">Why most strategic systems are built for a world that no longer exists &mdash; and what the consequences are.</p>
+        <span style="font-size: 12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--rf-accent);">Read the argument &rarr;</span>
       </a>
       <a href="index.html#services" class="explore-card explore-card--dim">
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(123,155,209,0.65); margin-bottom:14px;">Services</div>
-        <div class="font-display" style="font-size: 25px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">Four Ways of Working</div>
-        <p style="font-size: 15px; line-height:1.6; color:#4a6080; margin:0 0 20px; flex:1;">Strategy and planning, change management, leadership development, and strategic intelligence &mdash; connected by SiA.</p>
+        <div class="font-display" style="font-size: 25px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">Four Ways of Working</div>
+        <p style="font-size: 15px; line-height:1.6; color:var(--rf-text-muted); margin:0 0 20px; flex:1;">Strategy and planning, change management, leadership development, and strategic intelligence &mdash; connected by SiA.</p>
         <span style="font-size: 12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(123,155,209,0.65);">See our services &rarr;</span>
       </a>
       <a href="index.html#about" class="explore-card explore-card--dim">
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(123,155,209,0.65); margin-bottom:14px;">Our Team</div>
-        <div class="font-display" style="font-size: 25px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">The People Behind the Work</div>
-        <p style="font-size: 15px; line-height:1.6; color:#4a6080; margin:0 0 20px; flex:1;">Every engagement is led by the people with the deepest expertise &mdash; not delegated down after the pitch.</p>
+        <div class="font-display" style="font-size: 25px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; margin-bottom:10px;">The People Behind the Work</div>
+        <p style="font-size: 15px; line-height:1.6; color:var(--rf-text-muted); margin:0 0 20px; flex:1;">Every engagement is led by the people with the deepest expertise &mdash; not delegated down after the pitch.</p>
         <span style="font-size: 12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(123,155,209,0.65);">Meet the team &rarr;</span>
       </a>
     </div>

@@ -18,25 +18,14 @@
 
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section class="hero-section" style="
-  background: linear-gradient(155deg, #0B1D26 0%, #0B1D26 45%, #0B1D26 100%);
+  background: linear-gradient(155deg, var(--rf-navy) 0%, var(--rf-navy) 45%, var(--rf-navy) 100%);
   padding: 80px 48px 96px;
   position: relative;
   overflow: hidden;
 ">
-  <!-- Coral radial glow -->
-  <div style="
-    position:absolute; top:-80px; right:-80px;
-    width:500px; height:500px; border-radius:50%;
-    background: radial-gradient(circle, rgba(123,155,209,0.1) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
-  <!-- Blue-green glow -->
-  <div style="
-    position:absolute; bottom:40px; left:-60px;
-    width:350px; height:350px; border-radius:50%;
-    background: radial-gradient(circle, rgba(123,155,209,0.07) 0%, transparent 65%);
-    pointer-events:none;
-  "></div>
+  <!-- Radial glows -->
+  <div class="hero-glow--tr"></div>
+  <div class="hero-glow--bl"></div>
 
   <!-- Abstract signal network graphic (absolute, fills right half) -->
   <div class="why-hero__graphic" aria-hidden="true" style="
@@ -81,10 +70,10 @@
 
   <div class="section-inner" style="position:relative; z-index:1;">
     <!-- Breadcrumb -->
-    <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:40px; border-left:2px solid rgba(123,155,209,0.4); padding-left:12px;">
-      <a href="index.html" style="font-size: 12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a>
-      <span style="font-size: 12px; color:rgba(255,255,255,0.2);">&#47;</span>
-      <span style="font-size: 12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#7B9BD1;">Why Resilient Futures</span>
+    <div class="hero-breadcrumb">
+      <a href="index.html" class="hero-breadcrumb__link">Home</a>
+      <span class="hero-breadcrumb__sep">&#47;</span>
+      <span class="hero-breadcrumb__current">Why Resilient Futures</span>
     </div>
 
     <div class="hero-inner-flex" style="display:flex; gap:48px; align-items:flex-start;">
@@ -94,14 +83,14 @@
         flex-shrink: 0;
         min-height: 280px;
         margin-top: 4px;
-        background: linear-gradient(to bottom, #7B9BD1, rgba(123,155,209,0));
+        background: linear-gradient(to bottom, var(--rf-accent), rgba(123,155,209,0));
       "></div>
       <!-- Copy -->
       <div class="reveal" style="flex:1;">
         <h1 class="font-display" style="
           font-size: 54px;
           font-weight: 700;
-          color: #fff;
+          color: var(--rf-white);
           line-height: 1.1;
           letter-spacing: -0.025em;
           margin-bottom: 28px;
@@ -140,23 +129,23 @@
 </section>
 
 <!-- ═══════════════════════════ STRATEGIC REALITY ═══════════════════════════ -->
-<section id="reality" class="reality-section" style="background:#FAFAF7; padding: 96px 0;">
+<section id="reality" class="reality-section" style="background:var(--rf-cream); padding: 96px 0;">
   <div class="container">
     <div class="reveal">
-      <span class="eyebrow" style="color:#3A5A92;">The Strategic Reality Facing Leaders Today</span>
-      <h2 class="font-display" style="font-size: 43px; font-weight:700; color:#0B1D26; line-height:1.15; letter-spacing:-0.02em; max-width:700px; margin-bottom:24px;">Change is no longer an event to be managed.<br>It is the <span style="color:#8A9AAB;">permanent operating condition.</span></h2>
+      <span class="eyebrow" style="color:var(--rf-accent-deep);">The Strategic Reality Facing Leaders Today</span>
+      <h2 class="font-display" style="font-size: 43px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; max-width:700px; margin-bottom:24px;">Change is no longer an event to be managed.<br>It is the <span style="color:var(--rf-text-subtle);">permanent operating condition.</span></h2>
 
-      <p style="font-size: 17px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:16px;">
+      <p style="font-size: 17px; line-height:1.7; color:var(--rf-text); max-width:700px; margin-bottom:16px;">
         The forces reshaping organisations &mdash; from AI adoption and workforce transformation,
         to geopolitical instability, shifting member expectations, regulatory pressure, and
         climate-related disruption &mdash; are not sequential.
       </p>
-      <p style="font-size: 17px; line-height:1.7; color:#1A1A1A; max-width:700px; margin-bottom:16px;">
+      <p style="font-size: 17px; line-height:1.7; color:var(--rf-text); max-width:700px; margin-bottom:16px;">
         They interact. They amplify each other. And they do not pause for annual planning cycles.
       </p>
     </div>
 
-    <p class="reveal" style="font-size: 15px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#3A5A92; margin: 48px 0 24px;">
+    <p class="reveal" style="font-size: 15px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--rf-accent-deep); margin: 48px 0 24px;">
       The implications for leaders are profound
     </p>
 
@@ -164,37 +153,37 @@
     <div class="reality-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:stretch;">
 
       <div class="impl-chip reveal">
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:#7B9BD1; margin-bottom:8px;">01</div>
-        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Traditional strategy cycles are too slow and too narrow for the pace of change</p>
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:var(--rf-accent); margin-bottom:8px;">01</div>
+        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:var(--rf-text); margin:0;">Traditional strategy cycles are too slow and too narrow for the pace of change</p>
       </div>
       <div class="impl-chip reveal" style="transition-delay:80ms;">
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:#7B9BD1; margin-bottom:8px;">02</div>
-        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Risk registers seldom capture the dynamic interdependencies between forces</p>
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:var(--rf-accent); margin-bottom:8px;">02</div>
+        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:var(--rf-text); margin:0;">Risk registers seldom capture the dynamic interdependencies between forces</p>
       </div>
       <div class="impl-chip reveal" style="transition-delay:160ms;">
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:#7B9BD1; margin-bottom:8px;">03</div>
-        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Strategy becomes a &lsquo;project list&rsquo; &mdash; disconnected from real conditions</p>
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:var(--rf-accent); margin-bottom:8px;">03</div>
+        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:var(--rf-text); margin:0;">Strategy becomes a &lsquo;project list&rsquo; &mdash; disconnected from real conditions</p>
       </div>
       <div class="impl-chip reveal" style="transition-delay:240ms;">
-        <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:#7B9BD1; margin-bottom:8px;">04</div>
-        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Boards lack real-time strategic intelligence for effective governance</p>
+        <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:var(--rf-accent); margin-bottom:8px;">04</div>
+        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:var(--rf-text); margin:0;">Boards lack real-time strategic intelligence for effective governance</p>
       </div>
 
       <div class="impl-chip impl-chip--dim reveal">
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:rgba(123,155,209,0.5); margin-bottom:8px;">05</div>
-        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Undetected signals of change lead to decision lag and missed opportunity</p>
+        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:var(--rf-text); margin:0;">Undetected signals of change lead to decision lag and missed opportunity</p>
       </div>
       <div class="impl-chip impl-chip--dim reveal" style="transition-delay:80ms;">
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:rgba(123,155,209,0.5); margin-bottom:8px;">06</div>
-        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Organisations invest in optimising the present rather than preparing for the future</p>
+        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:var(--rf-text); margin:0;">Organisations invest in optimising the present rather than preparing for the future</p>
       </div>
       <div class="impl-chip impl-chip--dim reveal" style="transition-delay:160ms;">
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:rgba(123,155,209,0.5); margin-bottom:8px;">07</div>
-        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Leadership effectiveness declines under the pressure of disruptive change</p>
+        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:var(--rf-text); margin:0;">Leadership effectiveness declines under the pressure of disruptive change</p>
       </div>
       <div class="impl-chip impl-chip--dim reveal" style="transition-delay:240ms;">
         <div style="font-size: 11px; font-weight:700; letter-spacing:0.1em; color:rgba(123,155,209,0.5); margin-bottom:8px;">08</div>
-        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:#1A1A1A; margin:0;">Capability gaps &mdash; in people, systems, and infrastructure &mdash; quietly widen</p>
+        <p style="font-size: 15px; font-weight:500; line-height:1.55; color:var(--rf-text); margin:0;">Capability gaps &mdash; in people, systems, and infrastructure &mdash; quietly widen</p>
       </div>
 
     </div>
@@ -203,7 +192,7 @@
 
 <!-- ═══════════════════════════ MAD SECTION ═══════════════════════════ -->
 <section class="mad-section" style="
-  background: #E8EEF7;
+  background: var(--rf-surface-blue);
   padding: 96px 0 104px;
   position:relative; overflow:hidden;
   border-top: 1px solid rgba(46,92,142,0.14);
@@ -266,11 +255,11 @@
     <!-- Pullquote -->
     <div class="reveal" style="margin-top:64px; border-left:3px solid rgba(123,155,209,0.5); padding:24px 32px; background:rgba(11,29,38,0.04);">
       <p class="font-display" style="
-        font-size: 22px; font-weight:700; color:#0B1D26;
+        font-size: 22px; font-weight:700; color:var(--rf-navy);
         line-height:1.5; font-style:italic; margin-bottom:0;
       ">
         &ldquo;The most significant risk is not the disruption you can see.
-        It is the erosion of relevance that is happening <span style="color:#7B9BD1;">too slowly to trigger an alarm.</span>&rdquo;
+        It is the erosion of relevance that is happening <span style="color:var(--rf-accent);">too slowly to trigger an alarm.</span>&rdquo;
       </p>
     </div>
 
@@ -281,7 +270,7 @@
 <section class="comparison-section">
   <div class="container">
     <div class="reveal comparison-heading">
-      <span class="eyebrow" style="color:#3A5A92;">The Limits of Optimisation Alone</span>
+      <span class="eyebrow" style="color:var(--rf-accent-deep);">The Limits of Optimisation Alone</span>
       <h2 class="font-display comparison-h2">Optimisation tools sharpen execution &mdash; <span class="hl-accent">not strategic direction.</span></h2>
       <p class="comparison-lede">
         LEAN programs, agile methodologies, design thinking, BCG-style portfolio analysis, large-scale restructuring &mdash; applied well, these approaches deliver real value. Their job is to <strong>optimise performance within a given strategic frame.</strong> Setting that frame &mdash; and continually testing whether it still fits the conditions the organisation faces &mdash; is a different task.
@@ -311,7 +300,7 @@
     </div>
 
     <div class="reveal needs-heading">
-      <span class="eyebrow" style="color:#3A5A92;">A fundamentally different layer of work</span>
+      <span class="eyebrow" style="color:var(--rf-accent-deep);">A fundamentally different layer of work</span>
       <h2 class="font-display needs-h2">What leaders in complex environments actually need</h2>
       <p class="needs-lede">
         In addition to optimisation tools &mdash; clarity of strategic direction. Strategy that begins with reality, moves through value, and arrives at action.
@@ -321,27 +310,27 @@
     <div class="needs-grid">
       <div class="svc-card reveal">
         <div class="font-display" style="font-size:45px; font-weight:700; color:rgba(58,90,146,0.10); line-height:1; margin-bottom:16px;">01</div>
-        <div class="font-display" style="font-size:20px; font-weight:700; color:#0B1D26; margin-bottom:8px; line-height:1.25;">Honest reading of the change landscape</div>
-        <p style="font-size:14px; font-style:italic; color:#3A5A92; line-height:1.5; margin-bottom:14px;">Evidence &mdash; not assumptions &mdash; about what is actually changing.</p>
-        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin-bottom:0;">Starts with what is actually driving change in your operating environment, and what that means for the organisation &mdash; before any plan is drawn.</p>
+        <div class="font-display" style="font-size:20px; font-weight:700; color:var(--rf-navy); margin-bottom:8px; line-height:1.25;">Honest reading of the change landscape</div>
+        <p style="font-size:14px; font-style:italic; color:var(--rf-accent-deep); line-height:1.5; margin-bottom:14px;">Evidence &mdash; not assumptions &mdash; about what is actually changing.</p>
+        <p style="font-size:15px; line-height:1.65; color:var(--rf-text); margin-bottom:0;">Starts with what is actually driving change in your operating environment, and what that means for the organisation &mdash; before any plan is drawn.</p>
       </div>
       <div class="svc-card reveal" style="transition-delay:80ms;">
         <div class="font-display" style="font-size:45px; font-weight:700; color:rgba(58,90,146,0.10); line-height:1; margin-bottom:16px;">02</div>
-        <div class="font-display" style="font-size:20px; font-weight:700; color:#0B1D26; margin-bottom:8px; line-height:1.25;">Clarity on value generation and protection</div>
-        <p style="font-size:14px; font-style:italic; color:#3A5A92; line-height:1.5; margin-bottom:14px;">Where value must be created, renewed, and defended.</p>
-        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin-bottom:0;">Moves the conversation from activity to value &mdash; surfacing where the organisation must invest, protect, and let go, given the conditions it now faces.</p>
+        <div class="font-display" style="font-size:20px; font-weight:700; color:var(--rf-navy); margin-bottom:8px; line-height:1.25;">Clarity on value generation and protection</div>
+        <p style="font-size:14px; font-style:italic; color:var(--rf-accent-deep); line-height:1.5; margin-bottom:14px;">Where value must be created, renewed, and defended.</p>
+        <p style="font-size:15px; line-height:1.65; color:var(--rf-text); margin-bottom:0;">Moves the conversation from activity to value &mdash; surfacing where the organisation must invest, protect, and let go, given the conditions it now faces.</p>
       </div>
       <div class="svc-card reveal" style="transition-delay:160ms;">
         <div class="font-display" style="font-size:45px; font-weight:700; color:rgba(58,90,146,0.10); line-height:1; margin-bottom:16px;">03</div>
-        <div class="font-display" style="font-size:20px; font-weight:700; color:#0B1D26; margin-bottom:8px; line-height:1.25;">Identification of risks and opportunities that matter</div>
-        <p style="font-size:14px; font-style:italic; color:#3A5A92; line-height:1.5; margin-bottom:14px;">The choices that matter &mdash; not just the ones in view.</p>
-        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin-bottom:0;">Surfaces the conditions and choices with the most significant implications, separating them from the loudest signals and the most visible risks.</p>
+        <div class="font-display" style="font-size:20px; font-weight:700; color:var(--rf-navy); margin-bottom:8px; line-height:1.25;">Identification of risks and opportunities that matter</div>
+        <p style="font-size:14px; font-style:italic; color:var(--rf-accent-deep); line-height:1.5; margin-bottom:14px;">The choices that matter &mdash; not just the ones in view.</p>
+        <p style="font-size:15px; line-height:1.65; color:var(--rf-text); margin-bottom:0;">Surfaces the conditions and choices with the most significant implications, separating them from the loudest signals and the most visible risks.</p>
       </div>
       <div class="svc-card reveal" style="transition-delay:240ms;">
         <div class="font-display" style="font-size:45px; font-weight:700; color:rgba(58,90,146,0.10); line-height:1; margin-bottom:16px;">04</div>
-        <div class="font-display" style="font-size:20px; font-weight:700; color:#0B1D26; margin-bottom:8px; line-height:1.25;">Focused, adaptive action</div>
-        <p style="font-size:14px; font-style:italic; color:#3A5A92; line-height:1.5; margin-bottom:14px;">Strategy that moves at the pace of change.</p>
-        <p style="font-size:15px; line-height:1.65; color:#1A1A1A; margin-bottom:0;">Translates clarity into targeted initiatives that generate feedback quickly &mdash; so the organisation learns and adjusts as it moves, rather than waiting for the next plan.</p>
+        <div class="font-display" style="font-size:20px; font-weight:700; color:var(--rf-navy); margin-bottom:8px; line-height:1.25;">Focused, adaptive action</div>
+        <p style="font-size:14px; font-style:italic; color:var(--rf-accent-deep); line-height:1.5; margin-bottom:14px;">Strategy that moves at the pace of change.</p>
+        <p style="font-size:15px; line-height:1.65; color:var(--rf-text); margin-bottom:0;">Translates clarity into targeted initiatives that generate feedback quickly &mdash; so the organisation learns and adjusts as it moves, rather than waiting for the next plan.</p>
       </div>
     </div>
   </div>
