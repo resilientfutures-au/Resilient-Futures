@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Are you tech-savvy enough to lead your organisation? — Resilient Futures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    .article-hero { background: var(--rf-navy); padding: 88px 0 80px; position: relative; overflow: hidden; }
+    .article-hero__inner { position: relative; z-index: 1; display: flex; gap: 32px; align-items: flex-start; }
+    .article-hero__rule { width: 3px; flex-shrink: 0; min-height: 140px; margin-top: 8px;
+      background: linear-gradient(to bottom, var(--rf-accent), rgba(123,155,209,0)); }
+    .article-hero__copy { flex: 0 1 800px; min-width: 0; }
+    .article-hero__back {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--rf-font-sans); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--rf-accent);
+      text-decoration: none; margin-bottom: 22px;
+      transition: color 200ms ease;
+    }
+    .article-hero__back:hover { color: var(--rf-white); }
+    .article-hero__back::before { content: ''; display:inline-block; width:32px; height:1px; background: var(--rf-accent); }
+    .article-hero__title {
+      font-family: var(--rf-font-serif);
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 500; color: var(--rf-white);
+      line-height: 1.08; letter-spacing: -0.022em;
+      margin: 0 0 20px; max-width: 800px;
+    }
+    .article-hero__date {
+      font-family: var(--rf-font-sans); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--rf-accent);
+    }
+
+    .article-body-wrap { background: var(--rf-cream); padding: 72px 0 96px; }
+    .article-body { max-width: 720px; margin: 0 auto; color: var(--rf-text); }
+    .article-body p { font-size: 17px; line-height: 1.7; margin: 0 0 24px; max-width: 65ch; }
+    .article-body h2 { font-family: var(--rf-font-serif); font-size: 32px; font-weight: 500;
+      letter-spacing: -0.015em; line-height: 1.2; color: var(--rf-navy);
+      margin: 48px 0 16px; }
+    .article-body h3 { font-family: var(--rf-font-serif); font-size: 24px; font-weight: 500;
+      letter-spacing: -0.01em; color: var(--rf-navy); margin: 36px 0 12px; }
+    .article-body blockquote {
+      font-family: var(--rf-font-serif); font-style: italic;
+      font-size: 22px; line-height: 1.45; color: var(--rf-navy);
+      margin: 32px 0; padding: 0 0 0 24px;
+      border-left: 3px solid var(--rf-accent);
+    }
+    .article-body blockquote p { font-size: inherit; line-height: inherit; max-width: none; margin-bottom: 12px; }
+    .article-body ul, .article-body ol { margin: 0 0 24px 24px; }
+    .article-body li { margin-bottom: 8px; font-size: 17px; line-height: 1.7; }
+    .article-body img { display: block; max-width: 100%; height: auto;
+      border-radius: 4px; margin: 32px auto; }
+    .article-body a {
+      color: var(--rf-accent-deep);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color 200ms ease;
+    }
+    .article-body a:hover { color: var(--rf-accent); }
+
+    .article-footer { max-width: 720px; margin: 56px auto 0; padding-top: 32px;
+      border-top: 1px solid var(--rf-divider-soft); text-align: center; }
+    .article-footer a {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--rf-font-sans); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--rf-accent-deep); text-decoration: none;
+      transition: transform 200ms ease, color 200ms ease;
+    }
+    .article-footer a:hover { color: var(--rf-accent); transform: translateX(-4px); }
+
+    @media (max-width: 720px) {
+      .article-hero { padding: 64px 0 56px; }
+      .article-body-wrap { padding: 56px 0 80px; }
+      .article-hero__inner { gap: 20px; }
+      .article-hero__rule { min-height: 110px; }
+    }
+  </style>
+</head>
+<body class="page-article">
+
+<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:var(--rf-accent-deep);color:var(--rf-white);padding:12px 20px;font-size:15px;font-weight:600;border-radius:0 0 4px 4px;text-decoration:none;" onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto';" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px';">Skip to main content</a>
+
+<div data-include="nav"></div>
+
+<section id="main-content" class="article-hero">
+  <div class="container">
+    <div class="article-hero__inner">
+      <div class="article-hero__rule"></div>
+      <div class="article-hero__copy">
+        <a href="/articles/" class="article-hero__back">Articles</a>
+        <h1 class="article-hero__title">Are you tech-savvy enough to lead your organisation?</h1>
+        <p class="article-hero__date">19 May 2020</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article-body-wrap">
+  <div class="container">
+    <article class="article-body">
+      <img src="/assets/images/articles/blog-post-title-four-a3fyf/unsplash-image-PhYq704ffdA.jpg" alt="">
+  
+
+<p class="sqsrte-large"><strong><em>When we surveyed 280 Australian business leaders, we learned something sobering: too many don’t understand the strategic implications of exponentially emerging technologies.</em></strong></p><p class="">The headline might be brash. It might provoke some nasty responses. But the facts are clear: <strong>to make effective strategic decisions, most business leaders may not know enough about the technologies that have disrupted or may disrupt their organisations. </strong></p><p class="">Our recent survey – <a href="http://resilientfutures.com/surveys/"><em>The Disruption Report 2016: What Australian Business Leaders Think</em></a> -  showed that:</p><p class=""><strong>	1	Most leaders are not tech-savvy. </strong>They tend to rate established game-changers as emerging disruptors.</p><p class=""><strong>	2	Most leaders know a little about current technologies, but very little about emerging technologies. </strong>This means they aren’t investigating and making small upfront investments into emerging technologies that may yield large benefits once their exponential effects become apparent.</p><p class="">In short, we discovered that too many business leaders <em>don’t know what they don’t know</em>. And it’s impossible to form smart strategies to protect value generation in that condition.</p><p style="text-align:center;" class="sqsrte-large"><strong><em>There may be justifiable reasons for this…</em></strong></p><p class="">To cut our leaders some slack, let’s quickly review why they might be in this position.</p><p class="">First, understanding and working with exponential change is hard. There are few to no weak signals that signify the emergence of major changes. Furthermore, we tend not to notice exponential change before it spikes dramatically. We call this the long, quiet beginning to the shock awakening.</p><p class="">Second, the volume and speed of change nowadays is unprecedented and hard to fathom. Confusion is common when committing resources to emergent issues and strategies. Well-meaning risk management measures frequently quash a leader’s insights. For example, how easy is it for the forward-thinking leader to justify adopting a not yet fully formed technology to a board.</p><p class="">Third, all of the above is not just a problem with senior executives. With their primary focus on compliance and governance, too many boards are comprised of the people who don’t understand technology and the rate of change, and don’t have the insight required to see the strategic implications. Hence, a CEO, CTO, CSO, or CFO that is tech savvy has to teach the basics in order for a board to even allow the subject onto board papers.</p><p class="">Fourth, understanding and mitigating <em>strategic</em> risk is not typically a strength of organisations. Their risk focus is usually on operational governance and compliance. Plus risk managers often don’t have the capability to understand strategic risks to the business and they’re separated from the strategy team who take the risks. All of this is more unsettling when you consider that the primary reason for the failure of large organisations (like two-thirds of failures) is due to mismanagement of strategic risk.</p><p class="">Fifth, too many CTOs and IT departments have taken on the role of transactional maintenance. While they may have some insight into the future impact of technology, they are not bought into the strategic inner circle to share their views. Add to this a reliance on IT&amp;C vendors to dispense “independent advice” to non-tech-savvy leaders that hype the future disruption of technology, and you have an understandably confused set of decision-makers.</p><p class="">Finally, the pressure is on senior executives to produce short-term results with existing capabilities as their primary KPI. Plus, given the rapid churn rate of senior execs, they find it hard to think further than this year, or maybe next year. This is more so for listed companies that have institutional shareholders breathing down their necks for immediate ROI.</p><p class="">And to put another perspective that is commonly argued, it is true that we can never have perfect information to make strategic decisions. My counter to that is that while that is correct, we can do much more to understand the impacts of change and push ourselves to grasp the future so that we are better placed to change ahead of change, rather than being blinded by and at the mercy of change. The global financial crisis and threat to or demise of some of our supposedly strongest financial institutions is but just one scenario that we should not allow ourselves to ever repeat.</p><p class="">So, we do need to give leaders the benefit of the doubt. But it also needs to be demanded of our senior leaders that much more be done in preparing themselves and their people to solve this pressing issue.</p><p class="">After all, it is our business leaders who will lead their organisations, deliver new jobs and secure our economy through transition at a very critical and disruptive time. Our social and economic future as a nation relies on their capability to leverage disruption.</p><p style="text-align:center;" class="sqsrte-large"><strong><em>… and there are some simple solutions to this problem</em></strong></p><p class="sqsrte-large"><em>To begin the process of building tech-savvy capability in organisations, here are four simple first steps to solving it:</em></p><ol data-rte-list="default"><li><p class="">Directors and senior executives need to incorporate tech-savviness as a core measure in their KPIs, with a direct link to strategic risk.</p></li><li><p class="">An in-house or independent, external source of knowledge must be available to assess the opportunities and risks from current and emergent technology. They must be available to the board and senior management to provide advice.</p></li><li><p class="">Boards must comprise at least two tech-savvy directors that are independent with no affiliation with IT&amp;C vendors.</p></li><li><p class="">A quarterly management tech review – both digital and physical – must be carried out to identify potential immediate and emergent disruption. This must be facilitated by an outside body acting as an objective observer that can ask the tough questions without fear of recrimination.</p></li></ol><p class="">Just think if some or all of the above four simple steps were in place, wouldn’t organisations like Kodak and Fairfax Media have benefitted from these measures?</p><p class="">To build robust understanding of the strategic implications of emerging technologies may take some time. But is better to start sooner rather than later when you are forced to scramble to understand and respond to a converging quagmire of technologies that are sinking your boat.</p>
+
+
+  
+      <img src="/assets/images/articles/blog-post-title-four-a3fyf/unsplash-image-8KfCR12oeUM.jpg" alt="">
+  
+
+<p style="text-align:center;" class=""><strong>So what technologies should you know about - now, and what’s coming at you?</strong></p><blockquote><p class="">In the <em>Disruption Report 2016</em> we asked survey respondents to rate a range of known technologies in terms of the impact they expect these disruptors to have on their organisations in the next five years. 70% of our respondents rated the effects of <a href="http://resilientfutures.com/top-technology-disruptors/">8 out of the 20 listed technologies as having a high impact</a>, and also indicated <a href="http://resilientfutures.com/top-technology-disruptors/">8 that aren't really on their priority agenda</a> - yet.</p><p class="">Surprisingly, it isn't just the digital technologies that are seen as having a disruptive impact. It's the rapidly changing physical technologies. The ones that are very difficult to adapt to existing organisations in time to meet new completion. If digital disruption is a challenge for service-based industries and sectors, for those with dependence of physical infrastructure, it will be a nightmare if they don't prepare now to leverage their imminent disruption.</p></blockquote>
+    </article>
+    <div class="article-footer">
+      <a href="/articles/">← Back to Articles</a>
+    </div>
+  </div>
+</section>
+
+<div data-include="footer"></div>
+
+<script type="module" src="/assets/js/includes.js"></script>
+
+</body>
+</html>

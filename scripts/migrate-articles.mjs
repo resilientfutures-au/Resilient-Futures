@@ -93,7 +93,18 @@ export function stripSquarespaceHtml(html) {
 }
 
 export function generateExcerpt(html, maxLen = 180) {
-  const text = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  // Strip tags, then decode common HTML entities so the excerpt is plain text
+  const text = html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
   if (text.length <= maxLen) return text;
   const slice = text.slice(0, maxLen);
   const lastSpace = slice.lastIndexOf(' ');
@@ -164,6 +175,19 @@ export function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
+// Decode any residual HTML entities that the XML parser left in plain-text
+// fields (e.g. title). This normalises &amp; → & so escapeHtml can then
+// re-encode it exactly once.
+export function decodeHtmlEntities(s) {
+  return String(s)
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)));
+}
+
 function fillTemplate(template, vars) {
   let out = template;
   for (const [k, v] of Object.entries(vars)) {
@@ -216,7 +240,7 @@ export async function main() {
   const enriched = [];
 
   for (const p of rawPosts) {
-    const cleanedTitle = cleanMojibake(p.title);
+    const cleanedTitle = decodeHtmlEntities(cleanMojibake(p.title));
     const cleanedHtml = stripSquarespaceHtml(cleanMojibake(p.contentHtml));
     const beforeImgCount = (cleanedHtml.match(/images\.squarespace-cdn\.com/g) || []).length;
     const finalHtml = await rewriteImageSrcs(cleanedHtml, p.slug, projectRoot);

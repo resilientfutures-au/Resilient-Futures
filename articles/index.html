@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Articles — Resilient Futures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    .articles-hero { background: var(--rf-navy); padding: 104px 0 96px; position: relative; overflow: hidden; }
+    .articles-hero::before {
+      content: ""; position: absolute; top: -240px; right: -160px;
+      width: 720px; height: 720px;
+      background: radial-gradient(circle at 50% 50%,
+        rgba(123, 155, 209, 0.18) 0%, rgba(123, 155, 209, 0.05) 38%, rgba(123, 155, 209, 0) 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .articles-hero__inner { position: relative; z-index: 1; display: flex; gap: 32px; align-items: flex-start; }
+    .articles-hero__rule { width: 3px; flex-shrink: 0; min-height: 168px; margin-top: 8px;
+      background: linear-gradient(to bottom, var(--rf-accent), rgba(123,155,209,0)); }
+    .articles-hero__copy { flex: 0 1 760px; min-width: 0; }
+    .articles-hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--rf-font-sans); font-weight: 500; font-size: 13px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--rf-accent);
+      margin-bottom: 22px;
+    }
+    .articles-hero__eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background: var(--rf-accent); }
+    .articles-hero__title {
+      font-family: var(--rf-font-serif); font-size: clamp(44px, 6vw, 72px);
+      font-weight: 500; color: var(--rf-white); line-height: 1.04;
+      letter-spacing: -0.025em; margin: 0 0 24px;
+    }
+    .articles-hero__subhead { color: rgba(255,255,255,0.78); font-size: 18px;
+      line-height: 1.65; max-width: 580px; margin: 0; }
+    .articles-hero__meta {
+      display: inline-flex; align-items: center; gap: 14px; margin-top: 32px;
+      color: rgba(255,255,255,0.45); font-size: 12px; letter-spacing: 0.22em;
+      text-transform: uppercase; font-weight: 500;
+    }
+    .articles-hero__meta::before { content:''; display:inline-block; width:28px; height:1px; background: rgba(255,255,255,0.25); }
+    .articles-hero__meta strong { font-weight: 600; color: var(--rf-accent); }
+
+    .articles-section { background: var(--rf-cream); padding: 88px 0 128px; position: relative; }
+    .articles-list { max-width: 900px; margin: 0 auto; }
+    .articles-list__row {
+      display: grid; grid-template-columns: 140px 1fr; gap: 56px;
+      padding: 44px 0; border-bottom: 1px solid var(--rf-divider-soft);
+      align-items: baseline;
+    }
+    .articles-list__row:first-child { padding-top: 4px; }
+    .articles-list__row:last-child { border-bottom: none; }
+    .articles-list__date {
+      font-family: var(--rf-font-sans); font-size: 12px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--rf-accent-deep); padding-top: 10px; position: relative;
+    }
+    .articles-list__date::before {
+      content: ""; position: absolute; left: 0; top: 14px;
+      width: 16px; height: 1px; background: var(--rf-accent);
+      opacity: 0; transform: translateX(-12px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+    .articles-list__row:hover .articles-list__date::before,
+    .articles-list__row:focus-within .articles-list__date::before {
+      opacity: 1; transform: translateX(-22px);
+    }
+    .articles-list__link { display: block; text-decoration: none; color: inherit; }
+    .articles-list__title {
+      font-family: var(--rf-font-serif); font-size: 32px; font-weight: 500;
+      line-height: 1.22; letter-spacing: -0.018em; color: var(--rf-navy);
+      margin: 0 0 14px; transition: color 200ms ease; max-width: 36ch;
+    }
+    .articles-list__link:hover .articles-list__title,
+    .articles-list__link:focus-visible .articles-list__title { color: var(--rf-accent-deep); }
+    .articles-list__link:focus-visible { outline: 2px solid var(--rf-accent); outline-offset: 8px; border-radius: 2px; }
+    .articles-list__excerpt {
+      font-family: var(--rf-font-sans); font-size: 16px; line-height: 1.65;
+      color: var(--rf-text-muted); margin: 0; max-width: 62ch;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+
+    @media (max-width: 720px) {
+      .articles-hero { padding: 80px 0 72px; }
+      .articles-section { padding: 64px 0 96px; }
+      .articles-hero__inner { gap: 20px; }
+      .articles-hero__rule { min-height: 140px; }
+      .articles-list__row { grid-template-columns: 1fr; gap: 10px; padding: 36px 0; }
+      .articles-list__date { padding-top: 0; }
+      .articles-list__date::before { display: none; }
+      .articles-list__title { font-size: 24px; max-width: none; }
+    }
+  </style>
+</head>
+<body class="page-articles">
+
+<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:var(--rf-accent-deep);color:var(--rf-white);padding:12px 20px;font-size:15px;font-weight:600;border-radius:0 0 4px 4px;text-decoration:none;" onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto';" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px';">Skip to main content</a>
+
+<div data-include="nav"></div>
+
+<section id="main-content" class="articles-hero">
+  <div class="container">
+    <div class="articles-hero__inner">
+      <div class="articles-hero__rule"></div>
+      <div class="articles-hero__copy">
+        <span class="articles-hero__eyebrow">Archive</span>
+        <h1 class="articles-hero__title">Articles</h1>
+        <p class="articles-hero__subhead">
+          Strategy, leadership, and observations on a world that won't sit still &mdash; drawn from our work with Australian boards and executive teams.
+        </p>
+        <div class="articles-hero__meta">
+          <span><strong>36</strong>&nbsp;articles &nbsp;·&nbsp; 2019&ndash;2023</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="articles-section">
+  <div class="container">
+    <div class="articles-list">
+      <article class="articles-list__row">
+        <div class="articles-list__date">17 Apr 2023</div>
+        <a href="/articles/leading-2023-strategic-leadership-for-disruptive-change/" class="articles-list__link">
+          <h2 class="articles-list__title">LEADING 2023: Strategic Leadership for Disruptive Change  </h2>
+          <p class="articles-list__excerpt">Stay at the Forefront of Disruptive Change in 2023 &amp; Beyond: Sync robust planning, leadership &amp; value generation in disruptive change Change is no longer linear. It is going…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">03 Apr 2023</div>
+        <a href="/articles/6-simple-steps-for-strategy-planning-in-disruptive-conditions/" class="articles-list__link">
+          <h2 class="articles-list__title">6 SIMPLE STEPS FOR STRATEGY PLANNING IN DISRUPTIVE CONDITIONS</h2>
+          <p class="articles-list__excerpt">“Strategy in Action (SIA) is a wheel that never stops turning because it was built for a world that never stops changing. As the world is revolutionised around you, use SiA as a…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">10 Nov 2022</div>
+        <a href="/articles/anna-feringa-article-from-interview-chloe-lyons-1/" class="articles-list__link">
+          <h2 class="articles-list__title">Anna Feringa Article from Interview - Chloe Lyons</h2>
+          <p class="articles-list__excerpt">COVID-19 has shaken up the business world forever and amid the rapidly changing environment companies now face a make-or-break decision - look after employees’ mental health, or…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">19 Apr 2022</div>
+        <a href="/articles/disruption-what-we-learned-by-surveying-280-australian-business-leaders/" class="articles-list__link">
+          <h2 class="articles-list__title">Disruption: What We Learned by Surveying 280 Australian Business Leaders</h2>
+          <p class="articles-list__excerpt">2 in 6 are ahead of the curve, 1 in 6 are lagging behind, and 3 in 6 are playing a “wait and see” game. Resilient Futures has released its ‘Disruption Report 2016: What Australian…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">07 Dec 2020</div>
+        <a href="/articles/dr-peter-williams-smarter-businesses-are-tapping-their-cities-on-the-shoulder/" class="articles-list__link">
+          <h2 class="articles-list__title">Dr. Peter Williams: “Smarter businesses are tapping their cities on the shoulder”</h2>
+          <p class="articles-list__excerpt">Is the COVID-19 pandemic a dry run for the disruptions that climate change has in store? Assuming this is the case, Dr. Peter Williams, lead author of the UN City Disaster…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">30 Nov 2020</div>
+        <a href="/articles/chris-miller-despite-vaccine-announcements-were-looking-at-3-5-years-of-covid/" class="articles-list__link">
+          <h2 class="articles-list__title">Chris Miller: Despite vaccine announcements, “we’re looking at 3-5 years of COVID”</h2>
+          <p class="articles-list__excerpt">When Pfizer first announced its COVID-19 vaccine candidate in mid-November, the world’s collective hopes soared. But Chris Miller, one of Australia’s leading risk and business…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">11 Nov 2020</div>
+        <a href="/articles/joe-cammarano-the-american-experiment-is-still-possible-but-hanging-by-a-thread/" class="articles-list__link">
+          <h2 class="articles-list__title">Joe Cammarano: “The American experiment is still possible, but hanging by a thread”</h2>
+          <p class="articles-list__excerpt">In the wake of an American election that is historic for reasons too numerous to list, Providence College’s Joe Cammarano is reflecting on the state of his country. As an…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">04 Nov 2020</div>
+        <a href="/articles/thought-leaders-thinking-gerd-leonhard/" class="articles-list__link">
+          <h2 class="articles-list__title">Thought Leaders Thinking: Gerd Leonhard</h2>
+          <p class="articles-list__excerpt">People, planet, purpose, and prosperity; when Gerd Leonhard pictures the world to come, he hopes these will be its pillars. In our recent discussion with the famed author and…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">19 Oct 2020</div>
+        <a href="/articles/the-reality-of-resilient-regions-in-the-covid-economy-amp-beyond-1/" class="articles-list__link">
+          <h2 class="articles-list__title">The Reality of Resilient Regions in the COVID Economy &amp; Beyond</h2>
+          <p class="articles-list__excerpt">Given the disruption being experienced across Australia, for any region or community to assert they are resilient they must first pass the test of a new definition of resilience…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">16 Oct 2020</div>
+        <a href="/articles/thought-leaders-thinking-curt-spalding/" class="articles-list__link">
+          <h2 class="articles-list__title">Thought Leaders Thinking: Curt Spalding</h2>
+          <p class="articles-list__excerpt">We know that for the next year or two, we’ll be living under pandemic conditions. How can this nascent COVID economy dovetail into the real climate economy that will necessarily…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">08 Oct 2020</div>
+        <a href="/articles/thought-leader-thinking-dr-michael-busler/" class="articles-list__link">
+          <h2 class="articles-list__title">Thought Leader Thinking: Dr. Michael Busler</h2>
+          <p class="articles-list__excerpt">In Australia, there’s a saying that goes: “When Americans elect a president for themselves, they elect one for us too.” Of course, not only Australians are watching the American…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">02 Oct 2020</div>
+        <a href="/articles/thought-leaders-thinking-mark-zawacki/" class="articles-list__link">
+          <h2 class="articles-list__title">Thought Leaders Thinking: Mark Zawacki</h2>
+          <p class="articles-list__excerpt">650 Labs founder Mark Zawacki has a deceptively glib way of summing up the changes he sees ahead of us: “No more $14 avocado toast!” Of course, as the creator of a consultancy…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">21 Sep 2020</div>
+        <a href="/articles/thought-leaders-thinking-saul-eslake/" class="articles-list__link">
+          <h2 class="articles-list__title">Thought Leaders Thinking: Saul Eslake</h2>
+          <p class="articles-list__excerpt">If we imagine government fiscal policy as a bridge taking us over the economic disruption of this pandemic, we should be asking one question in particular. In Saul Eslake’s view…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">24 Aug 2020</div>
+        <a href="/articles/government-backed-loans-computer-says-no/" class="articles-list__link">
+          <h2 class="articles-list__title">Government-Backed Loans: Computer Says No!</h2>
+          <p class="articles-list__excerpt">I’m getting feedback that many of our institutional lenders are deliberately limiting access to the promised government-backed loan scheme. This is hurting small and medium sized…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">24 Aug 2020</div>
+        <a href="/articles/thought-leaders-thinking-robb-smith/" class="articles-list__link">
+          <h2 class="articles-list__title">Thought Leaders Thinking: Robb Smith</h2>
+          <p class="articles-list__excerpt">Clearly, the COVID-19 pandemic is reorganizing the world, but to what end? According to the human development social innovator Robb Smith, we are in the midst of a “meta-crisis”…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">22 Jul 2020</div>
+        <a href="/articles/managing-the-complexity-of-covid-19/" class="articles-list__link">
+          <h2 class="articles-list__title">Managing the Complexity of COVID-19</h2>
+          <p class="articles-list__excerpt">Six months since the outbreak of the COVID-19 pandemic, relevant empirically proven information is scare, while general complexity is high—and rising. According to the lauded…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">22 Jul 2020</div>
+        <a href="/articles/you-amp-the-covid-economy-finding-your-way-forward/" class="articles-list__link">
+          <h2 class="articles-list__title">You &amp; the COVID Economy: Finding Your Way Forward</h2>
+          <p class="articles-list__excerpt">The recent COVID-19 pandemic has seen the collapse of key business operations across many industries. International travel and hotel occupancy have drastically decreased, with…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">10 Jul 2020</div>
+        <a href="/articles/seek-out-strategic-opportunity-risk-even-in-worst-recession-since-the-great-depression/" class="articles-list__link">
+          <h2 class="articles-list__title">Seek Out Strategic Opportunity-Risk, Even in “Worst Recession Since the Great Depression”</h2>
+          <p class="articles-list__excerpt">Is it any surprise that the IMF just forecasted the “worst recession since the Great Depression, surpassing that seen during the financial crisis a decade ago”? Of course not. And…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">09 Jul 2020</div>
+        <a href="/articles/chris-connors-article/" class="articles-list__link">
+          <h2 class="articles-list__title">Chris Connors Article</h2>
+          <p class="articles-list__excerpt">With working from home set to become the new normal for many in a post-COVID-19 world, a team building expert has revealed how leaders can leverage the disruption to build…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">09 Jun 2020</div>
+        <a href="/articles/blog-post-title-one-kwem3/" class="articles-list__link">
+          <h2 class="articles-list__title">Technology Healthcare</h2>
+          <p class="articles-list__excerpt">The COVID-19 pandemic has pushed technologies that could revolutionise the healthcare sector into the public eye but the question remains, why did it take a disaster to reveal…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">28 May 2020</div>
+        <a href="/articles/hands-off-farming-food-production-fit-for-the-future-is-here-today/" class="articles-list__link">
+          <h2 class="articles-list__title">Hands-off Farming: Food Production Fit for the Future is Here Today</h2>
+          <p class="articles-list__excerpt">IN re-imagining food for the future, we must focus on understanding and transforming our food production capabilities — a revolution well on its way. The capabilities that are…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">19 May 2020</div>
+        <a href="/articles/blog-post-title-four-a3fyf/" class="articles-list__link">
+          <h2 class="articles-list__title">Are you tech-savvy enough to lead your organisation?</h2>
+          <p class="articles-list__excerpt">When we surveyed 280 Australian business leaders, we learned something sobering: too many don’t understand the strategic implications of exponentially emerging technologies. The…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">19 May 2020</div>
+        <a href="/articles/blog-post-title-two-cww5c/" class="articles-list__link">
+          <h2 class="articles-list__title">Technology Disruptors: What Business Leaders Notice... and Miss</h2>
+          <p class="articles-list__excerpt">The top 8 easy-to-see technologies Our recent survey of over 280 Australian business leaders produced some rich insights on a range of issues confronting organisations as they…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">19 May 2020</div>
+        <a href="/articles/in-surviving-ai-five-things-are-certain/" class="articles-list__link">
+          <h2 class="articles-list__title">In Surviving AI - Five Things are Certain</h2>
+          <p class="articles-list__excerpt">Artificial Intelligence (AI) is not new. From the early thinking captured in Alan Turing’s 1950 paper ‘Computing Machinery and Intelligence’ to IBM’s Deep Blue defeating world…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">14 May 2020</div>
+        <a href="/articles/englands-confusing-re-opening-underscores-need-for-business-agility/" class="articles-list__link">
+          <h2 class="articles-list__title">England’s Confusing Re-opening Underscores Need for Business Agility</h2>
+          <p class="articles-list__excerpt">In disruptive conditions, the items on a business’ 5-year plan may as well be thrown on a trash heap. The British companies that are engaging with England’s shaky re-opening are…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">13 May 2020</div>
+        <a href="/articles/cuomo-says-no-going-back-to-normal-fortunately-normal-is-fictional/" class="articles-list__link">
+          <h2 class="articles-list__title">Cuomo Says No Going “Back to Normal”—Fortunately, “Normal” Is Fictional</h2>
+          <p class="articles-list__excerpt">On April 1st, New York Governor Andrew Cuomo gave a speech in which he said, “I don’t think we get back to normal [after this pandemic]. I think we get to a new normal.” But…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">13 May 2020</div>
+        <a href="/articles/how-exponential-disruptive-change-represents-the-new-normal/" class="articles-list__link">
+          <h2 class="articles-list__title">How Exponential Disruptive Change Represents the New Normal</h2>
+          <p class="articles-list__excerpt">Right now, the confounding, overwhelming experience of disruption is impacting our lives in an immediate way. Right now, we all understand what it’s like to have a tsunami sneak…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">13 May 2020</div>
+        <a href="/articles/sanders-impact-on-the-dow-jones-a-reminder-to-think-conditions/" class="articles-list__link">
+          <h2 class="articles-list__title">Sanders’ Impact on the Dow Jones a Reminder to “Think Conditions”</h2>
+          <p class="articles-list__excerpt">When Bernie Sanders dropped out of the American Presidential race, the Dow Jones Industrial Average rose 3.44%. It’s a good reminder to “think conditions”: create teams of…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">13 May 2020</div>
+        <a href="/articles/twitter-traders-who-predicted-oil-crash-prove-someone-always-sees-the-wild-card/" class="articles-list__link">
+          <h2 class="articles-list__title">Twitter Traders Who Predicted Oil Crash Prove Someone Always Sees the Wild Card</h2>
+          <p class="articles-list__excerpt">The news that oil prices were in the negative came as a massive shock to most. But not to the traders organized under the Twitter hashtag EnergyFinTwit (#EFT) who made millions…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">13 May 2020</div>
+        <a href="/articles/new-zealands-prime-minister-most-effective-leader-on-the-planet/" class="articles-list__link">
+          <h2 class="articles-list__title">New Zealand’s Prime Minister “Most Effective Leader on the Planet”?</h2>
+          <p class="articles-list__excerpt">The Atlantic just published a story about New Zealand’s Prime Minister Jacinda Arden that ponders whether she is “the most effective leader on the planet.” Well, if she is, a good…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">13 May 2020</div>
+        <a href="/articles/trump-threatening-to-rip-supply-chains-from-china/" class="articles-list__link">
+          <h2 class="articles-list__title">Trump Threatening to Rip Supply Chains from China? Investigate Your Value Network</h2>
+          <p class="articles-list__excerpt">Trump has long threatened to pull global supply chains from China, but it seems that the COVID-19 pandemic may have strengthened that resolve. This condition is a reminder to all…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">16 Apr 2020</div>
+        <a href="/articles/are-you-disruption-ready/" class="articles-list__link">
+          <h2 class="articles-list__title">Are you disruption ready? The 3 questions you need to ask yourself right now if you want to leverage disruption</h2>
+          <p class="articles-list__excerpt">There are just three questions you need to ask yourself to determine whether you and your organisation are disruption-ready: 1 Does your executive team have an aligned view of…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">26 Mar 2020</div>
+        <a href="/articles/mad-politics-a-disrupted-world-and-a-new-enterprise-mindset/" class="articles-list__link">
+          <h2 class="articles-list__title">MAD Politics, a Disrupted World and a New Enterprise Mindset</h2>
+          <p class="articles-list__excerpt">“In an era of disruption, with politics fuelling managed adaptive decline rather than empowering a new future … who will lead?” It is now a given that we all face the challenge of…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">26 Mar 2020</div>
+        <a href="/articles/a-mad-moment-agriculture-must-flip-its-focus-from-farming-to-food-security/" class="articles-list__link">
+          <h2 class="articles-list__title">A MAD Moment: Agriculture must flip its focus from farming to food security</h2>
+          <p class="articles-list__excerpt">OUR farm sector is MAD. That is, it is in Managed Adaptive Decline. MAD occurs when an organisation adapts bit by bit, in a well-managed way, to declining conditions. Little…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">26 Jul 2019</div>
+        <a href="/articles/hacking-food-alternative-foods-present-opportunities-for-conventional-farmers/" class="articles-list__link">
+          <h2 class="articles-list__title">Hacking Food: Alternative Foods Present Opportunities for Conventional Farmers</h2>
+          <p class="articles-list__excerpt">OUR FARMS and farmers, if they are to survive and leverage disruptive change, must develop a new mindset, skill-set, and strategic focus that is open to an alternative food future…</p>
+        </a>
+      </article>
+
+      <article class="articles-list__row">
+        <div class="articles-list__date">11 Jul 2019</div>
+        <a href="/articles/its-up-to-us-support-needs-to-come-from-those-who-farmers-serve-their-customers/" class="articles-list__link">
+          <h2 class="articles-list__title">It’s Up to Us: Support needs to come from those who farmers serve - their customers</h2>
+          <p class="articles-list__excerpt">I LOVE writing for AgJournal. I get interesting feedback from farmers, their suppliers, customers and communities – that is all of us. While many have solutions, criticism and…</p>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div data-include="footer"></div>
+
+<script type="module" src="/assets/js/includes.js"></script>
+
+</body>
+</html>
