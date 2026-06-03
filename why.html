@@ -97,7 +97,7 @@
           max-width: 580px;
         ">
           The operating environment has changed.<br>
-          <span style="color:rgba(255,255,255,0.55);">Most strategic systems haven&rsquo;t.</span>
+          <span style="color:var(--rf-accent);">Most strategic systems haven&rsquo;t.</span>
         </h1>
         <p style="
           font-size: 19px;
@@ -133,7 +133,7 @@
   <div class="container">
     <div class="reveal">
       <span class="eyebrow" style="color:var(--rf-accent-deep);">The Strategic Reality Facing Leaders Today</span>
-      <h2 class="font-display" style="font-size: 43px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; max-width:700px; margin-bottom:24px;">Change is no longer an event to be managed.<br>It is the <span style="color:var(--rf-text-subtle);">permanent operating condition.</span></h2>
+      <h2 class="font-display" style="font-size: 43px; font-weight:700; color:var(--rf-navy); line-height:1.15; letter-spacing:-0.02em; max-width:700px; margin-bottom:24px;">Change is no longer an event to be managed.<br>It is the <span style="color:var(--rf-accent-deep);">permanent operating condition.</span></h2>
 
       <p style="font-size: 17px; line-height:1.7; color:var(--rf-text); max-width:700px; margin-bottom:16px;">
         The forces reshaping organisations &mdash; from AI adoption and workforce transformation,
@@ -239,25 +239,121 @@
           Each adaptive decision is locally rational. Collectively, they produce an irreversible
           drift away from relevance.
         </p>
-        <aside class="mad-callout">
-          The capability gap between what is required and what is available
-          accelerates as disruptive conditions intensify.
-        </aside>
       </div>
 
       <div class="reveal mad-diagram" style="transition-delay:160ms;">
-        <!-- Disruptive Conditions diagram -->
-        <img src="brand_assets/Disruptive%20Conditions%20(2).svg" alt="Disruptive conditions diagram" style="width:100%; height:auto; display:block;">
-        <p class="mad-figcaption">Capability gap vs. disruptive conditions, over time</p>
+        <header class="mad-figcaption">
+          <h3 class="mad-figcaption__title">Capability gap vs. disruptive conditions, over time</h3>
+          <p class="mad-figcaption__desc">The capability gap between what is required and what is available accelerates as disruptive conditions intensify.</p>
+        </header>
+        <!-- Brand-coloured inline diagram: two curves diverging over time,
+             shaded gap region between them. Navy + slate-blue only.        -->
+        <svg class="mad-svg" viewBox="0 50 640 410" role="img"
+             aria-labelledby="madDiagramTitle madDiagramDesc"
+             xmlns="http://www.w3.org/2000/svg">
+          <title id="madDiagramTitle">Capability gap vs. disruptive conditions, over time</title>
+          <desc id="madDiagramDesc">Two curves diverge over time: the level of capability demanded by disruptive conditions accelerates upward while the organisation's available capability grows slowly, opening a widening capability gap between them.</desc>
+
+          <!-- Axes -->
+          <line x1="80" y1="60"  x2="80"  y2="370"
+                stroke="#0B1D26" stroke-width="1" opacity="0.30"/>
+          <line x1="80" y1="370" x2="600" y2="370"
+                stroke="#0B1D26" stroke-width="1" opacity="0.30"/>
+
+          <!-- Y-axis label, rotated; text-anchor="middle" centres it on the
+               axis midpoint (y=215, the mid of the 60→370 axis span).        -->
+          <text x="-215" y="44" transform="rotate(-90)"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="11" font-weight="600" letter-spacing="2"
+                fill="#0B1D26" opacity="0.55" text-anchor="middle">
+            CAPABILITY REQUIRED
+          </text>
+
+          <!-- Shaded capability-gap region between the two curves -->
+          <path d="M 80 320 Q 290 308 600 290 L 600 100 Q 290 296 80 320 Z"
+                fill="#2E5C8E" opacity="0.12"/>
+
+          <!-- Organisational capability curve (lower, navy, slow growth) -->
+          <path d="M 80 320 Q 290 308 600 290"
+                fill="none" stroke="#0B1D26" stroke-width="3"
+                stroke-linecap="round"/>
+
+          <!-- Disruptive conditions curve (upper, slate-blue, accelerating) -->
+          <path d="M 80 320 Q 290 296 600 100"
+                fill="none" stroke="#2E5C8E" stroke-width="3.5"
+                stroke-linecap="round"/>
+
+          <!-- Curve endpoint markers -->
+          <circle cx="600" cy="100" r="5" fill="#2E5C8E"/>
+          <circle cx="600" cy="290" r="5" fill="#0B1D26"/>
+
+          <!-- Square bracket sitting INSIDE the gap at x≈420, marking the
+               vertical distance between the two curves. Plain right-angled
+               bracket — no centre notch.                                     -->
+          <path d="M 420 210 L 430 210 L 430 287 L 420 287"
+                fill="none" stroke="#0B1D26" stroke-width="1.5"
+                stroke-linejoin="miter" stroke-linecap="square" opacity="0.65"/>
+          <text x="442" y="253"
+                font-family="'Source Serif 4', Georgia, serif"
+                font-size="16" font-style="italic" font-weight="600"
+                fill="#0B1D26" text-anchor="start">
+            Capability gap
+          </text>
+
+          <!-- Curve identifiers — left-anchored, on a shared x=92 column,
+               sitting just above each curve's start so they read as captions -->
+          <text x="92" y="92"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="13" font-weight="700" letter-spacing="0.2"
+                fill="#2E5C8E" text-anchor="start">
+            Disruptive conditions
+          </text>
+          <text x="92" y="108"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="11" font-weight="500"
+                fill="#2E5C8E" opacity="0.75" text-anchor="start">
+            Capability the environment demands
+          </text>
+
+          <text x="92" y="346"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="13" font-weight="700" letter-spacing="0.2"
+                fill="#0B1D26" text-anchor="start">
+            Organisational capability
+          </text>
+          <text x="92" y="362"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="11" font-weight="500"
+                fill="#0B1D26" opacity="0.65" text-anchor="start">
+            What the organisation can currently deliver
+          </text>
+
+          <!-- Time-axis labels — all share y=412 baseline -->
+          <text x="80" y="412"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="11" font-weight="600" letter-spacing="2"
+                fill="#0B1D26" opacity="0.75" text-anchor="start">
+            PAST
+          </text>
+          <text x="340" y="432"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="11" font-weight="600" letter-spacing="2"
+                fill="#0B1D26" opacity="0.45" text-anchor="middle">
+            TIME
+          </text>
+          <text x="600" y="412"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="11" font-weight="600" letter-spacing="2"
+                fill="#0B1D26" opacity="0.75" text-anchor="end">
+            FUTURE
+          </text>
+        </svg>
       </div>
     </div>
 
-    <!-- Pullquote -->
-    <div class="reveal" style="margin-top:64px; border-left:3px solid rgba(123,155,209,0.5); padding:24px 32px; background:rgba(11,29,38,0.04);">
-      <p class="font-display" style="
-        font-size: 22px; font-weight:700; color:var(--rf-navy);
-        line-height:1.5; font-style:italic; margin-bottom:0;
-      ">
+    <!-- Pullquote — shares the .mad-callout component shell -->
+    <div class="reveal mad-pullquote">
+      <p class="mad-pullquote__text">
         &ldquo;The most significant risk is not the disruption you can see.
         It is the erosion of relevance that is happening <span style="color:var(--rf-accent);">too slowly to trigger an alarm.</span>&rdquo;
       </p>
