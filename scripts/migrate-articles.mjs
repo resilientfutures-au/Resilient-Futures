@@ -188,6 +188,81 @@ export function decodeHtmlEntities(s) {
     .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)));
 }
 
+// Canonical production host. The Squarespace export's channel <link> and the
+// site's own domain both use the www apex; canonical/OG URLs must match exactly.
+export const SITE = 'https://www.resilientfutures.com';
+const LOGO_URL = `${SITE}/brand_assets/Resilient%20Futures%20LOGOS%20(4).png`;
+
+// Build the per-article SEO/AEO <head> block: meta description, canonical,
+// Open Graph, Twitter card, and JSON-LD Article schema. Wrapped in seo:start/
+// seo:end comment markers so injection is idempotent (the marked block can be
+// stripped and replaced on re-run). `iso` is an ISO-8601 timestamp; `imageUrl`
+// is an absolute URL (falls back to the brand logo when a post has no image).
+export function buildArticleSeoBlock({ title, description, canonical, imageUrl, iso }) {
+  const t = escapeHtml(title);
+  const d = escapeHtml(description);
+  const img = imageUrl || LOGO_URL;
+  // Google truncates Article headline at ~110 chars; keep schema validators happy.
+  const headline = title.length > 110 ? title.slice(0, 109).trimEnd() + '…' : title;
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline,
+    description,
+    image: [img],
+    datePublished: iso,
+    dateModified: iso,
+    author: { '@type': 'Organization', name: 'Resilient Futures', url: SITE },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Resilient Futures',
+      logo: { '@type': 'ImageObject', url: LOGO_URL },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  };
+  // Escape '<' so a stray sequence in content can't break out of the script tag.
+  const ldJson = JSON.stringify(ld, null, 2).replace(/</g, '\\u003c');
+  return `<!-- seo:start -->
+  <meta name="description" content="${d}">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Resilient Futures">
+  <meta property="og:title" content="${t}">
+  <meta property="og:description" content="${d}">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${img}">
+  <meta property="article:published_time" content="${iso}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${t}">
+  <meta name="twitter:description" content="${d}">
+  <meta name="twitter:image" content="${img}">
+  <script type="application/ld+json">
+${ldJson}
+  </script>
+  <!-- seo:end -->`;
+}
+
+// Build a simpler SEO block for non-article (website) pages such as the
+// articles listing index: description, canonical, Open Graph, Twitter card.
+export function buildPageSeoBlock({ title, description, canonical }) {
+  const t = escapeHtml(title);
+  const d = escapeHtml(description);
+  return `<!-- seo:start -->
+  <meta name="description" content="${d}">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Resilient Futures">
+  <meta property="og:title" content="${t}">
+  <meta property="og:description" content="${d}">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:image" content="${LOGO_URL}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${t}">
+  <meta name="twitter:description" content="${d}">
+  <meta name="twitter:image" content="${LOGO_URL}">
+  <!-- seo:end -->`;
+}
+
 function fillTemplate(template, vars) {
   let out = template;
   for (const [k, v] of Object.entries(vars)) {
@@ -196,12 +271,13 @@ function fillTemplate(template, vars) {
   return out;
 }
 
-export function renderPost(template, { title, date, body, slug }) {
+export function renderPost(template, { title, date, body, slug, seo = '' }) {
   return fillTemplate(template, {
     title: escapeHtml(title),
     date: escapeHtml(date),
     body,             // already-cleaned HTML, do not escape
     slug,
+    seo,              // pre-built SEO block, do not escape
   });
 }
 
@@ -213,7 +289,12 @@ export function renderListing(template, rowTemplate, posts) {
     excerpt: escapeHtml(p.excerpt ?? ''),
     slug: p.slug,
   })).join('\n');
-  return fillTemplate(template, { rows, count: String(posts.length) });
+  const seo = buildPageSeoBlock({
+    title: 'Articles',
+    description: 'Articles and writing from Resilient Futures on strategy, leadership, and navigating disruptive change — drawn from current client work and the conditions shaping every operating environment.',
+    canonical: `${SITE}/articles/`,
+  });
+  return fillTemplate(template, { rows, count: String(posts.length), seo });
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -249,11 +330,25 @@ export async function main() {
     const excerpt = generateExcerpt(finalHtml);
     const dateStr = formatDate(p.date);
 
+    // SEO/AEO head block
+    const description = generateExcerpt(finalHtml, 155);
+    const canonical = `${SITE}/articles/${p.slug}/`;
+    const firstImg = (finalHtml.match(/src="(\/assets\/images\/articles\/[^"]+)"/) || [])[1];
+    const imageUrl = firstImg ? SITE + firstImg : undefined;
+    const seo = buildArticleSeoBlock({
+      title: cleanedTitle,
+      description,
+      canonical,
+      imageUrl,
+      iso: p.date.toISOString(),
+    });
+
     const html = renderPost(postTmpl, {
       title: cleanedTitle,
       date: dateStr,
       body: finalHtml,
       slug: p.slug,
+      seo,
     });
 
     const outDir = resolve(projectRoot, 'articles', p.slug);

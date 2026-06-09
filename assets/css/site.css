@@ -405,6 +405,10 @@ section + section.same-bg { padding-top: 0; }
   background: none; border: none; cursor: pointer;
   color: rgba(255,255,255,0.72); font-size: 15px; font-weight: 500;
   font-family: 'Inter', system-ui, -apple-system, sans-serif; text-decoration: none;
+  /* Explicitly reset the global `.btn, button { text-transform: uppercase }` rule
+     so About/Services stay title-case on every page (pages without the inline
+     button reset — e.g. the articles template — were rendering them in caps). */
+  text-transform: none; letter-spacing: normal;
   transition: color 0.2s; display: flex; align-items: center; gap: 4px;
   padding: 4px 8px;
 }
@@ -412,6 +416,25 @@ section + section.same-bg { padding-top: 0; }
 .nav-dropdown-trigger--active { color: rgba(255,255,255,0.9) !important; }
 .nav-caret { font-size: 12px; opacity: 1; transition: transform 0.15s; display: inline-block; }
 .nav-dropdown.open .nav-caret { transform: rotate(180deg); }
+
+/* Mobile menu toggle — hidden on desktop, shown ≤767px (see mobile block at end) */
+.nav-hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 44px; height: 44px; padding: 11px;
+  margin: 0; background: none; border: none; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-hamburger span {
+  display: block; width: 100%; height: 2px; border-radius: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: transform 0.28s cubic-bezier(0.4,0.01,0.2,1), opacity 0.2s ease;
+}
+.nav-hamburger:focus-visible { outline: 2px solid rgba(255,255,255,0.85); outline-offset: 2px; border-radius: 4px; }
+/* Animate to an X when open */
+nav.nav-open .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+nav.nav-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+nav.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .nav-dropdown-menu {
   position: absolute; top: calc(100% + 10px); left: 50%;
   transform: translateX(-50%) translateY(-4px);
@@ -1481,6 +1504,57 @@ a.book-card:hover .book-cover {
 .lib-pub-item:hover .lib-pub-meta { color: #3A5A92; }
 .lib-card--container { min-height: 0; }
 .lib-card--container .lib-card-desc { margin-bottom: 22px; flex: 0 1 auto; }
+
+/* Featured podcast block (Strategic Intelligence) */
+.podcast-feature {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(11,29,38,0.10);
+}
+.podcast-feature__cover {
+  width: 96px; height: 96px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 8px 22px rgba(11,29,38,0.20), 0 2px 6px rgba(11,29,38,0.12);
+}
+.podcast-feature__body { min-width: 0; }
+.podcast-feature__title {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--rf-navy); line-height: 1.3; letter-spacing: -0.012em;
+  margin: 0 0 5px;
+}
+.podcast-feature__meta {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(11,29,38,0.5);
+  margin: 0 0 15px;
+}
+.podcast-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.podcast-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(11,29,38,0.14);
+  border-radius: 999px;
+  background: var(--rf-white);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--rf-navy);
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+.podcast-link svg { flex-shrink: 0; transition: color 0.18s ease; }
+.podcast-link:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(11,29,38,0.12); }
+.podcast-link:focus-visible { outline: 2px solid #3A5A92; outline-offset: 2px; }
+.podcast-link:active { transform: translateY(0); }
+.podcast-link--spotify svg { color: #1DB954; }
+.podcast-link--spotify:hover { border-color: #1DB954; color: #1DB954; }
+.podcast-link--youtube svg { color: #FF0000; }
+.podcast-link--youtube:hover { border-color: #FF0000; color: #FF0000; }
 
 /* Book cover wrapper + Coming Soon badge */
 .book-cover-wrap {
@@ -2774,4 +2848,53 @@ body.page-404 {
   .page-contact .siapc-grid { grid-template-columns: 1fr !important; }
   .page-contact .contact-grid { grid-template-columns: 1fr !important; }
   .page-contact footer { padding: 40px 24px 28px !important; }
+}
+
+/* ── Mobile navigation menu (≤767px) ──
+   Placed last so it overrides the per-page `nav > div:last-child { display:none }`
+   rules above. The desktop links container becomes a slide-down panel toggled by
+   the hamburger (nav.nav-open). High specificity + !important to beat those rules. */
+@media (max-width: 767px) {
+  .nav-hamburger { display: flex; }
+
+  /* Open state: reveal links as a full-width panel below the 64px nav bar */
+  body nav.nav-open > div.nav-links {
+    display: flex !important;
+    position: absolute;
+    top: 64px; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: #0d2535;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 4px 24px 20px;
+    box-shadow: 0 18px 44px rgba(0,0,0,0.45);
+  }
+
+  /* Top-level links + dropdown triggers stack full-width with dividers */
+  nav.nav-open .nav-link,
+  nav.nav-open .nav-dropdown-trigger {
+    width: 100%; box-sizing: border-box;
+    padding: 15px 0 !important; font-size: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  nav.nav-open .nav-dropdown { width: 100%; }
+  nav.nav-open .nav-dropdown-trigger { justify-content: space-between; }
+
+  /* Dropdown menus render expanded inline (no hover/absolute on mobile) */
+  nav.nav-open .nav-dropdown-menu {
+    position: static; transform: none;
+    opacity: 1; pointer-events: auto;
+    display: block; min-width: 0;
+    background: transparent; border: none;
+    padding: 4px 0 10px 14px; box-shadow: none;
+  }
+  nav.nav-open .nav-dropdown-item { padding: 11px 0; }
+  nav.nav-open .nav-caret { display: none; }
+
+  /* CTA becomes a full-width button at the bottom of the panel */
+  nav.nav-open .btn-primary {
+    width: 100%; justify-content: center;
+    margin: 18px 0 0 !important; padding: 14px 24px;
+  }
 }

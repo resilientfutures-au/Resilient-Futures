@@ -66,3 +66,33 @@
     open.querySelector('.nav-dropdown-trigger')?.focus();
   });
 })();
+
+// Mobile hamburger menu — delegated so it works once the nav partial loads.
+(() => {
+  function closeMenu(nav) {
+    nav.classList.remove('nav-open');
+    nav.querySelector('.nav-hamburger')?.setAttribute('aria-expanded', 'false');
+  }
+  document.addEventListener('click', e => {
+    const burger = e.target.closest('.nav-hamburger');
+    if (burger) {
+      const nav = burger.closest('nav');
+      const open = nav.classList.toggle('nav-open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      return;
+    }
+    // Tapping a link inside the open panel closes the menu.
+    const link = e.target.closest('.nav-links a');
+    if (link) {
+      const nav = link.closest('nav');
+      if (nav) closeMenu(nav);
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    const nav = document.querySelector('nav.nav-open');
+    if (!nav) return;
+    closeMenu(nav);
+    nav.querySelector('.nav-hamburger')?.focus();
+  });
+})();
