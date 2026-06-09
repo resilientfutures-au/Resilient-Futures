@@ -57,16 +57,6 @@
       letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--rf-accent-deep); padding-top: 10px; position: relative;
     }
-    .articles-list__date::before {
-      content: ""; position: absolute; left: 0; top: 14px;
-      width: 16px; height: 1px; background: var(--rf-accent);
-      opacity: 0; transform: translateX(-12px);
-      transition: opacity 220ms ease, transform 220ms ease;
-    }
-    .articles-list__row:hover .articles-list__date::before,
-    .articles-list__row:focus-within .articles-list__date::before {
-      opacity: 1; transform: translateX(-22px);
-    }
     .articles-list__link { display: block; text-decoration: none; color: inherit; }
     .articles-list__title {
       font-family: var(--rf-font-serif); font-size: 32px; font-weight: 700;
@@ -81,6 +71,12 @@
       color: var(--rf-text-muted); margin: 0; max-width: 62ch;
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     }
+    .articles-list__thumb {
+      display: block; margin-top: 18px;
+      width: 100%; max-width: 140px; aspect-ratio: 1 / 1;
+      object-fit: cover; border-radius: 6px;
+      box-shadow: 0 8px 20px rgba(11,29,38,0.14);
+    }
 
     @media (max-width: 720px) {
       .articles-hero { padding: 80px 0 72px; }
@@ -89,9 +85,34 @@
       .articles-hero__rule { min-height: 140px; }
       .articles-list__row { grid-template-columns: 1fr; gap: 10px; padding: 36px 0; }
       .articles-list__date { padding-top: 0; }
-      .articles-list__date::before { display: none; }
       .articles-list__title { font-size: 24px; max-width: none; }
+      .articles-pager { margin-top: 40px; }
+      .articles-list__thumb { max-width: 120px; }
     }
+
+    /* Pagination */
+    .articles-pager {
+      max-width: 900px; margin: 56px auto 0;
+      display: flex; flex-wrap: wrap; gap: 8px;
+      align-items: center; justify-content: center;
+    }
+    .articles-pager__item {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 42px; height: 42px; padding: 0 13px; box-sizing: border-box;
+      font-family: var(--rf-font-sans); font-size: 14px; font-weight: 600;
+      letter-spacing: 0.02em; color: var(--rf-navy); text-decoration: none;
+      background: var(--rf-white);
+      border: 1px solid var(--rf-divider-soft); border-radius: 6px;
+      transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+    }
+    .articles-pager__item:hover { border-color: var(--rf-accent); color: var(--rf-accent-deep); transform: translateY(-2px); }
+    .articles-pager__item:focus-visible { outline: 2px solid var(--rf-accent-deep); outline-offset: 2px; }
+    .articles-pager__item:active { transform: translateY(0); }
+    .articles-pager__item.is-active { background: var(--rf-navy); color: var(--rf-white); border-color: var(--rf-navy); }
+    .articles-pager__item.is-disabled { color: rgba(11,29,38,0.28); pointer-events: none; background: transparent; }
+    .articles-pager__nav { text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; }
+    /* Prevent a flash of all rows before the pagination script runs */
+    .js .articles-list--paginate .articles-list__row:nth-child(n+11) { display: none; }
   </style>
 </head>
 <body class="page-articles">
@@ -120,7 +141,7 @@
 
 <section class="articles-section">
   <div class="container">
-    <div class="articles-list">
+    <div class="articles-list articles-list--paginate">
 {{rows}}
     </div>
   </div>
@@ -129,6 +150,70 @@
 <div data-include="footer"></div>
 
 <script type="module" src="/assets/js/includes.js"></script>
+
+<script>
+(function () {
+  var PER_PAGE = 10;
+  var list = document.querySelector('.articles-list--paginate');
+  if (!list) return;
+  var rows = [].slice.call(list.querySelectorAll('.articles-list__row'));
+  var pageCount = Math.ceil(rows.length / PER_PAGE);
+  list.classList.remove('articles-list--paginate'); // JS now controls visibility
+  if (pageCount <= 1) return;
+
+  var section = document.querySelector('.articles-section');
+  var pager = document.createElement('nav');
+  pager.className = 'articles-pager';
+  pager.setAttribute('aria-label', 'Articles pagination');
+  list.parentNode.insertBefore(pager, list.nextSibling);
+
+  function currentPage() {
+    var m = location.hash.match(/page-(\d+)/);
+    var p = m ? parseInt(m[1], 10) : 1;
+    if (!p || p < 1) p = 1;
+    if (p > pageCount) p = pageCount;
+    return p;
+  }
+
+  function item(label, target, opts) {
+    opts = opts || {};
+    var el = document.createElement(opts.disabled ? 'span' : 'a');
+    el.className = 'articles-pager__item'
+      + (opts.nav ? ' articles-pager__nav' : '')
+      + (opts.active ? ' is-active' : '')
+      + (opts.disabled ? ' is-disabled' : '');
+    el.textContent = label;
+    if (!opts.disabled) el.href = '#page-' + target;
+    if (opts.active) el.setAttribute('aria-current', 'page');
+    if (opts.aria) el.setAttribute('aria-label', opts.aria);
+    return el;
+  }
+
+  function render(page) {
+    for (var i = 0; i < rows.length; i++) {
+      rows[i].style.display = (i >= (page - 1) * PER_PAGE && i < page * PER_PAGE) ? '' : 'none';
+    }
+    pager.innerHTML = '';
+    pager.appendChild(item('‹ Prev', page - 1, { nav: true, disabled: page === 1, aria: 'Previous page' }));
+    for (var p = 1; p <= pageCount; p++) {
+      pager.appendChild(item(String(p), p, { active: p === page, aria: 'Page ' + p }));
+    }
+    pager.appendChild(item('Next ›', page + 1, { nav: true, disabled: page === pageCount, aria: 'Next page' }));
+  }
+
+  var initial = true;
+  function update() {
+    render(currentPage());
+    if (!initial && section) {
+      window.scrollTo({ top: section.offsetTop - 72, behavior: 'smooth' });
+    }
+    initial = false;
+  }
+
+  window.addEventListener('hashchange', update);
+  update();
+})();
+</script>
 
 </body>
 </html>

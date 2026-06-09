@@ -271,13 +271,24 @@ function fillTemplate(template, vars) {
   return out;
 }
 
-export function renderPost(template, { title, date, body, slug, seo = '' }) {
+// If the body starts with an image, lift it out to show as a hero "featured
+// image" under the date. Returns { image, body } where `image` is the hero
+// <figure> markup (or '') and `body` is the body with that leading image removed.
+export function hoistLeadImage(bodyHtml) {
+  const m = bodyHtml.match(/^\s*<img\b[^>]*>/i);
+  if (!m) return { image: '', body: bodyHtml };
+  const image = `<figure class="article-hero__image">${m[0].trim()}</figure>`;
+  return { image, body: bodyHtml.slice(m.index + m[0].length) };
+}
+
+export function renderPost(template, { title, date, body, slug, seo = '', image = '' }) {
   return fillTemplate(template, {
     title: escapeHtml(title),
     date: escapeHtml(date),
     body,             // already-cleaned HTML, do not escape
     slug,
     seo,              // pre-built SEO block, do not escape
+    image,            // pre-built hero <figure>, do not escape
   });
 }
 
@@ -288,6 +299,9 @@ export function renderListing(template, rowTemplate, posts) {
     title: escapeHtml(p.title),
     excerpt: escapeHtml(p.excerpt ?? ''),
     slug: p.slug,
+    image: p.image
+      ? `<img class="articles-list__thumb" src="${p.image}" alt="" loading="lazy">`
+      : '',
   })).join('\n');
   const seo = buildPageSeoBlock({
     title: 'Articles',
@@ -343,12 +357,16 @@ export async function main() {
       iso: p.date.toISOString(),
     });
 
+    // Lift a leading image into the hero (featured image under the date)
+    const { image: heroImage, body: bodyHtml } = hoistLeadImage(finalHtml);
+
     const html = renderPost(postTmpl, {
       title: cleanedTitle,
       date: dateStr,
-      body: finalHtml,
+      body: bodyHtml,
       slug: p.slug,
       seo,
+      image: heroImage,
     });
 
     const outDir = resolve(projectRoot, 'articles', p.slug);
@@ -356,7 +374,7 @@ export async function main() {
     await writeFile(resolve(outDir, 'index.html'), html, 'utf8');
 
     imagesRewritten += beforeImgCount - afterImgCount;
-    enriched.push({ ...p, title: cleanedTitle, excerpt });
+    enriched.push({ ...p, title: cleanedTitle, excerpt, image: firstImg || '' });
     console.log(`  ✓ /articles/${p.slug}/`);
   }
 
