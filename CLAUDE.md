@@ -26,7 +26,7 @@
 
 ## Output Defaults
 - Single `index.html` file, all styles inline, unless user says otherwise
-- Tailwind CSS via CDN: `<script src="https://cdn.tailwindcss.com"></script>`
+- Styling: use the existing design system in `assets/css/site.css` (custom CSS variables + classes). Do NOT add the Tailwind Play CDN (`cdn.tailwindcss.com`) — it ships a runtime CSS compiler that blocks the main thread on every load, and the site uses no Tailwind utilities. If a utility-class workflow is ever needed, compile Tailwind ahead of time into a static stylesheet instead.
 - Placeholder images: `https://placehold.co/WIDTHxHEIGHT`
 - Mobile-first responsive
 

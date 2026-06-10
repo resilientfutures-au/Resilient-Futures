@@ -5,7 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>document.documentElement.classList.add('js');</script>
   <title>New Thinking, New Tools, New Strategy for a New World Order: Focus, Action &amp; Results</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- head-meta:start -->
+  <link rel="icon" type="image/png" href="/rf.png">
+  <link rel="apple-touch-icon" href="/rf.png">
+  <meta name="description" content="Strategic planning, execution and leadership development for Boards, CEOs and executive teams operating in permanent disruption.">
+  <link rel="canonical" href="https://www.resilientfutures.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Resilient Futures">
+  <meta property="og:title" content="Resilient Futures — Strategy for Disruptive Change">
+  <meta property="og:description" content="Strategic planning, execution and leadership development for Boards, CEOs and executive teams operating in permanent disruption.">
+  <meta property="og:url" content="https://www.resilientfutures.com/">
+  <meta property="og:image" content="https://www.resilientfutures.com/assets/images/og/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Resilient Futures — Strategy for Disruptive Change">
+  <meta name="twitter:description" content="Strategic planning, execution and leadership development for Boards, CEOs and executive teams operating in permanent disruption.">
+  <meta name="twitter:image" content="https://www.resilientfutures.com/assets/images/og/og-default.png">
+  <!-- head-meta:end -->
   <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -473,7 +490,7 @@
           font-size: 19px; color:var(--rf-navy);
           line-height:1.55; font-style:italic;
           margin-bottom:20px; flex:0 0 auto;
-        ">&ldquo;My personal trajectory has been exponential&hellip; I went to a strategic planning day yesterday and it was the most frustrating day, and I kept thinking, you people have got no idea.&rdquo;</p>
+        ">&ldquo;What I value about Resilient Futures is the connection&hellip;the authentic connection. Because you got us. You understood us. You listened and heard what my story was. My personal trajectory has been exponential.&rdquo;</p>
         <p style="
           font-size: 15px; font-weight:600; letter-spacing:0.06em;
           text-transform:uppercase; color:var(--rf-text-muted);
@@ -565,7 +582,7 @@ const canvas = document.getElementById('hero-node-canvas');
 if (!canvas) throw new Error('hero-node-canvas not found');
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 renderer.setClearColor(0x000000, 0);
 
 const scene = new THREE.Scene();
@@ -729,7 +746,8 @@ window.addEventListener('pointermove', (e) => {
 });
 
 const clock = new THREE.Clock();
-function tick(){
+
+function renderFrame(){
   const t = clock.getElapsedTime();
   pointsMat.uniforms.uTime.value = t;
   for (let i = 0; i < nodes.length; i++){
@@ -750,9 +768,45 @@ function tick(){
   camera.lookAt(0, 3, 0);
 
   renderer.render(scene, camera);
-  requestAnimationFrame(tick);
 }
-tick();
+
+// Run the render loop only when it can actually be seen, and never faster than
+// ~30fps. Pauses when the tab is hidden or the canvas scrolls off-screen, and
+// honours prefers-reduced-motion (renders a single static frame, no loop). This
+// keeps an older laptop from being pinned by a perpetual WebGL render.
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const minFrameMs = 1000 / 30;
+let rafId = null, lastFrame = 0, onScreen = true;
+
+function tick(now){
+  rafId = requestAnimationFrame(tick);
+  if (now - lastFrame < minFrameMs) return;
+  lastFrame = now;
+  renderFrame();
+}
+function start(){
+  if (reduceMotion || rafId !== null) return;
+  lastFrame = 0;
+  rafId = requestAnimationFrame(tick);
+}
+function stop(){
+  if (rafId === null) return;
+  cancelAnimationFrame(rafId);
+  rafId = null;
+}
+function syncRunState(){
+  if (onScreen && document.visibilityState === 'visible') start();
+  else stop();
+}
+
+new IntersectionObserver((entries) => {
+  onScreen = entries.some((e) => e.isIntersecting);
+  syncRunState();
+}, { threshold: 0 }).observe(canvas);
+document.addEventListener('visibilitychange', syncRunState);
+
+if (reduceMotion) renderFrame();   // single static frame
+else syncRunState();
 </script>
 
   <script src="assets/js/includes.js" defer></script>

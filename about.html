@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>About Resilient Futures — The People Behind the Work</title>
+  <!-- head-meta:start -->
+  <link rel="icon" type="image/png" href="/rf.png">
+  <link rel="apple-touch-icon" href="/rf.png">
+  <meta name="robots" content="noindex, nofollow">
+  <!-- head-meta:end -->
+  <!-- DRAFT: not linked from the site navigation. Not live. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <style>
+    /* Page-scoped only — kept out of shared site.css since this page is a
+       standalone draft and not part of the live navigation. */
+    .page-about .bio-grid { margin-top: 0; }
+
+    @media (max-width: 900px) {
+      .page-about .hero-section { padding: 64px 32px 72px !important; }
+      .page-about .hero-inner-flex { flex-direction: column !important; }
+      .page-about .hero-accent-line { display: none !important; }
+      .page-about .about-section { padding: 80px 32px !important; }
+      .page-about .about-quote { padding: 40px 32px !important; }
+    }
+    @media (max-width: 640px) {
+      .page-about .hero-section { padding: 48px 24px 64px !important; }
+      .page-about .about-section { padding: 64px 24px !important; }
+      .page-about .bio-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+    }
+  </style>
+</head>
+<body class="page-about">
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<div data-include="nav"></div>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero-section" style="
+  background: linear-gradient(155deg, var(--rf-navy) 0%, var(--rf-navy) 45%, var(--rf-navy) 100%);
+  padding: 80px 48px 96px;
+  position: relative;
+  overflow: hidden;
+">
+  <!-- Radial glows -->
+  <div class="hero-glow--tr"></div>
+  <div class="hero-glow--bl"></div>
+
+  <div class="section-inner" style="position:relative; z-index:1;">
+    <!-- Breadcrumb -->
+    <div class="hero-breadcrumb">
+      <a href="index.html" class="hero-breadcrumb__link">Home</a>
+      <span class="hero-breadcrumb__sep">&#47;</span>
+      <span class="hero-breadcrumb__current">About</span>
+    </div>
+
+    <div class="hero-inner-flex" style="display:flex; gap:48px; align-items:flex-start;">
+      <!-- Vertical coral accent line -->
+      <div class="hero-accent-line" style="
+        width: 3px;
+        flex-shrink: 0;
+        min-height: 260px;
+        margin-top: 4px;
+        background: linear-gradient(to bottom, var(--rf-accent), rgba(123,155,209,0));
+      "></div>
+      <!-- Copy -->
+      <div class="reveal" style="flex:1;">
+        <p style="
+          font-size: 13px; font-weight:600;
+          letter-spacing: 0.16em; text-transform: uppercase;
+          color: var(--rf-accent);
+          margin-bottom: 20px;
+        ">The People Behind the Work</p>
+        <h1 class="font-display" style="
+          font-size: 54px;
+          font-weight: 700;
+          color: var(--rf-white);
+          line-height: 1.1;
+          letter-spacing: -0.025em;
+          margin-bottom: 28px;
+          max-width: 640px;
+        ">
+          25+ years advising Boards and CEOs<br>
+          <span style="color:var(--rf-accent);">across Australia.</span>
+        </h1>
+        <p style="
+          font-size: 19px;
+          line-height: 1.7;
+          color: rgba(255,255,255,0.82);
+          max-width: 560px;
+          margin-bottom: 0;
+        ">
+          When you engage Resilient Futures, every conversation, workshop, and deliverable is led
+          by the people with the deepest expertise in the room.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOUNDERS ═══════════════════════════ -->
+<section class="about-section" style="
+  background: var(--rf-cream);
+  padding: 96px 0;
+  position: relative; overflow: hidden;
+">
+  <div class="container" style="position:relative; z-index:1;">
+
+    <!-- Bio grid -->
+    <div class="bio-grid">
+
+      <!-- Larry -->
+      <div class="bio-card">
+        <div class="bio-card__portrait">
+          <img src="brand_assets/Larry.png" alt="Larry Quick">
+        </div>
+        <div class="font-display bio-card__name">Larry Quick</div>
+        <div class="bio-card__role">Co-founder &middot; Strategy &amp; Complex Systems</div>
+        <div class="bio-card__meta">
+          25+ years &nbsp;&middot;&nbsp; Co-author, <em>Disrupted</em> (2015) &nbsp;&middot;&nbsp; Government, Health, Education, Peak Bodies
+        </div>
+        <p class="bio-card__body">
+          Larry has spent over 25 years working at the intersection of strategy, complex systems, and organisational transformation across Australia, the United States, and internationally. His thinking on strategy for disruptive change is grounded in complex adaptive systems theory and resilience science, disciplines he applied long before disruption became a consulting industry buzzword.
+        </p>
+      </div>
+
+      <!-- David -->
+      <div class="bio-card">
+        <div class="bio-card__portrait">
+          <img src="brand_assets/David.png" alt="David Platt">
+        </div>
+        <div class="font-display bio-card__name">David Platt</div>
+        <div class="bio-card__role">Co-founder &middot; Capability &amp; Facilitation</div>
+        <div class="bio-card__meta">
+          20+ years &nbsp;&middot;&nbsp; Co-author, <em>Disrupted</em> (2015) &nbsp;&middot;&nbsp; Transformation, Facilitation, Capability Development
+        </div>
+        <p class="bio-card__body">
+          David brings deep expertise in organisational transformation, capability development, and the human dimensions of strategic change. He has spent over two decades developing the facilitation approaches, learning systems, and capability transfer methodologies that make Strategy in Action (SiA) practical and enduring for client organisations.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Full-width pull-out quote -->
+    <div class="about-quote" style="margin-top:64px; background:rgba(11,29,38,0.04); padding:56px 64px;">
+      <p class="font-display" style="
+        font-size: 25px; font-weight:700;
+        color:var(--rf-navy); line-height:1.6;
+        max-width:800px; margin:0 0 32px;
+      ">
+        &ldquo;Our role is to work alongside your leadership team, bringing the thinking, challenging the assumptions, and transferring the tools, so your organisation builds real strategic capability over time. <span style="color:var(--rf-accent-deep);">Not dependency.&rdquo;</span>
+      </p>
+      <p style="font-size: 13px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--rf-text-subtle); margin:0;">
+        David Platt &middot; Resilient Futures
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<div data-include="footer"></div>
+
+  <script src="assets/js/includes.js" defer></script>
+  <script src="assets/js/reveal.js" defer></script>
+</body>
+</html>
