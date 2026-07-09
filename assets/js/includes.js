@@ -1,3 +1,17 @@
+// HubSpot tracking (portal 20516341, AP1 region — matches the contact form).
+// Injected here so analytics + visitor→contact attribution work on every page
+// without editing each page head. Guards against double-insertion.
+(() => {
+  if (document.getElementById('hs-script-loader')) return;
+  const s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.id = 'hs-script-loader';
+  s.async = true;
+  s.defer = true;
+  s.src = '//js-ap1.hs-scripts.com/20516341.js';
+  document.head.appendChild(s);
+})();
+
 (async () => {
   async function include(selector, partial) {
     const host = document.querySelector(selector);

@@ -543,6 +543,17 @@ nav.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rota
   color: rgba(255, 255, 255, 0.5);
 }
 .site-footer__copy { margin: 0; }
+.site-footer__legal-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.site-footer__legal-link:hover { color: var(--rf-accent); }
+.site-footer__legal-link:focus-visible {
+  outline: 2px solid var(--rf-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
 .site-footer__social { display: flex; gap: 22px; align-items: center; }
 .site-footer__social a {
   display: inline-flex;

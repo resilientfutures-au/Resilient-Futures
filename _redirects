@@ -1,0 +1,26 @@
+# Resilient Futures — 301 redirects from old Squarespace URLs.
+#
+# NOTE: This file only takes effect on Cloudflare Pages (or Netlify).
+# GitHub Pages ignores it. It is here ready for the planned Cloudflare cutover.
+# Format: <old-path>  <new-destination>  <status>
+#
+# Traffic on the old site is low, so this is a light map of the handful of
+# paths most likely to be indexed or linked externally. The custom 404 page
+# catches anything not listed here. Adjust destinations if a guess is wrong.
+
+# --- Confident mappings ---
+/strategyinaction        /strategy-in-action.html        301
+/learning                /leadership-development.html     301
+/conditionswatch         /strategic-intelligence.html     301
+/publications            /articles/                       301
+/pathways                /strategic-services.html         301
+
+# SiA Practice Community now lives on its own domain
+/siapracticecommunity    https://siapracticecommunity.com/   301
+
+# --- Best-guess mappings (no direct equivalent on the new site) ---
+# "Our founders" content is folded into the Why page for now.
+/ourfounders             /why.html                        301
+# Case studies + events were not migrated; send to the most relevant hub.
+/ourwork                 /strategy-in-action.html         301
+/events                  /                                301
